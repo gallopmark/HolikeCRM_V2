@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="0dp"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_1" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_2" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_3" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_4" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_6" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/color_while" />
+        </shape>
+    </item>
+</layer-list>

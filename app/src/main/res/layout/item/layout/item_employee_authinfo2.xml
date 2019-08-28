@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/LinearLayout_Height48dp">
+
+        <TextView
+            android:id="@+id/mTipsTv"
+            style="@style/TextView_TipsStyle"
+            android:text="@string/employee_settings_tips1" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/mSwitch"
+            style="@style/SwitchButtonStyle" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vUnderLine"
+        style="@style/ViewDividerStyle" />
+</LinearLayout>

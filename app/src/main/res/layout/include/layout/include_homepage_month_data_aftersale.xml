@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Homepage_MonthData_LayoutStyle"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_homepage_month_data_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <View
+                android:id="@+id/lineRed"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvRate"
+                android:layout_alignBottom="@+id/tvRate"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:background="@color/color_red_width_3dp" />
+
+            <TextView
+                android:id="@+id/tvRate"
+                style="@style/Homepage_MonthData_TextViewStyle"
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_toEndOf="@+id/lineRed"
+                android:layout_toRightOf="@+id/lineRed"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="@string/once_install_completion_rate"
+                android:textSize="@dimen/textSize_14" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <View
+                android:id="@+id/lineOrange"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvSatisfaction"
+                android:layout_alignBottom="@+id/tvSatisfaction"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@color/color_orange_width_3dp" />
+
+            <TextView
+                android:id="@+id/tvSatisfaction"
+                style="@style/Homepage_MonthData_TextViewStyle"
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_toEndOf="@+id/lineOrange"
+                android:layout_toRightOf="@+id/lineOrange"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="@string/customer_satisfaction_tips"
+                android:textSize="@dimen/textSize_14" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

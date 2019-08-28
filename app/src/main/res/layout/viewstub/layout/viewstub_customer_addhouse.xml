@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Customer_Edit_TextViewStyle"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:text="@string/tips_customer_house_info"
+        android:textSize="@dimen/textSize_16" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_corners_white_5dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <LinearLayout style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+            <TextView
+                style="@style/Customer_Edit_TextViewStyle"
+                android:text="@string/tips_customer_area" />
+
+            <TextView
+                android:id="@+id/tvSelectArea"
+                style="@style/Customer_Edit_EditTextStyle"
+                android:drawableEnd="@drawable/choice_down"
+                android:drawableRight="@drawable/choice_down"
+                android:drawablePadding="@dimen/dp_6"
+                android:hint="@string/tips_please_select" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+            <TextView
+                style="@style/Customer_Edit_TextViewStyle"
+                android:text="@string/tips_customer_house_address" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                style="@style/Customer_Edit_EditTextStyle"
+                android:hint="@string/tips_customer_house_address_hint" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+            <TextView
+                style="@style/Customer_Edit_TextViewStyle"
+                android:text="@string/tips_customer_store_belong" />
+
+            <TextView style="@style/Customer_Edit_TextViewFillInStyle" />
+
+            <TextView
+                android:id="@+id/tvSelectStore"
+                style="@style/Customer_Edit_EditTextStyle"
+                android:drawableEnd="@drawable/choice_down"
+                android:drawableRight="@drawable/choice_down"
+                android:drawablePadding="@dimen/dp_6"
+                android:hint="@string/tips_please_select" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_group_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+
+                style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+                <TextView
+                    style="@style/Customer_Edit_TextViewStyle"
+                    android:text="@string/tips_customer_belong_organization" />
+
+                <TextView style="@style/Customer_Edit_TextViewFillInStyle" />
+
+                <TextView
+                    android:id="@+id/tv_select_group"
+                    style="@style/Customer_Edit_EditTextStyle"
+                    android:drawableEnd="@drawable/choice_down"
+                    android:drawableRight="@drawable/choice_down"
+                    android:drawablePadding="@dimen/dp_6"
+                    android:hint="@string/tips_please_select" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+            <TextView
+                style="@style/Customer_Edit_TextViewStyle"
+                android:text="@string/tips_customer_budget" />
+
+            <TextView
+                android:id="@+id/tvSelectBudget"
+                style="@style/Customer_Edit_EditTextStyle"
+                android:drawableEnd="@drawable/choice_down"
+                android:drawableRight="@drawable/choice_down"
+                android:drawablePadding="@dimen/dp_6"
+                android:hint="@string/tips_please_select" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+            <TextView
+                style="@style/Customer_Edit_TextViewStyle"
+                android:text="@string/tips_customer_standby_contact" />
+
+            <EditText
+                android:id="@+id/etContact"
+                style="@style/Customer_Edit_EditTextStyle"
+                android:hint="@string/tips_customer_standby_contact_hint" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout style="@style/Customer_Edit_LinearLayout48dpStyle">
+
+            <TextView
+                style="@style/Customer_Edit_TextViewStyle"
+                android:text="@string/tips_customer_standby_phone" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                style="@style/Customer_Edit_EditTextStyle"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:hint="@string/tips_customer_standby_phone_hint"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <TextView
+            style="@style/Customer_Edit_TextViewStyle"
+            android:layout_gravity="start"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:text="@string/tips_customer_remark" />
+
+        <EditText
+            android:id="@+id/etRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start|top"
+            android:hint="@string/tips_customer_remark_hint"
+            android:maxLines="5"
+            android:minLines="5"
+            android:textColorHint="@color/textColor21"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+</LinearLayout>

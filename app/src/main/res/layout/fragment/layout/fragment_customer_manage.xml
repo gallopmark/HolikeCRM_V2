@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/statusView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/textColor14" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:background="@color/textColor14">
+
+        <ImageView
+            android:id="@+id/iv_customer_manage_search_add_customer"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:src="@drawable/icon_add" />
+
+        <EditText
+            android:id="@+id/et_customer_manage_search"
+            android:layout_width="@dimen/dp_230"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_search"
+            android:hint="@string/customer_manage_search_hint"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="@dimen/dp_12"
+            android:singleLine="true"
+            android:textSize="@dimen/textSize_14" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center">
+
+            <TextView
+                android:id="@+id/tv_customer_msg"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/message_title"
+                android:textColor="@color/color_while"
+                android:textSize="@dimen/textSize_13" />
+
+            <ImageView
+                android:id="@+id/iv_red_point_msg"
+                style="@style/iv_red_point_msg"
+                android:visibility="gone" />
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/color_while"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/ll_customer_manage_customer_source"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_customer_manage_customer_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/receive_deposit_customerSource"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView
+                android:id="@+id/iv_customer_manage_customer_source"
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@drawable/choice_down" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_customer_manage_customer_state"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_customer_manage_customer_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/customer_manage_customer_state"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView
+                android:id="@+id/iv_customer_manage_customer_state"
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@drawable/choice_down" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dv_customer_manage_filter"
+        style="@style/divider_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/color_while"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12">
+
+        <LinearLayout
+            android:id="@+id/mTimeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/mCountTextView"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/icon_choice_date"
+                android:drawablePadding="@dimen/dp_5"
+                android:gravity="center|start"
+                android:text="@string/create_time_tips"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <TextView
+                android:id="@+id/mTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center|start"
+                android:maxLines="1"
+                android:text="@string/all"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView
+                android:id="@+id/mArrowImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:src="@drawable/bill_date_up" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:visibility="gone"
+            android:gravity="center|end"
+            android:text="@string/customer_count"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14" />
+    </RelativeLayout>
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_customer_manage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mCustomerRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_6"
+            android:overScrollMode="never"
+            android:paddingTop="@dimen/dp_7"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

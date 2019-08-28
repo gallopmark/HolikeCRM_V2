@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <include
+        android:id="@+id/title_layout"
+        layout="@layout/item_customer_manager_title" />
+
+    <TextView
+        android:id="@+id/tv_reservation_drawing"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:text="@string/followup_reservation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_layout"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_product"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/followup_product_tips"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_reservation_drawing"
+        app:layout_constraintStart_toEndOf="@+id/tv_reservation_drawing"
+        app:layout_constraintTop_toTopOf="@+id/tv_reservation_drawing"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_series"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:text="@string/followup_series_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reservation_drawing"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_style"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/followup_style_tips"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_series"
+        app:layout_constraintStart_toEndOf="@+id/tv_series"
+        app:layout_constraintTop_toTopOf="@+id/tv_series"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_remark_tips"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/tips_customer_remark2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_series" />
+
+    <TextView
+        android:id="@+id/tv_remark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13"
+        app:layout_constraintBottom_toTopOf="@+id/ll_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_remark_tips"
+        app:layout_constraintTop_toTopOf="@+id/tv_remark_tips" />
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remark">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pictures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/fl_bottom"
+            app:layout_constraintTop_toBottomOf="@+id/tv_remark"
+            app:spanCount="3" />
+
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <TextView
+                android:id="@+id/tv_more_pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_24"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:background="@color/bg"
+                android:drawablePadding="@dimen/dp_4"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="@string/more_pictures"
+                android:textColor="@color/textColor14"
+                android:textSize="@dimen/textSize_14"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_edit_upload_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_24"
+                android:layout_gravity="end"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:background="@drawable/bg_bg_corners4dp"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_14"
+                android:paddingRight="@dimen/dp_14"
+                android:text="@string/edit"
+                android:textColor="@color/textColor14"
+                android:textSize="@dimen/textSize_14"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/textColor20"
+        android:layout_height="@dimen/dp_40">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:id="@+id/ll_space_manifest_drop_down"
+            android:gravity="center">
+
+            <TextView
+                style="@style/tv_item_base_customer_gray_small"
+                android:text="@string/space_manifest_info_current"
+                android:textColor="@color/textColor6" />
+
+            <TextView
+                android:id="@+id/tv_space_manifest_info_current"
+                style="@style/tv_item_base_customer_black"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:text="青少年房" />
+
+            <ImageView
+                android:id="@+id/iv_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:src="@drawable/space_triangle_down" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dp_108"
+            android:layout_height="5dp"
+            android:layout_gravity="bottom|left"
+            android:background="@drawable/bg_side_shadow_top" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <include layout="@layout/include_side_bar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:layout_width="6dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_side_shadow" />
+
+            <include layout="@layout/include_space_manifest_from" />
+
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

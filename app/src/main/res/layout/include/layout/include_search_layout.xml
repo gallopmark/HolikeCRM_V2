@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mSearchContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/dp_6"
+    android:layout_marginBottom="@dimen/dp_6"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:background="@drawable/bg_btn_search_rounded_15"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <EditText
+        android:id="@+id/mSearchEditText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/bg_transparent"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_12" />
+
+    <ImageView
+        android:id="@+id/mClearImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/clear"
+        android:padding="@dimen/dp_5"
+        android:src="@drawable/icon_clear"
+        android:visibility="gone" />
+</LinearLayout>

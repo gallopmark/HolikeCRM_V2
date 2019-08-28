@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_homepage_collect_deposit"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_48"
+    android:layout_marginBottom="@dimen/dp_8"
+    android:background="@color/color_while"
+    android:gravity="center|left"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="@dimen/dp_4"
+        android:layout_height="@dimen/dp_16"
+        android:background="@color/textColor13" />
+
+    <TextView
+        android:id="@+id/tv_homepage_month_order"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor4"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:text="@string/orders_for_this_month"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_homepage_collect_deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shadow_layer_homepage"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_8"
+        android:text="@string/receive_deposit_title"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_14" />
+</LinearLayout>

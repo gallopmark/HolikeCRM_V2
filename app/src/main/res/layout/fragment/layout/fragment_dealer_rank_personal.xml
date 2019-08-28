@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_activity_dealers_rank_report">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="217dp"
+        android:background="@drawable/high_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_fragment_title_bar_transparent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/dp_3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="63dp"
+                            android:gravity="center"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_30"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_citycode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_16"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_40"
+                            android:text="@string/report_dealer_rank_achievement_year"
+                            android:textColor="#66ffffff"
+                            android:textSize="@dimen/textSize_14" />
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_after"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_16"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/dp_24"
+                        android:paddingBottom="@dimen/dp_4"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/distributor_division" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_rank"
+                                android:layout_width="68dp"
+                                android:layout_height="63dp"
+                                android:background="@drawable/distributor_ranking"
+                                android:gravity="center"
+                                android:textColor="#FFFFFF00"
+                                android:textSize="@dimen/textSize_20"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_9"
+                                android:textColor="@color/color_while"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:text="@string/report_dealer_rank_city_rank"
+                            android:textColor="#66ffffff"
+                            android:textSize="@dimen/textSize_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_40"
+                            android:text="@string/report_dealer_rank_front_area"
+                            android:textColor="#66ffffff"
+                            android:textSize="@dimen/textSize_14" />
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_pre_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_16"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_24">
+
+                    <include
+                        layout="@layout/include_analysis_report_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_24"
+                        android:layout_marginStart="@dimen/dp_24"
+                        android:layout_gravity="top" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center|bottom"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_your_location1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="您的位置"
+                                android:textColor="@color/bg_state_bar"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_4">
+
+
+                                <ImageView
+                                    android:layout_width="68dp"
+                                    android:layout_height="@dimen/dp_45"
+                                    android:layout_marginTop="@dimen/dp_18"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/danger" />
+
+                                <ImageView
+                                    android:id="@+id/iv_dealer_rank_personal_your_location1"
+                                    android:layout_width="@dimen/dp_16"
+                                    android:layout_height="23dp"
+                                    android:layout_gravity="top"
+                                    android:src="@drawable/current_location"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_are1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_12"
+                                android:text="@string/report_dealer_rank_danger"
+                                android:textColor="#FF015E"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_your_location2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="您的位置"
+                                android:textColor="@color/bg_state_bar"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
+
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_4">
+
+                                <ImageView
+                                    android:layout_width="68dp"
+                                    android:layout_height="70dp"
+                                    android:layout_marginTop="@dimen/dp_18"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/strive" />
+
+                                <ImageView
+                                    android:id="@+id/iv_dealer_rank_personal_your_location2"
+                                    android:layout_width="@dimen/dp_16"
+                                    android:layout_height="23dp"
+                                    android:src="@drawable/current_location"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
+
+                            <TextView
+
+                                android:id="@+id/tv_dealer_rank_personal_are2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_12"
+                                android:text="@string/report_dealer_rank_endeavor"
+                                android:textColor="#75FF00"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_your_location3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="您的位置"
+                                android:textColor="@color/bg_state_bar"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
+
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_4">
+
+                                <ImageView
+                                    android:layout_width="68dp"
+                                    android:layout_height="@dimen/dp_95"
+                                    android:layout_marginTop="@dimen/dp_18"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/potential" />
+
+                                <ImageView
+                                    android:id="@+id/iv_dealer_rank_personal_your_location3"
+                                    android:layout_width="@dimen/dp_16"
+                                    android:layout_height="23dp"
+                                    android:src="@drawable/current_location"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_are3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_12"
+                                android:text="@string/report_dealer_rank_potential"
+                                android:textColor="#00ACFF"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_your_location4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="您的位置"
+                                android:textColor="@color/bg_state_bar"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
+
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_4">
+
+                                <ImageView
+                                    android:layout_width="68dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_marginTop="@dimen/dp_18"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/excellent" />
+
+                                <ImageView
+                                    android:id="@+id/iv_dealer_rank_personal_your_location4"
+                                    android:layout_width="@dimen/dp_16"
+                                    android:layout_height="23dp"
+                                    android:src="@drawable/current_location"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_are4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_12"
+                                android:text="@string/report_dealer_rank_outstanding"
+                                android:textColor="#E700FF"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_your_location5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="您的位置"
+                                android:textColor="@color/bg_state_bar"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
+
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_4">
+
+                                <ImageView
+                                    android:layout_width="68dp"
+                                    android:layout_height="145dp"
+                                    android:layout_marginTop="@dimen/dp_18"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/outstanding" />
+
+                                <ImageView
+                                    android:id="@+id/iv_dealer_rank_personal_your_location5"
+                                    android:layout_width="@dimen/dp_16"
+                                    android:layout_height="23dp"
+                                    android:src="@drawable/current_location"
+                                    android:visibility="invisible" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/tv_dealer_rank_personal_are5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_12"
+                                android:text="@string/report_dealer_rank_excellence"
+                                android:textColor="#FF8400"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_32"
+                    android:background="#FF0066CC" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/dp_3"
+                        android:layout_height="@dimen/dp_16"
+                        android:layout_marginLeft="@dimen/dp_12"
+                        android:background="#FFFFDE02" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/report_dealer_rank_top_three_city"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/dp_16"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_27"
+                    android:layout_marginBottom="@dimen/dp_40"
+                    android:gravity="center|top"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_110"
+                            android:src="@drawable/second" />
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_rank_no2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_14"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_14"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="#FFA5BDD4" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_110"
+                            android:src="@drawable/first" />
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_rank_no1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_14"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_14"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="#FFFFDE02" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_110"
+                            android:src="@drawable/third" />
+
+                        <TextView
+                            android:id="@+id/tv_dealer_rank_personal_rank_no3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_14"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_14"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="#FFE8BB9E" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

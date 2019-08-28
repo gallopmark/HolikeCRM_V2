@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/divider_horizontal" />
+
+    <FrameLayout
+        android:id="@+id/fl_online_drainage_title"
+        android:layout_width="@dimen/dp_94"
+        android:layout_height="@dimen/dp_44">
+
+        <TextView
+            android:id="@+id/tv_online_drainage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/dp_1"
+            android:paddingRight="@dimen/dp_1"
+            android:text="已沟通客户订单"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+
+        <View
+            style="@style/divider_vertical"
+            android:layout_gravity="end" />
+    </FrameLayout>
+
+</LinearLayout>

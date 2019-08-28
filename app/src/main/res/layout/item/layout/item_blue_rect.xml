@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/dp_5"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_5">
+    <CheckBox
+        android:id="@+id/cb_options"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
+        android:button="@drawable/bg_checkbox"
+        android:checked="false"
+        />
+    <TextView  android:id="@+id/item_tv_rect"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:text="全屋"/>
+
+
+</LinearLayout>

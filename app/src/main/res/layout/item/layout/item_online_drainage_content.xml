@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_product_info_content_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/mDividerV"
+        style="@style/divider_horizontal" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
+
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_Design_and_color"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/product_hardware_specifications"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_material"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/product_overlaying_process"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/product_info_grain"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_length"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_7"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_width"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_thickness"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_count"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/product_cutting_length"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_11"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="left|center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/product_cutting_width"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_12"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/product_tank_group_name"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_online_drainage_13"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_online_drainage_13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lineSpacingExtra="@dimen/dp_2"
+                        android:maxLines="3"
+                        android:paddingLeft="@dimen/dp_4"
+                        android:paddingRight="@dimen/dp_4"
+                        android:text="@string/quotation_info_remark"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_12"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_vertical"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/mDividerV2"
+        style="@style/divider_horizontal"
+        android:visibility="gone" />
+</LinearLayout>

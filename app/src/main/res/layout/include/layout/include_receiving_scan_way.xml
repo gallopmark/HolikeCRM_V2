@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ShadowBg_Radius9dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_4"
+    android:layout_marginTop="@dimen/dp_4"
+    android:layout_marginRight="@dimen/dp_4"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/ll_item_base_customer"
+        android:background="@color/bg_transparent">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receiving_scan_way_1"
+            android:textSize="@dimen/textSize_14" />
+
+        <LinearLayout
+            android:id="@+id/ll_receiving_scan_way_1"
+            style="@style/tv_item_base_customer_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                style="@style/tv_item_base_customer_right"
+                android:text="@string/receiving_scan_way_1_check_steps"
+                android:textColor="@color/textColor14"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView style="@style/iv_arrow_right_blue" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12" />
+
+    <LinearLayout style="@style/ll_item_base_customer">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receiving_scan_way_2"
+            android:textSize="@dimen/textSize_14" />
+
+        <LinearLayout
+            android:id="@+id/ll_receiving_scan_way_2"
+            style="@style/tv_item_base_customer_right"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                style="@style/tv_item_base_customer_right"
+                android:text="@string/receiving_scan_way_2_click"
+                android:textColor="@color/textColor14"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView style="@style/iv_arrow_right_blue" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12" />
+
+
+    <LinearLayout
+        style="@style/ll_item_base_customer"
+        android:background="@color/bg_transparent">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receiving_scan_way_3"
+            android:textSize="@dimen/textSize_14" />
+
+
+        <com.holike.crm.customView.InputEditText
+            android:id="@+id/et_receiving_way3_input_numb"
+            style="@style/tv_item_base_customer_right"
+            android:enabled="false"
+            android:focusable="false"
+            android:gravity="center|left"
+            android:hint="@string/receiving_scan_way_3_hint"
+            android:maxLength="20"
+            android:paddingLeft="@dimen/dp_26"
+            android:textSize="@dimen/textSize_14"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_way_3_input_confirm"
+            style="@style/tv_item_base_customer_right"
+            android:layout_width="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:text="@string/click_input"
+            android:textColor="@color/textColor14"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="@dimen/dp_46"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_item_rv_house_manage_record_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_12"
+            android:background="@drawable/line_dash_vertical"
+            android:layerType="software" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_follow_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="07.27"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <View
+            android:id="@+id/view_item_rv_house_manage_record_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_dash_vertical"
+            android:layerType="software" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_rv_house_manage_record_follower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="跟进人：欧阳信雄"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_12" />
+
+            <TextView
+                android:id="@+id/tv_item_rv_house_manage_record_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类型：收取订金"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_collect_deposit_order_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="收取时间：2018.10.19"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_collect_deposit_order_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="收取人：海鸥"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+//定制品类
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_collect_deposit_custom_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="定制品类："
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_collect_deposit_order_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="收取订金：1000￥"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_collect_deposit_order_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="备注：简介：动画几乎是一个好的App所不可缺少的一部分，它体现了一种更友好的交互方式，在iOS、Android L中动画的使用越来越多，特别是后者更是着重强调设计更好的动画。从3.0开始，Android就提供了一种更为强大的属性动画框架。本次课程，将向你介绍如何使用属性动画做出更好的动画"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_item_rv_house_manage_record_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/btn_item_rv_house_manage_record_cancel"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_18"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:background="@drawable/bg_btn_rounded_corner_border_9"
+                android:gravity="center"
+                android:text="撤销"
+                android:textColor="@color/textColor14"
+                android:textSize="@dimen/dp_12" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

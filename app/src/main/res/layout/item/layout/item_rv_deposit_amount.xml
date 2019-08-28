@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:layout_marginTop="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_deposit_amount_img"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_deposit_amount_img"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_90"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/iv_deposit_amount_img_del"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="top|right"
+            android:src="@drawable/photo_close" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_deposit_amount_add"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bill_photo" />
+
+        <TextView
+            android:id="@+id/tv_deposit_amount_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:text="@string/receive_deposit_addBills"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_10" />
+    </FrameLayout>
+</FrameLayout>

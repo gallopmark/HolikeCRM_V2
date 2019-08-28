@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/item_ll_serial_bg"
+        android:layout_width="98dp"
+        android:weightSum="98"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dp_3"
+        android:paddingBottom="@dimen/dp_3">
+
+        <TextView
+            android:id="@+id/item_tv_serial"
+            style="@style/tv_item_base_customer_black_small"
+            android:layout_width="0dp"
+            android:textColor="@color/textColor5"
+            android:layout_height="match_parent"
+            android:layout_weight="43"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_4"
+            android:padding="@dimen/dp_5"
+            android:text="01"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/item_tv_barcode"
+            style="@style/tv_item_base_customer_black_small"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="56"
+            android:gravity="center"
+            android:textColor="@color/textColor5"
+            android:lineSpacingExtra="@dimen/dp_4"
+            android:text="138997"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

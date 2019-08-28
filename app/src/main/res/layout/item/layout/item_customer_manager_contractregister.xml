@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <include
+        android:id="@+id/title_layout"
+        layout="@layout/item_customer_manager_title" />
+
+    <TextView
+        android:id="@+id/tv_turnover"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:text="@string/followup_turnover_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_layout"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_deposit_received"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center|start"
+        android:text="@string/followup_deposit_received_tips"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_turnover"
+        app:layout_constraintStart_toEndOf="@+id/tv_turnover"
+        app:layout_constraintTop_toTopOf="@+id/tv_turnover"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_payment"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/followup_this_payment_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_turnover"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_remain_tail"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:text="@string/followup_remain_tail_tips"
+        android:textColor="@color/textColor15"
+        app:layout_constraintStart_toEndOf="@+id/tv_payment"
+        app:layout_constraintTop_toTopOf="@+id/tv_payment"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_sign_date"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/customer_date_of_signing_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_payment"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_contact_receipt"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:text="@string/followup_contact_receipt_tips"
+        app:layout_constraintStart_toEndOf="@+id/tv_sign_date"
+        app:layout_constraintTop_toTopOf="@+id/tv_sign_date"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_sign_person"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/followup_contractor_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sign_date" />
+
+    <TextView
+        android:id="@+id/tv_remark_tips"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/tips_customer_remark2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sign_person" />
+
+    <TextView
+        android:id="@+id/tv_remark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13"
+        app:layout_constraintBottom_toTopOf="@+id/rv_pictures"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_remark_tips"
+        app:layout_constraintTop_toTopOf="@+id/tv_remark_tips" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pictures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/tv_more_pictures"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remark"
+        app:spanCount="3" />
+
+    <TextView
+        android:id="@+id/tv_more_pictures"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:background="@color/bg"
+        android:drawablePadding="@dimen/dp_4"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/more_pictures"
+        android:textColor="@color/textColor14"
+        android:textSize="@dimen/textSize_14"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_pictures" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

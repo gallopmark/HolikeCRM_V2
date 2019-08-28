@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            style="@style/ShadowBg_Radius6dp_Padding18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_collect_deposit_operate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/house_manage_collect_time"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:text="*"
+                        android:textColor="@color/textColor15"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_collect_deposit_collect_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:hint="@string/receive_deposit_select"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/house_manage_collecter"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:text="*"
+                        android:textColor="@color/textColor15"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_collect_deposit_collect_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:hint="@string/receive_deposit_select"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_collect_deposit_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_36"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_18"
+                            android:layout_height="@dimen/dp_18"
+                            android:src="@drawable/icon_name" />
+
+                        <TextView
+                            android:id="@+id/tv_collect_deposit_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_9"
+                            android:text="刘思博"
+                            android:textColor="@color/textColor8"
+                            android:textSize="@dimen/textSize_14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_18"
+                            android:layout_height="@dimen/dp_18"
+                            android:src="@drawable/icon_phone" />
+
+                        <TextView
+                            android:id="@+id/tv_collect_deposit_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_9"
+                            android:text="13659478654"
+                            android:textColor="@color/textColor8"
+                            android:textSize="@dimen/textSize_14" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_36"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_18"
+                            android:layout_height="@dimen/dp_18"
+                            android:src="@drawable/icon_address" />
+
+                        <TextView
+                            android:id="@+id/tv_collect_deposit_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_9"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="金碧世纪花园世纪花园....."
+                            android:textColor="@color/textColor8"
+                            android:textSize="@dimen/textSize_14" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/receive_deposit_custom_category"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:text="*"
+                    android:textColor="@color/textColor15"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_collect_custom_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
+                    android:hint="@string/receive_deposit_select"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/receive_deposit_depositAmount"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:text="*"
+                    android:textColor="@color/textColor15"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_collect_deposit_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right|center"
+                    android:hint="@string/receive_deposit_depositAmount_et"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_48"
+                android:gravity="center|left"
+                android:text="@string/house_manage_note"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_collect_deposit_note"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="@string/house_manage_note_et"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <View style="@style/divider_horizontal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_collect_deposit_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dp_20" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_6" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_while"
+        android:padding="@dimen/dp_12">
+
+        <TextView
+            android:id="@+id/tv_collect_deposit_save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:background="@drawable/bg_btn_login_can_click"
+            android:gravity="center"
+            android:text="@string/receive_deposit_save"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

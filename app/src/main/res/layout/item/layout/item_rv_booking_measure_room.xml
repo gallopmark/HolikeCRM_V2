@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center|left"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_item_rv_booking_measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="全屋"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/cb_item_rv_booking_measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_12"
+        android:clickable="false"
+        android:gravity="center" />
+</LinearLayout>

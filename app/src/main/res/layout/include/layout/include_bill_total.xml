@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sv_total_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/bg_shadow_layer_radius6dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:text="@string/bill_list_xsrw_1" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_xsrw_1"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_dqrdd_2" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_dqrdd_2"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_sxed_3" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_sxed_3"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_sxye4" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_sxye4"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_qcye5" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_qcye5"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_crmhk6" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_crmhk6"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_crmflje7" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_crmflje7"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_ccjzq8" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_ccjzq8"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_hdzkje9" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_hdzkje9"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_ccjzh10" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_ccjzh10"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_kf11" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_kf11"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_kyje12" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_kyje12"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_kscddje13" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_kscddje13"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_cwflqcye14" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_cwflqcye14"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_cwfldqzj15" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_cwfldqzj15"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_cwfldqjs16" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_cwfldqjs16"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_cwflqmye17" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_cwflqmye17"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_ysqcye18" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_ysqcye18"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_ysfsye19" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_ysfsye19"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/tv_item_base_customer_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bill_list_ysqmye20" />
+
+                <TextView
+                    android:id="@+id/tv_bill_list_ysqmye20"
+                    style="@style/tv_item_base_customer_gray_fine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:gravity="center"
+                    android:text="456" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_6" />
+    </LinearLayout>
+</ScrollView>

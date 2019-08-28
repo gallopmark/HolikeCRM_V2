@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_12">
+
+                    <View
+                        android:layout_width="@dimen/dp_3"
+                        android:layout_height="@dimen/dp_16"
+                        android:background="@color/textColor14" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_weight="1"
+                        android:text="@string/receiving_scan_way_1_method_subtitle"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/dp_16"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/ShadowBg_Radius6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:text="首次连接："
+                        android:textColor="@color/textColor4"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_instruction_connection_method"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="10dp"
+                        android:paddingLeft="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_14"
+                        android:paddingRight="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:text="@string/receiving_scan_way_1_method_1"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/scanning_barcode" />
+
+                    <TextView
+                        android:id="@+id/tv_instruction_connection_method_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="10dp"
+                        android:paddingLeft="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:text="@string/receiving_scan_way_1_method_2"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:text="重新连接："
+                        android:textColor="@color/textColor4"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_instruction_connection_method_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="10dp"
+                        android:paddingLeft="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_20"
+                        android:text="@string/receiving_scan_way_1_method_3"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_14" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_12">
+
+                    <View
+                        android:layout_width="@dimen/dp_3"
+                        android:layout_height="@dimen/dp_16"
+                        android:background="@color/textColor14" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_weight="1"
+                        android:text="@string/receiving_scan_way_1_instruction_subtitle"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/dp_16"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/ShadowBg_Radius6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_instruction_connection_instruction_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="10dp"
+                        android:paddingLeft="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:text="@string/receiving_scan_way_1_instruction_0"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <TextView
+                        android:id="@+id/tv_instruction_connection_instruction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="10dp"
+                        android:paddingLeft="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:text="@string/receiving_scan_way_1_instruction_1"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <TextView
+                        android:id="@+id/tv_instruction_connection_instruction_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="20dp"
+                        android:paddingLeft="@dimen/dp_14"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_14"
+                        android:paddingBottom="@dimen/dp_20"
+                        android:text="@string/receiving_scan_way_1_instruction_2"
+                        android:textColor="@color/textColor8"
+                        android:textSize="@dimen/textSize_14" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

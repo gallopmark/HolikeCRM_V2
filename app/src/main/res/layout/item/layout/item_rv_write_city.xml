@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_item_rv_write_city"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_write_city_service_city"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="117"
+            android:gravity="center"
+            android:text="@string/report_table_serve_city"
+            android:textStyle="bold"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_write_city_service_data"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="147"
+            android:gravity="center"
+            android:text="@string/report_table_serve_date"
+            android:textStyle="bold"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_write_city_service_operate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="86"
+            android:gravity="center"
+            android:text="删除"
+            android:textStyle="bold"
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/textSize_12" />
+
+
+        <View style="@style/divider_vertical" />
+
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

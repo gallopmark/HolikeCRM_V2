@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <style name="Customer_Edit_TextViewStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColor4</item>
+        <item name="android:textSize">@dimen/textSize_14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">left|center</item>
+    </style>
+
+    <style name="Customer_Edit_TextViewFillInStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColor15</item>
+        <item name="android:textSize">@dimen/textSize_14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:text">@string/tips_must_fill_in</item>
+        <item name="android:layout_marginLeft">@dimen/dp_4</item>
+        <item name="android:layout_marginRight">@dimen/dp_4</item>
+    </style>
+
+    <style name="Customer_Edit_LinearLayout48dpStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_48</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="Customer_Edit_EditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:layout_marginStart">@dimen/dp_10</item>
+        <item name="android:textColorHint">@color/textColor21</item>
+        <item name="android:textSize">@dimen/textSize_14</item>
+        <item name="android:gravity">end|center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item> <!--maxLines是设置TextView最多展示多少行，但是在可编辑的Text中，必须要与singleLine一起使用才能使maxLinesAPI生效-->
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="SelectTextViewStyle">
+        <item name="android:drawableRight">@drawable/choice_down</item>
+        <item name="android:drawablePadding">@dimen/dp_6</item>
+        <item name="android:gravity">end|center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_marginLeft">@dimen/dp_10</item>
+        <item name="android:layout_marginStart">@dimen/dp_10</item>
+        <item name="android:hint">@string/tips_please_select</item>
+        <item name="android:textColorHint">@color/textColor21</item>
+        <item name="android:textColor">@color/textColor4</item>
+        <item name="android:textSize">@dimen/textSize_14</item>
+    </style>
+
+    <string-array name="customer_intent_array">
+        <item>A级</item>
+        <item>B级</item>
+        <item>C级</item>
+    </string-array>
+
+    <string name="dialog_tips_customer_edit_title">当前客户已存在</string>
+    <string name="dialog_tips_customer_edit_status">最新状态：</string>
+    <string name="dialog_tips_customer_edit_time">最新状态时间：</string>
+    <string name="dialog_tips_customer_edit_deposit">是否已收订金：</string>
+    <string name="dialog_tips_customer_edit_message">是否需要通知管理者重新分配？</string>
+
+    <string name="dialog_tips_customer_edit_title2">原因</string>
+    <string name="dialog_tips_customer_edit_reason_hint">请输入重新分配客户理由</string>
+
+    <string name="customer_deposit_collection_arrow">订金收取</string>
+    <string name="customer_intention_arrow">客户意向</string>
+</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#007AFF</color>
+
+    <color name="color_while">#ffffff</color>
+    <color name="color_green">#22CC00</color>
+    <color name="color_black">#000000</color>
+
+    <color name="bg">#f5faff</color>
+    <color name="bg_divider">#33007aff</color>
+    <color name="bg_state_bar">#dddddd</color>
+    <color name="bg_dialog">#cc000000</color>
+    <color name="bg_transparent">#00000000</color>
+    <color name="bg_transparent1">#00000001</color>
+    <color name="bg_toast">#e6000000</color>
+    <color name="bg_item_order_report">#1a3c8dbc</color>
+    <color name="bg_homepage_new">#FF0054</color>
+    <color name="bg_homepage_pb_complete">#cce4ff</color>
+    <color name="bg_homepage_pb_translate">#ffccdd</color>
+    <color name="bg_shadow_layout">#33007aff</color>
+    <color name="bg_feedback">#f5faff</color>
+    <color name="bg_month_complete">#1f0097</color>
+
+    <!--textColor-->
+    <color name="textColor1">#9bdaff</color>
+    <color name="textColor2">#aaaaaa</color>
+    <color name="textColor3">#333333</color>
+    <color name="textColor4">#222222</color>
+    <color name="textColor6">#999999</color>
+    <color name="textColor5">#007AFF</color>
+    <color name="textColor7">#F60037</color>
+    <color name="textColor8">#666666</color>
+    <color name="textColor9">#F8F8F8</color>
+    <color name="textColor10">#343434</color>
+    <color name="textColor11">#989898</color>
+    <color name="textColor12">#FF0055</color>
+    <color name="textColor13">#FF9601</color>
+    <color name="textColor14">#007AFF</color>
+    <color name="textColor15">#FF0155</color>
+    <color name="textColor16">#FF0101</color>
+    <color name="textColor17">#FF8500</color>
+    <color name="textColor18">#99ffffff</color>
+    <color name="textColor19">#66ffffff</color>
+    <color name="textColor20">#f5faff</color>
+    <color name="textColor21">#CCCCCC</color>
+
+    <color name="textColor22">#66007AFF</color>
+    <color name="textColor23">#EEEEEE</color>
+    <color name="textColor24">#E3F0FC</color>
+
+    <!-- line color -->
+    <color name="lineColor">#CCE5FF</color>
+
+    <!--柱状图-->
+    <color name="histogram_bg">#1f0097</color>
+    <color name="histogram_column">#007afe</color>
+    <color name="histogram_line">#99ffffff</color>
+
+    <color name="color_while_alpha_0_8">#ccffffff</color>
+    <color name="color_while_alpha_0_4">#66ffffff</color>
+
+    <color name="light_blue">#298efc</color>
+    <color name="light_text5">#19007aff</color>
+
+    <color name="container_divider">#EBF4FF</color>
+    <color name="translucent">#80000000</color>
+    <color name="white_percent60">#66ffffff</color>
+
+    <color name="calendar_range_middle">#14007AFF</color>
+    <color name="progressbar_background">#D4D7DD</color>
+
+    <color name="shadow_color_1">#03007aff</color>
+    <color name="shadow_color_2">#04007aff</color>
+    <color name="shadow_color_3">#05007aff</color>
+    <color name="shadow_color_4">#06007aff</color>
+    <color name="shadow_color_5">#07007aff</color>
+    <color name="shadow_color_6">#0a007aff</color>
+
+    <color name="color_f3">#f3f3f3</color>
+
+    <color name="color_green_width_3dp">#1FB800</color>
+    <color name="color_red_width_3dp">#FF0054</color>
+    <color name="color_blue_width_3dp">#007AFF</color>
+    <color name="color_yellow_width_3dp">#E6B800</color>
+    <color name="color_cyan_width_3dp">#00C7C7</color>
+    <color name="color_dark_blue_width_3dp">#0F00D6</color>
+    <color name="color_orange_width_3dp">#FF9600</color>
+    <color name="color_pink_width_3dp">#B300E0</color>
+
+</resources>

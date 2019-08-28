@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_4"
+    android:layout_marginTop="@dimen/dp_4"
+    android:layout_marginRight="@dimen/dp_4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shadow_layer_radius9dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_residence" />
+
+
+            <com.holike.crm.customView.InputEditText
+                android:id="@+id/et_baseCustomer_residence"
+                style="@style/tv_item_base_customer_right"
+                android:layout_marginLeft="@dimen/dp_24"
+                android:hint="@string/receive_deposit_residence_et" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+
+        <LinearLayout style="@style/ll_item_base_customer">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_houseNum" />
+
+
+            <com.holike.crm.customView.InputEditText
+                android:id="@+id/et_baseCustomer_houseNum"
+                style="@style/tv_item_base_customer_right"
+                android:layout_marginLeft="@dimen/dp_24"
+                android:hint="@string/receive_deposit_houseNum_et" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout style="@style/ll_item_base_customer">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_houseArea" />
+
+
+            <com.holike.crm.customView.InputEditText
+                android:id="@+id/et_baseCustomer_houseArea"
+                style="@style/tv_item_base_customer_right"
+                android:layout_marginLeft="@dimen/dp_24"
+                android:digits="1234567890"
+                android:hint="@string/receive_deposit_houseArea_et"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout style="@style/ll_item_base_customer">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_houseStyle" />
+
+
+            <TextView
+                android:id="@+id/tv_baseCustomer_houseStyle"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_select" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout style="@style/ll_item_base_customer">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_decorateStyle" />
+
+
+            <TextView
+                android:id="@+id/tv_baseCustomer_decorateStyle"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_select" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_decorateProperty" />
+
+
+            <TextView
+                android:id="@+id/tv_baseCustomer_decorateProperty"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_select" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <!--      ddddd       -->
+        <LinearLayout
+            android:id="@+id/ll_h_decorate_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_house_decorate_state" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_decorate_state"
+                    style="@style/tv_item_base_customer_right"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:hint="@string/receive_deposit_select" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_h_whether_floor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_house_whether_floor" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_whether_floor"
+                    style="@style/tv_item_base_customer_right"
+                    android:hint="@string/receive_deposit_select" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_h_floor_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_house_floor_time" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_floor_time"
+                    style="@style/tv_item_base_customer_right"
+                    android:hint="@string/receive_deposit_select" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_h_decorate_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_house_decorate_time" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_decorate_time"
+                    style="@style/tv_item_base_customer_right"
+                    android:hint="@string/receive_deposit_select" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_custom_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_deposit_custom_category" />
+
+                <TextView style="@style/tv_item_base_customer_must" />
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_custom_category"
+                    style="@style/tv_item_base_customer_right"
+                    android:hint="@string/receive_deposit_select" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_add_customer_collect_deposit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_deposit_depositAmount" />
+
+                <TextView style="@style/tv_item_base_customer_must" />
+
+                <EditText
+                    android:id="@+id/et_baseCustomer_depositAmount"
+                    style="@style/tv_item_base_customer_right"
+                    android:digits="1234567890."
+                    android:hint="@string/receive_deposit_depositAmount_et"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_add_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20" />
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_budget" />
+
+            <com.holike.crm.customView.InputEditText
+                android:id="@+id/et_baseCustomer_budget"
+                style="@style/tv_item_base_customer_right"
+                android:layout_marginLeft="@dimen/dp_24"
+                android:hint="@string/receive_deposit_budget_et"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <!-- dddd-ddd -->
+        <LinearLayout
+            android:id="@+id/ll_custom_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:text="@string/receive_deposit_customize_space" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_custom_space"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_12"
+                    android:overScrollMode="never">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_furniture_demand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:text="@string/receive_deposit_furniture_demand" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_furniture_demand"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_12"
+                    android:overScrollMode="never">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+        <!-- dddd-ddd -->
+        <LinearLayout
+            android:id="@+id/ll_digital_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer_vertical"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+
+                    android:text="@string/receive_deposit_customer_service" />
+
+                <TextView
+                    android:id="@+id/tv_receive_deposit_customer_service"
+                    style="@style/tv_item_base_customer_right_solid"
+                    android:hint="@string/quotation_info_no_remark"
+                    android:textSize="@dimen/textSize_14" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_edit_house_follow_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/edit_house_follow_status" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_follow_status"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_edit_house_promotion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/edit_house_promotion" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_promotion"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_edit_house_registration_scheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/edit_house_registration_scheme" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_registration_scheme"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_deposit_shop" />
+
+                <TextView style="@style/tv_item_base_customer_must" />
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_shop"
+                    style="@style/tv_item_base_customer_right"
+                    android:hint="@string/receive_deposit_shop_hint" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/receive_deposit_associates" />
+
+
+                <TextView
+                    android:id="@+id/tv_baseCustomer_associates"
+                    style="@style/tv_item_base_customer_right"
+                    android:hint="@string/receive_deposit_associates_hint" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_name" />
+
+
+            <EditText
+                android:id="@+id/et_baseCustomer_name"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_name_et"
+                android:maxLength="11" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_phone" />
+
+
+            <EditText
+                android:id="@+id/et_baseCustomer_phone"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_phone_et"
+                android:inputType="number|phone"
+                android:maxLength="11" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_material" />
+
+
+            <TextView
+                android:id="@+id/tv_baseCustomer_material"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_select" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+        <LinearLayout
+            style="@style/ll_item_base_customer"
+            android:background="@color/bg_transparent">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:text="@string/receive_deposit_color" />
+
+
+            <TextView
+                android:id="@+id/tv_baseCustomer_color"
+                style="@style/tv_item_base_customer_right"
+                android:hint="@string/receive_deposit_select" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider_horizontal"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_customer_server_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/tv_item_base_customer_left"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_17"
+                android:text="@string/receive_deposit_note" />
+
+
+            <EditText
+                android:id="@+id/et_baseCustomer_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_marginRight="@dimen/dp_12"
+                android:layout_marginBottom="@dimen/dp_14"
+                android:background="@null"
+                android:gravity="top|left"
+                android:hint="@string/receive_deposit_note_et"
+                android:minHeight="@dimen/dp_56"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

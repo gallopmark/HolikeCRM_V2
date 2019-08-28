@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/dp_6"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tips_message_board"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
+
+    <View style="@style/divider_horizontal" />
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@color/bg_transparent"
+        android:gravity="start|top"
+        android:hint="@string/tips_message_board_hint"
+        android:textColorHint="@color/textColor21"
+        android:inputType="text"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:textSize="@dimen/textSize_13" />
+
+    <View style="@style/divider_horizontal" />
+
+    <TextView
+        android:id="@+id/tv_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@drawable/bg_clickable_selector"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_40"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_40"
+        android:paddingBottom="@dimen/dp_8"
+        android:text="@string/publish"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_14" />
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:background="@color/color_while"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_search_rounded_15"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_search_collect_deposit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@null"
+                android:gravity="center|left"
+                android:hint="@string/customer_manage_search_hint"
+                android:imeOptions="actionSearch"
+                android:paddingLeft="@dimen/dp_17"
+                android:singleLine="true"
+                android:textColor="@color/textColor6"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_search_collect_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_13"
+            android:text="@string/dialog_cancel"
+            android:textColor="@color/textColor14"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_search_collect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_3"
+        android:layout_marginRight="@dimen/dp_3">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_collect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_3"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/shadow_bg"
+            android:overScrollMode="never"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

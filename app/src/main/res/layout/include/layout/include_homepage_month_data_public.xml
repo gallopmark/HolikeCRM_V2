@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_received"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_data_vertical_inside"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_2"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_2"
+        android:paddingBottom="@dimen/dp_16"
+        android:text="@string/payments_received"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_10" />
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_data_vertical_inside"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_2"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_2"
+        android:paddingBottom="@dimen/dp_16"
+        android:text="@string/total_contract_amount"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_10" />
+</LinearLayout>

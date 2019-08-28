@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/include_empty_page"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rlContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <com.grallopmark.tablayout.CommonTabLayout
+                android:id="@+id/mTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:layout_gravity="center"
+                android:background="@color/color_while"
+                app:tl_indicator_bounce_enable="false"
+                app:tl_indicator_color="@color/textColor5"
+                app:tl_indicator_corner_radius="@dimen/dp_2"
+                app:tl_indicator_height="@dimen/dp_4"
+                app:tl_indicator_width="@dimen/dp_32"
+                app:tl_tab_space_equal="true"
+                app:tl_textBold="BOTH"
+                app:tl_textSelectColor="@color/colorAccent"
+                app:tl_textUnselectColor="@color/textColor21"
+                app:tl_textSize="@dimen/textSize_16" />
+
+            <FrameLayout
+                android:id="@+id/mContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/flBottom"
+                android:layout_below="@+id/mTabLayout" />
+
+            <FrameLayout
+                android:id="@+id/flBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_while"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/mSaveTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_clickable_selector"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/employee_save"
+                    android:textColor="@color/color_while"
+                    android:textSize="@dimen/textSize_16" />
+            </FrameLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_while"
+    android:orientation="vertical"
+    tools:context="com.holike.crm.activity.main.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View style="@style/divider_horizontal" />
+
+    <com.galloped.tablayout.TabLayout
+        android:id="@+id/tab_main"
+        android:layout_width="match_parent"
+        app:tab_textSize="@dimen/textSize_12"
+        app:tab_selectedTextColor="@color/textColor5"
+        app:tab_unSelectTextColor="@color/textColor6"
+        app:tab_drawableWidth="@dimen/dp_24"
+        app:tab_drawableHeight="@dimen/dp_24"
+        app:tab_drawablePadding="@dimen/dp_2"
+        android:layout_height="@dimen/dp_49" />
+
+</LinearLayout>

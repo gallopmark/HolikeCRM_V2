@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_homepage_collect_deposit"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_40"
+    android:background="@color/color_while"
+    android:gravity="center|start"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_deposit_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/orders_for_this_month"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_collect_deposit"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/bg_shadow_layer_homepagev2"
+        android:gravity="center"
+        android:text="@string/receive_deposit_title"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_14" />
+</LinearLayout>

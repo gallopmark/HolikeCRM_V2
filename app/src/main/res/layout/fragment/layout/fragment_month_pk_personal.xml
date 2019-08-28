@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_activity_dealers_rank_report">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="217dp"
+        android:background="@drawable/high_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_fragment_title_bar_transparent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/dp_3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="63dp"
+                            android:gravity="center"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_30"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_rang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_16"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_40"
+                            android:text="@string/report_table_complete_score"
+                            android:textColor="#66ffffff"
+                            android:textSize="@dimen/textSize_14" />
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_16"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="@dimen/dp_4"
+                        android:paddingTop="@dimen/dp_24"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/distributor_division" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_month_pk_personal_rankPre"
+                                android:layout_width="68dp"
+                                android:layout_height="63dp"
+                                android:background="@drawable/distributor_ranking"
+                                android:gravity="center"
+                                android:textColor="#FFFFFF00"
+                                android:textSize="@dimen/textSize_20"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_month_pk_personal_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_9"
+                                android:textColor="@color/color_while"
+                                android:textSize="@dimen/textSize_14"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:text="@string/report_ranking"
+                            android:textColor="#66ffffff"
+                            android:textSize="@dimen/textSize_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_40"
+                            android:text="@string/report_before_you"
+                            android:textColor="#66ffffff"
+                            android:textSize="@dimen/textSize_14" />
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_pre_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_16"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:layout_marginTop="31dp"
+                    android:background="@drawable/bg_rv_month_pk_header"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="59"
+                        android:gravity="center"
+                        android:text="@string/report_task_year"
+                        android:textColor="@color/textColor18"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="51"
+                        android:gravity="center"
+                        android:text="@string/report_achievement_accumulation"
+                        android:textColor="@color/textColor18"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="47"
+                        android:gravity="center"
+                        android:text="@string/report_complete_accumulation"
+                        android:textColor="@color/textColor18"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="46"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:text="@string/report_task_month"
+                        android:textColor="@color/textColor18"
+                        android:textSize="@dimen/textSize_12">
+
+                    </TextView>
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="47"
+                        android:gravity="center"
+                        android:text="@string/report_achievement_month"
+                        android:textColor="@color/textColor18"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="47"
+                        android:gravity="center"
+                        android:text="@string/report_table_complete_month"
+                        android:textColor="@color/textColor18"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_task_year"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="59"
+                        android:gravity="center"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_achievement_year"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="51"
+                        android:gravity="center"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_complete_year"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="47"
+                        android:gravity="center"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_task_month"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="46"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_12">
+
+                    </TextView>
+
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_achievement_month"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="47"
+                        android:gravity="center"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_12" />
+
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_complete_month"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="47"
+                        android:gravity="center"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_12" />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_horizontal"
+                    android:background="#FF0066CC"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginRight="@dimen/dp_12" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_32"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/dp_3"
+                        android:layout_height="@dimen/dp_16"
+                        android:layout_marginLeft="@dimen/dp_12"
+                        android:background="#FFFFDE02" />
+
+                    <TextView
+                        android:id="@+id/tv_month_pk_personal_rank_top_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:text="@string/report_top_three"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/dp_16"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_27"
+                    android:gravity="center|top"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_110"
+                            android:src="@drawable/second" />
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_rank_no2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_14"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_14"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="#FFA5BDD4" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_110"
+                            android:src="@drawable/first" />
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_rank_no1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_14"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_14"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="#FFFFDE02" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_110"
+                            android:src="@drawable/third" />
+
+                        <TextView
+                            android:id="@+id/tv_month_pk_personal_rank_no3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_14"
+                            android:textColor="@color/color_while"
+                            android:textSize="@dimen/textSize_14"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_4"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="#FFE8BB9E" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

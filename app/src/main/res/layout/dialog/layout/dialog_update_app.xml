@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/mUpdateBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/update_top" />
+
+    <TextView
+        android:id="@+id/mUpdateTipsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/dialog_update_tips"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_18" />
+
+    <TextView
+        android:id="@+id/mVersionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mUpdateBg"
+        android:layout_alignLeft="@+id/mUpdateTipsTv"
+        android:text="@string/dialog_update_version"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_12" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mMessageRv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mVersionTv"
+        android:layout_alignLeft="@+id/mUpdateTipsTv"
+        android:layout_alignRight="@+id/mUpdateBg"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_20"
+        android:minHeight="@dimen/dp_40"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
+        android:id="@+id/mUpdateBottomTv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_28"
+        android:layout_below="@+id/mMessageRv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_28"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/bg_dialog_confirm_button_selector"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_26"
+        android:paddingRight="@dimen/dp_26"
+        android:text="@string/dialog_update_button"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_14" />
+</RelativeLayout>

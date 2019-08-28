@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:gravity="center"
+            android:textColor="@color/textColor4"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_user"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="end|center"
+            android:textColor="@color/textColor8" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_divider"
+        style="@style/divider_horizontal" />
+</LinearLayout>

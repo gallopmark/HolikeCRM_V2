@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_activity_dealers_rank_report"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="217dp"
+        android:background="@drawable/high_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_fragment_title_bar_transparent" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_19">
+
+            <TextView
+                android:id="@+id/tv_performance_personal_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_while"
+                android:textSize="@dimen/textSize_18"
+                android:textStyle="bold" />
+
+            <com.holike.crm.customView.ScaleProgressView
+                android:id="@+id/spv_performance_personal"
+                android:layout_width="244dp"
+                android:layout_height="244dp"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_performance_personal_complete_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/report_table_complete"
+                    android:textColor="@color/color_while_alpha_0_8"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_performance_personal_complete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_60"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_4"
+                        android:text="万"
+                        android:textColor="@color/color_while"
+                        android:textSize="@dimen/textSize_30"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_performance_personal_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@string/homepage_month_data_target"
+                    android:textColor="@color/color_while_alpha_0_4"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_22"
+                    android:text="@string/report_performance_personal_growth"
+                    android:textColor="@color/color_while_alpha_0_4"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_performance_personal_growth"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="@dimen/dp_32"
+                    android:layout_marginTop="@dimen/dp_11"
+                    android:background="@drawable/bg_rounded_corner_border_16"
+                    android:gravity="center"
+                    android:textColor="@color/color_while"
+                    android:textSize="@dimen/textSize_20"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <include
+            layout="@layout/include_analysis_report_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_16" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_12"
+            android:background="@drawable/bg_rv_month_pk_header"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/report_performance_personal_time"
+                android:textColor="@color/color_while"
+                android:textSize="@dimen/dp_13"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/report_table_complete"
+                android:textColor="@color/color_while"
+                android:textSize="@dimen/dp_13"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_performance_personal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12"
+            android:overScrollMode="never" />
+    </LinearLayout>
+</FrameLayout>

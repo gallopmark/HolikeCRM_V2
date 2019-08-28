@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MainTableLayout">
+        <attr name="mtlNorColor" format="color" />
+        <attr name="mtlSelectColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="HVScrollView">
+        <!--水平内容宽度是否充满，默认false自适应-->
+        <attr name="fillViewportH" format="boolean" />
+        <!--垂直内容高度是否充满，默认false自适应-->
+        <attr name="fillViewportV" format="boolean" />
+        <!--滚动方向，默认both双向滚动-->
+        <attr name="scrollOrientation">
+            <enum name="none" value="0" />
+            <enum name="horizontal" value="1" />
+            <enum name="vertical" value="2" />
+            <enum name="both" value="3" />
+        </attr>
+        <!--内容是否居中显示，默认右上角对齐-->
+        <attr name="childLayoutCenter" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="mCircleBgColor" format="color" />
+        <attr name="mTextColor" format="color" />
+        <attr name="mCircleWidth" format="dimension" />
+        <attr name="mTextSize" format="dimension" />
+        <attr name="mProgressColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowLayout2">
+        <attr name="sfl_backgroundRound" format="dimension" />
+        <attr name="sfl_shadowWidth" format="dimension" />
+        <attr name="sfl_shadowColor" format="color" />
+        <attr name="sfl_background" format="color" />
+        <attr name="sfl_offsetX" format="dimension" />
+        <attr name="sfl_offsetY" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="MyLinearLayout">
+        <attr name="mll_HeightRatio" format="reference|float" />
+        <attr name="mll_HeightDimen" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ClearEditText">
+        <attr name="clearIcon" format="reference" />
+        <attr name="scaleSize" format="float" />
+        <attr name="drawableWidth" format="dimension" />
+    </declare-styleable>
+
+    <!-- ShadowLayout 阴影 -->
+    <declare-styleable name="ShadowLayoutCompat">
+        <attr name="shadowBackground" format="color" />
+        <attr name="shadowCorners" format="dimension" />
+        <attr name="shadowColor" format="color" />
+        <attr name="shadowRadius" format="dimension" />
+        <attr name="shadowDx" format="dimension" />
+        <attr name="shadowDy" format="dimension" />
+        <attr name="shadowShape">
+            <flag name="rectangle" value="0x0001" />
+            <flag name="oval" value="0x0010" />
+        </attr>
+        <attr name="shadowSide">
+            <flag name="all" value="0x1111" />
+            <flag name="left" value="0x0001" />
+            <flag name="top" value="0x0010" />
+            <flag name="right" value="0x0100" />
+            <flag name="bottom" value="0x1000" />
+        </attr>
+    </declare-styleable>
+</resources>

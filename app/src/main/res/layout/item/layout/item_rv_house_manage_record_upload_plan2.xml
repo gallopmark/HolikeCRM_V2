@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer"
+    style="@style/Customer_ItemStyle"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="@dimen/dp_46"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_item_rv_house_manage_record_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_12"
+            android:layerType="software"
+            android:background="@drawable/line_dash_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_follow_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="07.27"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <View
+            android:id="@+id/view_item_rv_house_manage_record_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layerType="software"
+            android:background="@drawable/line_dash_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_12"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_rv_house_manage_record_follower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="跟进人：欧阳信雄"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_12" />
+
+            <TextView
+                android:id="@+id/tv_item_rv_house_manage_record_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类型：上传方案"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_12" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_upload_plan_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="上传方案时间：2015.2.1"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_upload_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="上传方案人员："
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_img_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="预约确图日期：2015.2.1"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+
+        <TextView
+            android:id="@+id/tv_item_rv_house_manage_record_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="备注：我是内容我是内容我是内容我是内"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_item_rv_house_manage_record_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/btn_item_rv_house_manage_record_cancel"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_18"
+                android:gravity="center"
+                android:background="@drawable/bg_btn_rounded_corner_border_9"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:text="撤销"
+                android:textColor="@color/textColor14"
+                android:textSize="@dimen/dp_12" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

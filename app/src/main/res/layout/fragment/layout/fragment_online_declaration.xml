@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/color_while"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/ll_trading_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_trading_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@string/bill_list_trading_time"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView
+                android:id="@+id/iv_customer_manage_customer_source"
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@drawable/choice_down" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_documents_state"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_documents_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@string/bill_list_documents_state"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView
+                android:id="@+id/iv_customer_manage_customer_state"
+                android:layout_width="@dimen/dp_8"
+                android:layout_height="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@drawable/choice_down" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_select_line"
+        style="@style/divider_horizontal" />
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_online_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_online_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_6"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

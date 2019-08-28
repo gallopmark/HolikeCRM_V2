@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ShadowBg_Radius9dp_Padding18dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_3"
+    android:layout_marginRight="@dimen/dp_3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_rv_feedback_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单编号：A00000-180713252"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_feedback_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="2018-7-10  11:40"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <TextView
+        android:id="@+id/tv_item_rv_feedback_problem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="问题类型：生产环节"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_item_rv_feedback_problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5" />
+
+    <TextView
+        android:id="@+id/tv_item_rv_feedback_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:singleLine="true"
+        android:text="问题描述：我是问题描述我是问题描述我是问题问..."
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_14" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_item_rv_feedback_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_item_rv_feedback_loss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="直接损失：0-100元"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_14"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_item_rv_feedback_solution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="解决问题建议：我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复。"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_14"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_item_rv_feedback_solution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_item_rv_feedback_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="工厂回复：我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复我是工厂回复。"
+        android:textColor="@color/textColor12"
+        android:textSize="@dimen/textSize_14" />
+
+    <LinearLayout
+        android:id="@+id/ll_item_rv_feedback_show"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:gravity="center|top">
+
+        <ImageView
+            android:id="@+id/iv_item_rv_feedback_show"
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/ranking_up"
+            android:tint="@color/textColor6" />
+    </LinearLayout>
+</LinearLayout>

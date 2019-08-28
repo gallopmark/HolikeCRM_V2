@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_rv_performance_personal_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="时间"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/dp_13"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_performance_personal_completed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已完成"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/dp_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:background="#FF0066CC" />
+</LinearLayout>

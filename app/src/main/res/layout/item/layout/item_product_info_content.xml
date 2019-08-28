@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_product_info_content_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dp_44"
+    android:orientation="horizontal">
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+    <FrameLayout
+        android:id="@+id/fl_product_info_design_and_color"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_design_and_color"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_Design_and_color" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_info_hardware_specifications"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_hardware_specifications"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/product_hardware_specifications" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_info_material"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_material"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_material" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_overlaying_process"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_overlaying_process"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_2"
+                android:text="@string/product_overlaying_process" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_info_grain"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_grain"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/product_info_grain" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_quotation_info_length"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_length"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_length" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_quotation_info_width"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_width"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_width" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_quotation_info_thickness"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_thickness"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_thickness" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_quotation_info_count"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_count"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_count" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_cutting_length"
+        android:layout_width="@dimen/dp_56"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_cutting_length"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/product_cutting_length" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_cutting_width"
+        android:layout_width="@dimen/dp_56"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_cutting_width"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/product_cutting_width" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="@dimen/dp_90"
+        android:id="@+id/fl_product_tank_group_name"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_tank_group_name"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_2"
+                android:text="@string/product_tank_group_name" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="@dimen/dp_90"
+        android:id="@+id/fl_product_info_remark"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_info_remark"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                android:text="@string/quotation_info_remark" />
+        </LinearLayout>
+    
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_product_side_info"
+        android:layout_width="@dimen/dp_90"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_product_side_info"
+                style="@style/tv_item_base_customer_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:maxLines="3"
+
+                android:paddingLeft="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_2"
+                android:text="@string/product_side_info" />
+        </LinearLayout>
+    
+    </FrameLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

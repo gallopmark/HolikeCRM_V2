@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:gravity="center"
+    android:padding="@dimen/dialog_padding"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_cancel_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/revoke"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_number"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_5"
+        android:background="@drawable/bg_corners2dp_textcolor21"
+        android:gravity="top"
+        android:hint="@string/revoke_hint"
+        android:padding="@dimen/dp_5"
+        android:textColor="@color/textColor3"
+        android:textColorHint="@color/textColor6"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_dialog_cancel_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_14"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dialog_cancel_button_selector"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@string/dialog_cancel"
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/btn_dialog_cancel_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dialog_confirm_button_selector"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@string/dialog_sure"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14" />
+
+    </LinearLayout>
+</LinearLayout>

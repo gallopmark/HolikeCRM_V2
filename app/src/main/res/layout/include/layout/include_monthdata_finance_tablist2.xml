@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/v_divider"
+        style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_50"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_principal"
+            style="@style/Scrollable_TextViewStyle2"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:text="@string/tips_customer_name" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/Scrollable_TextViewStyle"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:text="@string/followup_receipt_category_tips2" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/Scrollable_TextViewStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/followup_receipt_amount_tips3" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/Scrollable_TextViewStyle"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:text="@string/followup_receipt_time_tips2" />
+
+        <View style="@style/divider_vertical" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

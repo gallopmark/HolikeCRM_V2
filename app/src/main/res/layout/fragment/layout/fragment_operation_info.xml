@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/textColor20"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        android:background="@color/bg">
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:background="@color/color_while"
+                    android:orientation="horizontal"
+                    android:weightSum="375">
+
+                    <TextView
+                        style="@style/tv_item_base_customer_black"
+                        android:layout_width="0dp"
+                        android:layout_weight="90"
+                        android:gravity="center"
+                        android:text="@string/operation_log_nick" />
+
+                    <TextView
+                        style="@style/tv_item_base_customer_black"
+                        android:layout_width="0dp"
+                        android:layout_weight="90"
+                        android:gravity="center"
+                        android:text="@string/operation_log_log" />
+
+                    <TextView
+                        style="@style/tv_item_base_customer_black"
+                        android:layout_width="0dp"
+                        android:layout_weight="110"
+                        android:gravity="center"
+                        android:text="@string/operation_log_operator" />
+
+                    <TextView
+                        style="@style/tv_item_base_customer_black"
+                        android:layout_width="0dp"
+                        android:layout_weight="85"
+                        android:gravity="center"
+                        android:text="@string/operation_log_time" />
+                </LinearLayout>
+
+                <View style="@style/divider_horizontal" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_operation_log_center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="vertical" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="9dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:background="@drawable/bg_side_shadow" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

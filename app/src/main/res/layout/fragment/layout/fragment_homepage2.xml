@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f3"
+    android:orientation="vertical">
+
+    <com.xcode.general.YouthToolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:background="@color/textColor14"
+        android:minHeight="@dimen/dp_44"
+        app:contentInsetStart="0dp"
+        app:titleMarginEnd="@dimen/dp_10"
+        app:titleMarginStart="@dimen/dp_10"
+        app:titleTextAppearance="@style/AppToolbarTitleTextStyle2">
+
+        <TextView
+            android:id="@+id/tv_role"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/actionBarItemBackground"
+            android:drawableEnd="@drawable/ic_expand_more_white_24dp"
+            android:drawableRight="@drawable/ic_expand_more_white_24dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center">
+
+            <TextView
+                android:id="@+id/tv_homepage_msg"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/message_title"
+                android:textColor="@color/color_while"
+                android:textSize="@dimen/textSize_13" />
+
+            <ImageView
+                android:id="@+id/iv_home_red_point_msg"
+                style="@style/iv_red_point_msg"
+                android:contentDescription="@string/homepage_new"
+                android:visibility="gone" />
+        </FrameLayout>
+    </com.xcode.general.YouthToolbar>
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:srlEnableLoadMore="false">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/ll_content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_36">
+
+                <FrameLayout
+                    android:id="@+id/flOperate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@drawable/bg_corners_top_white_5dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/llNewsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/color_while"
+                    android:gravity="center|start"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_28"
+                        android:layout_height="@dimen/dp_27"
+                        android:contentDescription="@string/homepage_announcement"
+                        android:src="@drawable/home_page_news" />
+
+                    <TextView
+                        android:id="@+id/tvNewsContent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        android:layout_marginRight="@dimen/dp_12"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_13" />
+
+                    <View
+                        android:layout_width="@dimen/dp_1"
+                        android:layout_height="@dimen/dp_16"
+                        android:background="@color/textColor6" />
+
+                    <TextView
+                        android:id="@+id/mMoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="@string/more"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_12" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/mMenuContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@color/color_while"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

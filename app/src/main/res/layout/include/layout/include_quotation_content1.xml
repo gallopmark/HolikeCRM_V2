@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mQuotationContent1"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_44"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/mColorTv"
+            style="@style/tv_item_base_customer_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/quotation_info_Design_and_color" />
+
+        <TextView
+            android:id="@+id/mMaterialTv"
+            style="@style/tv_item_base_customer_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/quotation_info_Design_and_color"
+            android:visibility="invisible" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/mMatTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_material" />
+
+    <TextView
+        android:id="@+id/mLengthTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_length" />
+
+    <TextView
+        android:id="@+id/mWidthTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_width" />
+
+    <TextView
+        android:id="@+id/mHeightTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_thickness" />
+
+    <TextView
+        android:id="@+id/mQtyTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_count" />
+
+    <TextView
+        android:id="@+id/mAreaTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_area" />
+
+    <TextView
+        android:id="@+id/mTotalAreaTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_total_area" />
+
+    <TextView
+        android:id="@+id/mStandardPriceTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_benchmark" />
+
+    <TextView
+        android:id="@+id/mSalePriceTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_retail_price" />
+
+    <TextView
+        android:id="@+id/mFpbTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_price_before" />
+
+    <TextView
+        android:id="@+id/mFpdTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_price_after" />
+
+    <TextView
+        android:id="@+id/mActivityDisTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_discount_activity" />
+
+    <TextView
+        android:id="@+id/mFapTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_discount_amount" />
+
+    <TextView
+        android:id="@+id/mRebateDisTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_rebate_discount" />
+
+    <TextView
+        android:id="@+id/mRebatePriceTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_rebate_amount" />
+
+    <TextView
+        android:id="@+id/mUrgentPriceTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_urgent_fee_emergency" />
+
+    <TextView
+        android:id="@+id/mMainNameTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_branding" />
+
+    <TextView
+        android:id="@+id/mOrFreeTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_72"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_free_logo" />
+
+    <TextView
+        android:id="@+id/mRemarkTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_remark" />
+
+    <TextView
+        android:id="@+id/mMessageTv"
+        style="@style/tv_item_base_customer_gray"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/dp_4"
+        android:paddingRight="@dimen/dp_4"
+        android:text="@string/quotation_info_error_message" />
+</LinearLayout>

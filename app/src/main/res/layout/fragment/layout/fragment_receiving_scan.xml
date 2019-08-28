@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <EditText
+        android:id="@+id/et_scan_gun"
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/bg_transparent"
+        android:enabled="true"
+        android:focusable="true"
+        android:maxLines="1">
+
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_13"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_12">
+
+            <View
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_16"
+                android:background="@color/textColor14" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_weight="1"
+                android:text="@string/receiving_scan_way"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/dp_16"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <include layout="@layout/include_receiving_scan_way" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_13"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_12">
+
+            <View
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_16"
+                android:background="@color/textColor14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:text="@string/scan_result"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_weight="1"
+                android:text="@string/scan_by_phone_attention"
+                android:textColor="@color/textColor15"
+                android:textSize="@dimen/textSize_11" />
+
+        </LinearLayout>
+
+        <include layout="@layout/include_receiving_scan_result" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

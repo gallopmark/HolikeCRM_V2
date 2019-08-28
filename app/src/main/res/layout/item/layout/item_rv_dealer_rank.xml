@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item_rv_dealer_rank"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_48"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <View style="@style/divider_vertical" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="40">
+
+            <TextView
+                android:id="@+id/tv_item_rv_dealer_rank_rank"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/report_table_rank"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_12" />
+
+            <ImageView
+                android:id="@+id/iv_item_rv_dealer_rank"
+                android:layout_width="@dimen/dp_19"
+                android:layout_height="23dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_dealer_rank_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="51"
+            android:gravity="center"
+            android:text="@string/report_table_center"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_dealer_rank_city"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="51"
+            android:gravity="center"
+            android:text="@string/report_table_city"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_dealer_rank_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="46"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:text="@string/report_table_name"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12">
+
+        </TextView>
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_rv_dealer_rank_performance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="47"
+            android:gravity="center"
+            android:text="@string/report_table_performance"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_12" />
+
+        <View style="@style/divider_vertical" />
+
+
+        <TextView
+            android:id="@+id/tv_item_rv_dealer_rank_adjusted_performance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="49"
+            android:gravity="center"
+            android:text="@string/report_table_adjusted_performance"
+            android:textColor="@color/textColor12"
+            android:textSize="@dimen/textSize_12" />
+
+        <View style="@style/divider_vertical" />
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:background="@color/bg">
+
+        <View
+            android:layout_width="94dp"
+            android:layout_height="6dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_side_shadow_top" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_product_info_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_28"
+
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_12" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/tv_item_base_customer_black"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/color_while"
+                android:gravity="center"
+                android:text="@string/quotation_info_product_name" />
+
+            <View style="@style/divider_horizontal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_product_info_side"
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <HorizontalScrollView
+                android:overScrollMode="never"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/include_product_content_name" />
+
+                    <View style="@style/divider_horizontal" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_product_info_center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never"
+                        android:scrollbars="vertical" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View
+                android:layout_width="9dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:background="@drawable/bg_side_shadow" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/bg">
+
+        <View
+            android:layout_width="94dp"
+            android:layout_height="6dp"
+            android:layout_gravity="top"
+            android:background="@drawable/bg_side_shadow_bottom" />
+
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer"
+    style="@style/Customer_ItemStyle"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_20">
+
+    <TextView
+        android:id="@+id/tv_follow_records_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:text="@string/followup_record"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_16" />
+
+    <View
+        android:id="@+id/v_follow_line"
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_12" />
+</LinearLayout>

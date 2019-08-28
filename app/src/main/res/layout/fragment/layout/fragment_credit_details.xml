@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+
+    tools:context="com.holike.crm.activity.homepage.OrderDetailsActivity">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_3"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/bg_shadow_layer_radius6dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/ll_item_base_customer"
+                android:background="@color/bg_transparent">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_creation_time" />
+
+                <TextView
+                    android:id="@+id/tv_details_creation_time"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_the_current_state" />
+
+                <TextView
+                    android:id="@+id/tv_details_the_current_state"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_bank_line_number" />
+
+                <TextView
+                    android:id="@+id/tv_details_bank_line_number"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_bank_name" />
+
+                <TextView
+                    android:id="@+id/tv_details_bank_name"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_the_bank_account" />
+
+                <TextView
+                    android:id="@+id/tv_details_the_bank_account"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_bank_account_name" />
+
+                <TextView
+                    android:id="@+id/tv_details_bank_account_name"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_amount_of_money" />
+
+                <TextView
+                    android:id="@+id/tv_details_amount_of_money"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_trading_hours" />
+
+                <TextView
+                    android:id="@+id/tv_details_trading_hours"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout style="@style/ll_item_base_customer">
+
+                <TextView
+                    style="@style/tv_item_base_customer_left"
+                    android:text="@string/details_dealer_number" />
+
+                <TextView
+                    android:id="@+id/tv_details_dealer_number"
+                    style="@style/tv_item_base_customer_right" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_12" />
+
+            <LinearLayout
+                android:id="@+id/ll_order_details_order_recommended_retail_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/ll_item_base_customer">
+
+                    <TextView
+                        style="@style/tv_item_base_customer_left"
+                        android:text="@string/details_dealer_name" />
+
+                    <TextView
+                        android:id="@+id/tv_details_dealer_name"
+                        style="@style/tv_item_base_customer_right" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_horizontal"
+                    android:layout_marginLeft="@dimen/dp_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_order_details_order_dealer_factor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/ll_item_base_customer">
+
+                    <TextView
+                        style="@style/tv_item_base_customer_left"
+                        android:layout_height="@dimen/dp_50"
+                        android:text="@string/details_confidential_information" />
+
+                    <TextView
+                        android:id="@+id/tv_relation_tip"
+                        style="@style/tv_item_base_customer_gray_small"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_marginLeft="@dimen/dp_12"
+                        android:text="@string/details_confidential_information_change"
+                        android:textColor="@color/textColor15"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_add_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_while"
+        android:padding="@dimen/dp_12"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/bt_commit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:background="@drawable/bg_btn_login_can_click"
+            android:gravity="center"
+            android:text="@string/receive_deposit_commit"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

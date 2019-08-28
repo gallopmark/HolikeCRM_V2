@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_20"
+    android:background="@drawable/bg_dialog_loading"
+    android:orientation="vertical"
+    android:id="@+id/loading"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_dialog_loading_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数据较大，请稍等"
+        android:textSize="@dimen/textSize_14"
+        android:textColor="@color/color_while" />
+
+    <ImageView
+        android:id="@+id/mLoadingImageView"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_22"
+        android:src="@drawable/loading" />
+</LinearLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/mShortNameTv"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@drawable/bg_blue_round"
+        android:gravity="center"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_13" />
+
+    <LinearLayout
+        android:id="@+id/mContentLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/mShortNameTv"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_12">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start"
+                    android:minWidth="@dimen/dp_60"
+                    android:maxWidth="@dimen/dp_60"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14" />
+
+                <TextView
+                    android:id="@+id/mPhoneTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/textColor8"
+                    android:textSize="@dimen/textSize_14" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mNumberTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/textColor6"
+                android:textSize="@dimen/textSize_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mStatusTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_4"
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/textSize_12" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:src="@drawable/home_news_right" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/mDividerV"
+        style="@style/divider_horizontal"
+        android:layout_below="@+id/mContentLl"
+        android:layout_alignLeft="@+id/mContentLl"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10" />
+</RelativeLayout>

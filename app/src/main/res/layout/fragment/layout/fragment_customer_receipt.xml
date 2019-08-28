@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_f3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/bg_corners_white_5dp"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/LinearLayout_Height48dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/followup_receipt_category_tips2"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView style="@style/Required_TextViewStyle" />
+
+                <TextView
+                    android:id="@+id/tv_receipt_category"
+                    style="@style/SelectTextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <LinearLayout style="@style/LinearLayout_Height48dp">
+
+                <TextView
+                    android:id="@+id/tv_receipt_time_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/followup_receipt_time_tips2"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView style="@style/Required_TextViewStyle" />
+
+                <TextView
+                    android:id="@+id/tv_receipt_time"
+                    style="@style/SelectTextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <LinearLayout style="@style/LinearLayout_Height48dp">
+
+                <TextView
+                    android:id="@+id/tv_receipt_person_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/followup_receipt_person_tips2"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView style="@style/Required_TextViewStyle" />
+
+                <TextView
+                    android:id="@+id/tv_receipt_person"
+                    style="@style/SelectTextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <LinearLayout
+                android:id="@+id/ll_major"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout style="@style/LinearLayout_Height48dp">
+
+                    <TextView
+                        android:id="@+id/tv_major_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/followup_remain_tail_tips"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/Required_TextViewStyle"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:paddingTop="0dp"
+                        android:text="@string/tips_rmb" />
+
+                    <TextView
+                        android:id="@+id/tv_major"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp_2"
+                        android:layout_marginLeft="@dimen/dp_2"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:textColor="@color/textColor15"
+                        android:textSize="@dimen/textSize_14" />
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_horizontal"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/LinearLayout_Height48dp">
+
+                <TextView
+                    android:id="@+id/tv_receipt_amount_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/followup_receipt_amount_tips2"
+                    android:textColor="@color/textColor4"
+                    android:textSize="@dimen/textSize_14"
+                    android:textStyle="bold" />
+
+                <TextView style="@style/Required_TextViewStyle" />
+
+                <EditText
+                    android:id="@+id/et_receipt_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/bg_transparent"
+                    android:gravity="center|end"
+                    android:hint="@string/followup_receipt_amount_tips2_hint"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/textColor4"
+                    android:textColorHint="@color/textColor21"
+                    android:textSize="@dimen/textSize_14" />
+            </LinearLayout>
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <LinearLayout
+                android:id="@+id/ll_custom_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout style="@style/LinearLayout_Height48dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/followup_custom_products2"
+                        android:textColor="@color/textColor4"
+                        android:textSize="@dimen/textSize_14"
+                        android:textStyle="bold" />
+
+                    <TextView style="@style/Required_TextViewStyle" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    app:layoutManager=".manager.FlowLayoutManager" />
+
+                <View
+                    style="@style/divider_horizontal"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_18"
+                android:text="@string/tips_customer_remark"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:background="@color/bg_transparent"
+                android:gravity="top|start"
+                android:hint="@string/tips_customer_remark_hint2"
+                android:maxLines="5"
+                android:minLines="5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:textColor="@color/textColor4"
+                android:textColorHint="@color/textColor21"
+                android:textSize="@dimen/textSize_14" />
+
+            <View
+                style="@style/divider_horizontal"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_pictures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/include_savelayout_56dp" />
+</LinearLayout>

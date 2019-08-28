@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xcode.banner.widget.Banner xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/banner"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_190"
+    app:auto_play="true"
+    app:duration="5000"
+    app:image_scaleType="centerCrop"
+    app:indicator_drawable_selected="@drawable/bg_banner_indicator_selected"
+    app:indicator_drawable_unselected="@drawable/bg_banner_indicator_unselected"
+    app:indicator_enabled="true"
+    app:indicator_gravity="bottom|end"
+    app:indicator_height="@dimen/dp_8"
+    app:indicator_margin="@dimen/dp_4"
+    app:indicator_width="@dimen/dp_8"/>

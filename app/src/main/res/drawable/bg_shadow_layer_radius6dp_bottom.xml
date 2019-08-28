@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="0dp"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_1" />
+            <corners
+                android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_2" />
+            <corners  android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_3" />
+            <corners  android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_4" />
+            <corners  android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_5" />
+            <corners  android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="@dimen/dp_1" />
+            <solid android:color="@color/shadow_color_6" />
+            <corners  android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/color_while" />
+            <corners  android:bottomLeftRadius="@dimen/dp_5"
+                android:bottomRightRadius="@dimen/dp_5" />
+        </shape>
+    </item>
+</layer-list>

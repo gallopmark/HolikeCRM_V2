@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dialog_calendarpicker"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/mTitleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48">
+
+        <TextView
+            android:id="@+id/mCancelTextView"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:text="@string/clear"
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/textSize_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mConfirmTextView"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/textColor5"
+            android:textSize="@dimen/textSize_16"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_28"
+        android:layout_marginLeft="@dimen/dp_6"
+        android:layout_marginRight="@dimen/dp_6"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Sun"
+            android:textColor="@color/calendar_text_weekend" />
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Mon"
+            android:textColor="@color/textColor4" />
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Tues"
+            android:textColor="@color/textColor4" />
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Wed"
+            android:textColor="@color/textColor4" />
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Thurs"
+            android:textColor="@color/textColor4" />
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Fri"
+            android:textColor="@color/textColor4" />
+
+        <TextView
+            style="@style/CalendarHeaderStyle"
+            android:text="@string/Sat"
+            android:textColor="@color/calendar_text_weekend" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/mStickyView"
+        style="@style/CalendarTitleStyle"
+        android:visibility="gone" />
+
+    <com.squareup.timessquare.CalendarPickerView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_6"
+        android:layout_marginRight="@dimen/dp_6"
+        app:tsquare_dayBackground="@drawable/bg_dialog_calendarpicker_selector"
+        app:tsquare_displayAlwaysDigitNumbers="true"
+        app:tsquare_displayHeader="false"
+        app:tsquare_dividerColor="@color/bg_transparent"
+        app:tsquare_headerTextColor="@color/textColor21"
+        app:tsquare_titleTextStyle="@style/CalendarTitleStyle" />
+
+</LinearLayout>

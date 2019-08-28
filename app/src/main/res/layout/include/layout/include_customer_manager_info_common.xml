@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_12"
+    android:layout_marginRight="@dimen/dp_12"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:padding="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/tv_address"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/customer_address_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address">
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/current_state_tips"
+            android:textColor="@color/textColor15" />
+
+        <TextView
+            android:id="@+id/tv_budget"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/tips_customer_custom_budget" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_spare_contact"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:text="@string/tips_customer_standby_contact2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_content"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_spare_phone"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tips_customer_standby_phone2"
+        app:layout_constraintStart_toEndOf="@+id/tv_spare_contact"
+        app:layout_constraintTop_toTopOf="@+id/tv_spare_contact"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_remark_tips"
+        style="@style/Customer_Item_TextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:text="@string/followup_remark_tips"
+        android:textColor="@color/textColor21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_spare_contact" />
+
+    <TextView
+        android:id="@+id/tv_remark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_14"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_remark_tips"
+        app:layout_constraintTop_toBottomOf="@+id/tv_spare_contact" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

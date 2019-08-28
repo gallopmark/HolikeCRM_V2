@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    android:background="@drawable/bg_corners_top_white_5dp"
+    android:text="@string/followup_program_effect"
+    android:textColor="@color/textColor4"
+    android:textSize="@dimen/textSize_14"
+    android:textStyle="bold" />

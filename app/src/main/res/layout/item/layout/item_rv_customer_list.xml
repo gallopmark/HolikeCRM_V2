@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_12">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:gravity="center|start"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/dp_3"
+            android:layout_height="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_3"
+            android:layout_marginRight="@dimen/dp_3"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/dp_38"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_followup"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:gravity="start"
+            android:text="@string/latest_followup" />
+
+        <TextView
+            android:id="@+id/tv_createTime"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:gravity="end|center"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_8"
+            android:text="@string/create_time_tips" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toStartOf="@+id/tv_phone"
+            android:layout_toLeftOf="@+id/tv_phone"
+            android:gravity="center|start"
+            android:text="@string/customer_name_tips" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_name"
+            android:layout_alignBottom="@+id/tv_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="start|center"
+            android:maxWidth="@dimen/dp_140"
+            android:minWidth="@dimen/dp_130"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:text="@string/customer_phone_tips" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="@dimen/dp_12"
+            android:gravity="center|start"
+            android:text="@string/customer_address_tips" />
+
+        <TextView
+            android:id="@+id/tv_intention"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_address"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toStartOf="@+id/tv_deposit"
+            android:layout_toLeftOf="@+id/tv_deposit"
+            android:gravity="center|start"
+            android:text="@string/customer_intention_tips" />
+
+        <TextView
+            android:id="@+id/tv_deposit"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_phone"
+            android:layout_alignLeft="@+id/tv_phone"
+            android:layout_alignTop="@+id/tv_intention"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center|start"
+            android:text="@string/customer_deposit_tips" />
+
+        <TextView
+            android:id="@+id/tv_source"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_intention"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_toStartOf="@+id/tv_status"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/tv_status"
+            android:gravity="center|start"
+            android:text="@string/customer_source_tips" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_phone"
+            android:layout_alignLeft="@+id/tv_phone"
+            android:layout_alignTop="@+id/tv_source"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center|start"
+            android:text="@string/customer_status_tips" />
+    </RelativeLayout>
+</LinearLayout>

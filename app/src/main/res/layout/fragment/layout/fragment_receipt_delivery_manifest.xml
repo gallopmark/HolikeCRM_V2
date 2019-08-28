@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/textColor20"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <include layout="@layout/include_receipt_delivery_manifest_up" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_8">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/bg_transparent" />
+        <View
+            android:layout_width="98dp"
+            android:layout_height="5dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_side_shadow_top" />
+    </FrameLayout>
+
+    <include layout="@layout/include_receipt_delivery_manifest_down" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="-8dp"
+        android:layout_height="@dimen/dp_8">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/bg_transparent" />
+        <View
+            android:layout_width="98dp"
+            android:layout_height="6dp"
+            android:background="@drawable/bg_side_shadow_bottom" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar" />
+
+    <include
+        layout="@layout/include_empty_page"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/mContentLl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_while"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_while"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:background="@color/bg">
+
+                <View
+                    android:id="@+id/v_top_shadow"
+                    android:layout_width="@dimen/dp_94"
+                    android:layout_height="@dimen/dp_6"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/bg_side_shadow_top" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_44"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_quotation_info_product_number"
+                            style="@style/tv_item_base_customer_black"
+                            android:layout_width="@dimen/dp_40"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_while"
+                            android:gravity="center"
+                            android:lineSpacingExtra="@dimen/dp_2"
+                            android:text="@string/quotation_info_product_number"
+                            android:visibility="gone" />
+
+                        <TextView
+                            style="@style/tv_item_base_customer_black"
+                            android:layout_width="@dimen/dp_94"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_while"
+                            android:gravity="center"
+                            android:text="@string/quotation_info_product_name" />
+                    </LinearLayout>
+
+                    <View style="@style/divider_horizontal" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <View style="@style/divider_horizontal" />
+
+                        <com.holike.crm.customView.ObservableHorizontalScrollView
+                            android:id="@+id/mHsvTopTab"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:fillViewport="true"
+                            android:overScrollMode="never"
+                            android:scrollbars="none">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <include layout="@layout/include_quotation_content1" />
+
+                                <include layout="@layout/include_quotation_content2" />
+
+                            </FrameLayout>
+                        </com.holike.crm.customView.ObservableHorizontalScrollView>
+
+                        <View style="@style/divider_horizontal" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/dp_9"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:background="@drawable/bg_side_shadow" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <View
+                android:id="@+id/mShadowView"
+                android:layout_width="@dimen/dp_9"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_side_shadow"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_20"
+            android:background="@color/textColor20">
+
+            <View
+                android:id="@+id/v_down_shadow"
+                android:layout_width="@dimen/dp_94"
+                android:layout_height="@dimen/dp_6"
+                android:layout_gravity="top"
+                android:background="@drawable/bg_side_shadow_bottom" />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

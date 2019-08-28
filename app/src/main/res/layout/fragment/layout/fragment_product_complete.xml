@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_month_complete"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_fragment_title_bar_transparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/btn_product_complete_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_rounded_corner_border_while_4"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_6">
+
+            <TextView
+                android:id="@+id/tv_product_complete_area_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_while"
+                android:textSize="@dimen/textSize_14" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_9"
+                android:layout_height="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_9"
+                android:src="@drawable/ranking_up"
+                android:tint="@color/color_while" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_product_complete_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_16"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/include_analysis_report_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="@dimen/dp_12" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.holike.crm.customView.MonthCompleteChartView
+                android:id="@+id/monthCompleteView_product"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

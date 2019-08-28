@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.holike.crm.customView.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="@dimen/dp_26"
+        android:layout_height="@dimen/dp_26"
+        android:layout_gravity="top|end"
+        android:background="@drawable/bg_delete_image"
+        android:gravity="center"
+        android:text="@string/text_delete"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_12" />
+<!--
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:contentDescription="@string/delete"
+        android:maxWidth="@dimen/dp_30"
+        android:maxHeight="@dimen/dp_30"
+        android:padding="@dimen/dp_5"
+        android:scaleType="center"
+        android:src="@drawable/photo_close"
+        android:visibility="gone" />-->
+</com.holike.crm.customView.SquareLayout>

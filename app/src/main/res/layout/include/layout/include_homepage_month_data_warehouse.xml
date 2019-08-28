@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Homepage_MonthData_LayoutStyle"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_homepage_month_data_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/dp_3"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvPartsOfInput"
+            android:layout_alignBottom="@+id/tvPartsOfInput"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@color/color_green_width_3dp" />
+
+        <TextView
+            android:id="@+id/tvPartsOfInput"
+            style="@style/Homepage_MonthData_TextViewStyle"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_toEndOf="@+id/line"
+            android:layout_toRightOf="@+id/line"
+            android:text="@string/number_of_scanned_input_parts"
+            android:textSize="@dimen/textSize_14" />
+
+    </RelativeLayout>
+</LinearLayout>

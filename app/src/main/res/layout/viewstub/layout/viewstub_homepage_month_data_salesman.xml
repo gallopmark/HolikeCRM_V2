@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_20"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_12"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_homepage_performance_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.holike.crm.customView.CircleProgressBar
+                android:id="@+id/pb_homepage_month_data_money"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                app:mCircleBgColor="@color/bg_homepage_pb_complete"
+                app:mCircleWidth="@dimen/dp_6"
+                app:mProgressColor="@color/textColor14"
+                app:mTextColor="@color/textColor14"
+                app:mTextSize="@dimen/textSize_18" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/homepage_month_data_complete"
+                android:textColor="@color/textColor3" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:gravity="left|center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_homepage_month_data_target_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/homepage_month_data_target"
+                    android:textColor="@color/textColor14"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_homepage_month_data_target_money_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:text="@string/homepage_month_data_completed"
+                    android:textColor="@color/textColor3"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_homepage_order_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.holike.crm.customView.CircleProgressBar
+                android:id="@+id/pb_homepage_month_data_order"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                app:mCircleBgColor="@color/bg_homepage_pb_translate"
+                app:mCircleWidth="@dimen/dp_6"
+                app:mProgressColor="@color/bg_homepage_new"
+                app:mTextColor="@color/bg_homepage_new"
+                app:mTextSize="@dimen/textSize_18" />
+
+            <TextView
+                android:id="@+id/tv_homepage_month_data_target_order_completion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/homepage_month_data_translate"
+                android:textColor="@color/textColor3" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:gravity="left|center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_homepage_month_data_target_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/homepage_month_data_target"
+                    android:textColor="@color/bg_homepage_new"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_homepage_month_data_target_order_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:text="@string/homepage_month_data_completed"
+                    android:textColor="@color/textColor3"
+                    android:textSize="@dimen/textSize_12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_homepage_month_data_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="长沙市、岳阳市、常德市、张家界市、益阳市"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_12" />
+</LinearLayout>

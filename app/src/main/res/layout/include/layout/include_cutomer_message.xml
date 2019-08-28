@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ShadowBg_Radius9dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_4"
+    android:layout_marginTop="@dimen/dp_4"
+    android:layout_marginRight="@dimen/dp_4"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/ll_item_base_customer"
+        android:background="@color/bg_transparent">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receive_deposit_customerName" />
+
+        <TextView style="@style/tv_item_base_customer_must" />
+
+        <EditText
+            android:id="@+id/et_baseCustomer_customerName"
+            style="@style/tv_item_base_customer_right"
+            android:hint="@string/receive_deposit_customerName_et" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12" />
+
+    <LinearLayout style="@style/ll_item_base_customer">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receive_deposit_customerPhone" />
+
+        <TextView style="@style/tv_item_base_customer_must" />
+
+        <com.holike.crm.customView.InputEditText
+            android:id="@+id/et_baseCustomer_customerPhone"
+            style="@style/tv_item_base_customer_right"
+            android:digits="1234567890"
+            android:hint="@string/receive_deposit_customerPhone_et"
+            android:inputType="phone|number"
+            android:maxLength="11" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12" />
+
+
+    <LinearLayout style="@style/ll_item_base_customer">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receive_deposit_customerGender" />
+
+
+        <TextView
+            android:id="@+id/tv_baseCustomer_customerGender"
+            style="@style/tv_item_base_customer_right"
+            android:hint="@string/receive_deposit_select" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12" />
+
+
+    <LinearLayout style="@style/ll_item_base_customer">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receive_deposit_customerSource" />
+
+        <TextView style="@style/tv_item_base_customer_must" />
+
+        <TextView
+            android:id="@+id/tv_baseCustomer_customerSource"
+            style="@style/tv_item_base_customer_right"
+            android:hint="@string/receive_deposit_select" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12" />
+
+    <LinearLayout
+        style="@style/ll_item_base_customer"
+        android:background="@color/bg_transparent">
+
+        <TextView
+            style="@style/tv_item_base_customer_left"
+            android:text="@string/receive_deposit_specialSource" />
+
+
+        <TextView
+            android:id="@+id/tv_baseCustomer_specialSource"
+            style="@style/tv_item_base_customer_right"
+            android:hint="@string/receive_deposit_select" />
+    </LinearLayout>
+
+</LinearLayout>

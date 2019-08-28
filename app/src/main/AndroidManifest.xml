@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.holike.crm">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--热修复 外部存储读权限，调试工具加载本地补丁需要 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--扫描 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <application
+        android:name=".base.MyApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup"
+        tools:targetApi="n">
+
+        <!-- <meta-data
+             android:name="com.taobao.android.hotfix.IDSECRET"
+             android:value="" />
+         <meta-data
+             android:name="com.taobao.android.hotfix.APPSECRET"
+             android:value="" />
+         <meta-data
+             android:name="com.taobao.android.hotfix.RSASECRET"
+             android:value="" />-->
+
+        <activity
+            android:name=".activity.main.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.login.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.login.CheckAccountActivity"
+            android:launchMode="singleTop" />
+
+        <service android:name=".service.UpdateService" />
+
+        <activity android:name=".activity.homepage.OrderDetailsActivity" />
+        <activity android:name=".activity.analyze.WeekReportActivity" />
+        <activity android:name=".activity.message.MessageDetailsActivity" />
+        <activity android:name=".activity.mine.ChangePasswordActivity" />
+        <activity android:name=".activity.analyze.OrderReportActivity" />
+        <activity
+            android:name=".activity.main.BootingActivity"
+            android:theme="@style/ThemeSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.main.PhotoViewActivity" />
+        <activity android:name=".activity.analyze.TranslateReportActivity" />
+        <activity android:name=".activity.analyze.OrderRankingActivity" />
+        <activity android:name=".activity.analyze.ProductTradingActivity" />
+        <activity android:name=".activity.analyze.BuildStoreActivity" />
+        <activity android:name=".activity.analyze.InstallEvaluateActivity" />
+        <activity android:name=".activity.analyze.PerformanceActivity" />
+        <activity android:name=".activity.analyze.CupboardActivity" />
+        <activity android:name=".activity.analyze.OriginalBoardActivity" />
+        <activity android:name=".activity.analyze.DealerRankActivity" />
+        <activity android:name=".activity.analyze.TerminalCheckActivity" />
+        <activity android:name=".activity.analyze.NewRetailActivity" />
+        <activity android:name=".activity.analyze.NetActivity" />
+        <activity android:name=".activity.analyze.MonthPkActivity" />
+        <activity android:name=".activity.analyze.OnlineAttractReportActivity" />
+        <activity android:name=".activity.analyze.WoodenDoorActivity" />
+        <activity
+            android:name=".activity.homepage.AddCustomerActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.customer.CustomerEditActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name=".activity.customer.CustomerMultiTypeActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name=".activity.customer.CustomerEditHouseActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activity.customer.CustomerHighSeasHistoryActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".activity.customer.CustomerImagePreviewActivity" />
+
+        <activity android:name=".activity.analyze.ActiveMarketActivity" />
+        <activity android:name=".activity.analyze.ActiveMarketRankActivity" />
+        <activity
+            android:name=".activity.mine.FeedbackActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.homepage.FeedbackRecordActivity" />
+
+        <activity
+            android:name=".activity.homepage.ReceivingScanActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|keyboard"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+        <activity
+            android:name=".activity.homepage.MessageV2Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".fragment.customer.ScanGunInstructionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customer.CustomerDetailV2Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.homepage.CollectDepositActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.homepage.CustomerStateListActivity" />
+        <activity
+            android:name=".activity.customer.CustomerStatusListActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.credit.CreditInquiryActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".activity.analyze.FastLiveActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".activity.employee2.EmployeeListV2Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!--新增员工-->
+        <activity
+            android:name=".activity.employee2.EmployeeEditV2Activity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!--员工详情-->
+        <activity
+            android:name=".activity.employee2.EmployeeDetailsActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activity.employee2.EmployeeStrikeActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!--员工重置密码-->
+        <activity
+            android:name=".activity.employee2.EmployeePasswordActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name=".activity.employee.EmployeeEditActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.employee.EmployeeDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".activity.employee.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity android:name=".activity.homepage2.MonthDataActivity" />
+        <!--极光-->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace" />
+
+        <receiver
+            android:name=".receiver.push.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.holike.crm" />
+            </intent-filter>
+        </receiver>
+        <!--极光end-->
+
+        <!--监听通话记录-->
+        <!-- <service android:name=".service.PhoneStateService" />-->
+
+    </application>
+
+</manifest>
