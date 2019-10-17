@@ -1,7 +1,8 @@
 package com.holike.crm.activity.analyze;
 
+import android.os.Bundle;
+
 import com.holike.crm.R;
-import com.holike.crm.base.MyFragment;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.presenter.activity.InstallEvaluatePresenter;
 import com.holike.crm.view.activity.InstallEvaluateView;
@@ -22,8 +23,8 @@ public class InstallEvaluateActivity extends MyFragmentActivity<InstallEvaluateP
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setTitle(getString(R.string.report_item7_title));
         setLeft(getString(R.string.back));
         setRightMenu(getString(R.string.report_select_date));

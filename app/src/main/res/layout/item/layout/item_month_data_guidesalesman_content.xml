@@ -46,16 +46,16 @@
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
 
-        <View style="@style/divider_vertical" />
+        <!--<View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_number_measure"
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:textColor="@color/textColor8" />
+            android:textColor="@color/textColor8" />-->
 
-        <View style="@style/divider_vertical" />
+        <!--<View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_number_drawing"
@@ -63,7 +63,7 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textColor="@color/textColor8" />
+            android:textColor="@color/textColor8" />-->
 
         <View style="@style/divider_vertical" />
 
@@ -83,16 +83,16 @@
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
 
-        <View style="@style/divider_vertical" />
+        <!--<View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_order_number"
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:textColor="@color/textColor8" />
+            android:textColor="@color/textColor8" />-->
 
-        <View style="@style/divider_vertical" />
+      <!--  <View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_number_install"
@@ -100,8 +100,8 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
-
-        <View style="@style/divider_vertical" />
+-->
+        <!--<View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_store_turnover_rate"
@@ -117,7 +117,7 @@
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:textColor="@color/textColor8" />
+            android:textColor="@color/textColor8" />-->
 
         <View style="@style/divider_vertical" />
 

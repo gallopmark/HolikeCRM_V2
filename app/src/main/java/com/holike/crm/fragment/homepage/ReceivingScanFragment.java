@@ -226,7 +226,7 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
 //    }
 
     @Override
-    public void onGranted(int requestCode, @NonNull String[] permissions) {
+    public void onGranted(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         needCamera();
     }
 

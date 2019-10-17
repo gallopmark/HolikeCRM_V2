@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:ignore="RtlSymmetry">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -82,12 +82,12 @@
             </LinearLayout>
 
             <ViewStub
-                android:id="@+id/vs_content"
+                android:id="@id/form_data_vs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:layout="@layout/include_month_data_layout_content" />
+                android:layout="@layout/include_form_data_content" />
         </LinearLayout>
     </FrameLayout>
 

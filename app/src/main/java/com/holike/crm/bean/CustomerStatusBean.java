@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
+import com.holike.crm.util.ParseUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class CustomerStatusBean {
 
     public long getTotal() {
         try {
-            return Long.parseLong(total);
+            return ParseUtils.parseLong(total);
         } catch (Exception e) {
             return 0;
         }
@@ -128,6 +129,14 @@ public class CustomerStatusBean {
         @SerializedName("intention_level")
         public String intentionLevel; //意向评级
 
+        public String sum; //已收订金
+
+        @SerializedName("pay_time")
+        public String payTime; //最新收款时间
+
+        @SerializedName("high_seas_house_flag")
+        String highSeasHouseFlag;  //是否是公海房屋标识
+
         //是否是微信号
         public boolean isWxType() {
             return TextUtils.equals(type, "2");
@@ -135,6 +144,10 @@ public class CustomerStatusBean {
 
         public boolean isRed() {
             return TextUtils.equals(isRed, "1");
+        }
+
+        public boolean isHighSeasHouse() {
+            return TextUtils.equals(highSeasHouseFlag, "Y") || TextUtils.equals(highSeasHouseFlag, "y");
         }
 
         @Override

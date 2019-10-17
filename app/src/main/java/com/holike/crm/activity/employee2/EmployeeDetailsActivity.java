@@ -1,6 +1,7 @@
 package com.holike.crm.activity.employee2;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
@@ -42,7 +43,7 @@ public class EmployeeDetailsActivity extends MyFragmentActivity<EmployeeDetailV2
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         setTitle(getString(R.string.employee_details_title));
         mHelper = new EmployeeDetailHelper(this, this);
     }

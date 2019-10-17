@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_month_complete"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/statusView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <galloped.xcode.widget.TitleBar
+        android:id="@id/titleBar"
+        style="@style/TitleBarStyle"
+        android:background="@color/bg_transparent"
+        app:navigationIcon="@drawable/ic_back_left_white_24dp">
+
+        <com.grallopmark.tablayout.CommonTabLayout
+            android:id="@+id/tab_order"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:tl_iconVisible="false"
+            app:tl_indicator_bounce_enable="false"
+            app:tl_indicator_corner_radius="@dimen/dp_2"
+            app:tl_indicator_height="@dimen/dp_4"
+            app:tl_indicator_width="@dimen/dp_32"
+            app:tl_tab_space_equal="false"
+            app:tl_tab_width="@dimen/dp_80"
+            app:tl_textBold="BOTH"
+            app:tl_textSelectColor="@color/color_while"
+            app:tl_textSize="@dimen/textSize_16"
+            app:tl_textUnselectColor="#99ffffff" />
+    </galloped.xcode.widget.TitleBar>
+
+    <com.grallopmark.tablayout.SegmentTabLayout
+        android:id="@+id/tab_time"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_32"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_12"
+        app:tl_indicator_anim_enable="true"
+        app:tl_indicator_bounce_enable="false"
+        app:tl_indicator_color="@color/color_while"
+        app:tl_textBold="BOTH"
+        app:tl_textSelectColor="@color/textColor5"
+        app:tl_textSize="@dimen/textSize_16"
+        app:tl_textUnselectColor="#99ffffff" />
+
+    <TextView
+        android:id="@+id/tv_week_report_table_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:paddingLeft="@dimen/dp_12"
+        android:text="@string/report_week_order"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_12"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_customer_deposit_report_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_customer_deposit_report_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_48"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <pony.xcode.chart.BarChartView
+        android:id="@+id/barChartView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_50" />
+</LinearLayout>

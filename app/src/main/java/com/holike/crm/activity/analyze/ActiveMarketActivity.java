@@ -2,6 +2,9 @@ package com.holike.crm.activity.analyze;
 
 
 import android.app.Dialog;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 
 import com.holike.crm.R;
 import com.holike.crm.base.BasePresenter;
@@ -31,8 +34,7 @@ public class ActiveMarketActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(@Nullable Bundle savedInstanceState) {
         startFragment(new ActiveMarketFragment());
     }
 }

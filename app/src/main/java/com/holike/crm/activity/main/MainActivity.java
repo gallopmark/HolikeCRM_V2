@@ -3,38 +3,42 @@ package com.holike.crm.activity.main;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.galloped.tablayout.TabLayout;
 import com.galloped.tablayout.tab.Tab;
 import com.galloped.tablayout.tab.TabEntity;
 import com.holike.crm.R;
+import com.holike.crm.activity.customer.CustomerDetailV2Activity;
 import com.holike.crm.activity.login.LoginActivity;
+import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.MyApplication;
 import com.holike.crm.base.MyFragmentActivity;
-import com.holike.crm.bean.DownloadFileBean;
 import com.holike.crm.bean.UpdateBean;
 import com.holike.crm.dialog.UpdateAppDialog;
+import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.fragment.main.MineFragment;
-import com.holike.crm.fragment.analyze.ReportFragment;
+import com.holike.crm.fragment.main.ReportFragment;
 import com.holike.crm.fragment.main.CustomerV2Fragment;
 import com.holike.crm.fragment.main.HomepageV2Fragment;
 import com.holike.crm.fragment.main.OrderV2Fragment;
 import com.holike.crm.presenter.activity.MainPresenter;
-import com.holike.crm.service.UpdateService;
-import com.holike.crm.util.Constants;
-import com.holike.crm.util.IOUtil;
-import com.holike.crm.util.SharedPreferencesUtils;
+import com.holike.crm.service.VersionUpdateService;
+import com.holike.crm.util.KeyBoardUtil;
 import com.holike.crm.view.activity.MainView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -49,7 +53,7 @@ import butterknife.BindView;
 
 public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> implements MainView {
     @BindView(R.id.tab_main)
-    TabLayout tabMain;
+    TabLayout mTabLayout;
 
     private long mExitTime;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -59,7 +63,7 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     private static final String TAG_ORDER = "order";
     private static final String TAG_REPORT = "report";
     private static final String TAG_MINE = "mine";
-    private String currentTab = TAG_HOME;
+    private String mCurrentTab = TAG_HOME;
     private Fragment mShowingFragment;
     private MainHelper mHelper;
 
@@ -74,8 +78,7 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
         setStatusBarColor(R.color.textColor14);
         if (getIntent().getBooleanExtra("logout", false)) {//退出登录
             startActivity(LoginActivity.class);
@@ -85,7 +88,11 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
         MainPresenter.setAlias();
         mFragmentManager = getSupportFragmentManager();
         setupTab();
-        tabMain.setOnTabSelectListener(new TabLayout.OnTabSelectListener() {
+        if (savedInstanceState != null) {
+            mCurrentTab = savedInstanceState.getString("currentTab", TAG_HOME);
+            setTabIndex();
+        }
+        mTabLayout.setOnTabSelectListener(new TabLayout.OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
                 statistics(position);
@@ -97,7 +104,7 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
                 statistics(position);
             }
         });
-        setCurrentTab(currentTab);
+        setCurrentTab(mCurrentTab);
         mHelper = new MainHelper(this, mHandler);
         checkVersion();
         getGlobalData();
@@ -123,7 +130,21 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
         for (int i = 0; i < titles.length; i++) {
             tabList.add(new TabEntity(titles[i], selectedDrawables[i], unSelectDrawables[i]));
         }
-        tabMain.setupTab(tabList);
+        mTabLayout.setupTab(tabList);
+    }
+
+    private void setTabIndex() {
+        if (TextUtils.equals(mCurrentTab, TAG_HOME)) {
+            mTabLayout.setCurrentTab(0);
+        } else if (TextUtils.equals(mCurrentTab, TAG_CUSTOMER)) {
+            mTabLayout.setCurrentTab(1);
+        } else if (TextUtils.equals(mCurrentTab, TAG_ORDER)) {
+            mTabLayout.setCurrentTab(2);
+        } else if (TextUtils.equals(mCurrentTab, TAG_REPORT)) {
+            mTabLayout.setCurrentTab(3);
+        } else if (TextUtils.equals(mCurrentTab, TAG_MINE)) {
+            mTabLayout.setCurrentTab(4);
+        }
     }
 
     private void statistics(int position) {
@@ -161,7 +182,7 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     }
 
     private void setCurrentTab(String tab) {
-        this.currentTab = tab;
+        this.mCurrentTab = tab;
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         hideFragments(transaction);
         Fragment fragment = mFragmentManager.findFragmentByTag(tab);
@@ -198,7 +219,7 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     @Override
     public void onBackPressed() {
         if ((System.currentTimeMillis() - mExitTime) > 2000) {
-            Toast.makeText(this, getString(R.string.tips_exit), Toast.LENGTH_SHORT).show();
+            showShortToast(R.string.tips_exit);
             mExitTime = System.currentTimeMillis();
         } else {
             finish();
@@ -211,21 +232,17 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
      * 发现新版本
      */
     @Override
-    public void hasNewVersion(UpdateBean updateBean) {
-        long now = System.currentTimeMillis();
-        long old = SharedPreferencesUtils.getLong(Constants.CHECK_VERSION_TIME, 0);
-        if ((now - old) > Constants.UPDATE_DIALOG_TIME) {
-            SharedPreferencesUtils.saveLong(Constants.CHECK_VERSION_TIME, now);
+    public void onGetVersion(UpdateBean updateBean, boolean hasNewVersion) {
+        if (hasNewVersion) { //有新版本，则弹出更新提示窗
             showUpdateAppDialog(MainActivity.this, updateBean);
         }
     }
 
+    /*请求失败，则间隔5s再次请求*/
     @Override
     public void onFailure() {
-        mHandler.postDelayed(retryRun, 5000);
+        mHandler.postDelayed(this::checkVersion, 5000);
     }
-
-    private Runnable retryRun = this::checkVersion;
 
     /**
      * 版本更新弹窗
@@ -233,16 +250,7 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     public void showUpdateAppDialog(final Context context, final UpdateBean updateBean) {
         new UpdateAppDialog(context, updateBean).setUpdateButtonClickListener(dialog -> {
             dialog.dismiss();
-            if (updateBean.getType() == UpdateBean.TYPE_DOWNLOAD) {
-                showLongToast("正在下载...");
-//                Toast.makeText(MyApplication.getInstance(), "正在下载...", Toast.LENGTH_SHORT).show();
-                DownloadFileBean downloadFileBean = new DownloadFileBean(updateBean.getUpdatepath(), "CRM.apk");
-                Intent intent = new Intent(context, UpdateService.class);
-                intent.putExtra(UpdateService.DOWNLOADFILEBEAN, downloadFileBean);
-                context.startService(intent);
-            } else if (updateBean.getType() == UpdateBean.TYPE_INSTALL) {
-                UpdateService.install(IOUtil.getCachePath() + "/" + "CRM.apk");
-            }
+            VersionUpdateService.start(context, updateBean.getUpdatepath());
         }).show();
     }
 
@@ -250,6 +258,50 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     private void getGlobalData() {
         MyApplication.getInstance().getSystemCodeItems();
         MyApplication.getInstance().getUserInfo();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (mHelper != null) {
+            mHelper.onRestart();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((resultCode == CustomerValue.RESULT_CODE_ACTIVATION ||
+                resultCode == CustomerValue.RESULT_CODE_HIGH_SEAS) && data != null) {
+            String personalId = data.getStringExtra(CustomerValue.PERSONAL_ID);
+            String houseId = data.getStringExtra(CustomerValue.HOUSE_ID);
+            CustomerDetailV2Activity.open(this, personalId, houseId, false);
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (KeyBoardUtil.isShouldHideInput(v, ev)) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("currentTab", mCurrentTab);  //状态发生改变 保存当前切换tab位置
     }
 
     @Override

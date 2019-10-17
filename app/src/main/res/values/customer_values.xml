@@ -26,6 +26,8 @@
 
     <style name="Customer_Edit_LinearLayout48dpStyle">
         <item name="android:layout_width">match_parent</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
         <item name="android:layout_height">@dimen/dp_48</item>
         <item name="android:orientation">horizontal</item>
     </style>
@@ -65,7 +67,7 @@
 
     <string name="dialog_tips_customer_edit_title">当前客户已存在</string>
     <string name="dialog_tips_customer_edit_status">最新状态：</string>
-    <string name="dialog_tips_customer_edit_time">最新状态时间：</string>
+    <string name="dialog_tips_customer_edit_time">最新跟进时间：</string>
     <string name="dialog_tips_customer_edit_deposit">是否已收订金：</string>
     <string name="dialog_tips_customer_edit_message">是否需要通知管理者重新分配？</string>
 

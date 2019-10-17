@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/dp_12"
         android:layout_marginRight="@dimen/dp_12"
-        android:background="@drawable/bg_button_selector"
+        android:background="@drawable/bg_clickable_selector"
         android:gravity="center"
         android:text="@string/receive_deposit_save"
         android:textColor="@color/color_while"

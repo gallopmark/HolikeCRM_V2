@@ -1,16 +1,11 @@
 package com.holike.crm.presenter.fragment;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
+
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
@@ -21,8 +16,7 @@ import com.holike.crm.bean.MultiItem;
 import com.holike.crm.bean.NoMoreBean;
 import com.holike.crm.bean.PayListBean;
 import com.holike.crm.model.fragment.PayListModel;
-import com.holike.crm.popupwindown.PopupWindowUtils;
-import com.holike.crm.util.DensityUtil;
+import com.holike.crm.popupwindown.StringItemPopupWindow;
 import com.holike.crm.util.KeyBoardUtil;
 import com.holike.crm.view.fragment.PayListView;
 
@@ -31,12 +25,12 @@ import java.util.List;
 
 public class PayListPresenter extends BasePresenter<PayListView, PayListModel> {
 
-    private List<HomepageBean.TypeListBean.BrankDataBean> bankDataBeans = new ArrayList<>();
-    private int selectPosition;
+    private List<HomepageBean.TypeListBean.BrankDataBean> mBankDataBeans;
+    private int mSelectPosition;
     private List<MultiItem> mBeans = new ArrayList<>();
-    private PayListAdapter adapter;
+    private PayListAdapter mAdapter;
 
-    private static class PayListAdapter extends CommonAdapter<MultiItem> {
+    static class PayListAdapter extends CommonAdapter<MultiItem> {
 
         PayListAdapter(Context context, List<MultiItem> mDatas) {
             super(context, mDatas);
@@ -102,9 +96,9 @@ public class PayListPresenter extends BasePresenter<PayListView, PayListModel> {
     }
 
     public void setAdapter(RecyclerView recyclerView) {
-        adapter = new PayListAdapter(recyclerView.getContext(), mBeans);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener((adapter, holder, view, position) -> {
+        mAdapter = new PayListAdapter(recyclerView.getContext(), mBeans);
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
             if (position >= 0 && position < mBeans.size()) {
                 if (mBeans.get(position) instanceof PayListBean) {
                     PayListBean bean = (PayListBean) mBeans.get(position);
@@ -127,38 +121,40 @@ public class PayListPresenter extends BasePresenter<PayListView, PayListModel> {
         if (beans != null && !beans.isEmpty()) {
             this.mBeans.addAll(beans);
         }
-        adapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 
     public void noMoreData() {
         mBeans.add(new NoMoreBean());
-        adapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 
     public void getData(int pageNo, String startTime, String endTime, String searchContent, String status) {
-        model.getData(String.valueOf(pageNo), startTime, endTime, searchContent, status, new PayListModel.PayListListener() {
-            @Override
-            public void success(List<PayListBean> bean) {
-                if (getView() != null)
-                    getView().onSuccess(bean);
-            }
+        if (getModel() != null) {
+            getModel().getData(String.valueOf(pageNo), startTime, endTime, searchContent, status, new PayListModel.PayListListener() {
+                @Override
+                public void success(List<PayListBean> bean) {
+                    if (getView() != null)
+                        getView().onSuccess(bean);
+                }
 
-            @Override
-            public void fail(String errorMsg) {
-                if (getView() != null)
-                    getView().onFail(errorMsg);
-            }
-        });
+                @Override
+                public void fail(String errorMsg) {
+                    if (getView() != null)
+                        getView().onFail(errorMsg);
+                }
+            });
+        }
     }
 
     public void addBankDataBeans(List<HomepageBean.TypeListBean.BrankDataBean> beans) {
         if (beans != null && !beans.isEmpty()) {
-            this.bankDataBeans.addAll(beans);
+            mBankDataBeans = new ArrayList<>(beans);
         }
     }
 
     public void showStatePopupWindow(Context context, View mContentView, View parent) {
-        if (bankDataBeans.isEmpty()) return;
+        if (mBankDataBeans == null || mBankDataBeans.isEmpty()) return;
         long delayMills = 0;
         if (KeyBoardUtil.isKeyboardShown(mContentView)) {
             KeyBoardUtil.hideKeyboard(mContentView);
@@ -168,78 +164,23 @@ public class PayListPresenter extends BasePresenter<PayListView, PayListModel> {
     }
 
     private void showPopupWindow(Context context, View parent) {
-        final List<HomepageBean.TypeListBean.BrankDataBean> list = new ArrayList<>(bankDataBeans);
+        final List<HomepageBean.TypeListBean.BrankDataBean> list = new ArrayList<>(mBankDataBeans);
         list.add(0, new HomepageBean.TypeListBean.BrankDataBean("", context.getString(R.string.all)));
-        View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow_string_menulist, new LinearLayout(context), false);
-        RecyclerView recyclerView = contentView.findViewById(R.id.mRecyclerView);
-        if (list.size() > 6) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) recyclerView.getLayoutParams();
-            params.height = (int) (DensityUtil.dp2px(40.5f) * 6.5f);
-            recyclerView.setLayoutParams(params);
+        List<String> items = new ArrayList<>();
+        for (HomepageBean.TypeListBean.BrankDataBean bean : list) {
+            items.add(bean.getBarkName());
         }
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setBackgroundColor(ContextCompat.getColor(context, R.color.bg_dialog));
-        PopupWindow popupWindow = new PopupWindow(contentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        popupWindow.setFocusable(true);
-        popupWindow.setBackgroundDrawable(new ColorDrawable());
-        popupWindow.setOutsideTouchable(true);
-        MenuFilterAdapter filterAdapter = new MenuFilterAdapter(context, list, selectPosition);
-        filterAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
-            selectPosition = position;
-            filterAdapter.setSelectedIndex(position);
+        StringItemPopupWindow popupWindow = new StringItemPopupWindow(context, items, mSelectPosition);
+        popupWindow.setOnMenuItemClickListener((pw, position, content) -> {
+            mSelectPosition = position;
             if (getView() != null)
                 getView().onFilterItemSelect(list.get(position));
             popupWindow.dismiss();
         });
-        recyclerView.setAdapter(filterAdapter);
-        contentView.setOnClickListener(v -> popupWindow.dismiss());
-        PopupWindowUtils.showPopupWindow(popupWindow, parent, 0, 0, Gravity.TOP);
+        popupWindow.showAsDown(parent);
         if (getView() != null) getView().onPopupWindowShowing();
         popupWindow.setOnDismissListener(() -> {
             if (getView() != null) getView().onPopupWindowDismiss();
         });
-    }
-
-    private class MenuFilterAdapter extends CommonAdapter<HomepageBean.TypeListBean.BrankDataBean> {
-        private int selectedIndex;
-
-        private MenuFilterAdapter(Context context, List<HomepageBean.TypeListBean.BrankDataBean> datas, int selectedIndex) {
-            super(context, datas);
-            this.selectedIndex = selectedIndex;
-        }
-
-        private void setSelectedIndex(int selectedIndex) {
-            this.selectedIndex = selectedIndex;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            return super.getItemViewType(position);
-        }
-
-        @Override
-        protected int bindView(int viewType) {
-            return R.layout.item_rv_popup_filter;
-        }
-
-        @Override
-        public void onBindHolder(RecyclerHolder holder, HomepageBean.TypeListBean.BrankDataBean bean, int position) {
-            if (position < getItemCount()) {
-                holder.setVisibility(R.id.dv_item_rv_popup_filter, true);
-            } else {
-                holder.setVisibility(R.id.dv_item_rv_popup_filter, false);
-            }
-            if (position == selectedIndex) {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.textColor5));
-                holder.setTextColor(R.id.tv_item_rv_popup_filter, ContextCompat.getColor(mContext, R.color.color_while));
-            } else {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.color_while));
-                holder.setTextColor(R.id.tv_item_rv_popup_filter, ContextCompat.getColor(mContext, R.color.textColor8));
-            }
-            holder.setText(R.id.tv_item_rv_popup_filter, bean.getBarkName());
-        }
     }
 }

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.holike.crm.base.IntentValue;
+import com.holike.crm.bean.internal.SystemCodePattern;
 import com.holike.crm.util.TimeUtil;
 
 import java.io.Serializable;
@@ -59,6 +60,7 @@ public class CustomerManagerV2Bean {
         public String userType;
         public String versionNumber;
         public String wxNumber;
+        String isValidCustomer;
 
         public String getAgeType() {
             if (TextUtils.isEmpty(ageType)) return "";
@@ -100,9 +102,9 @@ public class CustomerManagerV2Bean {
             return TimeUtil.timeMillsFormat(updateDate);
         }
 
-        public boolean isHighSeasPerson() {
-            /*不区分大小写*/
-            return TextUtils.equals(highSeasPersonFlag, "Y") || TextUtils.equals(highSeasPersonFlag, "y");
+        /*主要用于判断是否可以编辑手机号码*/
+        public boolean isValidCustomer() {
+            return TextUtils.equals(isValidCustomer, "Y") || TextUtils.equals(isValidCustomer, "y");
         }
     }
 
@@ -270,8 +272,8 @@ public class CustomerManagerV2Bean {
         public String salesId; //导购id
         public String salesName; //导购姓名
         public String series; //系列
-        public String shopId;
-        public String shopName;
+        public String shopId; //导购门店id
+        public String shopName; //导购门店名
         public String groupId;
         public String groupName;
         public String spareContact; //备用联系人
@@ -295,216 +297,85 @@ public class CustomerManagerV2Bean {
 
         /*当前房屋状态*/
         public String getCurrentStatus() {
-            if (TextUtils.isEmpty(statusCode)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getCustomerStatusMove().containsKey(statusCode))
-                return "";
-            return bean.getCustomerStatusMove().get(statusCode);
+            return SystemCodePattern.getHouseStatus(statusCode);
         }
 
         /*通过字典匹配定制预算值*/
         public String getBudget() {
-            if (TextUtils.isEmpty(budgetTypeCode)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getCustomerBudgetType().containsKey(budgetTypeCode))
-                return "";
-            return bean.getCustomerBudgetType().get(budgetTypeCode);
+            return SystemCodePattern.getCustomBudget(budgetTypeCode);
         }
 
         /*装修风格*/
         public String getDecorateProgress() {
-            if (TextUtils.isEmpty(decorateProgress)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getDecorateProgress().containsKey(decorateProgress))
-                return "";
-            return bean.getDecorateProgress().get(decorateProgress);
+            return SystemCodePattern.getDecorateProgress(decorateProgress);
         }
 
         /*房屋状态*/
         public String getDecorateProperties() {
-            if (TextUtils.isEmpty(decorateProperties)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getHouseStatus().containsKey(decorateProperties))
-                return "";
-            return bean.getHouseStatus().get(decorateProperties);
+            return SystemCodePattern.getDecorateProperties(decorateProperties);
         }
 
         /*家庭成员*/
         public String getFamilyMember() {
-            if (TextUtils.isEmpty(flamilyMember)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null) return "";
-            try {
-                String[] array = flamilyMember.split(",");
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < array.length; i++) {
-                    if (bean.getFamilyMember().containsKey(array[i])) {
-                        String value = bean.getFamilyMember().get(array[i]);
-                        sb.append(value);
-                        if (i < array.length - 1) {
-                            sb.append("、");
-                        }
-                    }
-                }
-                return sb.toString();
-            } catch (Exception e) {
-                return "";
-            }
+            return SystemCodePattern.getFamilyMember(flamilyMember);
         }
 
         /*家具需求*/
         public String getFurnitureDemand() {
-            if (TextUtils.isEmpty(furnitureDemand)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null) return "";
-            try {
-                String[] array = furnitureDemand.split(",");
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < array.length; i++) {
-                    String value = bean.getFurnitureDemand().get(array[i]);
-                    if (!TextUtils.isEmpty(value)) {
-                        sb.append(value);
-                        if (i < array.length - 1) {
-                            sb.append("、");
-                        }
-                    }
-                }
-                return sb.toString();
-            } catch (Exception e) {
-                return "";
-            }
+            return SystemCodePattern.getFurnitureDemand(furnitureDemand);
         }
 
         /*每平方米房价*/
         public String getHousePrice() {
-            if (TextUtils.isEmpty(housePriceTypeCode)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getHousePriceType().containsKey(housePriceTypeCode))
-                return "";
-            return bean.getHousePriceType().get(housePriceTypeCode);
+            return SystemCodePattern.getHousePrice(housePriceTypeCode);
         }
 
         /*量尺沟通预算*/
         public String getMeasureBudget() {
-            if (TextUtils.isEmpty(measureBudgetTypeCode)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getCustomerBudgetType().containsKey(measureBudgetTypeCode))
-                return "";
-            return bean.getCustomerBudgetType().get(measureBudgetTypeCode);
+            return SystemCodePattern.getMeasureBudget(measureBudgetTypeCode);
         }
 
         /*户型*/
         public String getHouseType() {
-            if (TextUtils.isEmpty(houseType)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getCustomerHouseType().containsKey(houseType))
-                return "";
-            return bean.getCustomerHouseType().get(houseType);
+            return SystemCodePattern.getHouseType(houseType);
         }
 
         /*装修风格*/
         public String getPreferenceStyle() {
-            if (TextUtils.isEmpty(preferenceStyle)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getDecorationStyle().containsKey(preferenceStyle))
-                return "";
-            return bean.getDecorationStyle().get(preferenceStyle);
+            return SystemCodePattern.getPreferenceStyle(preferenceStyle);
         }
 
         public String getAppointMeasureSpace() {
-            if (TextUtils.isEmpty(appointMeasureSpace)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null) {
-                return "";
-            }
-            try {
-                String[] array = appointMeasureSpace.split(",");
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < array.length; i++) {
-                    String value = bean.getCustomerMeasureSpace().get(array[i]);
-                    if (!TextUtils.isEmpty(value)) {
-                        sb.append(value);
-                        if (i < array.length - 1) {
-                            sb.append("、");
-                        }
-                    }
-                }
-                return sb.toString();
-            } catch (Exception e) {
-                return "";
-            }
+            return SystemCodePattern.getAppointMeasureSpace(appointMeasureSpace);
         }
 
         /*接口返回的是房屋面积字典code*/
-        public String getAreaType() {
-            if (TextUtils.isEmpty(areaType)) {
-                return "";
-            }
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null) return "";
-            return bean.getCustomerAreaType().get(areaType);
+        public String getHouseArea() {
+            return SystemCodePattern.getHouseArea(areaType);
         }
 
         /*获取定制空间，通过字典匹配，接口返回的是定制空间的code，并以","隔开*/
         public String getCustomizeTheSpace() {
-            if (TextUtils.isEmpty(customizeTheSpace)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null) return "";
-            try {
-                String[] array = customizeTheSpace.split(",");
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < array.length; i++) {
-                    String value = bean.getCustomerMeasureSpace().get(array[i]);
-                    if (!TextUtils.isEmpty(value)) {
-                        sb.append(value);
-                        if (i < array.length - 1) {
-                            sb.append("、");
-                        }
-                    }
-                }
-                return sb.toString();
-            } catch (Exception e) {
-                return "";
-            }
+            return SystemCodePattern.getCustomSpace(customizeTheSpace);
         }
 
         /*系列*/
         public String getSeries() {
-            if (TextUtils.isEmpty(series)) {
-                return "";
-            }
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getHouseSeries().containsKey(series)) return "";
-            return bean.getHouseSeries().get(series);
+            return SystemCodePattern.getSeries(product, series);
         }
 
         /*产品*/
         public String getProduct() {
-            if (TextUtils.isEmpty(product)) {
-                return "";
-            }
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getCustomerProduct().containsKey(product)) return "";
-            return bean.getCustomerProduct().get(product);
+            return SystemCodePattern.getProduct(product);
         }
 
         public String getStyle() {
-            if (TextUtils.isEmpty(style)) {
-                return "";
-            }
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getDecorationStyle().containsKey(style)) return "";
-            return bean.getDecorationStyle().get(style);
+            return SystemCodePattern.getStyle(style);
         }
 
         /*查房结果*/
         public String getMeasureResult() {
-            if (TextUtils.isEmpty(validatePassed)) {
-                return "";
-            }
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null || !bean.getReviewHousePlan().containsKey(validatePassed)) return "";
-            return bean.getReviewHousePlan().get(validatePassed);
+            return SystemCodePattern.getMeasureResult(validatePassed);
         }
 
         public String getAmountOfDate() {
@@ -607,8 +478,26 @@ public class CustomerManagerV2Bean {
         public String iconPath;
         String isLock;
 
+        private OperateItemBean(String iconCode) {
+            this.iconCode = iconCode;
+        }
+
+        public static OperateItemBean newInstance(String iconCode) {
+            return new OperateItemBean(iconCode);
+        }
+
         public boolean isLock() {
             return TextUtils.equals(isLock, "Y") || TextUtils.equals(isLock, "y");
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) return false;
+            if (obj == this) return true;
+            if (obj instanceof OperateItemBean) {
+                return TextUtils.equals(iconCode, ((OperateItemBean) obj).iconCode);
+            }
+            return false;
         }
     }
 
@@ -684,13 +573,19 @@ public class CustomerManagerV2Bean {
     /*生成订单*/
     public static class GenerateOrderBean {
         public String orderId;
-        public String orderBy;
-        public String orderTime;
-        public String space;
-        public String status;
+        public String creater;
+        public String funType;
+        public String houseName;
+        public String orderStatus;
+        public String orderStatusName;
+        String createDate;
 
         public String getOrderId() {
             return TextUtils.isEmpty(orderId) ? "" : orderId;
+        }
+
+        public String getCreateDate() {
+            return TimeUtil.timeMillsFormat(createDate);
         }
     }
 
@@ -715,26 +610,7 @@ public class CustomerManagerV2Bean {
         String updateDate;
 
         public String getCategory() {
-            if (TextUtils.isEmpty(category)) return "";
-            SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-            if (bean == null) return "";
-            try {
-                StringBuilder sb = new StringBuilder();
-                String[] array = category.split(",");
-                Map<String, String> typeMap = bean.getCustomerEarnestHouse();
-                for (int i = 0; i < array.length; i++) {
-                    String value = typeMap.get(array[i]);
-                    if (!TextUtils.isEmpty(value)) {
-                        sb.append(value);
-                        if (i < array.length - 1) {
-                            sb.append("、");
-                        }
-                    }
-                }
-                return sb.toString();
-            } catch (Exception e) {
-                return "";
-            }
+            return SystemCodePattern.getCustomClass(category);
         }
 
         public String getCreateDate() {
@@ -900,7 +776,7 @@ public class CustomerManagerV2Bean {
         public String createBy;
         String createDate;
         public String dealerId;
-        String feedBackFlag;
+        public String feedBackFlag;
         String feedBackTime;
         public String installArea;
         public String installId;
@@ -920,13 +796,16 @@ public class CustomerManagerV2Bean {
             return TimeUtil.timeMillsFormat(createDate);
         }
 
-        public String getFeedBackTime() {
-            return TimeUtil.timeMillsFormat(feedBackTime);
+        public boolean isFeedback() {
+            return TextUtils.equals(feedBackFlag, "Y") || TextUtils.equals(feedBackFlag, "y");
         }
-
-        public String getUpdateDate() {
-            return TimeUtil.timeMillsFormat(updateDate);
-        }
+//        public String getFeedBackTime() {
+//            return TimeUtil.timeMillsFormat(feedBackTime);
+//        }
+//
+//        public String getUpdateDate() {
+//            return TimeUtil.timeMillsFormat(updateDate);
+//        }
 
         public String getInstallState() {
             if (TextUtils.isEmpty(installState)) return "";

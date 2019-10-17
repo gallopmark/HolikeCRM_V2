@@ -13,8 +13,8 @@ import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.helper.FlexboxManagerHelper;
 import com.holike.crm.http.ParamHelper;
-import com.holike.crm.manager.FlowLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +61,8 @@ public class BeenLostHelper extends GeneralHelper {
     }
 
     public void setup() {
-        mReasonRecyclerView.setLayoutManager(new FlowLayoutManager());
-        mSeriesRecyclerView.setLayoutManager(new FlowLayoutManager());
+        mReasonRecyclerView.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
+        mSeriesRecyclerView.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
         mReasonAdapter = new MultipleChoiceAdapter(mContext, mReasonItems);
         mReasonRecyclerView.setAdapter(mReasonAdapter);
         mSeriesAdapter = new MultipleChoiceAdapter(mContext, mSeriesItems);

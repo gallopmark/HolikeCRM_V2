@@ -473,7 +473,7 @@ public class HomepageFragment extends BaseFragment<HomePagePresenter, HomePageVi
                         MessageDetailsActivity.open(getFragment(),bean.getMessageId(), REQUEST_CODE);
 //                        AnnounceFragment.startMessageDetailsActivity(HomepageFragment.this, bean.getMessageId(), REQUEST_CODE);
                     } else {
-                        CustomerDetailV2Activity.open((BaseActivity) mContext, bean.getPersonalId(), bean.getMessageId());
+                        CustomerDetailV2Activity.open((BaseActivity) mContext, bean.getPersonalId(), bean.getMessageId(),bean.isHighSeasHouse());
                     }
                 });
             }

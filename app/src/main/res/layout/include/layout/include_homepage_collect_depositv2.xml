@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/orders_for_this_month"
+        android:text="@string/number_of_deposit_customers_this_month"
         android:textColor="@color/textColor4"
         android:textSize="@dimen/textSize_16"
         android:textStyle="bold" />
@@ -30,6 +30,7 @@
         android:background="@drawable/bg_shadow_layer_homepagev2"
         android:gravity="center"
         android:text="@string/receive_deposit_title"
+        android:visibility="gone"
         android:textColor="@color/color_while"
         android:textSize="@dimen/textSize_14" />
 </LinearLayout>

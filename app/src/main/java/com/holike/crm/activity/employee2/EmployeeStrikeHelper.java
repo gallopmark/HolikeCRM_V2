@@ -96,7 +96,7 @@ class EmployeeStrikeHelper {
     }
 
     void onSave() {
-        Map<String, String> params = null;
+        Map<String, String> params;
         EmployeeStoreFragment storeFragment = getStoreFragment();
         if (storeFragment != null && storeFragment.isSelected()) {
             params = storeFragment.obtain();

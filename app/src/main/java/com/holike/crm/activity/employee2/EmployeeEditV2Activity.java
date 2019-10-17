@@ -1,5 +1,6 @@
 package com.holike.crm.activity.employee2;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.holike.crm.R;
@@ -33,7 +34,7 @@ public class EmployeeEditV2Activity extends MyFragmentActivity<EmployeeEditV2Pre
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         setTitle(getString(R.string.employee_new_employees));
         mHelper = new EmployeeEditHelper(this, this);
     }

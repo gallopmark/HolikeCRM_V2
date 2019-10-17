@@ -1,19 +1,17 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+import android.os.Bundle;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.bean.WoodenDoorBean;
 import com.holike.crm.dialog.LoadingTipDialog;
 import com.holike.crm.fragment.analyze.WoodenDoorDealerFragment;
-import com.holike.crm.fragment.analyze.WoodenDoorPersonalFragment;
+import com.holike.crm.fragment.analyze.WoodenDoorDefaultFragment;
 import com.holike.crm.presenter.activity.WoodenDoorPresenter;
 import com.holike.crm.view.activity.WoodenDoorView;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by gallop on 2019/8/28.
@@ -33,8 +31,8 @@ public class WoodenDoorActivity extends MyFragmentActivity<WoodenDoorPresenter, 
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item18_title));
         getData();
@@ -58,12 +56,10 @@ public class WoodenDoorActivity extends MyFragmentActivity<WoodenDoorPresenter, 
     @Override
     public void onSuccess(WoodenDoorBean bean) {
         dismissLoading();
-        Map<String, Serializable> params = new HashMap<>();
-        params.put("bean", bean);
         if (bean.isDealer()) {
-            startFragment(params, new WoodenDoorDealerFragment(), false);
+            startFragment(null, WoodenDoorDealerFragment.newInstance(bean), false);
         } else {
-            startFragment(params, new WoodenDoorPersonalFragment(), false);
+            startFragment(null, WoodenDoorDefaultFragment.newInstance(bean), false);
         }
     }
 

@@ -71,25 +71,37 @@
             android:text="@string/customer_ruler_tips" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_reservation"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_12"
         android:layout_marginRight="@dimen/dp_10"
-        android:text="@string/followup_reservation"
-        android:textColor="@color/textColor15" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_countdown"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_12"
-        android:layout_marginRight="@dimen/dp_10"
-        android:text="@string/customer_countdown_tips"
-        android:textColor="@color/textColor15" />
+        <TextView
+            android:id="@+id/tv_reservation"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
+            android:gravity="center|start"
+            android:text="@string/followup_reservation"
+            android:textColor="@color/textColor15"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_countdown"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_weight="1"
+            android:gravity="center|start"
+            android:text="@string/customer_countdown_tips"
+            android:textColor="@color/textColor15"
+            android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>

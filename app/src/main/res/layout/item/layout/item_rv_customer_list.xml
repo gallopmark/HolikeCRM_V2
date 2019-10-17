@@ -85,7 +85,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:gravity="start|center"
-            android:maxWidth="@dimen/dp_140"
+            android:maxWidth="@dimen/dp_150"
             android:minWidth="@dimen/dp_130"
             android:paddingStart="0dp"
             android:paddingLeft="0dp"

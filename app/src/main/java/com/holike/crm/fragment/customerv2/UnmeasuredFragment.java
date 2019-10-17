@@ -7,7 +7,10 @@ import com.holike.crm.R;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.fragment.customerv2.helper.UnmeasuredHelper;
+import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
 import com.holike.crm.view.fragment.GeneralCustomerView;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -16,7 +19,7 @@ import butterknife.BindView;
  * Copyright holike possess 2019.
  * 预约量尺
  */
-public class UnmeasuredFragment extends GeneralCustomerFragment implements GeneralCustomerView, UnmeasuredHelper.Callback {
+public class UnmeasuredFragment extends GeneralCustomerFragment implements GeneralCustomerView, UnmeasuredHelper.Callback, GeneralCustomerPresenter.OnQueryRoleUserCallback {
     @BindView(R.id.rv_space)
     RecyclerView mSpaceRecyclerView;
     private UnmeasuredHelper mHelper;
@@ -39,9 +42,16 @@ public class UnmeasuredFragment extends GeneralCustomerFragment implements Gener
     }
 
     @Override
-    public void onQueryShopUser(String shopId) {
+    public void onQueryMeasurer(String shopId) {
         showLoading();
-        mPresenter.getShopRoleUser(shopId);
+        mPresenter.getMeasurePerson(shopId, this);
+    }
+
+    /*获取量尺人员成功*/
+    @Override
+    public void onSuccess(List<ShopRoleUserBean.UserBean> list) {
+        dismissLoading();
+        mHelper.onSelectRuler(list);
     }
 
     @Override
@@ -56,9 +66,7 @@ public class UnmeasuredFragment extends GeneralCustomerFragment implements Gener
         if (object == null) return;
         if (object instanceof CurrentUserBean) {
             mHelper.setUserInfo((CurrentUserBean) object);
-        } else if (object instanceof ShopRoleUserBean) {
-            mHelper.onSelectRuler(((ShopRoleUserBean) object).getDesigner());
-        } else {
+        }else {
             setResultOk(object);
         }
     }

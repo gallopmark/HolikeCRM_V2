@@ -1,5 +1,7 @@
 package com.holike.crm.activity.homepage;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,8 +45,8 @@ public class FeedbackRecordActivity extends MyFragmentActivity<FeedbackRecordPre
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setTitle(getString(R.string.feedback_record));
         mPresenter.setAdapter(mRecyclerView);
         srl.setRefreshHeader(new WaterDropHeader(this));

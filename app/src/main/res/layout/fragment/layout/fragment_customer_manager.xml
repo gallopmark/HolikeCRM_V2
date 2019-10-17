@@ -5,7 +5,7 @@
     android:background="@color/color_f3"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <include
         layout="@layout/include_empty_page"
@@ -18,16 +18,43 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView
-            android:id="@+id/recyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/dp_20" />
+            android:layout_weight="1">
+
+            <com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_20" />
+
+            <TextView
+                android:id="@+id/tv_online_logs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_180"
+                android:background="@drawable/bg_card"
+                android:lineSpacingExtra="@dimen/dp_3"
+                android:minWidth="@dimen/dp_50"
+                android:minHeight="@dimen/dp_50"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_6"
+                android:text="@string/tips_online_logs"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/textSize_14"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/fl_receive"

@@ -7,19 +7,17 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
 import com.holike.crm.activity.customer.CustomerImagePreviewActivity;
-import com.holike.crm.activity.main.PhotoViewActivity;
+import com.holike.crm.activity.homepage.OrderDetailsActivity;
+import com.holike.crm.adapter.SquareImageGridAdapter;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
@@ -365,15 +363,18 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             }
         }
 
+        /*展示导购信息*/
         private void setGuide(RecyclerHolder holder, MultiHouseItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.house_manage_divide_guide));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
-            holder.setText(R.id.tv_store, transform(R.string.tips_customer_store_belong2, mCurrentHouseDetailBean.shopName));  //所属门店
-            holder.setText(R.id.tv_guide, transform(R.string.customer_guide_tips, mCurrentHouseDetailBean.salesName)); //导购
-//            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_ASSIGN_GUIDE, assignGuide()));
+            String shopTemp = mCurrentHouseDetailBean.shopName + (TextUtils.isEmpty(mCurrentHouseDetailBean.groupName) ? ""
+                    : "-" + mCurrentHouseDetailBean.groupName);
+            holder.setText(R.id.tv_store, transform(0, shopTemp, holder.obtainView(R.id.tv_shop_tips)));  //所属门店
+            holder.setText(R.id.tv_guide, transform(0, mCurrentHouseDetailBean.salesName, holder.obtainView(R.id.tv_guide_tips))); //导购
         }
 
+        /*展示通话记录*/
         private void setCallLogs(RecyclerHolder holder, PhoneRecordItem item) {
             holder.setVisibility(R.id.tv_more, View.GONE);  //隐藏更多按钮
             holder.setText(R.id.tv_call_time, transform2(R.string.tips_call_time, item.recordBean.getCreateDate())); //通话时间
@@ -387,7 +388,7 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
             holder.setText(R.id.tv_reservation_time, transform(R.string.followup_reservation_time_tips, mCurrentHouseDetailBean.getAppointmentTime())); //预约时间
-            holder.setText(R.id.tv_ruler, transform(R.string.customer_ruler_tips, mCurrentHouseDetailBean.appointMeasureByName)); //量尺人员
+            holder.setText(R.id.tv_ruler, transform(0, mCurrentHouseDetailBean.appointMeasureByName, holder.obtainView(R.id.tv_ruler_tips))); //量尺人员
             holder.setText(R.id.tv_measure_store, transform(0, mCurrentHouseDetailBean.appointShopName, holder.obtainView(R.id.tv_measure_store_tips))); //量尺门店
             holder.setText(R.id.tv_measure_space, transform(0, mCurrentHouseDetailBean.getAppointMeasureSpace(), holder.obtainView(R.id.tv_measure_space_tips)));
             holder.setText(R.id.tv_remark, transform(0, item.remark, holder.obtainView(R.id.tv_remark_tips))); //备注信息
@@ -399,17 +400,17 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             holder.setText(R.id.tv_title, mContext.getString(R.string.followup_distribution_designer2));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
-            holder.setText(R.id.tv_store, transform(R.string.tips_customer_store_belong2, mCurrentHouseDetailBean.designerShopName)); //所属门店
-            holder.setText(R.id.tv_designer, transform(R.string.followup_designer, mCurrentHouseDetailBean.designerName));
-//            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_ASSIGN_DESIGNER, assignDesigner()));
+            holder.setText(R.id.tv_store, transform(0, mCurrentHouseDetailBean.designerShopName, holder.obtainView(R.id.tv_shop_tips))); //所属门店
+            holder.setText(R.id.tv_designer, transform(0, mCurrentHouseDetailBean.designerName, holder.obtainView(R.id.tv_designer_tips))); //设计师
         }
 
+        /*展示量尺结果*/
         private void setMeasureResult(RecyclerHolder holder, MeasureResultItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.customer_measure_result_tips));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
             holder.setText(R.id.tv_house_price, transform(R.string.followup_house_price_square, mCurrentHouseDetailBean.getHousePrice())); //每平方米房价
-            holder.setText(R.id.tv_house_area, transform(R.string.followup_house_area_tips, mCurrentHouseDetailBean.getAreaType())); //房屋面积
+            holder.setText(R.id.tv_house_area, transform(R.string.followup_house_area_tips, mCurrentHouseDetailBean.getHouseArea())); //房屋面积
             holder.setText(R.id.tv_house_type, transform(R.string.followup_house_type_tips, mCurrentHouseDetailBean.getHouseType())); //户型
             holder.setText(R.id.tv_family_member, transform(0, mCurrentHouseDetailBean.getFamilyMember(), holder.obtainView(R.id.tv_family_member_tips))); //家庭成员
             holder.setText(R.id.tv_custom_space, transform(0, mCurrentHouseDetailBean.getCustomizeTheSpace(), holder.obtainView(R.id.tv_custom_space_tips))); //定制空间
@@ -420,8 +421,8 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             holder.setText(R.id.tv_decoration_progress, transform(R.string.followup_decoration_progress_tips, mCurrentHouseDetailBean.getDecorateProgress())); //装修进度
             holder.setText(R.id.tv_plan_stay, transform(R.string.followup_plan_to_stay_tips, mCurrentHouseDetailBean.getPlannedStayDate())); //计划入住
             holder.setText(R.id.tv_actual_gauge, transform(R.string.followup_actual_gauge_tips, mCurrentHouseDetailBean.getAmountOfDate())); //实际量尺
-            holder.setText(R.id.tv_measure_shop, transform(R.string.followup_measure_store_tips, mCurrentHouseDetailBean.measureShopName));//量尺门店
-            holder.setText(R.id.tv_ruler, transform(R.string.customer_ruler_tips, mCurrentHouseDetailBean.measureByName));//量尺人员
+            holder.setText(R.id.tv_measure_shop, transform(0, mCurrentHouseDetailBean.measureShopName, holder.obtainView(R.id.tv_measure_shop_tips)));//量尺门店
+            holder.setText(R.id.tv_ruler, transform(0, mCurrentHouseDetailBean.measureByName, holder.obtainView(R.id.tv_ruler_tips)));//量尺人员
             holder.setText(R.id.tv_reservation_drawing, transform(R.string.followup_reservation, mCurrentHouseDetailBean.getMeasureAppConfirmTime())); //预约确图
             holder.setText(R.id.tv_remark, transform(0, item.remark, holder.obtainView(R.id.tv_remark_tips)));
             List<String> images = new ArrayList<>(item.images);
@@ -459,6 +460,7 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             holder.setVisibility(R.id.tv_edit_upload_plan, View.GONE);
         }
 
+        /*展示主管查房*/
         private void setRounds(RecyclerHolder holder, MultiHouseItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.followup_supervisor_rounds_title));
             holder.setText(R.id.tv_date, item.operateTime);
@@ -468,6 +470,7 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             holder.setVisibility(R.id.tv_edit_rounds, View.GONE);
         }
 
+        /*展示收款记录*/
         private void setReceipt(RecyclerHolder holder, ReceiptItem item) {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
             if (item.isLastPosition) {
@@ -481,11 +484,11 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             holder.setText(R.id.tv_receipt_person, transform(R.string.followup_receipt_person_tips, item.bean.receiver)); //收款人
             holder.setText(R.id.tv_receipt_category, transform(R.string.followup_receipt_category_tips, item.bean.type)); //收款类别
             holder.setText(R.id.tv_receipt_amount, transform(R.string.followup_receipt_amount_tips, item.bean.amount)); //收款金额
-            if (item.bean.isTailType()) {      //收尾款
+            if (TextUtils.isEmpty(item.bean.getCategory())) {//定制品类
                 holder.setVisibility(R.id.tv_custom_product_tips, View.GONE);
                 holder.setVisibility(R.id.tv_custom_product, View.GONE);
             } else {
-                holder.setText(R.id.tv_custom_product, transform(0, item.customProduct, holder.obtainView(R.id.tv_custom_product_tips))); //定制品类
+                holder.setText(R.id.tv_custom_product, transform(0, item.bean.getCategory(), holder.obtainView(R.id.tv_custom_product_tips))); //定制品类
                 holder.setVisibility(R.id.tv_custom_product_tips, View.VISIBLE);
                 holder.setVisibility(R.id.tv_custom_product, View.VISIBLE);
             }
@@ -507,6 +510,7 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
 //            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_RECEIPT, payment()));
         }
 
+        /*展示合同登记*/
         private void setContractRegister(RecyclerHolder holder, final ContractItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.followup_contract_title));
             if (mCurrentHouseDetailBean.isContractRegistration()) {  //已经登记了合同
@@ -560,7 +564,7 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
             String source = mContext.getString(R.string.order_number_tips);
             if (TextUtils.isEmpty(item.bean.orderId)) {
                 holder.setText(R.id.tv_order_number, transform(R.string.order_number_tips, "")); //订单号
-                holder.setDrawableRight(R.id.tv_order_number, 0);
+                holder.setDrawableRight(R.id.tv_order_number, null);
                 holder.setEnabled(R.id.tv_order_number, false);
             } else {
                 int start = source.length();
@@ -569,16 +573,14 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
                 ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.textColor14)), start, source.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
                 ss.setSpan(new StyleSpan(Typeface.BOLD), start, source.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
                 holder.setText(R.id.tv_order_number, ss);
-                holder.setDrawableRight(R.id.tv_order_number, R.drawable.ic_arrow_right_accent);
+                holder.setDrawableRight(R.id.tv_order_number, ContextCompat.getDrawable(mContext, R.drawable.layer_arrow_right_accent));
                 holder.setEnabled(R.id.tv_order_number, true);
             }
-            holder.setOnClickListener(R.id.tv_order_number, view -> {
-
-            });
-            holder.setText(R.id.tv_order_person, transform(R.string.order_player_tips, item.bean.orderBy)); //下单人
-            holder.setText(R.id.tv_order_time, transform(R.string.order_time_tips, item.bean.orderTime));//下单时间、
-            holder.setText(R.id.tv_space, transform(R.string.order_space_tips, item.bean.space)); //下单空间
-            holder.setText(R.id.tv_order_status, transform(R.string.order_status_tips, item.bean.status)); //下单状态
+            holder.setOnClickListener(R.id.tv_order_number, view -> OrderDetailsActivity.open(mActivity, item.bean.orderId));
+            holder.setText(R.id.tv_order_person, transform(R.string.order_player_tips, item.bean.creater)); //下单人
+            holder.setText(R.id.tv_order_time, transform(R.string.order_time_tips, item.bean.getCreateDate()));//下单时间、
+            holder.setText(R.id.tv_space, transform(R.string.order_space_tips, item.bean.houseName)); //下单空间
+            holder.setText(R.id.tv_order_status, transform(R.string.order_status_tips, item.bean.orderStatusName)); //下单状态
         }
 
         /*预约安装*/
@@ -661,13 +663,15 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
                 String user = TextUtils.isEmpty(item.bean.createName) ? "" : item.bean.createName;
                 holder.setText(R.id.tv_user, mContext.getString(R.string.tips_fill_in_person) + user);
                 if (item.bean.isAssignGuide()) {
-                    holder.setText(R.id.tv_shop, transform(R.string.tips_customer_store_belong2, item.bean.shopName));
-                    holder.setText(R.id.tv_user_name, transform(R.string.customer_guide_tips, item.bean.userName));
+                    holder.setText(R.id.tv_user_name_tips, mContext.getString(R.string.customer_guide_tips));
+                    holder.setText(R.id.tv_shop, transform(0, item.bean.shopName, holder.obtainView(R.id.tv_shop_tips)));
+                    holder.setText(R.id.tv_user_name, transform(0, item.bean.userName, holder.obtainView(R.id.tv_user_name_tips)));
                     holder.setVisibility(R.id.ll_assign_type, View.VISIBLE);
                     holder.setVisibility(R.id.tv_message, View.GONE);
                 } else if (item.bean.isAssignDesigner()) {
-                    holder.setText(R.id.tv_shop, transform(R.string.tips_customer_store_belong2, item.bean.shopName));
-                    holder.setText(R.id.tv_user_name, transform(R.string.followup_designer, item.bean.userName));
+                    holder.setText(R.id.tv_user_name_tips, mContext.getString(R.string.followup_designer));
+                    holder.setText(R.id.tv_shop, transform(0, item.bean.shopName, holder.obtainView(R.id.tv_shop_tips)));
+                    holder.setText(R.id.tv_user_name, transform(0, item.bean.userName, holder.obtainView(R.id.tv_user_name_tips)));
                     holder.setVisibility(R.id.ll_assign_type, View.VISIBLE);
                     holder.setVisibility(R.id.tv_message, View.GONE);
                 } else {
@@ -690,27 +694,8 @@ public class HighSeasHistoryHelper extends IHighSeasMultipleHelper {
                     rvPictures.addItemDecoration(itemDecoration);
                     rvPictures.setTag(itemDecoration);
                 }
-                ImageGridAdapter adapter = new ImageGridAdapter(mContext, images);
+                SquareImageGridAdapter adapter = new SquareImageGridAdapter(mContext, images);
                 rvPictures.setAdapter(adapter);
-                adapter.setOnItemClickListener((adapter1, holder, view, p) -> PhotoViewActivity.openImage(mActivity, p, images));
-            }
-        }
-
-        class ImageGridAdapter extends CommonAdapter<String> {
-
-            ImageGridAdapter(Context context, List<String> mDatas) {
-                super(context, mDatas);
-            }
-
-            @Override
-            protected int bindView(int viewType) {
-                return R.layout.item_square_image;
-            }
-
-            @Override
-            public void onBindHolder(RecyclerHolder holder, String url, int position) {
-                ImageView iv = holder.obtainView(R.id.iv_image);
-                Glide.with(mContext).load(url).apply(new RequestOptions().placeholder(R.drawable.loading_photo).error(0).centerCrop()).into(iv);
             }
         }
     }

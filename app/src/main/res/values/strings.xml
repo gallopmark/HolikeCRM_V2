@@ -18,9 +18,13 @@
     <string name="never">暂无</string>
     <string name="tips_call">拨打电话</string>
     <string name="call">拨打</string>
-    <string name="tips_dismiss_callPhone">拨号权限已被禁止，请到“权限管理”打开</string>
+    <string name="tips_dismiss_callPhone">授权失败，应用程序无法拨号，请到“权限管理”打开</string>
+    <string name="tips_callLog_permission_denied">授权失败，应用将无法读取通话记录</string>
+    <string name="tips_dismiss_callLogs">授权失败，应用程序无法读取通话记录，请重新打开</string>
+    <string name="tips_dismiss_callLogs_prohibit">授权失败，应用程序无法读取通话记录，请到“权限管理”打开</string>
     <string name="shopping_guide">导购</string>
     <string name="salesman">业务员</string>
+    <string name="salesman_tips">业务员：</string>
     <string name="tips_rmb">¥</string>
     <string name="dialog_title_default">温馨提示</string>
     <string name="record">记录</string>
@@ -36,7 +40,12 @@
     <string name="message_isRead">是否已读</string>
     <string name="login_expired">您的登录信息已经过期，请重新登录</string>
     <string name="login_now">马上登录</string>
+    <string name="this_month">本月</string>
+    <string name="version_update_notification_wait">正在更新…</string>
+    <string name="version_update_pause">下载已暂停，点击继续！</string>
+    <string name="version_update_error">下载失败，请点击重试！</string>
     <!--登录-->
+    <string name="tips_current_version">当前版本：</string>
     <string name="login_title">登录</string>
     <string name="login_account">账号</string>
     <string name="login_account_et">请输入账号</string>
@@ -86,8 +95,8 @@
     <string name="receive_deposit_add_customer">新建客户</string>
     <string name="receive_deposit_customerName">客户姓名</string>
     <string name="receive_deposit_customerName_et">输入客户姓名</string>
-    <string name="receive_deposit_customerPhone">客户手机</string>
-    <string name="receive_deposit_customerPhone_et">输入客户手机</string>
+    <string name="receive_deposit_customerPhone">客户电话</string>
+    <string name="receive_deposit_customerPhone_et">输入客户电话</string>
     <string name="receive_deposit_customerGender">客户性别</string>
     <string name="receive_deposit_customerAddress">客户地址</string>
     <string name="receive_deposit_customerAddress_et">输入客户地址</string>
@@ -147,7 +156,7 @@
     <string name="customer_manage_edit_customer">编辑客户</string>
     <string name="customer_manage_edit_house">编辑房屋</string>
     <string name="customer_manage_add_house">添加房屋</string>
-    <string name="customer_manage_search_hint">搜索客户姓名、手机号码、地址</string>
+    <string name="customer_manage_search_hint">搜索客户姓名、电话号码、地址、微信号</string>
     <string name="customer_manage_customer_style">客户类型</string>
     <string name="customer_manage_customer_state">客户状态</string>
     <string name="customer_manage_follow_et">输入跟进情况记录</string>
@@ -216,7 +225,7 @@
     <string name="house_manage_loss_go">客户去向</string>
 
     <!--订单中心-->
-    <string name="order_center_search">搜索客户姓名、手机号、订单号</string>
+    <string name="order_center_search">搜索客户姓名、电话号、订单号</string>
     <string name="order_center_order_type">订单类型</string>
     <string name="order_center_order_state">订单状态</string>
     <string name="order_center_type">类型：</string>
@@ -233,7 +242,7 @@
     <string name="order_details_order_isUrgent">是否加急</string>
     <string name="order_details_order_delivery_time">交货日期</string>
     <string name="order_details_order_customer_name">客户姓名</string>
-    <string name="order_details_order_customer_phone">客户手机</string>
+    <string name="order_details_order_customer_phone">客户电话</string>
     <string name="order_details_order_community_name">小区名称</string>
     <string name="order_details_order_district">所在地区</string>
     <string name="order_details_order_address">详细地址</string>
@@ -354,7 +363,7 @@
 
     <!--我的-->
     <string name="my_login_account">登录账号</string>
-    <string name="my_phone">手机号码</string>
+    <string name="my_phone">电话号码</string>
     <string name="my_user_type">用户类型</string>
     <string name="my_create_time">创建时间</string>
     <string name="my_change_password">修改密码</string>
@@ -451,6 +460,7 @@
     <string name="tips_exit">再按一次退出程序</string>
     <string name="tips_noresult">亲，暂无相应的查询结果哦~</string>
     <string name="tips_nonotice">亲，现在暂时还没有任何通知呢~</string>
+    <string name="tips_nopendingevents">亲，现在暂时还没有待处理事项呢~</string>
     <string name="tips_noannounce">亲，现在暂时还没有任何公告呢~</string>
     <string name="tips_nopermissions">当前角色无操作权限</string>
     <string name="tips_noorderdata">亲，你还没有订单数据哦~</string>
@@ -676,8 +686,8 @@
 
     <string name="symbol_question">\?</string>
 
-    <string name="employee_list_search_hint">输入员工姓名或手机号码进行搜索</string>
-    <string name="employee_list_search_hint2">输入员工姓名、手机号码</string>
+    <string name="employee_list_search_hint">输入员工姓名或电话号码进行搜索</string>
+    <string name="employee_list_search_hint2">输入员工姓名、电话号码</string>
     <string name="employee_list_select_store">选择门店</string>
     <string name="employee_list_select_shop">门店组织</string>
     <string name="employee_list_select_bill">单据状态</string>
@@ -702,8 +712,8 @@
     <string name="employee_account">员工帐号</string>
     <string name="employee_name_tips">员工姓名</string>
     <string name="employee_name_hint">请输入员工姓名</string>
-    <string name="employee_phone_tips">手机号码</string>
-    <string name="employee_phone_hint">请输入手机号码</string>
+    <string name="employee_phone_tips">电话号码</string>
+    <string name="employee_phone_hint">请输入电话号码</string>
     <string name="employee_jobNum_tips">工号\u3000\u3000</string>
     <string name="employee_jobNum_hint">请输入员工工号</string>
     <string name="employee_sex_tips">性别\u3000\u3000</string>
@@ -711,9 +721,11 @@
     <string name="employee_status_tips">状态</string>
     <string name="employee_password_tips">密码</string>
     <string name="employee_password_tips_empty">\u3000\u3000</string>
-    <string name="employee_password_hint">请输入密码</string>
+    <string name="employee_password_empty_input">请输入密码</string>
+    <string name="employee_password_hint">请输入6位以上数字+大小写字母</string>
     <string name="employee_twice_password_tips">确认密码</string>
-    <string name="employee_twice_password_hint">请再次输入密码</string>
+    <string name="employee_twice_password_empty_input">请输入确认密码</string>
+    <string name="employee_twice_password_hint">请输入6位以上数字+大小写字母</string>
     <string name="employee_reset_password">重置密码</string>
     <string name="employee_createTime">创建时间</string>
     <string name="employee_creator">创建人</string>
@@ -755,7 +767,7 @@
     <string name="begin_time">开始时间</string>
     <string name="end_time">结束时间</string>
     <string name="reset">重置</string>
-    <string name="please_input_correct_phone">请输入正确的手机号码</string>
+    <string name="please_input_correct_phone">请输入正确的电话号码</string>
     <string name="inconsistent_password_entered_twice">两次密码输入不一致</string>
 
     <string name="Sun">日</string>
@@ -793,6 +805,7 @@
     <string name="customer_followup">客户跟进</string>
     <string name="customer_adding_houses">添加房屋</string>
     <string name="orders_for_this_month">本月订金单数：</string>
+    <string name="number_of_deposit_customers_this_month">本月订金客户数：</string>
     <string name="bill">单</string>
     <string name="store">门店</string>
     <string name="organization">组织</string>
@@ -868,6 +881,7 @@
     <string name="followup_appointment_install_date">预约安装时间：</string>
     <string name="followup_installation_master">安装师傅：</string>
     <string name="followup_installation_master2">安装师傅</string>
+    <string name="followup_installation_uninstall_error">请先预约安装师傅</string>
     <string name="followup_installation_master_select_error">安装师傅重复，请重新选择</string>
     <string name="followup_installation_area">安装面积：</string>
     <string name="followup_installation_area2">安装面积</string>
@@ -922,6 +936,7 @@
     <string name="followup_receipt_select_date_error">收款时间不可大于当前时间</string>
     <string name="followup_receipt_amount_tips3">收款金额(万)</string>
     <string name="followup_receipt_amount_tips2_hint">请输入金额</string>
+    <string name="followup_receipt_amount_deposit_hint">请输入收款金额</string>
     <string name="followup_receipt_refund_time">退款时间</string>
     <string name="followup_receipt_refund_time_tips">退款时间：</string>
     <string name="followup_receipt_refund_person">退款人员</string>
@@ -1034,14 +1049,17 @@
 
     <string name="tips_must_fill_in">*</string>
     <string name="tips_please_select">请选择</string>
+    <string name="tips_pleas_choose_first">请先选择</string>
     <string name="tips_customer_name">客户姓名</string>
     <string name="tips_customer_name_hint">请输入客户姓名</string>
     <string name="tips_customer_linkup">联系方式</string>
-    <string name="tips_customer_linkup_phone">手机</string>
+    <string name="tips_customer_linkup_phone">电话</string>
     <string name="tips_customer_linkup_wx">微信</string>
-    <string name="tips_customer_linkup_phone_hint">请输入客户手机</string>
-    <string name="tips_customer_linkup_phone_correct">客户手机格式不正确</string>
+    <string name="tips_customer_linkup_phone_hint">请输入客户电话</string>
+    <string name="tips_customer_linkup_phone_correct">客户电话格式不正确</string>
     <string name="tips_customer_linkup_wx_hint">请输入客户微信</string>
+    <string name="tips_customer_empty_linkup">请输入联系方式</string>
+    <string name="tips_customer_linkup_wx_error">客户微信格式不正确</string>
     <string name="tips_customer_sex">客户性别</string>
     <string name="tips_customer_sex_man">先生</string>
     <string name="tips_customer_sex_girl">女士</string>
@@ -1073,9 +1091,11 @@
     <string name="tips_customer_standby_contact_hint">请输入备用联系人</string>
     <string name="tips_customer_standby_phone">备用电话</string>
     <string name="tips_customer_standby_phone2">备用电话：</string>
-    <string name="tips_customer_standby_phone_hint">请输入备用电话</string>
+    <string name="tips_customer_standby_phone_hint">请输入11–15位数备用电话</string>
+    <string name="tips_customer_standby_phone_error">请输入正确位数的备用电话</string>
     <string name="tips_customer_remark">备注信息</string>
     <string name="tips_customer_remark_hint2">请输入备注信息</string>
+    <string name="tips_customer_remark_hint3">请输入注意事项等信息</string>
     <string name="tips_customer_remark2">备注信息：</string>
     <string name="tips_customer_remark_hint">请输入客户意向、定制空间、家具需求等信息</string>
     <string name="tips_customer_belong_organization">所属组织</string>
@@ -1111,16 +1131,19 @@
 
     <string name="tips_add_install_drawings_images">添加安装图纸</string>
 
-    <string name="high_sea_customer_description">公海客户说明</string>
+    <string name="the_data_description">数据说明</string>
 
+    <string name="division">划分</string>
     <string name="principal">负责人</string>
     <string name="number_of_calls">通话次数</string>
     <string name="deposit">订金</string>
     <string name="tail">尾款</string>
 
-    <string name="dialog_month_data_tips1">导购和设计师分别计算自己服务过的流入公海客户，但重复客户不会计入经销商流入公海客户总数；</string>
-    <string name="dialog_month_data_tips2">店长看到的流失客户总数为本店内去重，经理看到的流失客户总数是所管辖门店范围内去重；</string>
-    <string name="dialog_month_data_tips3">职业经理人和老板看到的流失客户总数是所有门店内去重。</string>
+    <string name="dialog_month_data_step_one">1、公海客户计算方式：</string>
+    <string name="dialog_month_data_tips1">导购和设计师分别计算自己服务过的流入公海客户，但重复客户不会计入经销商流入公海客户总数。</string>
+    <string name="dialog_month_data_tips2">组长看到的流入公海客户合计数为本组 内去重，店长为本店内去重。</string>
+    <string name="dialog_month_data_tips3">经理/职业经理人看到的是所管辖门店范围内去重，老板看到的是所有门店去重；</string>
+    <string name="dialog_month_data_step_two">2、员工数据仅展示常规角色数据，若导购上传了方案，未在员工数据中展示，但是会计算在该员工所属的分组或门店数据内。</string>
 
     <string name="dialog_customer_repeat_self">该客户已被您创建，是否跳转到该客户的客户管理页面？</string>
     <string name="dialog_customer_repeat_high_seas_person">该客户已存在于公海，是否领取该客户？</string>
@@ -1128,8 +1151,8 @@
     <string name="refuse_to_assign">拒绝分配</string>
     <string name="agree_to_assign">同意分配</string>
 
-    <string name="distribution_shop">分配门店</string>
-    <string name="distribution_group">分配组织</string>
+    <string name="distribution_shop">所属门店</string>
+    <string name="distribution_group">所属组织</string>
     <string name="distribution_guide">分配导购</string>
     <string name="dialog_title_assign_customer">分配客户</string>
     <string name="dialog_message1_assign_customer">是否将该客户分配给</string>
@@ -1137,4 +1160,69 @@
 
     <string name="dialog_title_receving_customer">领取公海客户</string>
     <string name="dialog_message_receving_customer">是否领取该客户成为你的跟进中客户？</string>
+    <string name="dialog_message_exits_highSeas">该客户已存在于公海，是否领取该客户？</string>
+
+    <string name="empty_shop_guide">该门店下无导购</string>
+    <string name="empty_group_guide">该组织下无导购</string>
+    <string name="empty_shop_salesman">该门店下无业务员</string>
+    <string name="empty_shop_designer">该门店下无设计师</string>
+
+    <string name="search_hint_charge_deposit">搜索客户姓名、联系方式、地址</string>
+    <string name="tips_contact_customer_recently">最近联系客户</string>
+
+    <string name="latest_payment_tips">最新收款：</string>
+    <string name="deposit_received_customer_tips">已收订金客户：</string>
+    <string name="hint_password_regex_tips">请输入6位以上数字+大小写字母组合的密码</string>
+    <string name="dialog_message_confirm_lose_house">是否将其转为公海客户？</string>
+
+    <string name="customer_satisfaction_tab1" tools:ignore="TypographyDashes">服务满意度(1-5星)</string>
+    <string name="customer_satisfaction_tab2" tools:ignore="TypographyDashes">设计满意度(1-5星)</string>
+    <string name="customer_satisfaction_tab3" tools:ignore="TypographyDashes">配送满意度(1-5星)</string>
+    <string name="customer_satisfaction_tab4" tools:ignore="TypographyDashes">安装满意度(1-5星)</string>
+    <string name="query_date">查询日期</string>
+    <string name="customer_telephone_tips">客户电话：</string>
+
+    <string name="customer_satisfaction_service">服务满意度：</string>
+    <string name="customer_satisfaction_design">设计满意度：</string>
+    <string name="customer_satisfaction_delivery">配送满意度：</string>
+    <string name="customer_satisfaction_install">安装满意度：</string>
+
+    <string name="tips_invalid_return">注意：退回后客户将无法继续跟进，请慎重操作！</string>
+
+    <string name="dialog_repeat_digital_title">当前客户已退回</string>
+    <string name="dialog_repeat_digital_messsage">该客户已被退回线上客服，是否激活该客户？</string>
+    <string name="dialog_repeat_digital_returnTime">最近退回时间</string>
+    <string name="dialog_repeat_digital_cause">退回原因</string>
+
+    <string name="tips_customer_online_title">线上记录</string>
+    <string name="tips_online_logs">线上\n记录</string>
+    <string name="tips_title_promotion">推广信息</string>
+    <string name="tips_primary_channel">一级渠道：</string>
+    <string name="tips_secondary_channel">二级渠道：</string>
+    <string name="tips_program_name">方案名称：</string>
+    <string name="tips_registration_path">报名路径：</string>
+    <string name="tips_title_customer_info">客户信息</string>
+    <string name="tips_province_area">省份地区：</string>
+    <string name="tips_property_info">楼盘信息：</string>
+    <string name="tips_detail_address">详细地址：</string>
+    <string name="tips_housing_type">房屋户型：</string>
+    <string name="tips_whether_repossess">是否收楼：</string>
+    <string name="tips_repossession_date">收楼日期：</string>
+    <string name="tips_renovation_condition">装修情况：</string>
+    <string name="tips_renovation_date">装修日期：</string>
+    <string name="tips_plate_preference">板材喜好：</string>
+    <string name="tips_style_preferences">风格喜好：</string>
+    <string name="tips_jingdong_wantwant_id">京东/旺旺ID：</string>
+    <string name="tips_order_amount">订单金额：</string>
+    <string name="tips_gifts_coupons">赠品/优惠券：</string>
+    <string name="tips_appointment_type">预约类型：</string>
+    <string name="tips_deliver_customers">下发客户：</string>
+    <string name="tips_invalid_refusal">无效驳回：</string>
+    <string name="tips_confirm_valid">确认有效：</string>
+    <string name="tips_customer_service_followup_message">客服跟进留言：</string>
+    <string name="tips_chat_record_pictures">聊天记录图：</string>
+    <string name="tips_char_logs">聊天记录：</string>
+
+    <string name="hint_fragment_customer_search">搜索客户姓名、电话、地址、微信</string>
+    <string name="hint_fragment_order_search">搜索客户姓名、电话、订单号</string>
 </resources>

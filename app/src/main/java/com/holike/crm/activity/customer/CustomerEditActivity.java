@@ -3,8 +3,6 @@ package com.holike.crm.activity.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.holike.crm.R;
 import com.holike.crm.activity.customer.helper.CustomerEditHelper;
@@ -13,23 +11,23 @@ import com.holike.crm.bean.ActivityPoliceBean;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.ShopGroupBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
 import com.holike.crm.util.SharedPreferencesUtils;
 
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
  * Created by gallop 2019/7/5
  * Copyright (c) 2019 holike
- * 新建客户
+ * 新建客户、编辑客户
  */
 public class CustomerEditActivity extends GeneralCustomerActivity implements CustomerEditHelper.CustomerEditCallback,
-        GeneralCustomerPresenter.OnQueryShopGroupListener, GeneralCustomerPresenter.OnReceivingCustomerListener, GeneralCustomerPresenter.OnDistributionMsgPushListener {
-    @BindView(R.id.ll_activity_police)
-    LinearLayout mActivityPoliceLayout;
+        GeneralCustomerPresenter.OnQueryShopGroupListener, GeneralCustomerPresenter.OnReceivingCustomerListener, GeneralCustomerPresenter.OnDistributionMsgPushListener, GeneralCustomerPresenter.OnActivationCallback {
 
     private CustomerEditHelper mHelper;//13900011111
 
@@ -44,7 +42,7 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
 //        setTitle(getString(R.string.receive_deposit_add_customer));
         mHelper = new CustomerEditHelper(this, this);
     }
@@ -72,7 +70,7 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
     @Override
     public void onQueryShopGroup(String shopId) {
         showLoading();
-        mPresenter.getShopGroup(shopId, this);
+        mPresenter.getShopGroupByUser(shopId, this);
     }
 
     @Override
@@ -83,8 +81,7 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
 
     @Override
     public void onQueryFailure(String failReason) {
-        dismissLoading();
-        showShortToast(failReason);
+        onFailure(failReason);
     }
 
     @OnClick(R.id.tvSave)
@@ -93,9 +90,16 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
     }
 
     @Override
-    public void onReceivingCustomer(String houseId, String shopId, String groupId) {
+    public void onReceivingCustomer(String personalId, String houseId, String shopId, String groupId) {
         showLoading();
-        mPresenter.receiveHouse(houseId, shopId, groupId, SharedPreferencesUtils.getUserId(), this);
+        mPresenter.receiveHouse(personalId, houseId, shopId, groupId, SharedPreferencesUtils.getUserId(), this);
+    }
+
+    /*激活客户*/
+    @Override
+    public void onActivationCustomer(String personalId, String houseId, String shopId, String grouoId, String guideId) {
+        showLoading();
+        mPresenter.activationCustomer(personalId, houseId, shopId, grouoId, guideId, this);
     }
 
     /*重新分配客户*/
@@ -111,6 +115,12 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onSave(boolean isEdit, String body) {
         showLoading();
         if (!isEdit) {
@@ -123,21 +133,25 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
     /*领取客户失败*/
     @Override
     public void onReceivingFailure(String failReason) {
-        dismissLoading();
-        showShortToast(failReason);
+        onFailure(failReason);
     }
 
     /*领取客户成功*/
     @Override
-    public void onReceivingSuccess(String message) {
+    public void onReceivingSuccess(String message, String personalId, String houseId) {
         dismissLoading();
         showShortToast(message);
+        RxBus.getInstance().post(new MessageEvent(CustomerValue.EVENT_TYPE_RECEIVE_HOUSE));
+        Intent intent = new Intent();
+        intent.putExtra(CustomerValue.PERSONAL_ID, personalId);
+        intent.putExtra(CustomerValue.HOUSE_ID, houseId);
+        setResult(CustomerValue.RESULT_CODE_HIGH_SEAS, intent);
+        finish();
     }
 
     @Override
     public void onMsgPushFailure(String failReason) {
-        dismissLoading();
-        showShortToast(failReason);
+        onFailure(failReason);
     }
 
     @Override
@@ -155,16 +169,26 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
         } else if (object instanceof CurrentUserBean) {
             mHelper.setCurrentUserBean((CurrentUserBean) object);
         } else if (object instanceof List) {
-            List<ActivityPoliceBean> list = (List<ActivityPoliceBean>) object;
-            if (!list.isEmpty()) {
-                mActivityPoliceLayout.setVisibility(View.VISIBLE);
-                mHelper.setActivityPoliceBean(list);
-            }
+            mHelper.setActivityPoliceBean( (List<ActivityPoliceBean>) object);
         } else if (object instanceof String) { //创建或者修改客户成功
-            showShortToast((String) object);
-            setResult(RESULT_OK);
-            finish();
+            mHelper.onSaveResult((String) object);
         }
+    }
+
+    @Override
+    public void onActivationFailure(String failReason) {
+        onFailure(failReason);
+    }
+
+    @Override
+    public void onActivationSuccess(String message, String personalId, String houseId) {
+        dismissLoading();
+        showShortToast(message);
+        Intent intent = new Intent();
+        intent.putExtra(CustomerValue.PERSONAL_ID, personalId);
+        intent.putExtra(CustomerValue.HOUSE_ID, houseId);
+        setResult(CustomerValue.RESULT_CODE_ACTIVATION, intent);
+        finish();
     }
 
     @Override

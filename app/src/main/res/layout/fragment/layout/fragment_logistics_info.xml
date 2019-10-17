@@ -5,7 +5,7 @@
     android:background="@color/bg"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <include
         layout="@layout/include_empty_page"
@@ -33,12 +33,11 @@
         <TextView
             android:id="@+id/tv_logistics_line"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="29dp"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_17"
             android:layout_weight="1"
-            android:text="TextView"
             android:textColor="@color/textColor8"
             android:textSize="@dimen/textSize_16" />
 
@@ -65,17 +64,18 @@
         <TextView
             android:id="@+id/tv_logistics_station"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="29dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_17"
             android:layout_weight="1"
-            android:text="TextView"
             android:textColor="@color/textColor8"
             android:textSize="@dimen/textSize_16" />
 
         <View
             style="@style/divider_horizontal"
+            android:layout_marginStart="@dimen/dp_12"
             android:layout_marginLeft="@dimen/dp_12" />
     </LinearLayout>
 
@@ -88,6 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
             android:layout_marginLeft="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_16"
             android:text="物流公司"
@@ -97,17 +98,18 @@
         <TextView
             android:id="@+id/tv_logistics_frim"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="29dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_17"
             android:layout_weight="1"
-            android:text="TextView"
             android:textColor="@color/textColor8"
             android:textSize="@dimen/textSize_16" />
 
         <View
             style="@style/divider_horizontal"
+            android:layout_marginStart="@dimen/dp_12"
             android:layout_marginLeft="@dimen/dp_12" />
     </LinearLayout>
 
@@ -129,12 +131,12 @@
         <TextView
             android:id="@+id/tv_logistics_address"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="29dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginBottom="@dimen/dp_17"
             android:layout_weight="1"
-            android:text="TextView"
             android:textColor="@color/textColor8"
             android:textSize="@dimen/textSize_16" />
 

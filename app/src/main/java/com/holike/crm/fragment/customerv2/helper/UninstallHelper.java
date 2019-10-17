@@ -20,6 +20,7 @@ import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.CashierInputFilter;
 import com.holike.crm.base.SimpleTextWatcher;
 import com.holike.crm.bean.DealerInfoBean;
+import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.internal.Installer;
 import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.helper.PickerHelper;
@@ -97,7 +98,7 @@ public class UninstallHelper {
 
     /*选择预约安装日期*/
     private void onSelectDate() {
-        PickerHelper.showTimePicker(mContext, (date, v) -> {
+        PickerHelper.showTimePicker(mContext, date -> {
             mInstallDate = TimeUtil.timeMillsFormat(date, "yyyy-MM-dd");
             mSelectDateTextView.setText(TimeUtil.timeMillsFormat(date));
         });
@@ -105,7 +106,7 @@ public class UninstallHelper {
 
     /*选择预约时间*/
     private void onSelectTime() {
-        PickerHelper.showTimeHMPicker(mContext, (date, v) -> {
+        PickerHelper.showTimeHMPicker(mContext, date -> {
             mInstallTime = TimeUtil.timeMillsFormat(date, "HH:mm:ss");
             mSelectTimeTextView.setText(TimeUtil.timeMillsFormat(date, "HH:mm"));
         });
@@ -188,7 +189,7 @@ public class UninstallHelper {
             } else {
                 holder.setVisibility(R.id.iv_add, View.INVISIBLE);
             }
-            if (position == 0 && getItemCount() == 1) {
+            if (getItemCount() == 1 || installer.isFeedback()) { //仅有一条数据或者该安装师傅已经有填写记录，不能被移除
                 holder.setVisibility(R.id.iv_remove, View.INVISIBLE);
             } else {
                 holder.setVisibility(R.id.iv_remove, View.VISIBLE);
@@ -215,13 +216,13 @@ public class UninstallHelper {
     }
 
     private void selectInstaller() {
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (DealerInfoBean.UserBean bean : mInstallUsers) {
-            optionItems.add(bean.userName);
+            optionItems.add(new DictionaryBean(bean.userId, bean.userName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            String id = mInstallUsers.get(options1).userId;
-            String name = mInstallUsers.get(options1).userName;
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
+            String id = bean.id;
+            String name = bean.name;
             Installer installer = new Installer(id, name);
             if (mList.contains(installer) && mList.indexOf(installer) != mCurrentClickIndex) {  //选择安装师傅重复提示
                 mCallback.onRequired(mContext.getString(R.string.followup_installation_master_select_error));

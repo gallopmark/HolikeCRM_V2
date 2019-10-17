@@ -1,15 +1,13 @@
 package com.holike.crm.fragment.customerv2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.holike.crm.R;
-import com.holike.crm.base.BaseActivity;
 import com.holike.crm.bean.CurrentUserBean;
-import com.holike.crm.bean.DealerInfoBean;
+import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.fragment.customerv2.helper.MeasureResultHelper;
 import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
@@ -24,7 +22,7 @@ import butterknife.BindView;
  * Copyright holike possess 2019.
  * 量尺结果
  */
-public class MeasureResultFragment extends GeneralCustomerFragment implements MeasureResultHelper.MeasureResultCallback {
+public class MeasureResultFragment extends GeneralCustomerFragment implements MeasureResultHelper.MeasureResultCallback, GeneralCustomerPresenter.OnQueryRoleUserCallback {
     @BindView(R.id.ll_content)
     LinearLayout mContentLayout;
     @BindView(R.id.tvSave)
@@ -60,18 +58,24 @@ public class MeasureResultFragment extends GeneralCustomerFragment implements Me
     }
 
     @Override
-    public void onQueryAllDesigner() {
-        showLoading();
-        mPresenter.getDealerDesigner();
-    }
-
-    @Override
     public void onRequired(String text) {
         showShortToast(text);
     }
 
+    @Override
+    public void onQueryUserInfo() {
+        showLoading();
+        mPresenter.getUserInfo();
+    }
+
+    @Override
+    public void onQueryMeasurer(String shopId) {
+        showLoading();
+        mPresenter.getMeasurePerson(shopId, this);
+    }
+
     /**
-     * @param images        量尺图集合
+     * @param images 量尺图集合
      */
     @Override
     public void onSaved(Map<String, Object> params, List<String> images) {
@@ -85,7 +89,12 @@ public class MeasureResultFragment extends GeneralCustomerFragment implements Me
         mHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    public void onSuccess(List<ShopRoleUserBean.UserBean> list) {
+        dismissLoading();
+        mHelper.onSelectMeasureUser(list);
+    }
+
     @Override
     public void onSuccess(Object object) {
         super.onSuccess(object);
@@ -94,14 +103,8 @@ public class MeasureResultFragment extends GeneralCustomerFragment implements Me
             onShowContentView();
         } else if (object instanceof CurrentUserBean) {
             mHelper.setCurrentUserBean((CurrentUserBean) object);
-        } else if (object instanceof List) {
-            List<DealerInfoBean> list = (List<DealerInfoBean>) object;
-            mHelper.setDealerInfo(list);
         } else if (object instanceof String) {
-            showShortToast((String) object);
-            BaseActivity<?, ?> activity = (BaseActivity<?, ?>) mContext;
-            activity.setResult(Activity.RESULT_OK);
-            activity.finish();
+            setResultOk(object);
         }
     }
 }

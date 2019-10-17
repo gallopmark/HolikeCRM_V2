@@ -1,5 +1,7 @@
 package com.holike.crm.activity.homepage;
 
+import android.os.Bundle;
+
 import com.holike.crm.R;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.base.MyFragmentActivity;
@@ -22,8 +24,8 @@ public class CollectDepositActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         startFragment(new CollectDepositFragment());
     }
 }

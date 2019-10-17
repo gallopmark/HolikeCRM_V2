@@ -3,6 +3,7 @@ package com.holike.crm.presenter.fragment;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.NewRetailBean;
 import com.holike.crm.model.fragment.NewRetailModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.NewRetailView;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class NewRetailPresenter extends BasePresenter<NewRetailView, NewRetailMo
         } else {
             for (int i = 0, size = selectDataBeans.size(); i < size; i++) {
                 NewRetailBean.SelectDataBean bean = selectDataBeans.get(i);
-                if (bean != null && Integer.parseInt(time) == bean.getTime()) {
+                if (bean != null && ParseUtils.parseInt(time) == bean.getTime()) {
                     return i;
                 }
             }

@@ -95,7 +95,7 @@ class EmployeeDetailHelper implements EmployeeBasicDetailsFragment.OnViewClickLi
 
     @Override
     public void onResetPassword() {
-        mActivity.startActivity(EmployeePasswordActivity.class, mActivity.getIntent().getExtras());
+        mActivity.startActivity(EmployeeResetPwActivity.class, mActivity.getIntent().getExtras());
     }
 
     /*关联门店*/

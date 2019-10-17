@@ -7,15 +7,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter;
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
-import com.holike.crm.util.DensityUtil;
 
 import java.util.List;
 
@@ -30,19 +27,28 @@ public class StringItemPopupWindow extends CommonPopupWindow {
     private StringItemAdapter mAdapter;
     private OnMenuItemClickListener mListener;
 
+    public StringItemPopupWindow(Context context, @NonNull List<String> item) {
+        this(context, item, -1);
+    }
+
     public StringItemPopupWindow(Context context, @NonNull List<String> items, int selectPosition) {
+        this(context, items, selectPosition, 0);
+    }
+
+    public StringItemPopupWindow(Context context, @NonNull List<String> items, int selectPosition, int bottomMargin) {
         super(context);
         this.mStringItems = items;
         this.mSelectPosition = selectPosition;
+        setBottomMargin(bottomMargin);
         initView();
     }
 
     private void initView() {
         RecyclerView recyclerView = mContentView.findViewById(R.id.mRecyclerView);
-        if (mStringItems.size() > 6) {
+        if (mStringItems.size() > 5) {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) recyclerView.getLayoutParams();
             Resources resources = mContext.getResources();
-            params.height = (int) ((resources.getDimensionPixelSize(R.dimen.dp_40) + resources.getDimensionPixelSize(R.dimen.dp_0_5)) * 6.5f);
+            params.height = ((resources.getDimensionPixelSize(R.dimen.dp_40) + resources.getDimensionPixelSize(R.dimen.dp_0_5)) * 5);
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(RecyclerView.VERTICAL);

@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/include_fragment_title_bar_transparent" />
+        <include layout="@layout/include_titlebar_transparent" />
 
         <FrameLayout
             android:layout_width="match_parent"

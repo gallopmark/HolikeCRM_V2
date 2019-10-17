@@ -1,29 +1,18 @@
 package com.holike.crm.fragment.customerv2;
 
-import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.holike.crm.R;
-import com.holike.crm.base.BasePresenter;
-import com.holike.crm.base.MyFragment;
+import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.fragment.customerv2.helper.InvalidReturnHelper;
 import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
-import com.holike.crm.view.fragment.GeneralCustomerView;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by gallop on 2019/7/22.
  * Copyright holike possess 2019.
  * 无效退回
  */
-public class InvalidReturnFragment extends MyFragment<GeneralCustomerPresenter, GeneralCustomerView> {
-    @BindView(R.id.rv_reason)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.tvSave)
-    TextView mSaveTextView;
+public class InvalidReturnFragment extends GeneralCustomerFragment
+        implements InvalidReturnHelper.InvalidReturnCallback {
 
     private InvalidReturnHelper mHelper;
 
@@ -39,11 +28,28 @@ public class InvalidReturnFragment extends MyFragment<GeneralCustomerPresenter, 
 
     @Override
     protected void init() {
-
+        mHelper = new InvalidReturnHelper(this, this);
     }
 
-    @OnClick(R.id.tvSave)
-    public void onViewClicked() {
+    @Override
+    public void onQuerySystemCode() {
+        showLoading();
+        mPresenter.getSystemCode();
+    }
 
+    @Override
+    public void onSave(String body) {
+        showLoading();
+        mPresenter.invalidReturn(body);
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+        super.onSuccess(object);
+        if (object instanceof SysCodeItemBean) {
+            mHelper.setSystemCode((SysCodeItemBean) object);
+        } else {
+            setResultOk(object);
+        }
     }
 }

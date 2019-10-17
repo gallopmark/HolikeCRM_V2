@@ -1,17 +1,11 @@
 package com.holike.crm.dialog;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,26 +15,17 @@ import com.holike.crm.R;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.ShopGroupBean;
-import com.holike.crm.customView.AppToastCompat;
-import com.holike.crm.http.CustomerUrlPath;
-import com.holike.crm.http.MyHttpClient;
-import com.holike.crm.http.ParamHelper;
-import com.holike.crm.http.RequestCallBack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by gallop on 2019/8/26.
  * Copyright holike possess 2019.
  * 领取客户
  */
-public class ReceivingCustomerDialog extends CommonDialog {
+public class ReceivingCustomerDialog extends ICustomerToolDialog {
 
     private String mShopId, mGroupId;
     private TextView mShopTextView;
@@ -48,20 +33,10 @@ public class ReceivingCustomerDialog extends CommonDialog {
     private LinearLayout mGroupLayout;
     private TextView mGroupTextView;
     private TextView mConfirmTextView;
-    private CompositeDisposable mDisposables;
-    private List<ShopGroupBean> mCurrentGroupList; //当前门店下的组织
-
-    private OnSelectedListener mSelectedListener;
 
     public ReceivingCustomerDialog(Context context) {
         super(context);
-        mDisposables = new CompositeDisposable();
-        setCanceledOnTouchOutside(true);
         setup();
-    }
-
-    public void setOnSelectedListener(OnSelectedListener listener) {
-        mSelectedListener = listener;
     }
 
     private void setup() {
@@ -94,30 +69,27 @@ public class ReceivingCustomerDialog extends CommonDialog {
         });
     }
 
-    private void getUserInfo() {
-        mDisposables.add(MyHttpClient.getByTimeout(CustomerUrlPath.URL_GET_USER_INFO, 60, new RequestCallBack<CurrentUserBean>() {
-            @Override
-            public void onStart(Disposable d) {
-                mShopTextView.setVisibility(View.GONE);
-                mShopProgressBar.setVisibility(View.VISIBLE);
-            }
+    @Override
+    void onQueryStart(int type) {
+        if (type == 1) {
+            mShopTextView.setVisibility(View.GONE);
+            mShopProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mGroupLayout.setVisibility(View.GONE);
+        }
+    }
 
-            @Override
-            public void onFailed(String failReason) {
-                showToast(failReason);
-            }
+    @Override
+    void onQueryUserInfoSuccess(CurrentUserBean userBean) {
+        onSelectShop(userBean);
+    }
 
-            @Override
-            public void onSuccess(CurrentUserBean bean) {
-                onSelectShop(bean);
-            }
-
-            @Override
-            public void onFinished() {
-                mShopTextView.setVisibility(View.VISIBLE);
-                mShopProgressBar.setVisibility(View.GONE);
-            }
-        }));
+    @Override
+    void onQueryCompleted(int type) {
+        if (type == 1) {
+            mShopTextView.setVisibility(View.VISIBLE);
+            mShopProgressBar.setVisibility(View.GONE);
+        }
     }
 
     private void onSelectShop(CurrentUserBean userBean) {
@@ -126,9 +98,8 @@ public class ReceivingCustomerDialog extends CommonDialog {
         rvShop.setLayoutManager(new LinearLayoutManager(getContext()));
         List<CurrentUserBean.ShopInfo> list = userBean.getShopInfo();
         LinearLayout.LayoutParams params;
-        if (list.size() > 6) {  //最多显示6条
-            Resources resources = mContext.getResources();
-            params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) ((resources.getDimensionPixelSize(R.dimen.dp_40) + resources.getDimensionPixelSize(R.dimen.dp_0_5)) * 6.5f));
+        if (list.size() > SHOW_ENTRY) {  //最多显示6条
+            params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, MAX_HEIGHT);
         } else {
             params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
@@ -148,7 +119,7 @@ public class ReceivingCustomerDialog extends CommonDialog {
                     mShopTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.textColor4));
                     rvShop.setVisibility(View.GONE);
                     resetLayout();
-                    getShopGroup();
+                    getShopGroup(mShopId);
                 });
             }
         });
@@ -167,32 +138,14 @@ public class ReceivingCustomerDialog extends CommonDialog {
         mConfirmTextView.setEnabled(false);
     }
 
-    /*获取门店分组信息*/
-    private void getShopGroup() {
-        Map<String, String> params = new HashMap<>();
-        params.put("shopId", ParamHelper.noNullWrap(mShopId));
-        mDisposables.add(MyHttpClient.get(CustomerUrlPath.URL_GET_SHOP_GROUP, params, new RequestCallBack<List<ShopGroupBean>>() {
-
-            @Override
-            public void onStart(Disposable d) {
-                mGroupLayout.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onFailed(String failReason) {
-                showToast(failReason);
-            }
-
-            @Override
-            public void onSuccess(List<ShopGroupBean> result) {
-                if (result == null || result.isEmpty()) { //如果没有门店组织
-                    onSelected();
-                } else {
-                    mCurrentGroupList = new ArrayList<>(result);
-                    mGroupLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        }));
+    @Override
+    void onQueryShopGroupSuccess(List<ShopGroupBean> list) {
+        if (list == null || list.isEmpty()) { //如果没有门店组织
+            onSelected();
+        } else {
+            mCurrentGroupList = new ArrayList<>(list);
+            mGroupLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     /*选择组织*/
@@ -202,9 +155,8 @@ public class ReceivingCustomerDialog extends CommonDialog {
         rvGroup.setVisibility(View.VISIBLE);
         rvGroup.setLayoutManager(new LinearLayoutManager(mContext));
         LinearLayout.LayoutParams params;
-        if (mCurrentGroupList.size() > 6) {  //最多显示6条
-            Resources resources = mContext.getResources();
-            params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) ((resources.getDimensionPixelSize(R.dimen.dp_40) + resources.getDimensionPixelSize(R.dimen.dp_0_5)) * 6.5f));
+        if (mCurrentGroupList.size() > SHOW_ENTRY) {  //最多显示5条
+            params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, MAX_HEIGHT);
         } else {
             params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
@@ -236,40 +188,5 @@ public class ReceivingCustomerDialog extends CommonDialog {
     @Override
     protected int bindContentView() {
         return R.layout.dialog_receiving_customer;
-    }
-    @Nullable
-    @Override
-    public ViewGroup.MarginLayoutParams getLayoutParams() {
-        return new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-    }
-
-    @Override
-    public int getWindowAnimations() {
-        return R.style.Dialog_Anim;
-    }
-
-    @Override
-    protected boolean fullWidth() {
-        return true;
-    }
-
-    @Override
-    public int getGravity() {
-        return Gravity.BOTTOM;
-    }
-
-
-    private void showToast(String text) {
-        AppToastCompat.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        mDisposables.dispose();
-        super.onDetachedFromWindow();
-    }
-
-    public interface OnSelectedListener {
-        void onSelected(String shopId, String groupId);
     }
 }

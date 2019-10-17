@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import butterknife.BindView;
 /**
  * 客户状态列表
  */
+@Deprecated
 public class CustomerStateListActivity extends MyFragmentActivity<CustomerStateListPresenter, CustomerStateListView> implements CustomerStateListView {
 
     @BindView(R.id.ll_title)
@@ -63,8 +65,8 @@ public class CustomerStateListActivity extends MyFragmentActivity<CustomerStateL
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setLeft(getString(R.string.homepage));
 //        isBoss = getIntent().getBooleanExtra(Constants.IS_BOSS, false);
         stateName = getIntent().getStringExtra("stateName");
@@ -146,7 +148,7 @@ public class CustomerStateListActivity extends MyFragmentActivity<CustomerStateL
     }
 
     @Override
-    protected void clickRightMenu() {
+    protected void clickRightMenu(String menuText, View actionView) {
         startActivity(MessageV2Activity.class);
     }
 

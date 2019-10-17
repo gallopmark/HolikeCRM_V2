@@ -1,6 +1,7 @@
 package com.holike.crm.activity.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import com.holike.crm.base.BaseActivity;
 import com.holike.crm.bean.LoginBean;
 import com.holike.crm.helper.BindViewHelper;
 import com.holike.crm.presenter.activity.LoginPresenter;
+import com.holike.crm.util.AppUtils;
 import com.holike.crm.util.Constants;
 import com.holike.crm.view.activity.LoginView;
 
@@ -38,6 +40,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginView> imple
     ImageView ivShowpassword;
     @BindView(R.id.btn_login_login)
     TextView btnLogin;
+    @BindView(R.id.tv_version)
+    TextView mVersionTextView;
 
     private boolean isShowPassword = false;
 
@@ -52,7 +56,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginView> imple
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
+        String currentVersion = getString(R.string.tips_current_version) + AppUtils.getVersionName(true);
+        mVersionTextView.setText(currentVersion);
         BindViewHelper.bindBgView(btnLogin, etAccount, etPassword);
         etAccount.addTextChangedListener(new TextWatcher() {
             @Override

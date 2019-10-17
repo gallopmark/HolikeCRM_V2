@@ -1,15 +1,17 @@
 package com.holike.crm.fragment.customerv2.helper;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.holike.crm.R;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CurrentUserBean;
+import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.ShopGroupBean;
 import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.helper.PickerHelper;
@@ -44,6 +46,8 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
     private List<ShopGroupBean> mCurrentShopGroupList; //门店下的组织
     private List<ShopRoleUserBean.UserBean> mCurrentGroupGuideList;  //组织下的导购人员
     private List<ShopRoleUserBean.UserBean> mCurrentSalesmanList; //当前选择业务门店下的业务人员集合
+    private int mSelectType = 1;
+    private int mRequestType = 1;
 
     public AssignGuideHelper(BaseFragment<?, ?> fragment, AssignGuideCallback callback) {
         super(fragment);
@@ -70,46 +74,11 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
         contentView.findViewById(R.id.tvSave).setOnClickListener(this);
     }
 
-//    private void obtainBundleValue(Bundle bundle) {
-//        if (bundle != null) {
-//            mShopId = bundle.getString("shopId");
-////            if (!TextUtils.isEmpty(mShopId)) {
-////                mCallback.onQueryShopGroup(mShopId);
-////            }
-//            mGuideShopTextView.setText(bundle.getString("shopName"));
-//            mGroupId = bundle.getString("groupId");
-//            String groupName = bundle.getString("groupName");
-//            if (!TextUtils.isEmpty(mGroupId) && !TextUtils.isEmpty(groupName)) {
-//                mGroupTextView.setText(groupName);
-//                mGroupLayout.setVisibility(View.VISIBLE);
-//            }
-//            mGuideId = bundle.getString("guideId");
-//            String guideName = bundle.getString("guideName");
-//            if (!TextUtils.isEmpty(mGuideId) && !TextUtils.isEmpty(guideName)) {
-//                mGuideUserTextView.setText(guideName);
-//                mGuideLayout.setVisibility(View.VISIBLE);
-//            }
-//            mPromoterShopId = bundle.getString("promoterShopId");
-////            if (!TextUtils.isEmpty(mPromoterShopId)) {
-////                mCallback.onQuerySalesman(mPromoterShopId);
-////            }
-//            String promoterShopName = bundle.getString("promoterShopName");
-//            if (!TextUtils.isEmpty(mPromoterShopId) && !TextUtils.isEmpty(promoterShopName)) {
-//                mPromoterShopTextView.setText(promoterShopName);
-//            }
-//            mPromoterId = bundle.getString("promoterId");
-//            String promoterName = bundle.getString("promoterName");
-//            if (!TextUtils.isEmpty(mPromoterId) && !TextUtils.isEmpty(promoterName)) {
-//                mPromoterUserTextView.setText(promoterName);
-//                mSalesmanLayout.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_store:
+                mSelectType = 1;
                 if (mCurrentUser == null) {
                     mCallback.onQueryUserInfo();
                 } else {
@@ -123,6 +92,7 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
                 onSelectGroupGuide();
                 break;
             case R.id.tv_store2:
+                mSelectType = 2;
                 if (mCurrentUser == null) {
                     mCallback.onQueryUserInfo();
                 } else {
@@ -140,23 +110,27 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
 
     public void setCurrentUserInfo(CurrentUserBean bean) {
         this.mCurrentUser = bean;
-        onSelectGuideShop();
+        if (mSelectType == 1) {
+            onSelectGuideShop();
+        } else {
+            onSelectSalesmanShop();
+        }
     }
 
     /*选择导购门店*/
     private void onSelectGuideShop() {
         List<CurrentUserBean.ShopInfo> shopInfoList = mCurrentUser.getShopInfo();
         if (shopInfoList.isEmpty()) return;
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (CurrentUserBean.ShopInfo shopInfo : shopInfoList) {
-            optionItems.add(shopInfo.shopName);
+            optionItems.add(new DictionaryBean(shopInfo.shopId, shopInfo.shopName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mShopId = shopInfoList.get(options1).shopId;
-            mGuideShopTextView.setText(shopInfoList.get(options1).shopName);
+        PickerHelper.showOptionsPicker(mContext, optionItems, ((position, bean) -> {
+            mShopId = bean.id;
+            mGuideShopTextView.setText(bean.name);
             resetValues();
             mCallback.onQueryShopGroup(mShopId);
-        });
+        }));
     }
 
     /*切换门店时，重置数据*/
@@ -169,7 +143,7 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
     private void resetGroup() {
         mGroupId = null;
         mCurrentShopGroupList = null;
-        mGroupTextView.setText("");
+        mGroupTextView.setText(null);
         mGroupLayout.setVisibility(View.GONE);
     }
 
@@ -177,7 +151,8 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
     private void resetGuide() {
         mGuideId = null;
         mCurrentGroupGuideList = null;
-        mGuideUserTextView.setText("");
+        mGuideUserTextView.setText(null);
+        mGuideUserTextView.setHint(mContext.getString(R.string.tips_please_select));
         mGuideLayout.setVisibility(View.GONE);
     }
 
@@ -188,91 +163,106 @@ public class AssignGuideHelper extends GeneralHelper implements View.OnClickList
             mGroupLayout.setVisibility(View.VISIBLE);
             mGuideLayout.setVisibility(View.GONE);
         } else {  //没有组织信息，直接查找导购人员
+            mRequestType = 1;
             mCallback.onQueryShopGuide(mShopId);
         }
     }
 
     /*选择门店组织*/
     private void onSelectShopGroup() {
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (ShopGroupBean bean : mCurrentShopGroupList) {
-            optionItems.add(bean.groupName);
+            optionItems.add(new DictionaryBean(bean.id, bean.groupName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mGroupId = mCurrentShopGroupList.get(options1).id;
-            mGroupTextView.setText(mCurrentShopGroupList.get(options1).groupName);
+        PickerHelper.showOptionsPicker(mContext, optionItems, ((position, bean) -> {
+            mGroupId = bean.id;
+            mGroupTextView.setText(bean.name);
             resetGuide();
+            mRequestType = 2;
             mCallback.onQueryGroupGuide(mGroupId);
-        });
+        }));
     }
 
     /*查询门店下或门店分组下的导购人员数据成功*/
     public void setGuideList(List<ShopRoleUserBean.UserBean> list) {
+        mGuideLayout.setVisibility(View.VISIBLE);
         if (list != null && !list.isEmpty()) {
             mCurrentGroupGuideList = new ArrayList<>(list);
-            mGuideLayout.setVisibility(View.VISIBLE);
+            mGuideUserTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_down), null);
+            mGuideUserTextView.setEnabled(true);
         } else {
-            mGuideLayout.setVisibility(View.GONE);
+            if (mRequestType == 1) {
+                mGuideUserTextView.setHint(mContext.getString(R.string.empty_shop_guide));
+            } else {
+                mGuideUserTextView.setHint(mContext.getString(R.string.empty_group_guide));
+            }
+            mGuideUserTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            mGuideUserTextView.setEnabled(false);
         }
     }
 
     /*选择导购人员*/
     private void onSelectGroupGuide() {
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (ShopRoleUserBean.UserBean bean : mCurrentGroupGuideList) {
-            optionItems.add(bean.userName);
+            optionItems.add(new DictionaryBean(bean.userId, bean.userName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mGuideId = mCurrentGroupGuideList.get(options1).userId;
-            mGuideUserTextView.setText(mCurrentGroupGuideList.get(options1).userName);
-        });
+        PickerHelper.showOptionsPicker(mContext, optionItems, ((position, bean) -> {
+            mGuideId = bean.id;
+            mGuideUserTextView.setText(bean.name);
+        }));
     }
 
     /*选择业务员门店*/
     private void onSelectSalesmanShop() {
         List<CurrentUserBean.ShopInfo> shopInfoList = mCurrentUser.getShopInfo();
         if (shopInfoList.isEmpty()) return;
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (CurrentUserBean.ShopInfo shopInfo : shopInfoList) {
-            optionItems.add(shopInfo.shopName);
+            optionItems.add(new DictionaryBean(shopInfo.shopId, shopInfo.shopName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mPromoterShopId = shopInfoList.get(options1).shopId;
-            mPromoterShopTextView.setText(shopInfoList.get(options1).shopName);
+        PickerHelper.showOptionsPicker(mContext, optionItems, ((position, bean) -> {
+            mPromoterShopId = bean.id;
+            mPromoterShopTextView.setText(bean.name);
             resetSalesman();
             mCallback.onQuerySalesman(mPromoterShopId);
-        });
+        }));
     }
 
     private void resetSalesman() {
         mPromoterId = null;
         mCurrentSalesmanList = null;
-        mPromoterUserTextView.setText("");
+        mPromoterUserTextView.setText(null);
+        mPromoterUserTextView.setHint(mContext.getString(R.string.tips_please_select));
         mSalesmanLayout.setVisibility(View.GONE);
     }
 
     /*获取选择的业务门店下的业务人员成功*/
     public void setSalesmanList(ShopRoleUserBean bean) {
         List<ShopRoleUserBean.InnerBean> list = bean.getPromoter();
+        mSalesmanLayout.setVisibility(View.VISIBLE);
         if (!list.isEmpty() && !list.get(0).getUserList().isEmpty()) {  //取第一条数据
             mCurrentSalesmanList = new ArrayList<>(list.get(0).getUserList());
-            mSalesmanLayout.setVisibility(View.VISIBLE);
+            mPromoterUserTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_down), null);
+            mPromoterUserTextView.setEnabled(true);
         } else {
-            mSalesmanLayout.setVisibility(View.GONE);
+            mPromoterUserTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            mPromoterUserTextView.setHint(mContext.getString(R.string.empty_shop_salesman));
+            mPromoterUserTextView.setEnabled(false);
         }
     }
 
     /*选择业务人员*/
     private void onSelectSalesman() {
         if (mCurrentSalesmanList == null || mCurrentSalesmanList.isEmpty()) return;
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (ShopRoleUserBean.UserBean bean : mCurrentSalesmanList) {
-            optionItems.add(bean.userName);
+            optionItems.add(new DictionaryBean(bean.userId, bean.userName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mPromoterId = mCurrentSalesmanList.get(options1).userId;
-            mPromoterUserTextView.setText(mCurrentSalesmanList.get(options1).userName);
-        });
+        PickerHelper.showOptionsPicker(mContext, optionItems, ((position, bean) -> {
+            mPromoterId = bean.id;
+            mPromoterUserTextView.setText(bean.name);
+        }));
     }
 
     private void onSave() {

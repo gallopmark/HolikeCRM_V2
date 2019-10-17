@@ -12,6 +12,7 @@ import com.holike.crm.bean.EmployeeEditResultBean;
 import com.holike.crm.bean.HomepageBean;
 import com.holike.crm.bean.RoleDataBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.bean.UpdateBean;
 import com.holike.crm.http.MyJsonParser;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class IntentValue {
 
     private static final String SYSTEM_CODE = "sysCode";
     private static final String CURRENT_USER_INFO = "current_user";
+    private static final String UPDATE_BEAN = "updateBean";
     private static final String HOME_BEAN = "homeBean";
 
     private static final String EMPLOYEE_EDIT_RESULT = "employee_edit_result";
@@ -60,6 +62,20 @@ public class IntentValue {
         if (object == null) return null;
         if (object instanceof HomepageBean) {
             return (HomepageBean) object;
+        }
+        return null;
+    }
+
+    public void setUpdateBean(UpdateBean bean) {
+        mValueMap.put(UPDATE_BEAN, bean);
+    }
+
+    @Nullable
+    public UpdateBean getUpdateBean() {
+        Object object = mValueMap.get(UPDATE_BEAN);
+        if (object == null) return null;
+        if (object instanceof UpdateBean) {
+            return (UpdateBean) object;
         }
         return null;
     }
@@ -198,5 +214,9 @@ public class IntentValue {
 
     public void remove(String key) {
         mValueMap.remove(key);
+    }
+
+    public Object removeBy(String key){
+        return mValueMap.remove(key);
     }
 }

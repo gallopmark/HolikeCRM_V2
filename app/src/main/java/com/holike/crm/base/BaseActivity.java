@@ -6,11 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import androidx.annotation.DimenRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,12 +28,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +46,7 @@ import com.holike.crm.customView.CompatToast;
 import com.holike.crm.dialog.LoadingDialog;
 import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.helper.BackHandlerHelper;
+import com.holike.crm.service.VersionUpdateService;
 import com.holike.crm.util.CheckUtils;
 import com.holike.crm.util.CopyUtil;
 import com.holike.crm.util.LogCat;
@@ -53,6 +59,7 @@ import java.util.Map;
 import java.util.Random;
 
 import butterknife.ButterKnife;
+import galloped.xcode.widget.TitleBar;
 
 public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> extends AppCompatActivity {
     public final int REQUEST_CODE = new Random().nextInt(65536);
@@ -66,10 +73,16 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     protected FragmentManager fragmentManager;
     protected List<Fragment> fragmentList = new ArrayList<>();
 
+    protected int mActivityCloseEnterAnimation = -1;
+
+    protected int mActivityCloseExitAnimation = -1;
+
     @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupTheme();
+        setupWindow();
         setOrientation();
         setContentView(setContentViewId());
         ButterKnife.bind(this);
@@ -93,8 +106,26 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
             }
             SystemTintHelper.setStatusBarLightMode(this);
         }
-        setupToolbar();
-        init();
+        setupTitleBar();
+        init(savedInstanceState);
+    }
+
+    protected void setupTheme() {
+
+    }
+
+    /*activity动画兼容性,style 退出动画 解决退出动画无效问题*/
+    private void setupWindow() {
+        Resources.Theme theme = getTheme();
+        if (theme != null) {
+            TypedArray activityStyle = theme.obtainStyledAttributes(new int[]{android.R.attr.windowAnimationStyle});
+            int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);
+            activityStyle.recycle();
+            activityStyle = theme.obtainStyledAttributes(windowAnimationStyleResId, new int[]{android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+            mActivityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+            mActivityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+            activityStyle.recycle();
+        }
     }
 
     protected abstract P attachPresenter();
@@ -105,21 +136,21 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     protected abstract int setContentViewId();
 
     @Nullable
-    protected Toolbar getToolbar() {
+    protected TitleBar getTitleBar() {
         return findViewById(R.id.app_toolbar);
     }
 
-    private void setupToolbar() {
-        Toolbar toolbar = getToolbar();
-        if (toolbar != null) {
-            toolbar.setNavigationOnClickListener(view -> onBackPressed());
+    private void setupTitleBar() {
+        TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            titleBar.setNavigationOnClickListener(view -> onBackPressed());
         }
     }
 
     /***
      * 初始化
      */
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
     }
 
     /**
@@ -133,77 +164,97 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         }
     }
 
-    protected void setRightMenu(@StringRes int id) {
-        setRightMenu(getString(id));
+    protected FrameLayout setRightMenu(@StringRes int id) {
+        return setRightMenu(getString(id));
     }
 
     /**
      * 设置右边菜单文字
      */
-    protected void setRightMenu(final String text) {
-        final Toolbar toolbar = getToolbar();
-        if (toolbar != null) {
-            View view = getMenuLayout(toolbar);
-            if (view != null) {
-                view.setVisibility(View.VISIBLE);
+    @Nullable
+    protected FrameLayout setRightMenu(final String text) {
+        final TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            titleBar.getMenu().clear();
+            if (TextUtils.isEmpty(text)) {
+                return null;
             }
-            TextView tvMenu = toolbar.findViewById(R.id.tv_menu);
-            if (tvMenu != null) {
-                tvMenu.setText(text);
-                tvMenu.setOnClickListener(v -> clickRightMenu());
+            ToolbarHelper.inflateMenu(titleBar, R.menu.menu_main);
+            final View actionView = titleBar.getMenu().findItem(R.id.menu_main).getActionView();
+            TextView tvMenu = actionView.findViewById(R.id.right_menu_view);
+            tvMenu.setText(text);
+            if (titleBar.getTag() != null) {
+                tvMenu.setTextColor(ContextCompat.getColor(this, R.color.color_while));
             }
+            actionView.setOnClickListener(view -> clickRightMenu(text, actionView));
+            return actionView.findViewById(R.id.right_menu_layout);
         }
+        return null;
     }
 
     protected void setOptionsMenu(@MenuRes int menuId) {
-        final Toolbar toolbar = getToolbar();
-        if (toolbar != null) {
-            View view = getMenuLayout(toolbar);
-            if (view != null) {
-                view.setVisibility(View.GONE);
-            }
-            ToolbarHelper.inflateMenu(toolbar, menuId);
-            toolbar.setOnMenuItemClickListener(item -> {
-                onOptionsMenuClick(toolbar, item);
+        final TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            titleBar.getMenu().clear();
+            ToolbarHelper.inflateMenu(titleBar, menuId);
+            titleBar.setOnMenuItemClickListener(item -> {
+                onOptionsMenuClick(titleBar, item);
                 return true;
             });
         }
     }
 
-    @Nullable
-    protected View getMenuLayout(Toolbar toolbar) {
-        return toolbar.findViewById(R.id.fl_menu_layout);
-    }
-
     protected void onOptionsMenuClick(Toolbar toolbar, MenuItem menuItem) {
-        clickRightMenu();
+
     }
 
     /**
      * 设置右边菜单文字
      */
     protected void setRightMsg(final boolean isNewMsg) {
-        final Toolbar toolbar = getToolbar();
-        if (toolbar != null) {
-            View view = getMenuLayout(toolbar);
-            if (view != null) {
-                view.setVisibility(View.VISIBLE);
+        final TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            FrameLayout menuLayout = setRightMenu(getString(R.string.message_title));
+            if (isNewMsg) {
+                setRightDot(menuLayout);
+            } else {
+                hideRightDot(menuLayout);
             }
-            ImageView ivNewMsg = toolbar.findViewById(R.id.iv_new_tips);
-            if (ivNewMsg != null) {
-                ivNewMsg.setVisibility(isNewMsg ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    /*显示消息红点*/
+    protected void setRightDot(@Nullable FrameLayout actionView) {
+        if (actionView != null) {
+            ImageView ivDot = actionView.findViewById(R.id.right_menu_dot);
+            if (ivDot == null) {
+                ivDot = new ImageView(this);
+                ivDot.setId(R.id.right_menu_dot);
+                int size = getResources().getDimensionPixelSize(R.dimen.dp_8);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
+                params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dp_6);
+                params.topMargin = size;
+                params.gravity = Gravity.END;
+                ivDot.setLayoutParams(params);
             }
-            TextView tvMenu = toolbar.findViewById(R.id.tv_menu);
-            String text = getString(R.string.message_title);
-            tvMenu.setText(text);
-            tvMenu.setOnClickListener(v -> clickRightMenu());
+            ivDot.setImageResource(R.drawable.ic_red_point);
+        }
+    }
+
+    /*移除消息红点*/
+    protected void hideRightDot(@Nullable FrameLayout menuLayout) {
+        if (menuLayout != null) {
+            View vDot = menuLayout.findViewById(R.id.right_menu_dot);
+            if (vDot != null) {
+                menuLayout.removeView(vDot);
+            }
         }
     }
 
     /**
      * 点击右边菜单
      */
-    protected void clickRightMenu() {
+    protected void clickRightMenu(String menuText, View actionView) {
     }
 
     /**
@@ -231,13 +282,9 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置标题
      */
     public void setTitle(CharSequence title) {
-        TextView tvTitle = findViewById(R.id.tv_title);
-        if (tvTitle != null) {
-            tvTitle.setText(title);
-        }
-        Toolbar toolbar = getToolbar();
-        if (toolbar != null) {
-            toolbar.setTitle(title);
+        TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            titleBar.setTitle(title);
         }
     }
 
@@ -252,9 +299,19 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置搜索栏
      */
     protected EditText setSearchBar(CharSequence hint) {
-        Toolbar toolbar = getToolbar();
-        if (toolbar == null) return null;
-        return ToolbarHelper.addSearchContainer(toolbar, hint, (searchView, actionId, event) -> doSearch());
+        TitleBar titleBar = getTitleBar();
+        if (titleBar == null) return null;
+        return ToolbarHelper.addSearchContainer(titleBar, hint, -1, (searchView, actionId, event) -> doSearch());
+    }
+
+    protected void setSearchViewWidth(@DimenRes int id) {
+        TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            View searchContainer = ToolbarHelper.getSearchContainer(titleBar);
+            if (searchContainer != null) {
+                ((TitleBar.LayoutParams) searchContainer.getLayoutParams()).width = getResources().getDimensionPixelSize(id);
+            }
+        }
     }
 
     /**
@@ -268,9 +325,9 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置标题背景
      */
     protected void setTitleBg(int resId) {
-        Toolbar toolbar = getToolbar();
-        if (toolbar != null) {
-            toolbar.setBackgroundResource(resId);
+        TitleBar titleBar = getTitleBar();
+        if (titleBar != null) {
+            titleBar.setBackgroundResource(resId);
         }
     }
 
@@ -332,6 +389,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     public void openActivity(@NonNull Intent intent, @Nullable Bundle options) {
+        if (CheckUtils.isFastDoubleClick()) return;
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         if (options != null) {
             intent.putExtras(options);
@@ -344,6 +402,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     public void startActivity(Class<? extends Activity> activity, @Nullable Bundle options) {
+        if (CheckUtils.isFastDoubleClick()) return;
         Intent intent = new Intent(this, activity);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         if (options != null) {
@@ -380,10 +439,18 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     public void startFragment(Fragment fragment, @Nullable Bundle options) {
-        startFragment(fragment, options, true);
+        startFragment(R.id.fl_fragment_main, fragment, options, true);
+    }
+
+    public void startFragment(@IdRes int containerViewId, Fragment fragment, @Nullable Bundle options) {
+        startFragment(containerViewId, fragment, options, true);
     }
 
     public void startFragment(Fragment fragment, @Nullable Bundle options, boolean needAnimation) {
+        startFragment(R.id.fl_fragment_main, fragment, options, needAnimation);
+    }
+
+    public void startFragment(@IdRes int containerViewId, Fragment fragment, @Nullable Bundle options, boolean needAnimation) {
         if (options != null) {
             fragment.setArguments(options);
         }
@@ -391,7 +458,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         if (needAnimation) {
             transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_right_out);
         }
-        transaction.add(R.id.fl_fragment_main, fragment, fragment.getTag()).commitAllowingStateLoss();
+        transaction.add(containerViewId, fragment, fragment.getTag()).commitAllowingStateLoss();
         fragmentList.add(fragment);
     }
 
@@ -415,7 +482,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
             }
             transaction.remove(fragmentList.get(position)).commitAllowingStateLoss();
             fragmentList.remove(position);
-            ((MyFragment) fragmentList.get(position - 1)).onFinishResult(requestCode, resultCode, result);
+            ((BaseFragment) fragmentList.get(position - 1)).onFinishResult(requestCode, resultCode, result);
         } else {
             finish();
         }
@@ -496,8 +563,13 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (REQUEST_CODE == requestCode) {
-            onActivityResult(resultCode, data);
+        if (requestCode == VersionUpdateService.REQUEST_CODE_APP_INSTALL) {
+            Intent intent = new Intent(VersionUpdateService.ACTION_INSTALL);
+            sendBroadcast(intent);
+        } else {
+            if (requestCode == REQUEST_CODE) {
+                onActivityResult(resultCode, data);
+            }
         }
     }
 
@@ -633,11 +705,11 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     @SuppressWarnings("unused")
-    protected void showShortToast(@StringRes int resId) {
+    public void showShortToast(@StringRes int resId) {
         showShortToast(resId, -1);
     }
 
-    protected void showShortToast(@StringRes int resId, int gravity) {
+    public void showShortToast(@StringRes int resId, int gravity) {
         showShortToast(getString(resId), gravity);
     }
 
@@ -719,8 +791,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     /*是否授予了权限*/
-    protected boolean isPermissionGranted(String permission) {
+    public boolean isPermissionGranted(String permission) {
         return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void requestPermission(@NonNull String permission, OnRequestPermissionsCallback callback) {
+        requestPermissions(new String[]{permission}, 10086, callback);
     }
 
     /**
@@ -730,8 +806,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * @param requestCode 请求码
      * @param callback    callback
      */
-    protected void requestPermission(@NonNull String permission, int requestCode, OnRequestPermissionsCallback callback) {
+    public void requestPermission(@NonNull String permission, int requestCode, OnRequestPermissionsCallback callback) {
         requestPermissions(new String[]{permission}, requestCode, callback);
+    }
+
+    public void requestPermissions(@NonNull final String[] permissions, OnRequestPermissionsCallback callback) {
+        requestPermissions(permissions, 10086, callback);
     }
 
     /**
@@ -741,7 +821,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * @param requestCode 请求码
      * @param callback    请求回调
      */
-    protected void requestPermissions(@NonNull final String[] permissions, final int requestCode, OnRequestPermissionsCallback callback) {
+    public void requestPermissions(@NonNull final String[] permissions, final int requestCode, OnRequestPermissionsCallback callback) {
         this.mPermissionsRequestCode = requestCode;
         this.mRequestPermissionsCallback = callback;
         ActivityCompat.requestPermissions(this, permissions, requestCode);
@@ -755,16 +835,24 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         }
     }
 
-    /**
+    @Override
+    public void finish() {
+        super.finish();
+        if (mActivityCloseEnterAnimation != -1 || mActivityCloseExitAnimation != -1) {
+            overridePendingTransition(mActivityCloseEnterAnimation, mActivityCloseExitAnimation);
+        }
+    }
+
+    /*
      * 做法是为了快速点击按钮，多次触发启动activity等问题
      */
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (CheckUtils.isFastDoubleClick()) {
-                return true;
-            }
-        }
-        return super.dispatchTouchEvent(ev);
-    }
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+//            if (CheckUtils.isFastDoubleClick()) {
+//                return true;
+//            }
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
 }

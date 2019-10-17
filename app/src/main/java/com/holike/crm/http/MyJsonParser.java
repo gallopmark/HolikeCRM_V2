@@ -237,10 +237,21 @@ public class MyJsonParser {
     public static <T> T fromData(String json, Class<T> clazz) {
         if (isEmpty(json) || !hasData(json)) return null;
         try {
-            return new Gson().fromJson(getData(json), getSuperclassTypeParameter(clazz));
+            return new Gson().fromJson(getData(json), clazz);
         } catch (Exception e) {
             LogCat.e(e);
             return null;
+        }
+    }
+
+    /*json字符串转成List集合*/
+    public static <T> List<T> fromDataToList(String json, Class<T> clazz) {
+        if (isEmpty(json) || !hasData(json)) return new ArrayList<>();
+        try {
+            Type type = new ParameterizedTypeImpl(clazz);
+            return new Gson().fromJson(getData(json), type);
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 

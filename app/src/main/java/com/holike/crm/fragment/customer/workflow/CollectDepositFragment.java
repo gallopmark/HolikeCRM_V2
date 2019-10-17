@@ -35,6 +35,7 @@ import butterknife.Unbinder;
  * Created by wqj on 2018/8/6.
  * 收取订金
  */
+@Deprecated
 public class CollectDepositFragment extends WorkflowFragment implements WorkflowView {
     private CollectDepositListBean collectDepositListBean;
     protected Unbinder unbinder;

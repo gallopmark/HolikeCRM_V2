@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
@@ -126,5 +127,9 @@ public class NotificationUtils {
 
     public void cancel(int id) {
         getManager().cancel(id);
+    }
+
+    public void cancelAll() {
+        getManager().cancelAll();
     }
 }

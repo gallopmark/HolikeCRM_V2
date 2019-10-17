@@ -34,6 +34,7 @@ import com.holike.crm.popupwindown.DistributionStorePopupWindow;
 import com.holike.crm.presenter.activity.CustomerManagePresenter;
 import com.holike.crm.presenter.fragment.HomePagePresenter;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.activity.CustomerManageView;
 import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -497,7 +498,7 @@ public class CustomerManageFragment extends MyFragment<CustomerManagePresenter, 
         showShortToast(R.string.delete_customer_success_tips);
         if (attBean != null) {
             try {
-                long totalCount = Long.parseLong(attBean.totalRows) - 1;
+                long totalCount = ParseUtils.parseLong(attBean.totalRows) - 1;
                 if (totalCount <= 0) totalCount = 0;
                 attBean.totalRows = String.valueOf(totalCount);
                 setTextCount(attBean.totalRows);

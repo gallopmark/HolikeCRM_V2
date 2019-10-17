@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_while"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -25,11 +26,11 @@
             app:tl_indicator_corner_radius="@dimen/dp_2"
             app:tl_indicator_height="@dimen/dp_4"
             app:tl_indicator_width="@dimen/dp_32"
-            app:tl_tab_width="@dimen/dp_80"
+            app:tl_tab_width="80dp"
             app:tl_textBold="BOTH"
             app:tl_textSelectColor="@color/textColor5"
-            app:tl_textUnselectColor="#cccccc"
-            app:tl_textSize="@dimen/textSize_16" />
+            app:tl_textSize="@dimen/textSize_16"
+            app:tl_textUnselectColor="#cccccc" />
     </FrameLayout>
 
     <View style="@style/divider_horizontal" />
@@ -54,12 +55,12 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_product_trading_date"
+            android:id="@+id/tv_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:singleLine="true"
             android:textColor="@color/textColor6"
             android:textSize="@dimen/textSize_14" />
@@ -84,9 +85,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="NestedWeights">
 
             <View style="@style/divider_vertical" />
 

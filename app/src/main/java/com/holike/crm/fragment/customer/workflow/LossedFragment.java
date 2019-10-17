@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 已流失
  */
-
+@Deprecated
 public class LossedFragment extends WorkflowFragment implements WorkflowView {
     private final int TYPE_RESON = 1;
     private final int TYPE_GO = 2;

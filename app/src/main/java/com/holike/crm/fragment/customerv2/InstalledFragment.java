@@ -9,6 +9,7 @@ import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.fragment.customerv2.helper.InstalledHelper;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -55,22 +56,23 @@ public class InstalledFragment extends GeneralCustomerFragment implements Instal
     }
 
     @Override
-    public void onSaved(String body) {
+    public void onSaved(Map<String, Object> params, List<String> imagePaths) {
         showLoading();
-        mPresenter.finishInstall(body);
+        mPresenter.finishInstall(mContext, params, imagePaths);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onSuccess(Object object) {
         super.onSuccess(object);
         if (object == null) return;
         if (object instanceof SysCodeItemBean) {
             mHelper.setSystemCode((SysCodeItemBean) object);
-        } else if (object instanceof List) {
-            List<DealerInfoBean.UserBean> list = (List<DealerInfoBean.UserBean>) object;
-            mHelper.setInstaller(list);
-        } else {
+        }
+//        else if (object instanceof List) {
+//            List<DealerInfoBean.UserBean> list = (List<DealerInfoBean.UserBean>) object;
+//            mHelper.setInstaller(list);
+//        }
+        else {
             setResultOk(object);
         }
     }

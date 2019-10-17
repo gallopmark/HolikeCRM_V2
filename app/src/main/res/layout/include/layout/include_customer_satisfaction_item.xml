@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/color_while">
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_division"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/division"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_service_satisfaction"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/customer_satisfaction_tab1"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_design_satisfaction"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/customer_satisfaction_tab2"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_delivery_satisfaction"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/customer_satisfaction_tab3"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_install_satisfaction"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:text="@string/customer_satisfaction_tab4"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_12"
+            android:textStyle="bold" />
+
+        <View style="@style/divider_vertical" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

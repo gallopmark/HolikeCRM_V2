@@ -47,16 +47,16 @@
             android:layout_height="match_parent"
             android:text="@string/number_of_reservation_scale" />
 
-        <View style="@style/divider_vertical" />
+       <!-- <View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_number_measure"
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:text="@string/number_of_measuring" />
+            android:text="@string/number_of_measuring" />-->
 
-        <View style="@style/divider_vertical" />
+       <!-- <View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_number_drawing"
@@ -65,7 +65,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text="@string/number_of_output_graphs" />
-
+-->
         <View style="@style/divider_vertical" />
 
         <TextView
@@ -84,25 +84,25 @@
             android:layout_height="match_parent"
             android:text="@string/number_of_signatures" />
 
-        <View style="@style/divider_vertical" />
+       <!-- <View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_order_number"
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:text="@string/number_of_place_orders" />
+            android:text="@string/number_of_place_orders" />-->
 
-        <View style="@style/divider_vertical" />
+       <!-- <View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_number_install"
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:text="@string/number_of_install" />
+            android:text="@string/number_of_install" />-->
 
-        <View style="@style/divider_vertical" />
+        <!--<View style="@style/divider_vertical" />
 
         <TextView
             android:id="@+id/tv_store_turnover_rate"
@@ -118,7 +118,7 @@
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:text="@string/scale_turnover_rate" />
+            android:text="@string/scale_turnover_rate" />-->
 
         <View style="@style/divider_vertical" />
 

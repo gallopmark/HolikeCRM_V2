@@ -1,6 +1,9 @@
 package com.holike.crm.bean;
 
+import com.holike.crm.util.ParseUtils;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +40,7 @@ public class WeekDepositBean implements Serializable {
     }
 
     public List<MoneyDataBean> getMoneyData() {
-        return moneyData;
+        return moneyData == null ? new ArrayList<>() : moneyData;
     }
 
     public void setMoneyData(List<MoneyDataBean> moneyData) {
@@ -54,19 +57,16 @@ public class WeekDepositBean implements Serializable {
          * money : 0
          */
 
-        private int counts;
+        @SuppressWarnings("unused")
+        private String counts;
         private String endTime;
         private String month;
         private String startTime;
         private String timeStamp;
-        private float money;
+        private String money;
 
         public int getCounts() {
-            return counts;
-        }
-
-        public void setCounts(int counts) {
-            this.counts = counts;
+            return ParseUtils.parseInt(counts);
         }
 
         public String getEndTime() {
@@ -102,11 +102,7 @@ public class WeekDepositBean implements Serializable {
         }
 
         public float getMoney() {
-            return money;
-        }
-
-        public void setMoney(float money) {
-            this.money = money;
+            return ParseUtils.parseFloat(money);
         }
     }
 }

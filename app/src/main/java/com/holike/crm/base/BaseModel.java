@@ -123,6 +123,22 @@ public abstract class BaseModel {
         addDisposable(MyHttpClient.postByBodyTimeout(url, header, params, timeout, callBack));
     }
 
+    /*直接返回json字符串*/
+    public void postByBodyString(String url, String params, RequestCallBack<String> callBack) {
+        postByBodyString(url, null, params, callBack);
+    }
+
+    public void postByBodyString(String url, @Nullable Map<String, String> header, String params, RequestCallBack<String> callBack) {
+        addDisposable(MyHttpClient.postByBodyString(url, header, params, callBack));
+    }
+
+    public void postByBodyString(String url, String params, int timeout, RequestCallBack<String> callBack) {
+        postByBodyString(url, null, params, timeout, callBack);
+    }
+
+    public void postByBodyString(String url, @Nullable Map<String, String> header, String params, int timeout, RequestCallBack<String> callBack) {
+        addDisposable(MyHttpClient.postByBodyString(url, header, params, timeout, callBack));
+    }
 
     public <T> void upload(final Context context, String url, @NonNull List<String> filePaths, RequestCallBack<T> callBack) {
         if (filePaths.isEmpty()) {

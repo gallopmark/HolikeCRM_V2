@@ -1,8 +1,6 @@
 package com.holike.crm.http;
 
 
-import android.text.TextUtils;
-
 import androidx.annotation.Nullable;
 
 import com.holike.crm.util.SharedPreferencesUtils;
@@ -231,11 +229,18 @@ public class ParamHelper {
             return toBody(params);
         }
 
-        /*新建客户输入手机号、微信号检查是否存在*/
-        public static String checkPhoneWx(String dealerId, String phone, String wxNumber) {
+        /*新建客户输入手机号检测*/
+        public static String checkPhone(String phone) {
             Map<String, String> params = general();
-            params.put("dealerId", noNullWrap(dealerId));
+            params.put("dealerId", SharedPreferencesUtils.getDealerId());
             params.put("phone", noNullWrap(phone));
+            return toBody(params);
+        }
+
+        /*新建客户输入手机号、微信号检查是否存在*/
+        public static String checkWechat(String wxNumber) {
+            Map<String, String> params = general();
+            params.put("dealerId", SharedPreferencesUtils.getDealerId());
             params.put("wxNumber", noNullWrap(wxNumber));
             return toBody(params);
         }
@@ -271,11 +276,8 @@ public class ParamHelper {
             Map<String, String> params = general();
             params.put("dealerId", noNullWrap(SharedPreferencesUtils.getDealerId()));
             params.put("userName", noNullWrap(userName));
-            if (!TextUtils.isEmpty(phoneNumber)) {
-                params.put("phoneNumber", phoneNumber);
-            } else {
-                params.put("wxNumber", wxNumber);
-            }
+            params.put("phoneNumber", phoneNumber);
+            params.put("wxNumber", wxNumber);
             params.put("gender", noNullWrap(gender));
             params.put("ageType", noNullWrap(ageType));
             params.put("source", noNullWrap(source));
@@ -321,11 +323,8 @@ public class ParamHelper {
             params.put("recordStatus", noNullWrap(recordStatus));
             params.put("versionNumber", noNullWrap(versionNumber));
             params.put("userName", noNullWrap(userName));
-            if (!TextUtils.isEmpty(phoneNumber)) {
-                params.put("phoneNumber", phoneNumber);
-            } else {
-                params.put("wxNumber", wxNumber);
-            }
+            params.put("phoneNumber", noNullWrap(phoneNumber));
+            params.put("wxNumber", noNullWrap(wxNumber));
             params.put("gender", noNullWrap(gender));
             params.put("ageType", noNullWrap(ageType));
             params.put("source", noNullWrap(source));
@@ -344,6 +343,7 @@ public class ParamHelper {
          * @param districtCode      区县代码(必填)
          * @param address           地址(必填)
          * @param shopId            门店id(必填)
+         * @param groupId           组织id
          * @param budgetTypeCode    定制预算
          * @param spareContact      备用联系人
          * @param spareContactPhone 备用联系电话
@@ -351,7 +351,7 @@ public class ParamHelper {
          * @return body
          */
         public static String addHouseInfo(String personalId, String provinceCode, String cityCode, String districtCode,
-                                          String address, String shopId, String budgetTypeCode, String spareContact,
+                                          String address, String shopId,String groupId, String budgetTypeCode, String spareContact,
                                           String spareContactPhone, String remark) {
             Map<String, String> params = general();
             params.put("dealerId", noNullWrap(SharedPreferencesUtils.getDealerId()));
@@ -361,6 +361,7 @@ public class ParamHelper {
             params.put("districtCode", noNullWrap(districtCode));
             params.put("address", noNullWrap(address));
             params.put("shopId", noNullWrap(shopId));
+            params.put("groupId",noNullWrap(groupId));
             params.put("budgetTypeCode", noNullWrap(budgetTypeCode));
             params.put("spareContact", noNullWrap(spareContact));
             params.put("spareContactPhone", noNullWrap(spareContactPhone));
@@ -380,6 +381,7 @@ public class ParamHelper {
          * @param districtCode      区县代码(必填)
          * @param address           地址(必填)
          * @param shopId            门店id(必填)
+         * @param groupId           组织id
          * @param budgetTypeCode    定制预算
          * @param spareContact      备用联系人
          * @param spareContactPhone 备用联系电话
@@ -388,7 +390,7 @@ public class ParamHelper {
          */
         public static String updateHouseInfo(String personalId, String houseId, String recordStatus, String versionNumber,
                                              String provinceCode, String cityCode, String districtCode, String address,
-                                             String shopId, String budgetTypeCode, String spareContact,
+                                             String shopId, String groupId, String budgetTypeCode, String spareContact,
                                              String spareContactPhone, String remark) {
             Map<String, String> params = general();
             params.put("dealerId", noNullWrap(SharedPreferencesUtils.getDealerId()));
@@ -401,6 +403,7 @@ public class ParamHelper {
             params.put("districtCode", noNullWrap(districtCode));
             params.put("address", noNullWrap(address));
             params.put("shopId", noNullWrap(shopId));
+            params.put("groupId", noNullWrap(groupId));
             params.put("budgetTypeCode", noNullWrap(budgetTypeCode));
             params.put("spareContact", noNullWrap(spareContact));
             params.put("spareContactPhone", noNullWrap(spareContactPhone));
@@ -505,39 +508,6 @@ public class ParamHelper {
             return params;
         }
 
-        static class InstallDrawing {
-            String houseId;
-            String type;
-            String installId;
-            String installUserId;
-            String resourceId;
-
-            InstallDrawing(String houseId, String type, String installId, String installUserId, String resourceId) {
-                this.houseId = houseId;
-                this.type = type;
-                this.installId = installId;
-                this.installUserId = installUserId;
-                this.resourceId = resourceId;
-            }
-        }
-
-        /*上传安装图纸*/
-        public static String uploadInstallDrawing(String houseId, String installId, String installUserId, List<String> images) {
-            List<InstallDrawing> list = new ArrayList<>();
-            for (String image : images) {
-                list.add(new InstallDrawing(houseId, "安装图", installId, installUserId, image));
-            }
-            return MyJsonParser.fromBeanToJson(list);
-        }
-
-        /*上传安装图纸备注信息*/
-        public static String uploadInstallDrawingRemark(String houseId, String remark) {
-            Map<String, String> params = general();
-            params.put("houseId", noNullWrap(houseId));
-            params.put("remark", noNullWrap(remark));
-            return toBody(params);
-        }
-
         /**
          * 客户管理-流失房屋
          *
@@ -565,10 +535,10 @@ public class ParamHelper {
         }
 
         /*客户管理-安装完成*/
-        public static String finishInstall(String houseId, String installId, String actualInstallDate,
-                                           String installUserId, String installUserName, String installArea,
-                                           String installState, String remark) {
-            Map<String, String> params = general();
+        public static Map<String, Object> finishInstall(String houseId, String installId, String actualInstallDate,
+                                                        String installUserId, String installUserName, String installArea,
+                                                        String installState, String remark) {
+            Map<String, Object> params = objectMap();
             params.put("dealerId", SharedPreferencesUtils.getDealerId());
             params.put("houseId", noNullWrap(houseId));
             params.put("installId", noNullWrap(installId));
@@ -578,7 +548,7 @@ public class ParamHelper {
             params.put("installArea", noNullWrap(installArea));
             params.put("installState", noNullWrap(installState));
             params.put("remark", noNullWrap(remark));
-            return toBody(params);
+            return params;
         }
 
         /*客户管理-公海客户-领取客户*/
@@ -599,8 +569,8 @@ public class ParamHelper {
          * @param status     客户最新状态
          * @param statusTime 客户状态时间
          * @param reason     重新分配客户理由
-         * @param shopId 门店id
-         * @param groupId 分组id
+         * @param shopId     门店id
+         * @param groupId    分组id
          */
         public static String distributionMsgPush(String personalId, String houseId, String status,
                                                  String statusTime, String reason, String shopId,
@@ -610,9 +580,24 @@ public class ParamHelper {
             params.put("houseId", noNullWrap(houseId));
             params.put("status", noNullWrap(status));
             params.put("statusTime", noNullWrap(statusTime));
-            params.put("reason",noNullWrap(reason));
-            params.put("shopId",noNullWrap(shopId));
-            params.put("groupId",noNullWrap(groupId));
+            params.put("reason", noNullWrap(reason));
+            params.put("shopId", noNullWrap(shopId));
+            params.put("groupId", noNullWrap(groupId));
+            return toBody(params);
+        }
+
+        /*客户管理-确认流失房屋*/
+        public static String confirmLoseHouse(String houseId) {
+            Map<String, String> params = general();
+            params.put("houseId", noNullWrap(houseId));
+            return toBody(params);
+        }
+
+        /*无效退回*/
+        public static String invalidReturn(String houseId, String efficientCause) {
+            Map<String, String> params = general();
+            params.put("houseId", noNullWrap(houseId));
+            params.put("efficientCause", noNullWrap(efficientCause));
             return toBody(params);
         }
     }

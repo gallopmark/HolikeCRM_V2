@@ -66,65 +66,29 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:layout_marginTop="@dimen/dp_20">
 
-        <RelativeLayout
-            android:layout_width="0dp"
+        <View
+            android:id="@+id/lineBlue"
+            android:layout_width="@dimen/dp_3"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_alignTop="@+id/tvInstallSquares"
+            android:layout_alignBottom="@+id/tvInstallSquares"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@color/color_blue_width_3dp" />
 
-            <View
-                android:id="@+id/lineBlue"
-                android:layout_width="@dimen/dp_3"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/tvInstallSquares"
-                android:layout_alignBottom="@+id/tvInstallSquares"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:background="@color/color_blue_width_3dp" />
-
-            <TextView
-                android:id="@+id/tvInstallSquares"
-                style="@style/Homepage_MonthData_TextViewStyle"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:layout_toEndOf="@+id/lineBlue"
-                android:layout_toRightOf="@+id/lineBlue"
-                android:text="@string/number_of_install_squares"
-                android:textSize="@dimen/textSize_14" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1">
-
-            <View
-                android:id="@+id/lineOrange"
-                android:layout_width="@dimen/dp_3"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/tvSatisfaction"
-                android:layout_alignBottom="@+id/tvSatisfaction"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:background="@color/color_orange_width_3dp" />
-
-            <TextView
-                android:id="@+id/tvSatisfaction"
-                style="@style/Homepage_MonthData_TextViewStyle"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:layout_toEndOf="@+id/lineOrange"
-                android:layout_toRightOf="@+id/lineOrange"
-                android:text="@string/customer_satisfaction_tips"
-                android:textSize="@dimen/textSize_14" />
-        </RelativeLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvInstallSquares"
+            style="@style/Homepage_MonthData_TextViewStyle"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_toEndOf="@+id/lineBlue"
+            android:layout_toRightOf="@+id/lineBlue"
+            android:text="@string/number_of_install_squares"
+            android:textSize="@dimen/textSize_14" />
+    </RelativeLayout>
 </LinearLayout>

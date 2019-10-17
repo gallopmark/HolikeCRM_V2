@@ -1,21 +1,18 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.bean.OriginalBoardBean;
 import com.holike.crm.dialog.LoadingTipDialog;
-import com.holike.crm.fragment.analyze.OriginalBoardFragment;
-import com.holike.crm.fragment.analyze.OriginalBoardPersonalFragment;
+import com.holike.crm.fragment.analyze.OriginalBoardRatioDefaultFragment;
+import com.holike.crm.fragment.analyze.OriginalBoardRatioDealerFragment;
 import com.holike.crm.presenter.fragment.OriginalBoardPresenter;
-import com.holike.crm.util.Constants;
 import com.holike.crm.view.fragment.OriginalBoardView;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 原态板占比
@@ -33,11 +30,10 @@ public class OriginalBoardActivity extends MyFragmentActivity<OriginalBoardPrese
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item10_title));
-        setLeft(getString(R.string.report_title));
         getData();
     }
 
@@ -64,12 +60,10 @@ public class OriginalBoardActivity extends MyFragmentActivity<OriginalBoardPrese
     @Override
     public void getDataSuccess(OriginalBoardBean bean) {
         dismissLoading();
-        Map<String, Serializable> params = new HashMap<>();
-        params.put(Constants.ORIGINAL_BOARD_BEAN, bean);
         if (TextUtils.equals(bean.getIsDealer(), "1")) {
-            startFragment(params, new OriginalBoardPersonalFragment(), false);
+            startFragment(null, OriginalBoardRatioDealerFragment.newInstance(bean), false);
         } else {
-            startFragment(params, new OriginalBoardFragment(), false);
+            startFragment(null, OriginalBoardRatioDefaultFragment.newInstance(bean), false);
         }
     }
 

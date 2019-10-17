@@ -40,6 +40,7 @@ public class MonthDataBossBean {
         public String scaleCount; //量尺数
         public String installed;    //安装数
         public String newCount; //新建客户数
+        public String picCount; //出图数
         public String enterPercent; //进店成交率
         public String cityCode; //城市代码
         public String prescaleCount;    //预约量尺数

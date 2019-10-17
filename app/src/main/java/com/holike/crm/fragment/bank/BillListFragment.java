@@ -1,16 +1,15 @@
 package com.holike.crm.fragment.bank;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragment;
@@ -39,8 +38,8 @@ import butterknife.BindView;
 public class BillListFragment extends MyFragment<BillListPresenter, BillListView> implements BillListView {
 
 
-    @BindView(R.id.tv_day_sum)
-    TextView tvDaySum;
+    //    @BindView(R.id.tv_day_sum)
+//    TextView tvDaySum;
     @BindView(R.id.rv_bill_list)
     RecyclerView rv;
     @BindView(R.id.srl_bill_list)
@@ -51,8 +50,8 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
     ScrollView svTotalPage;
     @BindView(R.id.tv_select_date)
     TextView tvSelectDate;
-    @BindView(R.id.tv_all)
-    TextView tvAll;
+    @BindView(R.id.tv_this_month)
+    TextView mThisMonth;
     @BindView(R.id.iv_select_date)
     ImageView ivSelectDate;
     @BindView(R.id.ll_select_date)
@@ -119,8 +118,8 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
     protected void init() {
         super.init();
         setTitle(getString(R.string.bill_list));
-        tvAll.setVisibility(View.INVISIBLE);
-        tvDaySum.setVisibility(View.INVISIBLE);
+        mThisMonth.setVisibility(View.INVISIBLE);
+//        tvDaySum.setVisibility(View.INVISIBLE);
         rlSelectDate.setVisibility(View.GONE);
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -136,7 +135,7 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
         } else {
             setTitle(getString(R.string.bill_list_detail));
             rlSelectDate.setVisibility(View.VISIBLE);
-            tvAll.setVisibility(showAll ? View.INVISIBLE : View.VISIBLE);
+            mThisMonth.setVisibility(showAll ? View.INVISIBLE : View.VISIBLE);
             mPresenter.setAdapter(rv);
             srlBillList.setRefreshHeader(new WaterDropHeader(mContext));
             srlBillList.setRefreshFooter(new BallPulseFooter(mContext));
@@ -151,13 +150,14 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
                     refresh(false);
                 }
             });
-
             if (billListBean != null) {
-                tvSelectDate.setText(TimeUtil.stampToString(billListBean.getStartTime(), "yyyy.MM.dd") + "-" + TimeUtil.stampToString(billListBean.getEndTime(), "yyyy.MM.dd"));
+                String text = TimeUtil.stampToString(billListBean.getStartTime(), "yyyy.MM.dd") + "-"
+                        + TimeUtil.stampToString(billListBean.getEndTime(), "yyyy.MM.dd");
+                tvSelectDate.setText(text);
                 loadList(billListBean);
             }
         }
-        tvAll.setOnClickListener(v -> reload());
+        mThisMonth.setOnClickListener(v -> reload());
         llSelectDate.setOnClickListener(v -> {
             ivSelectDate.setRotationX(180);
             checkDate();
@@ -166,7 +166,6 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
 
     @Override
     protected void clickRightMenu(String menuText, View actionView) {
-        super.clickRightMenu(menuText, actionView);
         if (billListBean == null) return;
         showAll = !TimeUtil.stampToString(startTime, "yyyy.MM.dd").equals(TimeUtil.stampToString(billListBean.getStartTime(), "yyyy.MM.dd")) ||
                 !TimeUtil.stampToString(endTime, "yyyy.MM.dd").equals(TimeUtil.stampToString(billListBean.getEndTime(), "yyyy.MM.dd"));
@@ -187,8 +186,8 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
     public void success(BillListBean bean) {
         billListBean = bean;
         dismissLoading();
-        tvSelectDate.setText(TimeUtil.stampToString(bean.getStartTime() + 1, "yyyy.MM.dd") + "-" + TimeUtil.stampToString(bean.getEndTime() + 1, "yyyy.MM.dd"));
-
+        String text = TimeUtil.stampToString(bean.getStartTime() + 1, "yyyy.MM.dd") + "-" + TimeUtil.stampToString(bean.getEndTime() + 1, "yyyy.MM.dd");
+        tvSelectDate.setText(text);
         if (orderId.equals("账单列表")) {
             svTotalPage.setVisibility(View.VISIBLE);
             rlSelectDate.setVisibility(View.VISIBLE);
@@ -241,9 +240,9 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
         startTime = "";
         endTime = "";
         tvSelectDate.setText("");
-        tvDaySum.setVisibility(View.INVISIBLE);
-        tvDaySum.setText("");
-        tvAll.setVisibility(View.INVISIBLE);
+//        tvDaySum.setVisibility(View.INVISIBLE);
+//        tvDaySum.setText("");
+        mThisMonth.setVisibility(View.INVISIBLE);
         srlBillList.setVisibility(View.GONE);
         showLoading();
         mPresenter.getHeadData(pageNo, startTime, endTime);
@@ -336,10 +335,11 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
                     endTime = TimeUtil.dateToStamp(end, true);
 //                    startTime = TimeUtil.dataToStamp(start, "yyyy年MM月dd日");
 //                    endTime = TimeUtil.dataToStamp(end, "yyyy年MM月dd日");
-                    tvSelectDate.setText(TimeUtil.stampToString(startTime, "yyyy.MM.dd") + "-" + TimeUtil.stampToString(endTime, "yyyy.MM.dd"));
-                    tvDaySum.setVisibility(View.VISIBLE);
-                    tvDaySum.setText(((end.getTime() - start.getTime()) / 86400000) + 1 + "天");
-//                    tvAll.setVisibility(View.VISIBLE);
+                    String text = TimeUtil.stampToString(startTime, "yyyy.MM.dd") + "-" + TimeUtil.stampToString(endTime, "yyyy.MM.dd");
+                    tvSelectDate.setText(text);
+//                    tvDaySum.setVisibility(View.VISIBLE);
+//                    tvDaySum.setText(((end.getTime() - start.getTime()) / 86400000) + 1 + "天");
+                    mThisMonth.setVisibility(View.VISIBLE);
                 } else {
                     startTime = null;
                     endTime = null;
@@ -347,8 +347,6 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
                 showLoading();
                 mPresenter.getHeadData(pageNo, startTime, endTime);
             }
-        }, dialogInterface -> {
-            ivSelectDate.setRotationX(0);
-        });
+        }, dialogInterface -> ivSelectDate.setRotationX(0));
     }
 }

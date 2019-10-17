@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.holike.crm.R;
-import com.holike.crm.activity.analyze.WeekReportActivity;
 import com.holike.crm.base.MyApplication;
 import com.holike.crm.bean.DayDepositBean;
 import com.holike.crm.bean.WeekDepositBean;
@@ -31,7 +30,7 @@ import java.util.List;
  * Created by wqj on 2018/3/1.
  * 订单交易报表柱状图
  */
-
+@Deprecated
 public class WeekReportChartView extends View {
     private Paint mPaint = new Paint();
     private Path mPath = new Path();
@@ -122,7 +121,7 @@ public class WeekReportChartView extends View {
                 mPaint.setColor(Color.WHITE);
                 mPaint.setTextSize(DensityUtil.dp2px(12));
                 String name = getName(i);
-                String num = orderType == WeekReportActivity.TYPE_ORDER_REPORT ? String.valueOf((int) value) : String.valueOf(value);//订单不要小数点
+                String num = orderType == 0 ? String.valueOf((int) value) : String.valueOf(value);//订单不要小数点
                 //x轴名字和y轴值
                 drawName(canvas, name, i);
                 if (value > 0) {
@@ -299,7 +298,7 @@ public class WeekReportChartView extends View {
      * @return
      */
     private float getValueByOrderType(WeekDepositBean.MoneyDataBean bean) {
-        return orderType == WeekReportActivity.TYPE_ORDER_REPORT ? bean.getCounts() : bean.getMoney();
+        return orderType == 0 ? bean.getCounts() : bean.getMoney();
     }
 
     /**

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
         android:background="@drawable/bg_corners_white_5dp">
 
         <TextView
@@ -28,8 +29,8 @@
             android:id="@+id/tv_edit_info"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:drawableEnd="@drawable/ic_arrow_right_accent"
-            android:drawableRight="@drawable/ic_arrow_right_accent"
+            android:drawableEnd="@drawable/layer_arrow_right_accent"
+            android:drawableRight="@drawable/layer_arrow_right_accent"
             android:gravity="center|end"
             android:paddingLeft="@dimen/dp_5"
             android:paddingRight="@dimen/dp_5"
@@ -50,21 +51,36 @@
             android:layout_marginRight="@dimen/dp_10"
             app:layout_constraintTop_toBottomOf="@+id/tv_customer_info" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/Customer_Item_TextViewStyle"
+        <LinearLayout
+            android:id="@+id/ll_name_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_12"
-            android:text="@string/customer_name_tips"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v_divider"
-            app:layout_constraintWidth_percent="0.5" />
+            app:layout_constraintWidth_percent="0.5">
+
+            <TextView
+                android:id="@+id/tv_name_tips"
+                style="@style/Customer_Item_TextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_name_tips" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/Customer_Item_TextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dp_4"
+                android:textColor="@color/textColor4" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_phoneWx"
+            android:id="@+id/tv_phone"
             style="@style/Customer_Item_TextViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,8 +90,20 @@
             android:layout_marginRight="@dimen/dp_10"
             android:text="@string/customer_phone_tips"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+            app:layout_constraintStart_toEndOf="@+id/ll_name_layout"
+            app:layout_constraintTop_toTopOf="@+id/ll_name_layout" />
+
+        <TextView
+            android:id="@+id/tv_wechat"
+            style="@style/Customer_Item_TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@string/customer_wechat_tips"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_name_layout" />
 
         <TextView
             android:id="@+id/tv_source"
@@ -87,7 +115,7 @@
             android:layout_marginTop="@dimen/dp_14"
             android:text="@string/tips_customer_source2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wechat"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -148,21 +176,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_create_time" />
 
-        <TextView
-            android:id="@+id/tv_policy"
+        <LinearLayout
+            android:id="@+id/ll_activity_police_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_14"
-            android:layout_marginEnd="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:text="@string/tips_customer_activity_policy2"
-            android:textColor="@color/textColor8"
-            android:textSize="@dimen/textSize_13"
+            android:visibility="gone"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_next_date" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_next_date">
+
+            <TextView
+                android:id="@+id/tv_policy_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tips_customer_activity_policy2"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_13" />
+
+            <TextView
+                android:id="@+id/tv_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_13" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -221,8 +262,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:drawableEnd="@drawable/ic_arrow_right_accent"
-            android:drawableRight="@drawable/ic_arrow_right_accent"
+            android:drawableEnd="@drawable/layer_arrow_right_accent"
+            android:drawableRight="@drawable/layer_arrow_right_accent"
             android:gravity="center|end"
             android:paddingLeft="@dimen/dp_5"
             android:paddingRight="@dimen/dp_5"

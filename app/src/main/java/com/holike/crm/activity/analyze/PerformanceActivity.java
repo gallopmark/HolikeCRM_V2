@@ -3,6 +3,8 @@ package com.holike.crm.activity.analyze;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.bean.CupboardBean;
@@ -35,11 +37,9 @@ public class PerformanceActivity extends MyFragmentActivity<PerformancePresenter
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(@Nullable Bundle savedInstanceState) {
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item8_title));
-        setLeft(getString(R.string.report_title));
         getData();
     }
 
@@ -74,8 +74,6 @@ public class PerformanceActivity extends MyFragmentActivity<PerformancePresenter
 
     /**
      * 获取业绩数据成功
-     *
-     * @param performanceBean
      */
     @Override
     public void getDataSuccess(PerformanceBean performanceBean) {

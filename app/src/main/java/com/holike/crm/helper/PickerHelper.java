@@ -1,15 +1,18 @@
 package com.holike.crm.helper;
 
 import android.content.Context;
-import android.view.View;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
+import androidx.annotation.Nullable;
 
+import com.holike.crm.bean.DictionaryBean;
+import com.holike.crm.bean.internal.Dictionary;
+import com.holike.crm.dialog.DatetimePickerDialog;
+import com.holike.crm.dialog.OptionsPickerDialog;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -18,41 +21,64 @@ import java.util.List;
  */
 public class PickerHelper {
 
-    /*显示时间选择器，默认 “年”“月”“日”*/
-    public static void showTimePicker(Context context, OnTimeSelectListener listener) {
-        new TimePickerBuilder(context, listener).setType(new boolean[]{true, true, true, false, false, false}).build().show();
+    /*显示时间选择器，“年”、“月”*/
+    public static void showTimeYMPicker(Context context, DatetimePickerDialog.OnDatetimePickerListener listener) {
+        new DatetimePickerDialog.Builder(context)
+                .withType(DatetimePickerDialog.TYPE_Y_M)
+                .listener(listener).show();
     }
 
-    /*显示时间选择器,“年”“月”“日”“时”“分”*/
-    public static void showTimeYMDHMPicker(Context context, OnTimeSelectListener listener) {
-        new TimePickerBuilder(context, listener).setType(new boolean[]{true, true, true, true, true, false}).build().show();
+    /*显示时间选择器，默认 “年”“月”“日”*/
+    public static void showTimePicker(Context context, DatetimePickerDialog.OnDatetimePickerListener listener) {
+        new DatetimePickerDialog.Builder(context)
+                .withType(DatetimePickerDialog.TYPE_Y_M_D)
+                .listener(listener).show();
+    }
+
+    public static void showTimePicker(Context context, Date minDate, DatetimePickerDialog.OnDatetimePickerListener listener) {
+        showTimePicker(context, minDate, null, listener);
+    }
+
+    public static void showTimePicker(Context context, @Nullable Date minDate, @Nullable Date maxDate,
+                                      DatetimePickerDialog.OnDatetimePickerListener listener) {
+        new DatetimePickerDialog.Builder(context)
+                .withType(DatetimePickerDialog.TYPE_Y_M_D)
+                .minDate(minDate)
+                .maxDate(maxDate)
+                .listener(listener).show();
     }
 
     /*显示时间选择器，“时”，“分”*/
-    public static void showTimeHMPicker(Context context, OnTimeSelectListener listener) {
-        new TimePickerBuilder(context, listener).setType(new boolean[]{false, false, false, true, true, false}).build().show();
+    public static void showTimeHMPicker(Context context, DatetimePickerDialog.OnDatetimePickerListener listener) {
+        new DatetimePickerDialog.Builder(context)
+                .withType(DatetimePickerDialog.TYPE_HM)
+                .listener(listener).show();
     }
 
-    public static void showTimeHMSPicker(Context context, OnTimeSelectListener listener) {
-        new TimePickerBuilder(context, listener).setType(new boolean[]{false, false, false, true, true, true}).build().show();
+    public static void showOptionsPicker(Context context, List<DictionaryBean> optionsItems, OptionsPickerDialog.OnOptionPickerListener listener) {
+        showOptionsPicker(context, optionsItems, 0, listener);
     }
 
-    public static void showTimePicker(Context context, OnTimeSelectListener listener, View parent) {
-        new TimePickerBuilder(context, listener).setType(new boolean[]{true, true, true, false, false, false}).build().show(parent);
+    public static void showOptionsPicker(Context context, List<DictionaryBean> optionsItems, int selectPosition,
+                                         OptionsPickerDialog.OnOptionPickerListener listener) {
+        new OptionsPickerDialog(context).withData(optionsItems, selectPosition).listener(listener).show();
     }
 
-    public static void showTimeHMPicker(Context context, OnTimeSelectListener listener, View parent) {
-        new TimePickerBuilder(context, listener).setType(new boolean[]{true, true, true, true, true, false}).build().show(parent);
+    public static List<DictionaryBean> list2OptionsItems(List<? extends Dictionary> items) {
+        if (items == null || items.isEmpty()) return new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
+        for (Dictionary dictionary : items) {
+            optionItems.add(new DictionaryBean(dictionary.getId(), dictionary.getName()));
+        }
+        return optionItems;
     }
 
-    public static void showOptionsPicker(Context context, List<String> optionsItems, OnOptionsSelectListener listener) {
-        showOptionsPicker(context, optionsItems, listener, 0);
-    }
-
-    public static void showOptionsPicker(Context context, List<String> optionsItems, OnOptionsSelectListener listener, int selectPosition) {
-        OptionsPickerView<String> pickerView = new OptionsPickerBuilder(context, listener).build();
-        pickerView.setPicker(optionsItems);
-        pickerView.setSelectOptions(selectPosition);
-        pickerView.show();
+    public static List<DictionaryBean> map2OptionItems(Map<String, String> params) {
+        if (params == null) return new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            optionItems.add(new DictionaryBean(entry.getKey(), entry.getValue()));
+        }
+        return optionItems;
     }
 }

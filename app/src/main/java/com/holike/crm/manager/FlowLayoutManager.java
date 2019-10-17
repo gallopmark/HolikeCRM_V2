@@ -1,7 +1,9 @@
 package com.holike.crm.manager;
 
 import android.graphics.Rect;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/*recyclerView实现流式布局，用google的FlexboxLayoutManager替代*/
+@Deprecated
 public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
     private final FlowLayoutManager self = this;

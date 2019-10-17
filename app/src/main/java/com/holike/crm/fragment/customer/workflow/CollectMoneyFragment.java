@@ -14,6 +14,7 @@ import com.holike.crm.R;
 import com.holike.crm.bean.CollectionBean;
 import com.holike.crm.fragment.customer.WorkflowFragment;
 import com.holike.crm.http.MyJsonParser;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.util.TimeUtil;
 import com.holike.crm.view.fragment.WorkflowView;
 
@@ -27,7 +28,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 收尾款
  */
-
+@Deprecated
 public class CollectMoneyFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.rv_collect_money)
     RecyclerView rvCollectMoney;
@@ -76,9 +77,9 @@ public class CollectMoneyFragment extends WorkflowFragment implements WorkflowVi
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 tvUncollect.setText("");
                 String collectMoneyText = getText(etCollectMoney);
-                int collectMoney = TextUtils.isEmpty(collectMoneyText) ? 0 : Integer.parseInt(collectMoneyText);
+                int collectMoney = TextUtils.isEmpty(collectMoneyText) ? 0 : ParseUtils.parseInt(collectMoneyText);
                 if (uncollect >= collectMoney) {
-                    tvUncollect.setText("￥" + String.valueOf(uncollect - collectMoney));
+                    tvUncollect.setText("￥" + (uncollect - collectMoney));
                 }
             }
 
@@ -98,7 +99,7 @@ public class CollectMoneyFragment extends WorkflowFragment implements WorkflowVi
         dismissLoading();
         if (success instanceof CollectionBean) {
             uncollect = ((CollectionBean) success).getBalance();
-            tvUncollect.setText("￥" + String.valueOf(uncollect));
+            tvUncollect.setText("￥" + uncollect);
             showCollectList((CollectionBean) success);
         } else if (success instanceof String) {
             showShortToast(MyJsonParser.getShowMessage((String) success));

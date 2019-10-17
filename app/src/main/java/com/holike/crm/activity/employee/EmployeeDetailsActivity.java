@@ -1,5 +1,6 @@
 package com.holike.crm.activity.employee;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.holike.crm.view.activity.EmployeeDetailsView;
 import butterknife.BindView;
 
 /*员工详情页面*/
+@Deprecated
 public class EmployeeDetailsActivity extends MyFragmentActivity<EmployeeDetailsPresenter, EmployeeDetailsView> implements EmployeeDetailsView {
 
     @BindView(R.id.rlContainer)
@@ -35,8 +37,8 @@ public class EmployeeDetailsActivity extends MyFragmentActivity<EmployeeDetailsP
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setTitle(getString(R.string.employee_details_title));
         mPresenter.init(this, fragmentManager, mTabLayout);
         mSaveTextView.setOnClickListener(view -> mPresenter.saveEmployee(this));

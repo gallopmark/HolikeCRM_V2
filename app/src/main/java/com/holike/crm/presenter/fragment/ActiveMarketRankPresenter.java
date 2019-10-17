@@ -3,6 +3,7 @@ package com.holike.crm.presenter.fragment;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.ActiveMarketRankBean;
 import com.holike.crm.model.fragment.ActiveMarketRankModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.ActiveMarketRankView;
 
 /**
@@ -16,7 +17,7 @@ public class ActiveMarketRankPresenter extends BasePresenter<ActiveMarketRankVie
      * 获取数据
      */
     public void getData(String start, String end) {
-        model.getData(start == null ? "" : String.valueOf(Long.parseLong(start) ), end == null ? "" : String.valueOf(Long.parseLong(end) ), new ActiveMarketRankModel.GetDataListener() {
+        model.getData(start == null ? "" : String.valueOf(ParseUtils.parseLong(start) ), end == null ? "" : String.valueOf(ParseUtils.parseLong(end) ), new ActiveMarketRankModel.GetDataListener() {
             @Override
             public void success(ActiveMarketRankBean bean) {
                 if (getView() != null)

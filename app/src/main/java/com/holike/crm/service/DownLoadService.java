@@ -97,4 +97,8 @@ public abstract class DownLoadService extends Service {
             notificationUtils.sendNotification(notifyId, "下载", "下载" + progress + "%", progress);
         }
     }
+
+    void cancelNotification(){
+        notificationUtils.cancelAll();
+    }
 }

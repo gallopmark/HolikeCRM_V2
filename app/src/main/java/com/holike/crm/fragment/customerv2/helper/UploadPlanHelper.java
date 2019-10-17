@@ -2,6 +2,7 @@ package com.holike.crm.fragment.customerv2.helper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -12,10 +13,11 @@ import com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView;
 import com.holike.crm.R;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
+import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.enumeration.CustomerValue;
+import com.holike.crm.helper.IImageSelectHelper;
 import com.holike.crm.helper.PickerHelper;
-import com.holike.crm.http.ParamHelper;
 import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
 import com.holike.crm.util.KeyBoardUtil;
 
@@ -31,7 +33,7 @@ import java.util.Map;
  * Copyright holike possess 2019.
  * 上传方案帮助类
  */
-public class UploadPlanHelper extends IBaseHelper implements View.OnClickListener {
+public class UploadPlanHelper extends IImageSelectHelper implements View.OnClickListener {
 
     private UploadPlanCallback mCallback;
     private TextView mReservationDateTextView;
@@ -128,11 +130,15 @@ public class UploadPlanHelper extends IBaseHelper implements View.OnClickListene
                 }
                 break;
             case R.id.tv_series:
-                if (mSysCodeBean == null) {
-                    mSelectType = 2;
-                    mCallback.onRequestSystemCode();
+                if (TextUtils.isEmpty(mProduct)) {
+                    mCallback.onRequired(mContext.getString(R.string.tips_pleas_choose_first) + mContext.getString(R.string.followup_product_tips2));
                 } else {
-                    onSelectSeries(mSeriesTextView, mSysCodeBean.getHouseSeries());
+                    if (mSysCodeBean == null) {
+                        mSelectType = 2;
+                        mCallback.onRequestSystemCode();
+                    } else {
+                        onSelectSeries(mSeriesTextView);
+                    }
                 }
                 break;
             case R.id.tv_style:
@@ -148,7 +154,7 @@ public class UploadPlanHelper extends IBaseHelper implements View.OnClickListene
 
     /*选择预约确图日期*/
     private void onSelectDate(TextView tv) {
-        PickerHelper.showTimePicker(mContext, (date, v) -> {
+        PickerHelper.showTimePicker(mContext, date -> {
             mBookOrderDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
             tv.setText(new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(date));
         });
@@ -159,7 +165,7 @@ public class UploadPlanHelper extends IBaseHelper implements View.OnClickListene
         if (mSelectType == 1) {
             onSelectProduct(mProductTextView, mSysCodeBean.getCustomerProduct());
         } else if (mSelectType == 2) {
-            onSelectSeries(mSeriesTextView, mSysCodeBean.getHouseSeries());
+            onSelectSeries(mSeriesTextView);
         } else if (mSelectType == 3) {
             onSelectStyle(mStyleTextView, mSysCodeBean.getDecorationStyle());
         }
@@ -167,31 +173,55 @@ public class UploadPlanHelper extends IBaseHelper implements View.OnClickListene
 
     /*选择产品*/
     private void onSelectProduct(final TextView tv, Map<String, String> customerProduct) {
-        final List<String> keyList = new ArrayList<>(customerProduct.keySet());
-        final List<String> optionItems = new ArrayList<>(customerProduct.values());
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mProduct = keyList.get(options1);
-            tv.setText(optionItems.get(options1));
+        List<DictionaryBean> optionItems = PickerHelper.map2OptionItems(customerProduct);
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
+            mProduct = bean.id;
+            tv.setText(bean.name);
+            resetSeries();
         });
     }
 
-    /*选择系列*/
-    private void onSelectSeries(final TextView tv, Map<String, String> houseSeries) {
-        final List<String> keyList = new ArrayList<>(houseSeries.keySet());
-        final List<String> optionItems = new ArrayList<>(houseSeries.values());
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mSeries = keyList.get(options1);
-            tv.setText(optionItems.get(options1));
-        });
+    /*重新选择产品后 重置系列*/
+    private void resetSeries() {
+        mSeries = null;
+        mSeriesTextView.setText(null);
+    }
+
+    /*选择系列，前提是要选择产品之后*/
+    private void onSelectSeries(final TextView tv) {
+        /*"WHOLE_HOUSE_PRODUCT":"全屋定制产品",
+"CUPBOARD_PRODUCT":"橱柜产品",
+"DOOR_PRODUCT":"木门产品"*/
+        Map<String, String> series = null;
+        Map<String, String> productMap = mSysCodeBean.getCustomerProduct();
+        String productName = productMap.get(mProduct);
+        if (TextUtils.equals(mProduct, "WHOLE_HOUSE_PRODUCT")
+                || TextUtils.equals(productName, "全屋定制产品")) {  //全屋定制系列
+            //选择了“全屋定制产品”
+            series = mSysCodeBean.getHouseSeries();
+        } else if (TextUtils.equals(mProduct, "CUPBOARD_PRODUCT")
+                || TextUtils.equals(productName, "橱柜产品")) { //橱柜系列
+            /*选择了“橱柜产品”*/
+            series = mSysCodeBean.getCupboardSeries();
+        } else if (TextUtils.equals(mProduct, "DOOR_PRODUCT") || TextUtils.equals(productName, "木门产品")) { //木门系列
+            /*选择了“木门产品”*/
+            series = mSysCodeBean.getDoorSeries();
+        }
+        if (series != null) {
+            List<DictionaryBean> optionItems = PickerHelper.map2OptionItems(series);
+            PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
+                mSeries = bean.id;
+                tv.setText(bean.name);
+            });
+        }
     }
 
     /*选择风格*/
     private void onSelectStyle(final TextView tv, Map<String, String> decorationStyle) {
-        final List<String> keyList = new ArrayList<>(decorationStyle.keySet());
-        final List<String> optionItems = new ArrayList<>(decorationStyle.values());
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mStyle = keyList.get(options1);
-            tv.setText(optionItems.get(options1));
+        final List<DictionaryBean> optionItems = PickerHelper.map2OptionItems(decorationStyle);
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
+            mStyle = bean.id;
+            tv.setText(bean.name);
         });
     }
 

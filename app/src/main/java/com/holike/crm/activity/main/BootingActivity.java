@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -52,7 +53,7 @@ public class BootingActivity extends BaseActivity<BootingPresenter, BootingView>
     }
 
     @Override
-    protected void init() {
+    protected void init(@Nullable Bundle savedInstanceState) {
         mHandler.postDelayed(startRunnable, 3000);
         mPresenter.getAd();
     }
@@ -75,7 +76,7 @@ public class BootingActivity extends BaseActivity<BootingPresenter, BootingView>
         if (!isStartSkip) {
             isStartSkip = true;
             Intent intent;
-            if (TextUtils.isEmpty(SharedPreferencesUtils.getCliId())) {
+            if (TextUtils.isEmpty(SharedPreferencesUtils.getUserId())) {
                 intent = new Intent(this, LoginActivity.class);
             } else {
                 intent = new Intent(this, MainActivity.class);

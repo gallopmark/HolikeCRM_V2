@@ -12,6 +12,7 @@ import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.DealerRankBean;
 import com.holike.crm.util.Constants;
 import com.holike.crm.util.DensityUtil;
+import com.holike.crm.util.ParseUtils;
 
 import butterknife.BindView;
 
@@ -82,7 +83,7 @@ public class DealerRankPersonalFragment extends MyFragment {
                         ImageView imageView = mContentView.findViewById(ivYourLocationId[i]);
                         imageView.setVisibility(View.VISIBLE);
                         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-                        layoutParams.leftMargin = (int) (DensityUtil.dp2px(68 - 16) * (Float.parseFloat(rangBean.getPosition().replace("%", "")) / 100));
+                        layoutParams.leftMargin = (int) (DensityUtil.dp2px(68 - 16) * (ParseUtils.parseFloat(rangBean.getPosition().replace("%", "")) / 100));
                     }
                 }
             }

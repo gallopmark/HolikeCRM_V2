@@ -37,9 +37,9 @@ public abstract class IMessageFragment extends MyFragment<MessageV2Presenter, Me
 
     private MessageResultBean mResultBean;
     List<MessageResultBean.MessageBean> mMessageList;
-    CommonAdapter<?> mAdapter;
+    private CommonAdapter<?> mAdapter;
 
-    private String mType = "1"; //类型 1通知 2公告
+    private String mType = "1"; //类型 1待处理事项 2公告
     private int mPageNo = 1; //页码
     private final int mPageSize = 20; //页码大小
     private boolean isLoadCompleted; //加载完成
@@ -87,14 +87,18 @@ public abstract class IMessageFragment extends MyFragment<MessageV2Presenter, Me
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPageNo = 1;
-        isRefresh = true;
-        initData(false);
+        refreshMessage();
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         isRefresh = false;
+        initData(false);
+    }
+
+    private void refreshMessage() {
+        mPageNo = 1;
+        isRefresh = true;
         initData(false);
     }
 
@@ -111,7 +115,11 @@ public abstract class IMessageFragment extends MyFragment<MessageV2Presenter, Me
         List<MessageResultBean.MessageBean> messageList = resultBean.getMessageList();
         if (!isLoadCompleted) {  //是否是第一次加载成功
             if (messageList.isEmpty()) {
-                noResult();
+                if (TextUtils.equals(mType, "1")) {
+                    noData(R.drawable.no_result, R.string.tips_nopendingevents, false);
+                } else {
+                    noData(R.drawable.no_notice, R.string.tips_noannounce, false);
+                }
             } else {
                 displayContent();
                 updateMessage(messageList);
@@ -170,16 +178,16 @@ public abstract class IMessageFragment extends MyFragment<MessageV2Presenter, Me
     public void onItemClick(BaseRecyclerAdapter adapter, BaseRecyclerAdapter.RecyclerHolder holder, View view, int position) {
         if (position >= 0 && position < mMessageList.size()) {
             MessageResultBean.MessageBean bean = mMessageList.get(position);
-            if (!bean.isRead() && mCallback != null && mResultBean != null) {  //设置消息已读
-                if (TextUtils.equals(mType, "1")) {  //待处理事件
-                    mResultBean.noticeRead = mResultBean.noticeRead - 1 > -1 ? mResultBean.noticeRead - 1 : 0;
-                } else {  //公告
-                    mResultBean.announcementRead = mResultBean.announcementRead - 1 > -1 ? mResultBean.announcementRead - 1 : 0;
-                }
-                mCallback.onResponse(mResultBean);
-            }
-            mMessageList.get(position).setRead(); //设置消息已读
-            mAdapter.notifyDataSetChanged();
+//            if (!bean.isRead() && mCallback != null && mResultBean != null) {  //设置消息已读
+//                if (TextUtils.equals(mType, "1")) {  //待处理事件
+//                    mResultBean.noticeRead = mResultBean.noticeRead - 1 > -1 ? mResultBean.noticeRead - 1 : 0;
+//                } else {  //公告
+//                    mResultBean.announcementRead = mResultBean.announcementRead - 1 > -1 ? mResultBean.announcementRead - 1 : 0;
+//                }
+//                mCallback.onResponse(mResultBean);
+//            }
+//            mMessageList.get(position).setRead(); //设置消息已读
+//            mAdapter.notifyDataSetChanged();
             onItemClick(bean, position);
         }
     }
@@ -189,6 +197,8 @@ public abstract class IMessageFragment extends MyFragment<MessageV2Presenter, Me
     @Override
     public void onRedistributeSuccess(String message) {
         dismissLoading();
+        showShortToast(message);
+        refreshMessage();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.holike.crm.presenter.fragment;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.MessageResultBean;
 import com.holike.crm.http.CustomerUrlPath;
+import com.holike.crm.http.MyJsonParser;
 import com.holike.crm.http.ParamHelper;
 import com.holike.crm.http.RequestCallBack;
 import com.holike.crm.model.fragment.MessageV2Model;
@@ -50,7 +51,7 @@ public class MessageV2Presenter extends BasePresenter<MessageV2View, MessageV2Mo
                 @Override
                 public void onSuccess(String result) {
                     if (getView() != null) {
-                        getView().onRedistributeSuccess(result);
+                        getView().onRedistributeSuccess(MyJsonParser.getShowMessage(result));
                     }
                 }
             });

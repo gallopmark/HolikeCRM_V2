@@ -1,5 +1,6 @@
 package com.holike.crm.fragment.customer;
 
+import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.holike.crm.R;
@@ -27,7 +28,7 @@ public class ScanGunInstructionActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         setTitle(getString(R.string.receiving_scan_way_1_how_to_use));
     }
 

@@ -21,6 +21,9 @@ public class CustomerUrlPath {
     /*客户详情*/
     public static final String URL_GET_CUSTOMER_DETAIL = CUSTOMER_MANAGER_V2 + "/customerPersonalInfo/getCustomerDetailInfo";
 
+    /*公海客户详情*/
+    public static final String URL_GET_HIGH_SEAS_CUSTOMER_DETAIL = CUSTOMER_MANAGER_V2 + "/customerPersonalInfo/getHighSeasCustomerDetailInfo";
+
     /*客户管理-图片展示*/
     public static final String URL_SHOW_IMAGE = CUSTOMER_MANAGER_V2 + "/file/showImg/";
 
@@ -61,6 +64,9 @@ public class CustomerUrlPath {
     /*获取门店分组信息*/
     public static final String URL_GET_SHOP_GROUP = CUSTOMER_MANAGER_V2 + "/sysPartnerShopGroup/getGroupInfo";
 
+    /*获取用户门店分组信息*/
+    public static final String URL_GET_SHOP_USER_GROUP = CUSTOMER_MANAGER_V2 + "/sysPartnerShopGroup/getUserGroupInfo";
+
     /*获取门店下的导购人员*/
     public static final String URL_GET_SHOP_GUIDE = CUSTOMER_MANAGER_V2 + "/sysUser/getShopGuide";
 
@@ -88,6 +94,7 @@ public class CustomerUrlPath {
     public static final String URL_GET_DEALER_DESIGNER = CUSTOMER_MANAGER_V2 + "/sysUser/getDealerDesigner";
 
     /*保存量尺结果-方案图片记录*/
+    @Deprecated
     public static final String URL_SAVE_HOUSE_SCHEME_IMG = CUSTOMER_MANAGER_V2 + "/customerHouseInfo/saveCustomerHouseSchemeImg";
 
     /*客户管理-删除量尺，方案图片记录*/
@@ -100,6 +107,7 @@ public class CustomerUrlPath {
     public static final String URL_FINISH_MEASURE = CUSTOMER_MANAGER_V2 + "/customerHouseInfo/finishMeasure";
 
     /*客户管理-上传安装图-安装效果图*/
+    @Deprecated
     public static final String URL_SAVE_INSTALL_DRAWING_IMG = CUSTOMER_MANAGER_V2 + "/customerInstallInfo/saveInstallInfoImg";
 
     /*上传安装图纸备注信息*/
@@ -124,10 +132,14 @@ public class CustomerUrlPath {
     /*客户管理-获取门店收款人*/
     public static final String URL_GET_SHOP_PAYMENT = CUSTOMER_MANAGER_V2 + "/sysUser/getShopPaymentUser";
 
+    /*客户管理-获取门店签约人*/
+    public static final String URL_GET_SHOP_CONTRACT_USER = CUSTOMER_MANAGER_V2 + "/sysUser/getShopContractUser";
+
     /*客户管理-收取订金，尾款，退款*/
     public static final String URL_SAVE_PAYMENT = CUSTOMER_MANAGER_V2 + "/customerPayment/savePayment";
 
     /*客户管理-收取订金，尾款，合同款图片记录*/
+    @Deprecated
     public static final String URL_SAVE_PAYMENT_IMG = CUSTOMER_MANAGER_V2 + "/customerPaymentImg/saveCustomerPaymentImg";
 
     /*合同登记*/
@@ -147,4 +159,22 @@ public class CustomerUrlPath {
 
     /*客户管理-推送系统消息(重新分配客户)*/
     public static final String URL_REDISTRIBUTION_PUSH = CUSTOMER_MANAGER_V2 + "/customerPersonalInfo/redistributionMsgPush";
+
+    /*客户管理-获取门店量尺人*/
+    public static final String URL_GET_MEASURE_PERSON = CUSTOMER_MANAGER_V2 + "/sysUser/getMeasurePerson";
+
+    /*客户管理-确认流失房屋*/
+    public static final String URL_CONFIRM_LEAVE_HOUSE = CUSTOMER_MANAGER_V2 + "/customerHouseInfo/comfirmLeaveHouse";
+
+    /*无效退回*/
+    public static final String URL_INVALID_RETURN = CUSTOMER_MANAGER_V2 + "/customerHouseInfo/returnHouse";
+
+    /*客户管理-激活线上客户*/
+    public static final String URL_ACTIVATE_HOUSE = CUSTOMER_MANAGER_V2 + "/customerHouseInfo/activateHouse";
+
+    /*线上引流推-广信息接口*/
+    public static final String URL_ONLINE_DRAINAGE_AD = BuildConfig.API_HOST_ONLINE_DRAINAGE + "/ad";
+
+    /*线上引流推-客户信息接口*/
+    public static final String URL_ONLINE_DRAINAGE_LOG = BuildConfig.API_HOST_ONLINE_DRAINAGE + "/log";
 }

@@ -4,6 +4,7 @@
     package="com.holike.crm">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -31,6 +32,13 @@
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
+    <!--x5 webView-->
+    <uses-permission android:name="android.permission.READ_SETTINGS" />
+
+    <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
+
+
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <application
         android:name=".base.MyApplication"
         android:allowBackup="false"
@@ -66,7 +74,7 @@
         <service android:name=".service.UpdateService" />
 
         <activity android:name=".activity.homepage.OrderDetailsActivity" />
-        <activity android:name=".activity.analyze.WeekReportActivity" />
+        <activity android:name=".activity.analyze.OrderTradingTrendActivity" />
         <activity android:name=".activity.message.MessageDetailsActivity" />
         <activity android:name=".activity.mine.ChangePasswordActivity" />
         <activity android:name=".activity.analyze.OrderReportActivity" />
@@ -82,7 +90,7 @@
         <activity android:name=".activity.main.PhotoViewActivity" />
         <activity android:name=".activity.analyze.TranslateReportActivity" />
         <activity android:name=".activity.analyze.OrderRankingActivity" />
-        <activity android:name=".activity.analyze.ProductTradingActivity" />
+        <activity android:name=".activity.analyze.ProductTransactionReportActivity" />
         <activity android:name=".activity.analyze.BuildStoreActivity" />
         <activity android:name=".activity.analyze.InstallEvaluateActivity" />
         <activity android:name=".activity.analyze.PerformanceActivity" />
@@ -95,6 +103,7 @@
         <activity android:name=".activity.analyze.MonthPkActivity" />
         <activity android:name=".activity.analyze.OnlineAttractReportActivity" />
         <activity android:name=".activity.analyze.WoodenDoorActivity" />
+        <activity android:name=".activity.analyze.CustomerSatisfactionActivity" />
         <activity
             android:name=".activity.homepage.AddCustomerActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -180,7 +189,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!--员工重置密码-->
         <activity
-            android:name=".activity.employee2.EmployeePasswordActivity"
+            android:name=".activity.employee2.EmployeeResetPwActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
@@ -199,6 +208,16 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity android:name=".activity.homepage2.MonthDataActivity" />
+        <activity android:name=".activity.customer.CustomerChargeDepositActivity" />
+        <activity
+            android:name=".activity.customer.CustomerChargeDepositSearchActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+
+        <activity android:name=".activity.customer.CustomerOnlineLogActivity" />
+        <activity android:name=".activity.web.WebViewActivity" />
+        <!--版本更新服务-->
+        <service android:name=".service.VersionUpdateService" />
+
         <!--极光-->
         <service
             android:name="cn.jpush.android.service.PushService"

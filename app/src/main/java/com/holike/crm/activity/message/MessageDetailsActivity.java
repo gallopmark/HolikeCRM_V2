@@ -3,6 +3,7 @@ package com.holike.crm.activity.message;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.gallopmark.recycler.adapterhelper.SuperRecyclerAdapter;
 import com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView;
 import com.holike.crm.R;
@@ -64,7 +64,7 @@ public class MessageDetailsActivity extends MyFragmentActivity<MessageDetailsPre
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         setTitle(getString(R.string.message_detail_title));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         mHeaderView = getLayoutInflater().inflate(R.layout.header_message_detail, new LinearLayout(this), false);

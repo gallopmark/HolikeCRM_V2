@@ -7,7 +7,6 @@ import com.holike.crm.util.TimeUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created by gallop on 2019/8/13.
@@ -16,9 +15,13 @@ import java.util.Map;
 public class ErrorInfoBean {
 
     public String statusTime;
-    public String depositFlag;
+    @SuppressWarnings("WeakerAccess")
+    String depositFlag;
     public String status;
     public String houseId;
+    @SuppressWarnings("WeakerAccess")
+    String returnTime;
+    public String efficientCause;
 //
     public String getStatusTime() {
 //        if (TextUtils.isEmpty(errorInfo)) {
@@ -69,4 +72,15 @@ public class ErrorInfoBean {
         return TextUtils.equals(depositFlag, "Y") || TextUtils.equals(depositFlag, "y");
     }
 
+    public String getReturnTime(){
+        if (TextUtils.isEmpty(returnTime)) {
+            return "";
+        }
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(returnTime);
+            return TimeUtil.timeMillsFormat(date);
+        } catch (Exception e) {
+            return returnTime;
+        }
+    }
 }

@@ -22,7 +22,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/3.
  * 添加沟通记录
  */
-
+@Deprecated
 public class AddRecordFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_add_record_way)
     TextView tvWay;

@@ -1,7 +1,6 @@
 package com.holike.crm.fragment.main.child;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -26,11 +25,11 @@ import butterknife.BindView;
 
 /*首页功能菜单*/
 public class HomeMenuFragment extends MyFragment {
-    @BindView(R.id.mMenuRecyclerView)
+    @BindView(R.id.menuRecyclerView)
     RecyclerView mMenuRecyclerView;
-    @BindView(R.id.mMenuProgressLayout)
+    @BindView(R.id.menuProgressLayout)
     FrameLayout mMenuProgressLayout;
-    @BindView(R.id.mProgressView)
+    @BindView(R.id.progressView)
     View mProgressView;
     private List<HomepageBean.NewDataBean.CreditItem> mItems = new ArrayList<>();
     private MenuAdapter mAdapter;
@@ -42,28 +41,28 @@ public class HomeMenuFragment extends MyFragment {
 
     private class MenuAdapter extends CommonAdapter<HomepageBean.NewDataBean.CreditItem> {
 
+        int mItemWidth;
         MenuAdapter(Context context, List<HomepageBean.NewDataBean.CreditItem> mDatas) {
             super(context, mDatas);
+            mItemWidth = ((DensityUtil.getScreenWidth(mContext) - (int) (2 * mContext.getResources().getDimension(R.dimen.dp_12))) / 4);
         }
 
         @Override
         public void onBindHolder(RecyclerHolder holder, HomepageBean.NewDataBean.CreditItem item, int position) {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
-            params.width = ((DensityUtil.getScreenWidth(mContext) - (int) (2 * mContext.getResources().getDimension(R.dimen.dp_12))) / 4);
+            params.width = mItemWidth;
             holder.itemView.setLayoutParams(params);
-            holder.setVisibility(R.id.tv_item_rv_homepage_operate_num, false);
-            holder.setText(R.id.tv_item_rv_homepage_operate_name, item.getName());
-            Glide.with(mContext).load(item.getIcon()).into((ImageView) holder.obtainView(R.id.iv_item_rv_homepage_operate_icon));
+            holder.setText(R.id.tv_operate_name, item.getName());
+            Glide.with(mContext).load(item.getIcon()).into((ImageView) holder.obtainView(R.id.iv_operate_icon));
             holder.itemView.setOnClickListener(v -> {
                 if (mOnMenuClickListener != null) {
                     mOnMenuClickListener.onMenuClick(item.getType(), item.getName());
                 }
             });
         }
-
         @Override
         protected int bindView(int viewType) {
-            return R.layout.item_rv_homepage_operate;
+            return R.layout.item_homepage_operate;
         }
     }
 

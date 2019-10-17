@@ -10,7 +10,7 @@ import com.holike.crm.bean.UpdateBean;
  */
 
 public interface MainView extends BaseView {
-    void hasNewVersion(UpdateBean updateBean);
+    void onGetVersion(UpdateBean updateBean,boolean hasNewVersion);
 
     void onFailure();
 }

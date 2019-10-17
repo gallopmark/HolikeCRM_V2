@@ -1,6 +1,9 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragmentActivity;
@@ -38,10 +41,8 @@ public class ActiveMarketRankActivity extends MyFragmentActivity<ActiveMarketRan
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(@Nullable Bundle savedInstanceState) {
         setTitle(getString(R.string.report_item17_title));
-        setLeft(getString(R.string.report_title));
         setStatusBarColor(R.color.bg_state_bar);
         getData();
     }

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,8 +31,8 @@ import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.helper.FlexboxManagerHelper;
 import com.holike.crm.http.ParamHelper;
-import com.holike.crm.manager.FlowLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,8 +113,8 @@ public class SupervisorRoundsHelper extends GeneralHelper {
                 expandLayout.setVisibility(View.VISIBLE);
                 expandLayout.findViewById(R.id.tv_expand).setOnClickListener(new View.OnClickListener() {
                     private boolean isExpanded;
-                    private Drawable mArrowDown = ContextCompat.getDrawable(mActivity, R.drawable.ic_arrow_down_accent);
-                    private Drawable mArrowUp = ContextCompat.getDrawable(mActivity, R.drawable.ic_arrow_up_accent);
+                    private Drawable mArrowDown = ContextCompat.getDrawable(mActivity, R.drawable.layer_arrow_down_accent);
+                    private Drawable mArrowUp = ContextCompat.getDrawable(mActivity, R.drawable.layer_arrow_up_accent);
 
                     @Override
                     public void onClick(View view) {
@@ -151,7 +150,7 @@ public class SupervisorRoundsHelper extends GeneralHelper {
 
     private void initFooterView(SysCodeItemBean bean) {
         RecyclerView rvSelect = mFooterView.findViewById(R.id.rv_select);
-        rvSelect.setLayoutManager(new FlowLayoutManager());
+        rvSelect.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
         List<DictionaryBean> list = new ArrayList<>();
         for (Map.Entry<String, String> entry : bean.getReviewHousePlan().entrySet()) {
             list.add(new DictionaryBean(entry.getKey(), entry.getValue()));
@@ -216,6 +215,12 @@ public class SupervisorRoundsHelper extends GeneralHelper {
                         ContextCompat.getColor(mContext, R.color.color_while));
                 holder.mRv.addItemDecoration(itemDecoration);
                 holder.tag = itemDecoration;
+            }
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+            if (position == getItemCount() - 1) {
+                params.bottomMargin = mDp10;
+            } else {
+                params.bottomMargin = 0;
             }
             holder.mRv.setAdapter(new ImageGridAdapter(mContext, mData.get(position)));
         }

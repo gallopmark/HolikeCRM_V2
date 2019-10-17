@@ -1,5 +1,6 @@
 package com.holike.crm.activity.employee;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.holike.crm.view.activity.EmployeeResetPasswordView;
 import butterknife.BindView;
 
 /*员工信息 重置密码*/
+@Deprecated
 public class ResetPasswordActivity extends MyFragmentActivity<EmployeeResetPasswordPresenter, EmployeeResetPasswordView> implements EmployeeResetPasswordView {
 
     @BindView(R.id.mNewPassword)
@@ -42,9 +44,8 @@ public class ResetPasswordActivity extends MyFragmentActivity<EmployeeResetPassw
     }
 
     @Override
-    protected void init() {
-        super.init();
-        setLeft("");
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setTitle(getString(R.string.reset_password_title));
         mPresenter.watcher(mNewPassword, mConfirmPassword, mClearPwdIv, mClearPwdIv2, mSaveTextView);
         mPresenter.onShowPassword(mNewPassword, mEyePwdIv);

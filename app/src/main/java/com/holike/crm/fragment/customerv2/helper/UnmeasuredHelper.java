@@ -15,22 +15,19 @@ import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.DictionaryBean;
-import com.holike.crm.bean.DistributionStoreBean;
 import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.helper.FlexboxManagerHelper;
 import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.http.ParamHelper;
-import com.holike.crm.manager.FlowLayoutManager;
 import com.holike.crm.util.KeyBoardUtil;
 import com.holike.crm.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.OnClick;
 
 /**
  * Created by gallop on 2019/8/12.
@@ -118,11 +115,11 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
     }
 
     public void setMeasureSpace(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new FlowLayoutManager());
+        recyclerView.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
         SysCodeItemBean bean = IntentValue.getInstance().getSystemCode();
-        if (bean != null && bean.customerMeasureSpace != null) {
+        if (bean != null) {
             List<DictionaryBean> list = new ArrayList<>();
-            for (Map.Entry<String, String> entry : bean.customerMeasureSpace.entrySet()) {
+            for (Map.Entry<String, String> entry : bean.getCustomerMeasureSpace().entrySet()) {
                 list.add(new DictionaryBean(entry.getKey(), entry.getValue()));
             }
             mMeasureSpaceAdapter = new MultipleChoiceAdapter(mContext, list, mSelectedItems);
@@ -149,9 +146,9 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
                 break;
             case R.id.tv_measure_ruler:
                 if (TextUtils.isEmpty(mAppointShopId)) {
-                    showToast(mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.store));
+                    showToast(mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.followup_measure_store_tips2));
                 } else {
-                    mCallback.onQueryShopUser(mAppointShopId);
+                    mCallback.onQueryMeasurer(mAppointShopId);
                 }
                 break;
             case R.id.tvSave:
@@ -161,14 +158,14 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
     }
 
     private void onSelectDate() {
-        PickerHelper.showTimePicker(mContext, (date, v) -> {
+        PickerHelper.showTimePicker(mContext, date -> {
             mDate = TimeUtil.timeMillsFormat(date, "yyyy-MM-dd");
-            mReservationDateTextView.setText(mDate);
+            mReservationDateTextView.setText(TimeUtil.timeMillsFormat(date));
         });
     }
 
     private void onSelectTime() {
-        PickerHelper.showTimeHMPicker(mContext, (date, v) -> {
+        PickerHelper.showTimeHMPicker(mContext, date -> {
             mTime = TimeUtil.timeMillsFormat(date, "HH:mm:ss");
             mReservationTimeTextView.setText(TimeUtil.timeMillsFormat(date, "HH:mm"));
         });
@@ -180,33 +177,31 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
     }
 
     private void onSelectShop() {
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         final List<CurrentUserBean.ShopInfo> shopInfoList = mCurrentUser.getShopInfo();
         for (CurrentUserBean.ShopInfo bean : shopInfoList) {
-            optionItems.add(bean.shopName);
+            optionItems.add(new DictionaryBean(bean.shopId, bean.shopName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mShopIndex = options1;
-            mAppointShopId = shopInfoList.get(options1).shopId;
-            mMeasureShopTextView.setText(shopInfoList.get(options1).shopName);
-        }, mShopIndex);
+        PickerHelper.showOptionsPicker(mContext, optionItems, mShopIndex, ((position, bean) -> {
+            mShopIndex = position;
+            mAppointShopId = bean.id;
+            mMeasureShopTextView.setText(bean.name);
+            mAppointMeasureBy = null;
+            mMeasureByTextView.setText(null);
+        }));
     }
 
     /*选择设计师*/
-    public void onSelectRuler(List<ShopRoleUserBean.InnerBean> list) {
-        Map<String, String> map = new HashMap<>();
-        for (ShopRoleUserBean.InnerBean bean : list) {
-            for (ShopRoleUserBean.UserBean userBean : bean.getUserList()) {
-                map.put(userBean.userId, userBean.userName);
-            }
+    public void onSelectRuler(final List<ShopRoleUserBean.UserBean> list) {
+        List<DictionaryBean> optionItems = new ArrayList<>();
+        for (ShopRoleUserBean.UserBean bean : list) {
+            optionItems.add(new DictionaryBean(bean.userId, bean.userName));
         }
-        List<String> optionItems = new ArrayList<>(map.values());
-        final List<String> ids = new ArrayList<>(map.keySet());
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mRulerIndex = options1;
-            mAppointMeasureBy = ids.get(options1);
-            mMeasureByTextView.setText(optionItems.get(options1));
-        }, mRulerIndex);
+        PickerHelper.showOptionsPicker(mContext, optionItems, mRulerIndex, (position, bean) -> {
+            mRulerIndex = position;
+            mAppointMeasureBy = bean.id;
+            mMeasureByTextView.setText(bean.name);
+        });
     }
 
     private void onSave() {
@@ -238,7 +233,7 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
     public interface Callback {
         void onQueryUserInfo();
 
-        void onQueryShopUser(String shopId);
+        void onQueryMeasurer(String shopId);
 
         void onSave(String body);
     }

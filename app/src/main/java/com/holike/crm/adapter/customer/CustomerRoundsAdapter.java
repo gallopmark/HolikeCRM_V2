@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.holike.crm.R;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
 import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 
@@ -34,7 +33,12 @@ public class CustomerRoundsAdapter extends CustomerStatusListAdapter {
         holder.setText(R.id.tv_upload_date, obtain2(mTipsUploadDate, wrap(bean.uploadPlanDate))); //上传方案时间
         holder.setText(R.id.tv_source, obtain(mTipsSource, bean.source, false)); //来源
         holder.setText(R.id.tv_designer, obtain(mTipsDesigner, wrap(bean.designer), false)); //设计师
-        holder.setText(R.id.tv_reservation, obtain2(mTipsReservation, wrap(bean.measureAppConfirmTime))); //确图
+        if (!TextUtils.isEmpty(bean.measureAppConfirmTime)) {  //预约确图
+            holder.setText(R.id.tv_reservation, obtain2(mTipsReservation, bean.measureAppConfirmTime));
+            holder.setVisibility(R.id.tv_reservation, View.VISIBLE);
+        } else {
+            holder.setVisibility(R.id.tv_reservation, View.GONE);
+        }
         if (TextUtils.isEmpty(bean.customerProtectTime)) {
             holder.setVisibility(R.id.tv_countdown, View.GONE);
         } else {

@@ -15,6 +15,19 @@ public class MessageEvent {
 
     private Bundle mArguments;
 
+    public String type;
+
+    public MessageEvent() {
+    }
+
+    public MessageEvent(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public void setArguments(Bundle arguments) {
         this.mArguments = arguments;
     }

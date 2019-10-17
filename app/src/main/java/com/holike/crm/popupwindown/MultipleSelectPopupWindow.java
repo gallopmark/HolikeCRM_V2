@@ -2,7 +2,6 @@ package com.holike.crm.popupwindown;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
-import com.holike.crm.bean.DictionaryBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +57,11 @@ public class MultipleSelectPopupWindow extends CommonPopupWindow {
     }
 
     @Override
+    public int getBottomMargin() {
+        return mContext.getResources().getDimensionPixelSize(R.dimen.dp_50);
+    }
+
+    @Override
     public int bindLayoutId() {
         return R.layout.popupwindow_multiple_select;
     }
@@ -68,9 +71,14 @@ public class MultipleSelectPopupWindow extends CommonPopupWindow {
     }
 
     public MultipleSelectPopupWindow(Context context, List<Item> items, List<Item> selectItems) {
+        this(context, items, selectItems, 0);
+    }
+
+    public MultipleSelectPopupWindow(Context context, List<Item> items, List<Item> selectItems, int bottomMargin) {
         super(context);
         this.mItems = items;
         initView(selectItems);
+        setBottomMargin(bottomMargin);
     }
 
     private void initView(List<Item> selectItems) {
@@ -104,7 +112,7 @@ public class MultipleSelectPopupWindow extends CommonPopupWindow {
 
         @Override
         protected int bindView(int viewType) {
-            return R.layout.item_multiplechoice;
+            return R.layout.popupwindow_item_selectable;
         }
 
         @Override

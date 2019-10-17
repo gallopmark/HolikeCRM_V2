@@ -1,9 +1,10 @@
 package com.holike.crm.activity.mine;
 
 
+import android.os.Bundle;
+
 import com.holike.crm.R;
 import com.holike.crm.base.BasePresenter;
-import com.holike.crm.base.MyApplication;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.fragment.homepage.FeedbackFragment;
 
@@ -25,8 +26,8 @@ public class FeedbackActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
 
 //        HomepageBean homepageBean = (HomepageBean) getIntent().getSerializableExtra(Constants.HOME_PAGE_BEAN);
 //        Map<String, Serializable> params = new HashMap<>();

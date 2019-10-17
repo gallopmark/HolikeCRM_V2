@@ -1,6 +1,7 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+import android.os.Bundle;
 
 import com.holike.crm.R;
 import com.holike.crm.base.BasePresenter;
@@ -24,8 +25,8 @@ public class TranslateReportActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         startFragment(new TranslateReportFragment());
     }
 

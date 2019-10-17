@@ -39,7 +39,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/6/12.
  * 添加客户
  */
-
+@Deprecated
 public class AddCustomerActivity extends MyFragmentActivity<AddCustomerPresenter, AddCustomerView> implements AddCustomerView, HouseMutilSelectHelper.HouseMutilSelectListener {
     protected final int TYPE_CUSTOMER_GENDER = 1;
     protected final int TYPE_CUSTOMER_SOURCE = 2;
@@ -151,7 +151,7 @@ public class AddCustomerActivity extends MyFragmentActivity<AddCustomerPresenter
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.getString(Constants.IS_EARNEST) != null) {
             initImgList();

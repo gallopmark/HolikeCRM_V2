@@ -5,7 +5,10 @@ import android.app.Activity;
 import com.holike.crm.R;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.fragment.customerv2.helper.BeenLostHelper;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
 
 /**
  * Created by gallop on 2019/7/22.
@@ -43,10 +46,11 @@ public class BeenLostFragment extends GeneralCustomerFragment implements BeenLos
         super.onSuccess(object);
         if (object instanceof SysCodeItemBean) {
             mBeenLostHelper.setSystemCode((SysCodeItemBean) object);
-        } else if(object instanceof String){
+        } else if (object instanceof String) {
             showShortToast((String) object);
             BaseActivity<?, ?> activity = (BaseActivity<?, ?>) mContext;
             activity.setResult(Activity.RESULT_OK);
+            RxBus.getInstance().post(new MessageEvent(CustomerValue.EVENT_TYPE_LOST_HOUSE));
             activity.finish();
         }
     }

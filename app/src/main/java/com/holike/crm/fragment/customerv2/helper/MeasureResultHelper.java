@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,10 +24,11 @@ import com.holike.crm.R;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CurrentUserBean;
-import com.holike.crm.bean.DealerInfoBean;
+import com.holike.crm.bean.DictionaryBean;
+import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.bean.SysCodeItemBean;
-import com.holike.crm.customView.AppToastCompat;
 import com.holike.crm.enumeration.CustomerValue;
+import com.holike.crm.helper.IImageSelectHelper;
 import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.http.ParamHelper;
 import com.holike.crm.util.TimeUtil;
@@ -43,7 +43,7 @@ import java.util.Map;
  * Copyright holike possess 2019.
  * 量尺结果帮助类
  */
-public class MeasureResultHelper extends IBaseHelper {
+public class MeasureResultHelper extends IImageSelectHelper {
 
     private MeasureResultCallback mCallback;
     private List<AdapterItem> mItems = new ArrayList<>();
@@ -80,7 +80,8 @@ public class MeasureResultHelper extends IBaseHelper {
     private List<String> mSelectedImages;  //已选择的图片 （从客户管理详情也带过来，属于网络图片）
     private List<String> mMeasureImages; //删除图片去schemeImgId，后台真是骚 搞不懂？？？？？？？？
     private List<String> mRemovedImages;  //被删除的网络图片数据
-    private List<DealerInfoBean> mDealerInfoList; //所有经销商设计师等数据
+//    private List<DealerInfoBean> mDealerInfoList; //所有经销商设计师等数据
+//    private List<DealerInfoBean.UserBean> mCurrentUserList; //当前选中的设计师集合
 
     public MeasureResultHelper(BaseFragment<?, ?> fragment, MeasureResultCallback callback) {
         super(fragment);
@@ -179,17 +180,17 @@ public class MeasureResultHelper extends IBaseHelper {
             } else if (viewId == R.id.tv_measure_date) {
                 onSelectAmountOfDate(mMeasureDateTextView);
             } else if (viewId == R.id.tv_measure_shop) {
-                if (mDealerInfoList == null) {
-                    mCallback.onQueryAllDesigner();
+                if (mCurrentUserBean == null) {
+                    mCallback.onQueryUserInfo();
                 } else {
-                    onSelectMeasureShop(mMeasureShopTextView);
+                    onSelectMeasureShop();
                 }
             } else if (viewId == R.id.tv_surveyor) {
                 if (TextUtils.isEmpty(mMeasureShopId)) {
                     String text = mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.followup_actual_shop);
-                    AppToastCompat.makeText(mContext.getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+                    mCallback.onRequired(text);
                 } else {
-                    onSelectMeasureUser(mMeasureByTextView);
+                    mCallback.onQueryMeasurer(mMeasureShopId);
                 }
             } else if (viewId == R.id.tv_reservation_date) {
                 onSelectMeasureConfirmTime(mAppConfirmTextView);
@@ -209,20 +210,25 @@ public class MeasureResultHelper extends IBaseHelper {
      * 量尺日期默认为今日，点击可以滑动选择其他时间。量尺人默认为本账号人员，点击可以滑动选择其他设计师。
      */
     private void initValues() {
-        mAmountOfDate = TimeUtil.timeMillsFormat(new Date(), "yyyy-MM-dd");
-        setDefaultValue();
+        if (TextUtils.isEmpty(mAmountOfDate)) {
+            Date date = new Date();
+            mAmountOfDate = TimeUtil.timeMillsFormat(date, "yyyy-MM-dd");
+            mMeasureDateTextView.setText(TimeUtil.timeMillsFormat(date));
+        }
+//        setDefaultValue();
     }
 
-    private void setDefaultValue() {
-        if (mCurrentUserBean == null) return;
-        if (mCurrentUserBean.getUserInfo() != null) {
-            CurrentUserBean.InfoBean infoBean = mCurrentUserBean.getUserInfo();
-            if (TextUtils.isEmpty(mMeasureBy)) {
-                mMeasureBy = infoBean.userId;
-                mMeasureByTextView.setText(infoBean.userName);
-            }
-        }
-    }
+    /*设置默认量尺人员为本账号*/
+//   private void setDefaultValue() {
+//        if (mCurrentUserBean == null) return;
+//        if (mCurrentUserBean.getUserInfo() != null) {
+//            CurrentUserBean.InfoBean infoBean = mCurrentUserBean.getUserInfo();
+//            if (TextUtils.isEmpty(mMeasureBy)) {
+//                mMeasureBy = infoBean.userId;
+//                mMeasureByTextView.setText(infoBean.userName);
+//            }
+//        }
+//    }
 
     private void setDataFromBundle(Bundle bundle) {
         mHouseId = bundle.getString(CustomerValue.HOUSE_ID); //房屋id
@@ -242,11 +248,11 @@ public class MeasureResultHelper extends IBaseHelper {
         String amountOfDate = bundle.getString("amountOfDate");
         mAmountOfDate = TimeUtil.timeMillsFormat(amountOfDate, "yyyy-MM-dd");
         mMeasureDateTextView.setText(TimeUtil.timeMillsFormat(amountOfDate));
-        mMeasureShopId = bundle.getString("measureShopId");
-        mMeasureShopTextView.setText(bundle.getString("measureShopName"));
+        mMeasureShopId = bundle.getString("shopId");
+        mMeasureShopTextView.setText(bundle.getString("shopName"));
         mMeasureBy = bundle.getString("measureBy");
         mMeasureByTextView.setText(bundle.getString("measureByName"));
-        setDefaultValue();
+//        setDefaultValue();
         String measureAppConfirmTime = bundle.getString("measureAppConfirmTime");
         mMeasureAppConfirmTime = TimeUtil.timeMillsFormat(measureAppConfirmTime, "yyyy-MM-dd");
         mAppConfirmTextView.setText(TimeUtil.timeMillsFormat(measureAppConfirmTime));
@@ -261,7 +267,7 @@ public class MeasureResultHelper extends IBaseHelper {
         }
     }
 
-    private void setupSelectedImages(){
+    private void setupSelectedImages() {
         mImageHelper.imageOptionsListener((position, path) -> {
             mImageHelper.remove(position);
             if (mSelectedImages.contains(path) && position >= 0 && position < mMeasureImages.size()) {  //删除网络图片
@@ -274,22 +280,17 @@ public class MeasureResultHelper extends IBaseHelper {
         }).setImagePaths(mSelectedImages);
     }
 
-    public void setDealerInfo(List<DealerInfoBean> list) {
-        mDealerInfoList = list;
-        onSelectMeasureShop(mMeasureShopTextView);
-    }
-
     /*选择计划入住时间*/
     private void onSelectPlanStayDate(final TextView tv) {
-        PickerHelper.showTimePicker(mContext, (date, v) -> {
+        PickerHelper.showTimePicker(mContext, date -> {
             mPlannedStayDate = TimeUtil.timeMillsFormat(date, "yyyy-MM-dd");
             tv.setText(TimeUtil.timeMillsFormat(date));
         });
     }
 
-    /*选择量房完成时间*/
+    /*选择量房完成时间 不能选未来时间*/
     private void onSelectAmountOfDate(final TextView tv) {
-        PickerHelper.showTimePicker(mContext, (date, v) -> { //实际量尺日期不能选未来时间
+        PickerHelper.showTimePicker(mContext, null, new Date(), date -> {
             if (date.after(new Date())) {  //选择了未来时间，则默认为当天时间
                 mAmountOfDate = TimeUtil.timeMillsFormat(new Date(), "yyyy-MM-dd");
                 tv.setText(TimeUtil.timeMillsFormat(new Date()));
@@ -301,43 +302,35 @@ public class MeasureResultHelper extends IBaseHelper {
     }
 
     /*选择实际量尺门店*/
-    private void onSelectMeasureShop(TextView tv) {
-        final List<String> shopList = new ArrayList<>();
-        List<String> optionItems = new ArrayList<>();
-        for (DealerInfoBean infoBean : mDealerInfoList) {
-            if (!TextUtils.isEmpty(infoBean.shopId) && !TextUtils.isEmpty(infoBean.shopName)) {
-                shopList.add(infoBean.shopId);
-                optionItems.add(infoBean.shopName);
-            }
+    private void onSelectMeasureShop() {
+        List<DictionaryBean> optionItems = new ArrayList<>();
+        final List<CurrentUserBean.ShopInfo> shopInfoList = mCurrentUserBean.getShopInfo();
+        for (CurrentUserBean.ShopInfo infoBean : shopInfoList) {
+            optionItems.add(new DictionaryBean(infoBean.shopId, infoBean.shopName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mMeasureShopId = shopList.get(options1);
-            tv.setText(optionItems.get(options1));
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
+            mMeasureShopId = bean.id;
+            mMeasureShopTextView.setText(bean.name);
+            mMeasureBy = null; //清空已选的量尺人员
+            mMeasureByTextView.setText(null);
         });
     }
 
     /*选择实际量尺人员*/
-    private void onSelectMeasureUser(final TextView tv) {
-        final List<DealerInfoBean.UserBean> userList = new ArrayList<>();
-        for (DealerInfoBean infoBean : mDealerInfoList) {
-            if (TextUtils.equals(infoBean.shopId, mMeasureShopId)) {
-                userList.addAll(infoBean.getUserList());
-                break;
-            }
+    public void onSelectMeasureUser(final List<ShopRoleUserBean.UserBean> userList) {
+        List<DictionaryBean> optionItems = new ArrayList<>();
+        for (ShopRoleUserBean.UserBean bean : userList) {
+            optionItems.add(new DictionaryBean(bean.userId, bean.userName));
         }
-        List<String> optionItems = new ArrayList<>();
-        for (DealerInfoBean.UserBean bean : userList) {
-            optionItems.add(bean.userName);
-        }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mMeasureBy = userList.get(options1).userId;
-            tv.setText(userList.get(options1).userName);
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
+            mMeasureBy = bean.id;
+            mMeasureByTextView.setText(bean.name);
         });
     }
 
     /*选择预约确图时间*/
     private void onSelectMeasureConfirmTime(final TextView tv) {
-        PickerHelper.showTimePicker(mContext, (date, v) -> {
+        PickerHelper.showTimePicker(mContext, date -> {
             mMeasureAppConfirmTime = TimeUtil.timeMillsFormat(date, "yyyy-MM-dd");
             tv.setText(TimeUtil.timeMillsFormat(date));
         });
@@ -350,7 +343,7 @@ public class MeasureResultHelper extends IBaseHelper {
 
     public void setCurrentUserBean(CurrentUserBean bean) {
         this.mCurrentUserBean = bean;
-        setDefaultValue();
+//        setDefaultValue();
     }
 
     private void initItems() {
@@ -603,7 +596,7 @@ public class MeasureResultHelper extends IBaseHelper {
 
             @Override
             protected int bindView(int viewType) {
-                return R.layout.item_multiplechoice;
+                return R.layout.item_flexbox_optional;
             }
 
             @Override
@@ -644,7 +637,7 @@ public class MeasureResultHelper extends IBaseHelper {
 
             @Override
             protected int bindView(int viewType) {
-                return R.layout.item_multiplechoice;
+                return R.layout.item_flexbox_optional;
             }
 
             @Override
@@ -697,21 +690,25 @@ public class MeasureResultHelper extends IBaseHelper {
                         if (TextUtils.isEmpty(mAmountOfDate)) { //实际量房日期必选
                             mCallback.onRequired(mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.followup_real_measure_time2));
                         } else {
-                            if (TextUtils.isEmpty(mMeasureBy)) { //量尺人员必填
-                                mCallback.onRequired(mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.followup_actual_surveyor2));
+                            if (TextUtils.isEmpty(mMeasureShopId)) {  //量尺门店 必选
+                                mCallback.onRequired(mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.followup_actual_shop));
                             } else {
-                                List<String> images = mImageHelper.getSelectedImages();
-                                List<String> targetImages = new ArrayList<>(); //只上传新添加进来的图片，即从相册新增进来的图片
-                                for (String image : images) { //过滤掉从详情带过来的图片（不作上传，从相册新添加进来的才做上传）
-                                    if (!mSelectedImages.contains(image)) {
-                                        targetImages.add(image);
+                                if (TextUtils.isEmpty(mMeasureBy)) { //量尺人员必填
+                                    mCallback.onRequired(mContext.getString(R.string.tips_please_select) + mContext.getString(R.string.followup_actual_surveyor2));
+                                } else {
+                                    List<String> images = mImageHelper.getSelectedImages();
+                                    List<String> targetImages = new ArrayList<>(); //只上传新添加进来的图片，即从相册新增进来的图片
+                                    for (String image : images) { //过滤掉从详情带过来的图片（不作上传，从相册新添加进来的才做上传）
+                                        if (!mSelectedImages.contains(image)) {
+                                            targetImages.add(image);
+                                        }
                                     }
+                                    mCallback.onSaved(ParamHelper.Customer.finishMeasure(mRemovedImages, mHouseId, mAreaType,
+                                            mMeasureBudgetTypeCode, mCustomizeTheSpace, mFurnitureDemand,
+                                            mAmountOfDate, mMeasureShopId, mMeasureBy, mHouseType, mFamilyMember, mHousePriceTypeCode,
+                                            mPreferenceStyle, mDecorateProperties, mDecorateProgress, mPlannedStayDate,
+                                            mMeasureAppConfirmTime, mRemarkEditText.getText().toString()), targetImages);
                                 }
-                                mCallback.onSaved(ParamHelper.Customer.finishMeasure(mRemovedImages, mHouseId, mAreaType,
-                                        mMeasureBudgetTypeCode, mCustomizeTheSpace, mFurnitureDemand,
-                                        mAmountOfDate, mMeasureShopId, mMeasureBy, mHouseType, mFamilyMember, mHousePriceTypeCode,
-                                        mPreferenceStyle, mDecorateProperties, mDecorateProgress, mPlannedStayDate,
-                                        mMeasureAppConfirmTime, mRemarkEditText.getText().toString()), targetImages);
                             }
                         }
                     }
@@ -725,7 +722,9 @@ public class MeasureResultHelper extends IBaseHelper {
 
         void onShowContentView();
 
-        void onQueryAllDesigner();
+        void onQueryUserInfo();
+
+        void onQueryMeasurer(String shopId);
 
         void onRequired(String text);
 

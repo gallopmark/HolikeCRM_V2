@@ -174,6 +174,54 @@
         app:layout_constraintTop_toTopOf="@+id/tv_decoration_progress"
         app:layout_constraintWidth_percent="0.5" />
 
+    <LinearLayout
+        android:id="@+id/ll_shop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_decoration_progress">
+
+        <TextView
+            android:id="@+id/tv_measure_shop_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followup_measure_store_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_measure_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_ruler_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/ll_shop_layout">
+
+        <TextView
+            android:id="@+id/tv_ruler_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_ruler_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_ruler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_actual_gauge"
         style="@style/Customer_Item_TextViewStyle"
@@ -184,28 +232,7 @@
         android:paddingRight="@dimen/dp_10"
         android:text="@string/followup_actual_gauge_tips"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_decoration_progress"
-        app:layout_constraintWidth_percent="0.5" />
-
-    <TextView
-        android:id="@+id/tv_measure_shop"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/followup_measure_store_tips"
-        app:layout_constraintStart_toEndOf="@+id/tv_actual_gauge"
-        app:layout_constraintTop_toTopOf="@+id/tv_actual_gauge"
-        app:layout_constraintWidth_percent="0.5" />
-
-    <TextView
-        android:id="@+id/tv_ruler"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
-        android:text="@string/customer_ruler_tips"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_actual_gauge"
+        app:layout_constraintTop_toBottomOf="@+id/ll_ruler_layout"
         app:layout_constraintWidth_percent="0.5" />
 
     <TextView
@@ -214,8 +241,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/followup_reservation"
-        app:layout_constraintStart_toEndOf="@+id/tv_ruler"
-        app:layout_constraintTop_toTopOf="@+id/tv_ruler"
+        app:layout_constraintStart_toEndOf="@+id/tv_actual_gauge"
+        app:layout_constraintTop_toTopOf="@+id/tv_actual_gauge"
         app:layout_constraintWidth_percent="0.5" />
 
     <TextView
@@ -226,7 +253,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:text="@string/tips_customer_remark2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ruler" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_actual_gauge" />
 
     <TextView
         android:id="@+id/tv_remark"
@@ -266,7 +293,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_24"
                 android:layout_marginBottom="@dimen/dp_12"
-                android:background="@color/bg"
+                android:background="@drawable/bg_bg_corners4dp"
                 android:drawablePadding="@dimen/dp_4"
                 android:gravity="center"
                 android:paddingLeft="@dimen/dp_10"

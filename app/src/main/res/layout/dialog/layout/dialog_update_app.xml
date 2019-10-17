@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -8,14 +9,15 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/mUpdateBg"
+        android:id="@+id/iv_update_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/update_top" />
+        android:src="@drawable/update_top"
+        tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/mUpdateTipsTv"
+        android:id="@+id/tv_update_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_20"
@@ -24,33 +26,49 @@
         android:textSize="@dimen/textSize_18" />
 
     <TextView
-        android:id="@+id/mVersionTv"
+        android:id="@+id/tv_current_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mUpdateBg"
-        android:layout_alignLeft="@+id/mUpdateTipsTv"
+        android:layout_below="@+id/iv_update_top"
+        android:layout_alignStart="@+id/tv_update_tips"
+        android:layout_alignLeft="@+id/tv_update_tips"
+        android:text="@string/tips_current_version"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_12" />
+
+    <TextView
+        android:id="@+id/tv_newest_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_current_version"
+        android:layout_alignStart="@+id/tv_update_tips"
+        android:layout_alignLeft="@+id/tv_update_tips"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="@string/dialog_update_version"
         android:textColor="@color/textColor6"
         android:textSize="@dimen/textSize_12" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mMessageRv"
+        android:id="@+id/rv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mVersionTv"
-        android:layout_alignLeft="@+id/mUpdateTipsTv"
-        android:layout_alignRight="@+id/mUpdateBg"
+        android:layout_below="@+id/tv_newest_version"
+        android:layout_alignStart="@+id/tv_current_version"
+        android:layout_alignLeft="@+id/tv_current_version"
+        android:layout_alignEnd="@+id/iv_update_top"
+        android:layout_alignRight="@+id/iv_update_top"
         android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
         android:minHeight="@dimen/dp_40"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <TextView
-        android:id="@+id/mUpdateBottomTv"
+        android:id="@+id/tv_update_now"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_28"
-        android:layout_below="@+id/mMessageRv"
+        android:layout_below="@+id/rv_message"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_28"
         android:layout_marginBottom="@dimen/dp_20"

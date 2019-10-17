@@ -17,22 +17,25 @@ import com.holike.crm.util.KeyBoardUtil;
 
 /*客户管理*/
 public class CustomerDetailV2Activity extends MyFragmentActivity {
-    /*客户详情*/
-    public static void open(BaseActivity<?, ?> activity, String personalId) {
-        open(activity, personalId, null);
-    }
 
-    /*客户详情*/
-    public static void open(BaseActivity<?, ?> activity, String personalId, String houseId) {
+    /**
+     * 客户详情
+     *
+     * @param personalId      客户id
+     * @param houseId         房屋id
+     * @param isHighSeasHouse 是否是公海房屋
+     */
+    public static void open(BaseActivity<?, ?> activity, String personalId, String houseId, boolean isHighSeasHouse) {
         Bundle bundle = new Bundle();
         bundle.putString(CustomerValue.PERSONAL_ID, personalId);
         bundle.putString(CustomerValue.HOUSE_ID, houseId);
+        bundle.putBoolean(CustomerValue.HIGH_SEAS_HOUSE_FLAG, isHighSeasHouse);
         activity.startActivity(CustomerDetailV2Activity.class, bundle);
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
 //        startFragment(new CustomerDetailFragment2(), getIntent().getExtras(), false);
         startFragment(new CustomerManagerV2Fragment(), getIntent().getExtras(), false);  //v2.0
     }

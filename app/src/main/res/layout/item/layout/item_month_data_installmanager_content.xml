@@ -6,15 +6,14 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:minHeight="@dimen/dp_44"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/Scrollable_TextViewStyle"
-            android:layout_width="@dimen/dp_70"
+            android:layout_width="@dimen/dp_80"
             android:layout_height="match_parent" />
 
         <View style="@style/divider_vertical" />
@@ -22,7 +21,7 @@
         <TextView
             android:id="@+id/tv_install_count"
             style="@style/Scrollable_TextViewStyle"
-            android:layout_width="@dimen/dp_70"
+            android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
 
@@ -31,7 +30,7 @@
         <TextView
             android:id="@+id/tv_install_area"
             style="@style/Scrollable_TextViewStyle"
-            android:layout_width="@dimen/dp_70"
+            android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
 
@@ -40,20 +39,20 @@
         <TextView
             android:id="@+id/tv_completion_rate"
             style="@style/Scrollable_TextViewStyle"
-            android:layout_width="@dimen/dp_70"
+            android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
 
         <View style="@style/divider_vertical" />
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/tv_satisfaction"
             style="@style/Scrollable_TextViewStyle"
             android:layout_width="@dimen/dp_70"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
 
-        <View style="@style/divider_vertical" />
+        <View style="@style/divider_vertical" />-->
     </LinearLayout>
 
     <View style="@style/divider_horizontal" />

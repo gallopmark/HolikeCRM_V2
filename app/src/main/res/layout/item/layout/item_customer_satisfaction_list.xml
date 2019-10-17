@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@drawable/bg_corners_white_5dp"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_12">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_customer_phone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:maxLines="1"
+            android:text="@string/customer_telephone_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_order_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:maxLines="1"
+            android:text="@string/order_time_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_service_satisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:drawableEnd="@drawable/ic_star"
+                android:drawableRight="@drawable/ic_star"
+                android:drawablePadding="@dimen/dp_4"
+                android:ellipsize="end"
+                android:gravity="center|start"
+                android:maxLines="1"
+                android:text="@string/customer_satisfaction_service"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_design_satisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:drawableEnd="@drawable/ic_star"
+                android:drawableRight="@drawable/ic_star"
+                android:drawablePadding="@dimen/dp_4"
+                android:ellipsize="end"
+                android:gravity="center|start"
+                android:maxLines="1"
+                android:text="@string/customer_satisfaction_design"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_delivery_satisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|start"
+                android:drawableEnd="@drawable/ic_star"
+                android:drawableRight="@drawable/ic_star"
+                android:drawablePadding="@dimen/dp_4"
+                android:ellipsize="end"
+                android:gravity="center|start"
+                android:maxLines="1"
+                android:text="@string/customer_satisfaction_delivery"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_install_satisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:drawableEnd="@drawable/ic_star"
+                android:drawableRight="@drawable/ic_star"
+                android:drawablePadding="@dimen/dp_4"
+                android:ellipsize="end"
+                android:gravity="center|start"
+                android:maxLines="1"
+                android:text="@string/customer_satisfaction_install"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:visibility="gone">
+
+        <View style="@style/divider_horizontal" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:lineSpacingExtra="@dimen/dp_2"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_photo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:visibility="gone">
+
+        <View style="@style/divider_horizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="5" />
+    </LinearLayout>
+</LinearLayout>

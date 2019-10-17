@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/distribution_shop"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView style="@style/Required_TextViewStyle" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_select_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:hint="@string/tips_please_select"
+                android:maxLines="1"
+                android:textColor="@color/textColor4"
+                android:textColorHint="@color/textColor6"
+                android:textSize="@dimen/textSize_14" />
+
+            <ProgressBar
+                android:id="@+id/pb_shop"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_gravity="end"
+                android:indeterminateDrawable="@drawable/anim_loading"
+                android:visibility="gone" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/pb_group"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:indeterminateDrawable="@drawable/anim_loading"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_group_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/distribution_group"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <TextView style="@style/Required_TextViewStyle" />
+
+            <TextView
+                android:id="@+id/tv_select_group"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="end|center"
+                android:hint="@string/tips_please_select"
+                android:maxLines="1"
+                android:textColor="@color/textColor4"
+                android:textColorHint="@color/textColor4"
+                android:textSize="@dimen/textSize_14" />
+
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_guide"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:indeterminateDrawable="@drawable/anim_loading"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_guide_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/distribution_guide"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14" />
+
+            <TextView style="@style/Required_TextViewStyle" />
+
+            <TextView
+                android:id="@+id/tv_select_guide"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="end|center"
+                android:hint="@string/tips_please_select"
+                android:maxLines="1"
+                android:textColor="@color/textColor4"
+                android:textColorHint="@color/textColor6"
+                android:textSize="@dimen/textSize_14" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_guide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

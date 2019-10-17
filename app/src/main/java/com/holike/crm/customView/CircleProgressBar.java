@@ -7,13 +7,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import androidx.annotation.Nullable;
-
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.holike.crm.R;
+import com.holike.crm.util.ParseUtils;
 
 /**
  * Created by wqj on 2018/4/18.
@@ -112,16 +112,11 @@ public class CircleProgressBar extends View {
 
     //设置进度条
     public void setProgress(String text) {
-        if(TextUtils.isEmpty(text)) return;
         if (text.equals("-")) {
             this.text = "- %";
         } else {
             this.text = text;
-            try {
-                progress = Float.parseFloat(text.replace("%", ""));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            progress = ParseUtils.parseFloat(text.replace("%", ""));
             if (progress > max) {
                 progress = max;
             }

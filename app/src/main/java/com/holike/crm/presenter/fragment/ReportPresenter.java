@@ -19,7 +19,7 @@ public class ReportPresenter extends BasePresenter<ReportView, ReportModel> {
             public void success(List<ReportPermissionsBean> list) {
                 if (list == null || list.size() == 0) {
                     if (getView() != null)
-                    getView().noPromissions();
+                    getView().noPermissions();
                 } else {
                     if (getView() != null)
                     getView().getPermissionsSuccess(list);

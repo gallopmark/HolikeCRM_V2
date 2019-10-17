@@ -1,6 +1,7 @@
 package com.holike.crm.activity.customer;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,8 +44,8 @@ public class CustomerMultiTypeActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         String type = getIntent().getType();
         if (TextUtils.equals(type, CustomerValue.TYPE_ASSIGN_GUIDE)) { //分配导购
             setTitle(getString(R.string.house_manage_divide_guide));
@@ -64,9 +65,6 @@ public class CustomerMultiTypeActivity extends MyFragmentActivity {
         } else if (TextUtils.equals(type, CustomerValue.TYPE_UPLOAD_PLAN)) { //上传方案
             setTitle(getString(R.string.followup_upload_scheme_title));
             startFragment(new UploadPlanFragment(), getIntent().getExtras(), false);
-        } else if (TextUtils.equals(type, CustomerValue.TYPE_INVALID_RETURN)) { //无效退回
-            setTitle(getString(R.string.customer_invalid_return_title));
-            startFragment(new InvalidReturnFragment(), getIntent().getExtras(), false);
         } else if (TextUtils.equals(type, CustomerValue.TYPE_UNMEASURED)) { //预约量尺
             setTitle(getString(R.string.customer_appointment_ruler_tips2));
             startFragment(new UnmeasuredFragment(), getIntent().getExtras(), false);
@@ -88,6 +86,9 @@ public class CustomerMultiTypeActivity extends MyFragmentActivity {
         } else if (TextUtils.equals(type, CustomerValue.TYPE_INSTALLED)) { //安装完成
             setTitle(getString(R.string.house_manage_installed));
             startFragment(new InstalledFragment(), getIntent().getExtras(), false);
+        } else if (TextUtils.equals(type, CustomerValue.TYPE_INVALID_RETURN)) { //无效退回
+            setTitle(getString(R.string.customer_invalid_return_title));
+            startFragment(new InvalidReturnFragment(), getIntent().getExtras(), false);
         }
     }
 

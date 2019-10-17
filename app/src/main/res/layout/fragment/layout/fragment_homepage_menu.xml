@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mMenuRecyclerView"
+        android:id="@+id/menuRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never" />
 
     <FrameLayout
-        android:id="@+id/mMenuProgressLayout"
+        android:id="@+id/menuProgressLayout"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_4"
         android:layout_gravity="center"
@@ -25,7 +25,7 @@
             android:background="@drawable/bg_corners10dp_progressbar_background" />
 
         <View
-            android:id="@+id/mProgressView"
+            android:id="@+id/progressView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_corners10dp_coloraccent" />

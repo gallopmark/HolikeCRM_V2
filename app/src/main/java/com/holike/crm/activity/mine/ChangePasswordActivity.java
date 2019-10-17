@@ -1,5 +1,6 @@
 package com.holike.crm.activity.mine;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,17 +23,17 @@ public class ChangePasswordActivity extends MyFragmentActivity<ChangePasswordPre
 
 
     @BindView(R.id.et_change_password_oldpassword)
-    EditText etOldpassword;
+    EditText etOldPassword;
     @BindView(R.id.et_change_password_newpassword)
-    EditText etNewpassword;
+    EditText etNewPassword;
     @BindView(R.id.et_change_password_surepassword)
-    EditText etSurepassword;
+    EditText etSurePassword;
     @BindView(R.id.iv_change_password_oldpassword)
-    ImageView ivOldpassword;
+    ImageView ivOldPassword;
     @BindView(R.id.iv_change_password_newpassword)
-    ImageView ivNewpassword;
+    ImageView ivNewPassword;
     @BindView(R.id.iv_change_password_surepassword)
-    ImageView ivSurepassword;
+    ImageView ivSurePassword;
 
     private boolean isShowOld, isShowNew, isShowSure;
 
@@ -47,7 +48,7 @@ public class ChangePasswordActivity extends MyFragmentActivity<ChangePasswordPre
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         setTitle(getString(R.string.my_change_password));
     }
 
@@ -67,24 +68,24 @@ public class ChangePasswordActivity extends MyFragmentActivity<ChangePasswordPre
     @Override
     public void warn(String text) {
         dismissLoading();
-        showShortToast(text);
+        showLongToast(text);
     }
 
-    @OnClick({R.id.iv_change_password_oldpassword, R.id.iv_change_password_newpassword, R.id.iv_change_password_surepassword, R.id.btn_change_password_save})
+    @OnClick({R.id.iv_change_password_oldpassword, R.id.iv_change_password_newpassword, R.id.iv_change_password_surepassword, R.id.tvSave})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_change_password_oldpassword:
-                isShowOld = showPassword(isShowOld, etOldpassword, ivOldpassword);
+                isShowOld = showPassword(isShowOld, etOldPassword, ivOldPassword);
                 break;
             case R.id.iv_change_password_newpassword:
-                isShowNew = showPassword(isShowNew, etNewpassword, ivNewpassword);
+                isShowNew = showPassword(isShowNew, etNewPassword, ivNewPassword);
                 break;
             case R.id.iv_change_password_surepassword:
-                isShowSure = showPassword(isShowSure, etSurepassword, ivSurepassword);
+                isShowSure = showPassword(isShowSure, etSurePassword, ivSurePassword);
                 break;
-            case R.id.btn_change_password_save:
+            case R.id.tvSave:
                 showLoading();
-                mPresenter.changePassword(etOldpassword.getText().toString(), etNewpassword.getText().toString(), etSurepassword.getText().toString());
+                mPresenter.changePassword(this, etOldPassword.getText().toString(), etNewPassword.getText().toString(), etSurePassword.getText().toString());
                 break;
         }
     }

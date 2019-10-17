@@ -1,5 +1,6 @@
 package com.holike.crm.activity.employee;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.holike.crm.view.activity.EmployeeEditView;
 
 import butterknife.BindView;
 /*新增员工*/
+@Deprecated
 public class EmployeeEditActivity extends MyFragmentActivity<EmployeeEditPresenter, EmployeeEditView>
         implements View.OnClickListener, EmployeeEditView {
 
@@ -47,8 +49,8 @@ public class EmployeeEditActivity extends MyFragmentActivity<EmployeeEditPresent
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setStatusBarColor(R.color.textColor14);
         findViewById(R.id.mBackIv).setOnClickListener(v -> onBackPressed());
         mPresenter.init(this,fragmentManager);

@@ -1,14 +1,12 @@
 package com.holike.crm.fragment.main;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,14 +17,11 @@ import com.holike.crm.activity.customer.CustomerDetailV2Activity;
 import com.holike.crm.activity.homepage.MessageV2Activity;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.MyFragment;
-import com.holike.crm.base.OnRequestPermissionsCallback;
 import com.holike.crm.bean.CustomerListBeanV2;
 import com.holike.crm.bean.SysCodeItemBean;
-import com.holike.crm.controller.CustomerController;
 import com.holike.crm.dialog.DistributionShopDialog;
 import com.holike.crm.presenter.activity.CustomerListPresenter;
-import com.holike.crm.presenter.fragment.HomePagePresenter;
-import com.holike.crm.util.Constants;
+import com.holike.crm.presenter.fragment.HomePagePresenter2;
 import com.holike.crm.view.activity.CustomerV2View;
 import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -43,36 +38,25 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /*客户列表fragment v2.0*/
-public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, CustomerV2View> implements CustomerV2View, CustomerController.CustomerControllerView {
-    @BindView(R.id.ll_parent)
-    LinearLayout llParent;
-    @BindView(R.id.et_search)
-    EditText etSearch;
-    @BindView(R.id.tv_customer_manage_customer_state)
-    TextView tvCustomerState;
-    @BindView(R.id.iv_customer_manage_customer_state)
-    ImageView ivCustomerState;
-    @BindView(R.id.tv_customer_manage_customer_source)
-    TextView tvCustomerSource;
-    @BindView(R.id.iv_red_point_msg)
-    ImageView ivRedPoint;
-    @BindView(R.id.iv_customer_manage_customer_source)
-    ImageView ivCustomerSource;
-    @BindView(R.id.dv_customer_manage_filter)
-    View dvFilter;
+public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, CustomerV2View> implements CustomerV2View, CustomerHelper.Callback {
+    private EditText mSearchEditText;
+    @BindView(R.id.tv_source)
+    TextView mSourceTextView;
+    @BindView(R.id.tv_status)
+    TextView mStatusTextView;
+    @BindView(R.id.v_parent)
+    View mDropDownView;
     @BindView(R.id.mCustomerRv)
     RecyclerView mCustomerRv;
     @BindView(R.id.srl_customer_manage)
     SmartRefreshLayout mRefreshLayout;
 
-    @BindView(R.id.mTimeTextView)
+    @BindView(R.id.tv_select_time)
     TextView mTimeTextView;
-    @BindView(R.id.mArrowImageView)
-    ImageView mArrowImageView;
-    @BindView(R.id.mCountTextView)
+    @BindView(R.id.tv_count)
     TextView mCountTextView;
 
-    private CustomerController mCustomerController;
+    private CustomerHelper mHelper;
     private Handler mHandler;
 
     @Override
@@ -86,35 +70,44 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
     }
 
     @Override
+    protected void onNavigationClick(View view) {
+        mHelper.onClickAddCustomer();
+    }
+
+    @Override
     protected void init() {
-        mCustomerController = new CustomerController(mContext, this);
-        mCustomerController.setDefaultTimeText(mTimeTextView);
-        mCustomerController.setCustomerAdapter(mCustomerRv);
+        mHelper = new CustomerHelper(mContext, this);
+        mHelper.setDefaultTimeText(mTimeTextView);
+        mHelper.setCustomerAdapter(mCustomerRv);
         mRefreshLayout.setRefreshHeader(new WaterDropHeader(mContext));
         mRefreshLayout.setRefreshFooter(new BallPulseFooter(mContext));
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
-                mCustomerController.onRefresh();
+                mHelper.onRefresh();
             }
 
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
-                mCustomerController.onLoadMore();
+                mHelper.onLoadMore();
             }
         });
-        etSearch.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                hideSoftInput(etSearch);
-                search();
-            }
-            return false;
-        });
+        mSearchEditText = setSearchBar(R.string.hint_fragment_customer_search, R.drawable.bg_search);
+        mSearchEditText.setGravity(Gravity.CENTER | Gravity.START);
         getCustomerList();
     }
 
     private void getCustomerList() {
-        mCustomerController.startFirstLoad();
+        mHelper.startFirstLoad();
+    }
+
+    /*搜索*/
+    @Override
+    protected void doSearch() {
+        MobclickAgent.onEvent(mContext, "customer_search");
+//        mHelper.resetParams(tvCustomerState, tvCustomerSource);
+        getCustomerList();
+//        mSearchEditText.setText(null);
     }
 
     @Override
@@ -127,15 +120,15 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
 
     @Override
     public void onSourceSelected(String id, String value) {
-        tvCustomerSource.setText(TextUtils.isEmpty(id) ? mContext.getString(R.string.receive_deposit_customerSource) : value);
-        reset();
+        mSourceTextView.setText(TextUtils.isEmpty(id) ? mContext.getString(R.string.receive_deposit_customerSource) : value);
+//        reset();
         getCustomerList();
     }
 
     @Override
     public void onStatusSelected(String id, String value) {
 //        tvCustomerState.setText(TextUtils.isEmpty(id) ? mContext.getString(R.string.customer_manage_customer_state) : value);
-        reset();
+//        reset();
         getCustomerList();
     }
 
@@ -144,10 +137,11 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
         getCustomerList();
     }
 
-    private void reset() {
-        etSearch.setText("");
-        mCustomerController.onReset();
-    }
+//    private void reset() {
+//        mSearchContent = null;
+//        mSearchEditText.setText(null);
+//        mHelper.onReset();
+//    }
 
     @Override
     public void onGetCustomerList(boolean isShowLoading, String source, String status, Date startDate,
@@ -155,47 +149,36 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
         if (isShowLoading) {
             showLoading();
         }
-        String searchContent = etSearch.getText().toString();
-        mPresenter.getCustomerList(searchContent, source, status, startDate, endDate, orderBy, pageNo, pageSize);
+        mPresenter.getCustomerList(mSearchEditText.getText().toString(), source, status, startDate, endDate, orderBy, pageNo, pageSize);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 //        tvMsg.setText(HomePagePresenter.getMsgNum());
-        ivRedPoint.setVisibility(HomePagePresenter.isNewMsg() ? View.VISIBLE : View.GONE);
+        setRightMenuMsg(HomePagePresenter2.isNewMsg());
+//        ivRedPoint.setVisibility(HomePagePresenter.isNewMsg() ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Constants.RESULT_CODE_EDIT_SUCCESS || resultCode == Constants.RESULT_CODE_ADD_SUCCESS) {
-            getCustomerList();
-        }
+    protected void clickRightMenu(String menuText, View actionView) {
+        startActivity(MessageV2Activity.class);
     }
 
-    @OnClick({R.id.iv_addCustomer, R.id.ll_customer_manage_customer_state,
-            R.id.ll_customer_manage_customer_source, R.id.tv_customer_msg,
-            R.id.mTimeLayout, R.id.iv_orderBy})
+    @OnClick({R.id.tv_source, R.id.tv_status, R.id.tv_select_time, R.id.iv_orderBy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_addCustomer:
-                mCustomerController.onClickAddCustomer();
+            case R.id.tv_source:
+                mHelper.onClickSource(mContentView, mDropDownView, mSourceTextView);
                 break;
-            case R.id.ll_customer_manage_customer_source:
-                mCustomerController.onClickSource(mContentView, dvFilter, ivCustomerSource);
+            case R.id.tv_status:
+                mHelper.onClickStatus(mContentView, mDropDownView, mStatusTextView);
                 break;
-            case R.id.ll_customer_manage_customer_state:
-                mCustomerController.onClickStatus(mContentView, dvFilter, ivCustomerState);
-                break;
-            case R.id.tv_customer_msg:
-                startActivity(MessageV2Activity.class);
-                break;
-            case R.id.mTimeLayout:
-                mCustomerController.showCalendarDialog(mContext, mArrowImageView, mTimeTextView);
+            case R.id.tv_select_time:
+                mHelper.showCalendarDialog(mContext, mTimeTextView);
                 break;
             case R.id.iv_orderBy:
-                mCustomerController.onOrderBy((ImageView) view);
+                mHelper.onOrderBy((ImageView) view);
                 break;
         }
     }
@@ -206,22 +189,18 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
     }
 
     /**
-     * 搜索
-     */
-    private void search() {
-        MobclickAgent.onEvent(mContext, "customer_search");
-        mCustomerController.resetParams(tvCustomerState, tvCustomerSource);
-        getCustomerList();
-    }
-
-    /**
      * 获取客户列表成功
      */
     @Override
     public void getCustomerListSuccess(CustomerListBeanV2 bean) {
         dismissLoading();
         onLoadComplete();
-        mCustomerController.onGetCustomerOk(bean, bean.total, mCountTextView);
+        if (bean.isShow()) { //是否显示"添加客户"icon
+            setNavigationIcon(R.drawable.icon_add);
+        } else {
+            setNavigationIcon(null);
+        }
+        mHelper.onGetCustomerOk(bean, bean.total, mCountTextView);
     }
 
     private void onLoadComplete() {
@@ -237,8 +216,8 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
             hasData();
             setLoadMoreEnabled(!isLoadAll);
         } else {
-            if (mCustomerController.isFirstLoading()) {  //首次加载完成（没有加载到数据）
-                showEmptyView(false);
+            if (mHelper.isFirstLoading()) {  //首次加载完成（没有加载到数据）
+                showEmptyView(false, null);
             }
         }
     }
@@ -260,13 +239,13 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
         dismissLoading();
         onLoadComplete();
         if (isNoAuth(failed)) {
-            mCustomerController.clearData();
+            mHelper.clearData();
             setContentEnabled(false);
             noAuthority();
         } else {
-            if (mCustomerController.isFirstLoading()) {
-                mCustomerController.clearData();
-                showEmptyView(true);
+            if (mHelper.isFirstLoading()) {
+                mHelper.clearData();
+                showEmptyView(true, failed);
             } else {
                 showShortToast(failed);
             }
@@ -274,10 +253,10 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
     }
 
     /*显示缺省页*/
-    private void showEmptyView(boolean isNetworkError) {
+    private void showEmptyView(boolean isNetworkError, String failReason) {
         setContentEnabled(false);
         if (isNetworkError) {
-            noNetwork();
+            noNetwork(failReason);
         } else {
             noResult();
         }
@@ -307,35 +286,20 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
      */
     @Override
     public void onGetSystemCodeSuccess(SysCodeItemBean bean) {
-        int pressedType = mCustomerController.getPressedType();
+        int pressedType = mHelper.getPressedType();
         if (pressedType == 1 || pressedType == 2)
             dismissLoading();
-        mCustomerController.onGetSystemCode(bean, mContentView, dvFilter, ivCustomerSource, ivCustomerState);
+        mHelper.onGetSystemCode(bean, mContentView, mDropDownView, mSourceTextView, mStatusTextView);
     }
 
     @Override
     public void onGetSystemCodeFailure(String failed) {
-        int pressedType = mCustomerController.getPressedType();
+        int pressedType = mHelper.getPressedType();
         if (pressedType == 1 || pressedType == 2)
             dismissLoading();
         if (pressedType == 1 || pressedType == 2) {
             showShortToast(failed);
         }
-    }
-
-    @Override
-    public void onRequestCallPhone(final String phoneNumber) {
-        requestPermission(Manifest.permission.CALL_PHONE, new OnRequestPermissionsCallback() {
-            @Override
-            public void onGranted(int requestCode, @NonNull String[] permissions) {
-                mCustomerController.callPhone(phoneNumber);
-            }
-
-            @Override
-            public void onDenied(int requestCode, @NonNull String[] permissions, boolean isProhibit) {
-                mCustomerController.onDismissCallPermission(isProhibit);
-            }
-        });
     }
 
     @Override
@@ -359,7 +323,7 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
         if (TextUtils.isEmpty(bean.shopId)) {
             customerPopupDialog(bean);
         } else {
-            CustomerDetailV2Activity.open((BaseActivity) mContext, bean.personalId, bean.houseId);
+            CustomerDetailV2Activity.open((BaseActivity) mContext, bean.personalId, bean.houseId, bean.isHighSeasHouse());
         }
     }
 
@@ -373,7 +337,7 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
     public void deleteCustomerSuccess(String result, int position) {
         dismissLoading();
         showShortToast(R.string.delete_customer_success_tips);
-        mCustomerController.onDeleteCustomer(position, mCountTextView);
+        mHelper.onDeleteCustomer(position, mCountTextView);
     }
 
     @Override
@@ -402,19 +366,6 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
         DistributionShopDialog dialog = new DistributionShopDialog(mContext, bean);
         dialog.setOnConfirmListener((shopId, groupId, guideId) -> onDistributionShop(bean.houseId, shopId, groupId, guideId));
         dialog.show();
-//        //防止重复创建popupWindow
-//        DistributionStorePopupWindow2 popupWindow = new DistributionStorePopupWindow2(mContext, bean, new DistributionStorePopupWindow2.StateCallback() {
-//            @Override
-//            public void onUpgradeSuccess() {
-//                getCustomerList();
-//            }
-//
-//            @Override
-//            public void onDismiss() {
-//
-//            }
-//        });
-//        popupWindow.showAtLocation(llParent, Gravity.BOTTOM, 0, 0);
     }
 
     /*分配门店*/
@@ -441,6 +392,7 @@ public class CustomerV2Fragment extends MyFragment<CustomerListPresenter, Custom
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
         }
+        mHelper.onDispose();
         super.onDestroyView();
     }
 }

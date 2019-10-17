@@ -31,7 +31,7 @@ import java.util.List;
  * Created by wqj on 2018/9/18.
  * 分配门店
  */
-
+@Deprecated
 public class DistributionStorePopupWindow extends BasePopupWindow implements ShopListRequestHelper.ShopListCallback, View.OnClickListener {
 
     private Context mContext;

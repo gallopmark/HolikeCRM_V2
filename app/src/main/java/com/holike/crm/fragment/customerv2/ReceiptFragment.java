@@ -3,8 +3,6 @@ package com.holike.crm.fragment.customerv2;
 import android.content.Intent;
 
 import com.holike.crm.R;
-import com.holike.crm.base.BasePresenter;
-import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.fragment.customerv2.helper.ReceiptHelper;
@@ -50,7 +48,7 @@ public class ReceiptFragment extends GeneralCustomerFragment implements ReceiptH
     }
 
     @Override
-    public void onRequired(String tips) {
+    public void onRequired(CharSequence tips) {
         showShortToast(tips);
     }
 

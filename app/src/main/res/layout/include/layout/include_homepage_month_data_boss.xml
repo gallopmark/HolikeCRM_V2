@@ -49,8 +49,8 @@
                 android:id="@+id/lineRed"
                 android:layout_width="@dimen/dp_3"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/tv_signatures"
-                android:layout_alignBottom="@+id/tv_signatures"
+                android:layout_alignTop="@+id/tv_deposits"
+                android:layout_alignBottom="@+id/tv_deposits"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_toEndOf="@+id/tv_customers"
@@ -58,13 +58,13 @@
                 android:background="@color/color_red_width_3dp" />
 
             <TextView
-                android:id="@+id/tv_signatures"
+                android:id="@+id/tv_deposits"
                 style="@style/Homepage_MonthData_TextViewStyle"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginLeft="@dimen/dp_4"
                 android:layout_toEndOf="@+id/lineRed"
                 android:layout_toRightOf="@+id/lineRed"
-                android:text="@string/number_of_signatures" />
+                android:text="@string/number_of_deposit_customers" />
 
             <View
                 android:id="@+id/lineBlue"
@@ -82,33 +82,31 @@
                 android:layout_below="@+id/tv_customers"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
                 android:layout_toEndOf="@+id/lineBlue"
                 android:layout_toRightOf="@+id/lineBlue"
                 android:text="@string/number_of_measuring" />
 
             <View
-                android:id="@+id/lineYellow"
+                android:id="@+id/lineOrange"
                 android:layout_width="@dimen/dp_3"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/lineRed"
                 android:layout_alignLeft="@+id/lineRed"
-                android:layout_alignTop="@+id/tv_storeRate"
-                android:layout_alignBottom="@+id/tv_storeRate"
-                android:layout_toEndOf="@+id/tv_measures"
-                android:layout_toRightOf="@+id/tv_measures"
-                android:background="@color/color_yellow_width_3dp" />
+                android:layout_alignTop="@+id/tv_signatures"
+                android:layout_alignBottom="@+id/tv_signatures"
+                android:background="@color/color_orange_width_3dp" />
 
             <TextView
-                android:id="@+id/tv_storeRate"
+                android:id="@+id/tv_signatures"
                 style="@style/Homepage_MonthData_TextViewStyle"
-                android:layout_below="@+id/tv_signatures"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_toEndOf="@+id/lineYellow"
-                android:layout_toRightOf="@+id/lineYellow"
-                android:text="@string/store_entry_turnover_rate" />
+                android:layout_below="@+id/tv_deposits"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_toEndOf="@+id/lineOrange"
+                android:layout_toRightOf="@+id/lineOrange"
+                android:text="@string/number_of_signatures" />
 
             <View
                 android:id="@+id/lineCyan"
@@ -126,7 +124,7 @@
                 android:layout_below="@+id/tv_measures"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
                 android:layout_toEndOf="@+id/lineBlue"
                 android:layout_toRightOf="@+id/lineBlue"
                 android:text="@string/number_of_output_graphs" />
@@ -137,70 +135,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/lineRed"
                 android:layout_alignLeft="@+id/lineRed"
-                android:layout_alignTop="@+id/tv_ruleRate"
-                android:layout_alignBottom="@+id/tv_ruleRate"
-                android:layout_toEndOf="@+id/tv_measures"
-                android:layout_toRightOf="@+id/tv_measures"
-                android:background="@color/color_dark_blue_width_3dp" />
-
-            <TextView
-                android:id="@+id/tv_ruleRate"
-                style="@style/Homepage_MonthData_TextViewStyle"
-                android:layout_below="@+id/tv_storeRate"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_toEndOf="@+id/lineDarkBlue"
-                android:layout_toRightOf="@+id/lineDarkBlue"
-                android:text="@string/scale_turnover_rate" />
-
-            <View
-                android:id="@+id/lineOrange"
-                android:layout_width="@dimen/dp_3"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/lineGreen"
-                android:layout_alignLeft="@+id/lineGreen"
-                android:layout_alignTop="@+id/tv_deposits"
-                android:layout_alignBottom="@+id/tv_deposits"
-                android:background="@color/color_orange_width_3dp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tv_deposits"
-                style="@style/Homepage_MonthData_TextViewStyle"
-                android:layout_below="@+id/tv_graphs"
-                android:layout_marginStart="@dimen/dp_4"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_toEndOf="@+id/lineBlue"
-                android:layout_toRightOf="@+id/lineBlue"
-                android:text="@string/number_of_deposit_customers"
-                android:visibility="gone" />
-
-            <View
-                android:id="@+id/linePink"
-                android:layout_width="@dimen/dp_3"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/lineRed"
-                android:layout_alignLeft="@+id/lineRed"
                 android:layout_alignTop="@+id/tv_seasCount"
                 android:layout_alignBottom="@+id/tv_seasCount"
-                android:layout_toEndOf="@+id/tv_deposits"
-                android:layout_toRightOf="@+id/tv_deposits"
-                android:background="@color/color_pink_width_3dp"
-                android:visibility="gone" />
+                android:layout_toEndOf="@+id/tv_graphs"
+                android:layout_toRightOf="@+id/tv_graphs"
+                android:background="@color/color_dark_blue_width_3dp" />
 
             <TextView
                 android:id="@+id/tv_seasCount"
                 style="@style/Homepage_MonthData_TextViewStyle"
-                android:layout_below="@+id/tv_ruleRate"
+                android:layout_below="@+id/tv_signatures"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
                 android:layout_toEndOf="@+id/lineDarkBlue"
                 android:layout_toRightOf="@+id/lineDarkBlue"
-                android:text="@string/number_of_customers_into_seas"
-                android:visibility="gone" />
+                android:text="@string/number_of_customers_into_seas" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

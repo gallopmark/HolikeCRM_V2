@@ -33,8 +33,9 @@ public class CallbackHelper {
         LogCat.i_response(s);
         try {
             switch (MyJsonParser.getCode(s)) {
-                case 0:
-//                    T t = MyJsonParser.parseJson(s, getClass());
+                case 0: //code = 0 表示数据成功
+                case MyJsonParser.DEFAULT_CODE:  //没有code字段 但是有data字段或result字段
+                    //                    T t = MyJsonParser.parseJson(s, getClass());
                     callBack.onSuccess(MyJsonParser.parseJson(s, callBack.getClass()));
                     break;
                 case 9:
@@ -62,9 +63,6 @@ public class CallbackHelper {
                         callBack.onFailed(MyJsonParser.getMsg(s));
                     }
                     break;
-                case MyJsonParser.DEFAULT_CODE:  //没有Code字段 但是有data字段或result字段
-                    callBack.onSuccess(MyJsonParser.parseJson(s, callBack.getClass()));
-                    break;
                 default:
                     if (MyJsonParser.hasMsg(s)) {
                         callBack.onFailed(MyJsonParser.getMsg(s));
@@ -83,7 +81,7 @@ public class CallbackHelper {
 
     public static <T> void onDeliveryFailure(Throwable throwable, final RequestCallBack<T> callBack) {
         LogCat.e(throwable);
-        callBack.onFailed("网络请求出错");
+        callBack.onFailed(ApiException.handleException(throwable).getMessage());
         callBack.onFinished();
     }
 

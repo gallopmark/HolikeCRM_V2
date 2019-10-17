@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.holike.crm.R;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
 import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 

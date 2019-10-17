@@ -17,6 +17,7 @@ public class Installer implements Parcelable {
     private String id;
     private String installUserId;
     private String installUserName;
+    private String feedbackFlag;
 
     public Installer() {
     }
@@ -30,6 +31,13 @@ public class Installer implements Parcelable {
         this.id = id;
         this.installUserId = installUserId;
         this.installUserName = installUserName;
+    }
+
+    public Installer(String id, String installUserId, String installUserName, String feedbackFlag) {
+        this.id = id;
+        this.installUserId = installUserId;
+        this.installUserName = installUserName;
+        this.feedbackFlag = feedbackFlag;
     }
 
     public void setId(String id) {
@@ -56,6 +64,13 @@ public class Installer implements Parcelable {
         return installUserName == null ? "" : installUserName;
     }
 
+    public void setFeedback(String feedbackFlag) {
+        this.feedbackFlag = feedbackFlag;
+    }
+
+    public boolean isFeedback() {
+        return TextUtils.equals(feedbackFlag, "Y") || TextUtils.equals(feedbackFlag, "y");
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -78,6 +93,7 @@ public class Installer implements Parcelable {
         parcel.writeString(id);
         parcel.writeString(installUserId);
         parcel.writeString(installUserName);
+        parcel.writeString(feedbackFlag);
     }
 
     public static final Creator CREATOR = new Creator() {
@@ -88,6 +104,7 @@ public class Installer implements Parcelable {
             i.setId(source.readString());
             i.setInstallUserId(source.readString());
             i.setInstallUserName(source.readString());
+            i.setFeedback(source.readString());
             return i;
         }
 

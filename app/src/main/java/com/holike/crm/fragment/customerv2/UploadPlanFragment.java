@@ -1,10 +1,8 @@
 package com.holike.crm.fragment.customerv2;
 
-import android.app.Activity;
 import android.content.Intent;
 
 import com.holike.crm.R;
-import com.holike.crm.base.BaseActivity;
 import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.fragment.customerv2.helper.UploadPlanHelper;
 

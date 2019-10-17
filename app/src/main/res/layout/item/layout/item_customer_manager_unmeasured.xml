@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,92 +16,102 @@
     <TextView
         android:id="@+id/tv_reservation_time"
         style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_14"
-        android:text="@string/followup_reservation_time_tips"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_layout"
-        app:layout_constraintWidth_percent="0.5" />
+        android:text="@string/followup_reservation_time_tips" />
 
-    <TextView
-        android:id="@+id/tv_ruler"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:gravity="center|start"
-        android:text="@string/customer_ruler_tips"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_reservation_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_reservation_time"
-        app:layout_constraintTop_toTopOf="@+id/tv_reservation_time" />
-
-    <TextView
-        android:id="@+id/tv_measure_store_tips"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:text="@string/followup_measure_store_tips"
-        android:textColor="@color/textColor8"
-        android:textSize="@dimen/textSize_13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_reservation_time" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_measure_store"
-        android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_measure_store_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followup_measure_store_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_measure_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColor4"
-        android:textSize="@dimen/textSize_13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_measure_store_tips"
-        app:layout_constraintTop_toTopOf="@+id/tv_measure_store_tips" />
+        android:layout_marginTop="@dimen/dp_16">
 
-    <TextView
-        android:id="@+id/tv_measure_space_tips"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_ruler_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:text="@string/customer_ruler_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_ruler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:gravity="center|start" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:text="@string/followup_measure_space_tips"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_measure_store" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_measure_space"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="@dimen/dp_4"
-        android:textColor="@color/textColor4"
-        android:textSize="@dimen/textSize_13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_measure_space_tips"
-        app:layout_constraintTop_toTopOf="@+id/tv_measure_space_tips" />
+        <TextView
+            android:id="@+id/tv_measure_space_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followup_measure_space_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
 
-    <TextView
-        android:id="@+id/tv_remark_tips"
-        style="@style/Customer_Item_TextViewStyle"
-        android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_measure_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/dp_4"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
-        android:text="@string/tips_customer_remark2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_measure_space" />
-
-    <TextView
-        android:id="@+id/tv_remark"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_12"
-        android:lineSpacingExtra="@dimen/dp_4"
-        android:textColor="@color/textColor4"
-        android:textSize="@dimen/textSize_13"
-        app:layout_constraintBottom_toTopOf="@+id/tv_edit_unmeasured"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_remark_tips"
-        app:layout_constraintTop_toTopOf="@+id/tv_remark_tips" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_remark_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tips_customer_remark2"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/dp_4"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_edit_unmeasured"
@@ -111,14 +121,12 @@
         android:background="@drawable/bg_bg_corners4dp"
         android:paddingLeft="@dimen/dp_14"
         android:paddingTop="@dimen/dp_6"
+        android:layout_gravity="end"
         android:paddingRight="@dimen/dp_14"
         android:paddingBottom="@dimen/dp_6"
         android:text="@string/edit"
         android:textColor="@color/textColor14"
         android:textSize="@dimen/textSize_13"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_remark" />
+        android:visibility="gone" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

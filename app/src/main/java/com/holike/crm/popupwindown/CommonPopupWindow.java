@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.PopupWindowCompat;
 
 import com.holike.crm.R;
+import com.holike.crm.util.DensityUtil;
 
 /**
  * Created by gallop on 2019/7/11.
@@ -24,6 +25,7 @@ import com.holike.crm.R;
 public abstract class CommonPopupWindow extends PopupWindow {
     protected Context mContext;
     protected View mContentView;
+    private int mBottomMargin = 0;
 
     public CommonPopupWindow(Context context) {
         this.mContext = context;
@@ -48,7 +50,7 @@ public abstract class CommonPopupWindow extends PopupWindow {
     }
 
     public int getColorDrawable() {
-        return R.color.color_while;
+        return R.color.bg_transparent;
     }
 
     @Override
@@ -61,6 +63,14 @@ public abstract class CommonPopupWindow extends PopupWindow {
         return ViewGroup.LayoutParams.WRAP_CONTENT;
     }
 
+    public void setBottomMargin(int bottomMargin) {
+        this.mBottomMargin = bottomMargin;
+    }
+
+    public int getBottomMargin() {
+        return mBottomMargin;
+    }
+
     public void showAsDown(View anchor) {
         showAsDown(anchor, 0, 0, Gravity.NO_GRAVITY);
     }
@@ -71,7 +81,7 @@ public abstract class CommonPopupWindow extends PopupWindow {
             Rect visibleFrame = new Rect();
             anchor.getGlobalVisibleRect(visibleFrame);
             int height = anchor.getResources().getDisplayMetrics().heightPixels - visibleFrame.bottom;
-            setHeight(height);
+            setHeight(height + DensityUtil.getStatusHeight(mContext) - getBottomMargin());
             showAsDropDown(anchor, xoff, yoff, gravity);
         } else {
             PopupWindowCompat.showAsDropDown(this, anchor, 0, 0, gravity);

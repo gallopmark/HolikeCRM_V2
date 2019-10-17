@@ -1,14 +1,13 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+import android.os.Bundle;
 
 import com.holike.crm.R;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.dialog.LoadingTipDialog;
 import com.holike.crm.fragment.analyze.OnlineAttractReportFragment;
-
-import java.util.Map;
 
 public class OnlineAttractReportActivity extends MyFragmentActivity {
     @Override
@@ -22,8 +21,8 @@ public class OnlineAttractReportActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
 
         startFragment(new OnlineAttractReportFragment());
     }

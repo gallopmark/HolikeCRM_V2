@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="horizontal">
+
+    <com.holike.crm.customView.DrawableCenterTextView
+        android:id="@+id/tv_status"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_weight="1"
+        android:drawableEnd="@drawable/choice_down"
+        android:drawableRight="@drawable/choice_down"
+        android:drawablePadding="@dimen/dp_5"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_5"
+        android:text="@string/customer_manage_customer_state"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/deposit_received_customer_tips"
+        android:gravity="center|end"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+</LinearLayout>

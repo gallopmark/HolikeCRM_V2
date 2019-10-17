@@ -32,6 +32,7 @@ import java.util.Map;
 import butterknife.BindView;
 
 /*客户详情*/
+@Deprecated
 public class CustomerDetailFragment2 extends MyFragment<CustomerDetailPresenter, CustomerDetailView>
         implements View.OnClickListener, CustomerDetailView, CustomerDetailPresenter.OnMultiItemClickListener, CustomerDetailPresenter.RevokeCallback {
     @BindView(R.id.mRecyclerView)

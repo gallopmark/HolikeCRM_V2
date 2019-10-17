@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 上传方案
  */
-
+@Deprecated
 public class UploadPlanFragment extends WorkflowFragment implements WorkflowView {
     private final int TYPE_PLAN = 1;
     private final int TYPE_IMG = 2;

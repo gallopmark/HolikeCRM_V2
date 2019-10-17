@@ -3,7 +3,6 @@ package com.holike.crm.adapter.customer;
 import android.content.Context;
 
 import com.holike.crm.R;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
 import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 
@@ -21,7 +20,7 @@ public class CustomerOrderPlacedAdapter extends CustomerStatusListAdapter {
     public CustomerOrderPlacedAdapter(Context context, List<MultiItem> mDatas) {
         super(context, mDatas);
         mTipContractDelivery = context.getString(R.string.customer_contract_delivery_tips);
-        mTipsStatus = context.getString(R.string.customer_status_tips2);
+        mTipsStatus = context.getString(R.string.customer_status_tips);
         mTipsTailStatus = context.getString(R.string.customer_tail_status_tips);
         mTipsGuide = context.getString(R.string.customer_guide_tips);
         mTipsDesigner = context.getString(R.string.followup_designer);

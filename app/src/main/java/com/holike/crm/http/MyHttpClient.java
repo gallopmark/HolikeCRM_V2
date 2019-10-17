@@ -3,7 +3,6 @@ package com.holike.crm.http;
 
 import androidx.annotation.Nullable;
 
-import com.holike.crm.BuildConfig;
 import com.holike.crm.util.Constants;
 import com.holike.crm.util.LogCat;
 import com.holike.crm.util.PackageUtil;
@@ -77,14 +76,14 @@ public class MyHttpClient {
         header.put(Constants.CLIENT, Constants.ANDROID);
 //        header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE, ""));
         header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE2, ""));
-        OkHttpClient.Builder ob = new OkHttpClient.Builder();
-        ob.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
         //----开启builder日志 等级BODY----
 //        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 //        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        ob.addInterceptor(loggingInterceptor);
         //-------
-        OkHttpClient client = ob.build();
+        OkHttpClient client = builder.build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(HttpClient.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -166,6 +165,39 @@ public class MyHttpClient {
         return HttpClient.getInstance().postByBodyString(url, header, params, callBack);
     }
 
+    public static Disposable postByBodyString(String url, String params, int timeout, RequestCallBack<String> callBack) {
+        return postByBodyString(url, null, params, timeout, callBack);
+    }
+
+    public static Disposable postByBodyString(String url, @Nullable Map<String, String> header, String params, int timeout, RequestCallBack<String> callBack) {
+        if (header == null) {
+            header = new HashMap<>();
+        }
+        header.put(Constants.VERSION, String.valueOf(PackageUtil.getVersionCode()));
+        header.put(Constants.CLIENT, Constants.ANDROID);
+        header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE2, ""));
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
+        //----开启builder日志 等级BODY----
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        ob.addInterceptor(loggingInterceptor);
+        //-------
+        OkHttpClient client = builder.build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(HttpClient.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .client(client)
+                .build();
+        BodyService service = retrofit.create(BodyService.class);
+        Observable<String> call;
+        LogCat.v_request(url);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), params);
+        call = service.post(url, header, body);
+        LogCat.v_request("POST url:" + url + "\nheader:" + header.toString() + "\nparams:" + params);
+        return CallbackHelper.processResult(call, callBack);
+    }
+
     public static <T> Disposable postByBodyTimeout(String url, Map<String, String> header, String params,
                                                    int timeout, RequestCallBack<T> callBack) {
         if (header == null) {
@@ -174,14 +206,14 @@ public class MyHttpClient {
         header.put(Constants.VERSION, String.valueOf(PackageUtil.getVersionCode()));
         header.put(Constants.CLIENT, Constants.ANDROID);
         header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE2, ""));
-        OkHttpClient.Builder ob = new OkHttpClient.Builder();
-        ob.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
         //----开启builder日志 等级BODY----
 //        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 //        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        ob.addInterceptor(loggingInterceptor);
         //-------
-        OkHttpClient client = ob.build();
+        OkHttpClient client = builder.build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(HttpClient.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -220,14 +252,14 @@ public class MyHttpClient {
         header.put(Constants.VERSION, String.valueOf(PackageUtil.getVersionCode()));
         header.put(Constants.CLIENT, Constants.ANDROID);
         header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE, ""));
-        OkHttpClient.Builder ob = new OkHttpClient.Builder();
-        ob.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.readTimeout(timeout, TimeUnit.SECONDS).connectTimeout(timeout, TimeUnit.SECONDS);
         //----开启builder日志 等级BODY----
 //        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 //        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        ob.addInterceptor(loggingInterceptor);
         //-------
-        OkHttpClient client = ob.build();
+        OkHttpClient client = builder.build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(HttpClient.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())

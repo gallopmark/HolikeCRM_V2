@@ -9,7 +9,7 @@
 
     tools:context="com.holike.crm.activity.homepage.OrderDetailsActivity">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

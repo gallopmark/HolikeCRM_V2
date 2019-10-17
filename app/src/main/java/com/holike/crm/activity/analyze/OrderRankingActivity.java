@@ -1,8 +1,11 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ import com.holike.crm.dialog.SelectAreaDialog;
 import com.holike.crm.presenter.activity.OrderRankingPresenter;
 import com.holike.crm.presenter.fragment.OrderReportPresenter;
 import com.holike.crm.util.LogCat;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.util.TimeUtil;
 import com.holike.crm.view.activity.OrderRankingView;
 
@@ -65,8 +69,8 @@ public class OrderRankingActivity extends MyFragmentActivity<OrderRankingPresent
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setTitle(getString(R.string.report_item4_title));
         setLeft(getString(R.string.report_title));
         setRightMenu(getString(R.string.report_select_date));
@@ -86,7 +90,7 @@ public class OrderRankingActivity extends MyFragmentActivity<OrderRankingPresent
     private List<Date> mSelectedDates;
 
     @Override
-    protected void clickRightMenu() {
+    protected void clickRightMenu(String menuText, View actionView) {
         OrderReportPresenter.selectDate(this, mSelectedDates, new CalendarPickerDialog.OnCalendarRangeSelectedListener() {
             @Override
             public void onLeftClicked(CalendarPickerDialog dialog) {
@@ -98,8 +102,8 @@ public class OrderRankingActivity extends MyFragmentActivity<OrderRankingPresent
                 dialog.dismiss();
                 mSelectedDates = selectedDates;
                 if (selectedDates.size() >= 2) {
-                    startTime = String.valueOf(Long.parseLong(TimeUtil.dataToStamp(start, "yyyy年MM月dd日")));
-                    endTime = String.valueOf(Long.parseLong(TimeUtil.dataToStamp(end, "yyyy年MM月dd日")));
+                    startTime = String.valueOf(ParseUtils.parseLong(TimeUtil.dataToStamp(start, "yyyy年MM月dd日")));
+                    endTime = String.valueOf(ParseUtils.parseLong(TimeUtil.dataToStamp(end, "yyyy年MM月dd日")));
                 } else {
                     startTime = null;
                     endTime = null;

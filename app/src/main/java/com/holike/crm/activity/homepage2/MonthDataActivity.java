@@ -1,15 +1,16 @@
 package com.holike.crm.activity.homepage2;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.holike.crm.R;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.base.MyFragmentActivity;
-import com.holike.crm.fragment.homepagev2.BossMonthDataFragment;
-import com.holike.crm.fragment.homepagev2.FinanceMonthDataFragment;
-import com.holike.crm.fragment.homepagev2.InstallManagerMonthDataFragment;
+import com.holike.crm.fragment.monthdata.BossMonthDataFragment;
+import com.holike.crm.fragment.monthdata.FinanceMonthDataFragment;
+import com.holike.crm.fragment.monthdata.InstallManagerMonthDataFragment;
 
 /**
  * Created by gallop on 2019/8/12.
@@ -38,7 +39,7 @@ public class MonthDataActivity extends MyFragmentActivity {
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         String type = getIntent().getType();
         if (TextUtils.equals(type, TYPE_BOSS)) {   //老板、店长本月数据
             startFragment(new BossMonthDataFragment());

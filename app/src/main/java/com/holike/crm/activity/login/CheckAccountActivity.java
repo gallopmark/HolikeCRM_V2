@@ -1,6 +1,7 @@
 package com.holike.crm.activity.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,7 +51,7 @@ public class CheckAccountActivity extends BaseActivity<CheckAccountPresenter, Ch
 
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         BindViewHelper.bindBgView(btnCheck, etOldDealers, etOldPassword, etOldUser);
     }
 

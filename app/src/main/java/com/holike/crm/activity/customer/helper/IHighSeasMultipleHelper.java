@@ -16,16 +16,13 @@ import androidx.core.content.ContextCompat;
 
 import com.holike.crm.R;
 import com.holike.crm.base.BaseActivity;
-import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
-import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.helper.TextSpanHelper;
 import com.holike.crm.http.CustomerUrlPath;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by gallop on 2019/8/18.
@@ -197,34 +194,12 @@ class IHighSeasMultipleHelper {
     /*收款item*/
     class ReceiptItem extends MultiHouseItem {
         CustomerManagerV2Bean.PaymentBean bean;
-        String customProduct; //定制品类
         boolean isLastPosition;
         List<String> images = new ArrayList<>();
 
         ReceiptItem(CustomerManagerV2Bean.PaymentBean bean, boolean isLastPosition) {
             super(MultiHouseItem.TYPE_RECEIPT);
             this.bean = bean;
-            if (TextUtils.isEmpty(bean.category)) customProduct = "";
-            SysCodeItemBean systemCode = IntentValue.getInstance().getSystemCode();
-            if (systemCode != null) {  //通过字典去匹配
-                try {
-                    StringBuilder sb = new StringBuilder();
-                    String[] array = this.bean.category.split(",");
-                    Map<String, String> typeMap = systemCode.getCustomerEarnestHouse();
-                    for (int i = 0; i < array.length; i++) {
-                        String value = typeMap.get(array[i]);
-                        if (!TextUtils.isEmpty(value)) {
-                            sb.append(value);
-                            if (i < array.length - 1) {
-                                sb.append("、");
-                            }
-                        }
-                    }
-                    customProduct = sb.toString();
-                } catch (Exception e) {
-                    customProduct = "";
-                }
-            }
             this.isLastPosition = isLastPosition;
             for (CustomerManagerV2Bean.GeneralImageBean imageBean : bean.getPaymentImg()) {
                 this.images.add(CustomerUrlPath.URL_SHOW_IMAGE + imageBean.resourceId);

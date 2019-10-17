@@ -6,7 +6,8 @@
     android:layout_marginTop="@dimen/dp_50"
     android:layout_marginBottom="@dimen/dp_50"
     android:background="@drawable/bg_corners_white_5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_20">
 
     <TextView
         android:id="@+id/tv_title"
@@ -19,32 +20,21 @@
         android:textSize="@dimen/textSize_16"
         android:textStyle="bold" />
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:id="@+id/ll_content_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_14"
-            android:layout_marginRight="@dimen/dp_14"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_14"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:lineSpacingExtra="@dimen/dp_4"
-                android:textColor="@color/textColor8"
-                android:textSize="@dimen/textSize_14"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </ScrollView>
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_14"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/v_divider"
@@ -59,7 +49,6 @@
         android:layout_marginLeft="@dimen/dp_36"
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginRight="@dimen/dp_36"
-        android:layout_marginBottom="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -76,7 +65,8 @@
             android:paddingBottom="@dimen/dp_10"
             android:text="@string/cancel"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/textSize_14" />
+            android:textSize="@dimen/textSize_14"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_positive"
@@ -89,6 +79,23 @@
             android:paddingBottom="@dimen/dp_10"
             android:text="@string/confirm"
             android:textColor="@color/color_while"
-            android:textSize="@dimen/textSize_14" />
+            android:textSize="@dimen/textSize_14"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_neutral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_clickable_selector"
+            android:gravity="center"
+            android:minWidth="@dimen/dp_140"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_40"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="@string/i_know"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_14"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

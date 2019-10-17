@@ -19,6 +19,7 @@ import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.presenter.fragment.ActiveMarketRankPresenter;
 import com.holike.crm.presenter.fragment.OrderReportPresenter;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.util.TimeUtil;
 import com.holike.crm.view.fragment.ActiveMarketRankView;
 
@@ -139,7 +140,7 @@ public class ActiveMarketRankFragment extends MyFragment<ActiveMarketRankPresent
                 ivRank.setVisibility(View.GONE);
                 tvRank.setVisibility(View.GONE);
                 if (!dataListBean.getRank().equals("-")) {
-                    switch (Integer.parseInt(dataListBean.getRank())) {
+                    switch (ParseUtils.parseInt(dataListBean.getRank())) {
                         case 1:
                             ivRank.setVisibility(View.VISIBLE);
                             ivRank.setBackgroundResource(R.drawable.ranking_first);

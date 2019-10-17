@@ -1,6 +1,8 @@
 package com.holike.crm.activity.customer;
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,8 +13,8 @@ import com.holike.crm.activity.customer.helper.CustomerStatusListHelper;
 import com.holike.crm.activity.homepage.MessageV2Activity;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.bean.CustomerStatusBean;
+import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.presenter.activity.CustomerStatusListPresenter;
-import com.holike.crm.presenter.fragment.HomePagePresenter;
 import com.holike.crm.presenter.fragment.HomePagePresenter2;
 import com.holike.crm.view.activity.CustomerStatusListView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -35,7 +37,7 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
 
-    private CustomerStatusListHelper mStatusListController;
+    private CustomerStatusListHelper mHelper;
 
     @Override
     protected CustomerStatusListPresenter attachPresenter() {
@@ -48,24 +50,24 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         String statusName = getIntent().getStringExtra("statusName");
         setTitle(statusName);
-        mStatusListController = new CustomerStatusListHelper(this, statusName, this);
-        mStatusListController.setAdapter(mRecyclerView);
+        mHelper = new CustomerStatusListHelper(this, statusName, this);
+        mHelper.setAdapter(mRecyclerView);
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mStatusListController.onLoadMore();
+                mHelper.onLoadMore();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mStatusListController.onRefresh();
+                mHelper.onRefresh();
             }
         });
-        mStatusListController.startFirstLoad();
+        mHelper.startFirstLoad();
     }
 
     @Override
@@ -84,7 +86,7 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
             hasData();
             setLoadMoreEnabled(!isLoadAll);
         } else {
-            if (mStatusListController.isFirstLoading()) {  //首次加载完成（没有加载到数据）
+            if (mHelper.isFirstLoading()) {  //首次加载完成（没有加载到数据）
                 noResult();
             }
         }
@@ -109,7 +111,7 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     public void onSuccess(CustomerStatusBean bean) {
         dismissLoading();
         onLoadComplete(true);
-        mStatusListController.onHttpResponse(bean, bean.getList());
+        mHelper.onHttpResponse(bean, bean.getList());
     }
 
     private void onLoadComplete(boolean isVisible) {
@@ -128,13 +130,13 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     public void onFailed(String failed) {
         dismissLoading();
         if (isNoAuth(failed)) {
-            mStatusListController.clearData();
+            mHelper.clearData();
             onLoadComplete(false);
             noAuthority();
         } else {
-            if (mStatusListController.isFirstLoading()) {
+            if (mHelper.isFirstLoading()) {
                 onLoadComplete(false);
-                noData(R.drawable.no_network, failed, true);
+                noNetwork(failed);
             } else {
                 showShortToast(failed);
                 onLoadComplete(true);
@@ -144,7 +146,7 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
 
     @Override
     public void reload() {
-        mStatusListController.startFirstLoad();
+        mHelper.startFirstLoad();
     }
 
     @Override
@@ -154,7 +156,23 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     }
 
     @Override
-    protected void clickRightMenu() {
+    protected void clickRightMenu(String menuText, View actionView) {
         startActivity(MessageV2Activity.class);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && (resultCode == CustomerValue.RESULT_CODE_RECEIVE_HOUSE || resultCode == CustomerValue.RESULT_CODE_LOST_HOUSE)) {
+            if (requestCode == CustomerValue.RESULT_CODE_RECEIVE_HOUSE) {
+                mHelper.onReceiveHouseOk();
+            }
+            mHelper.onRefresh();
+        } else if ((resultCode == CustomerValue.RESULT_CODE_ACTIVATION ||
+                resultCode == CustomerValue.RESULT_CODE_HIGH_SEAS) && data != null) {
+            String personalId = data.getStringExtra(CustomerValue.PERSONAL_ID);
+            String houseId = data.getStringExtra(CustomerValue.HOUSE_ID);
+            CustomerDetailV2Activity.open(this, personalId, houseId, false);
+        }
     }
 }

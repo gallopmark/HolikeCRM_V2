@@ -1,11 +1,10 @@
 package com.holike.crm.presenter.fragment;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.text.TextUtils;
 
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
@@ -17,6 +16,7 @@ import com.holike.crm.bean.NoMoreBean;
 import com.holike.crm.fragment.bank.BillDetialFragment;
 import com.holike.crm.model.fragment.BillListModel;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.BillListView;
 
 import java.io.Serializable;
@@ -31,7 +31,7 @@ public class BillListPresenter extends BasePresenter<BillListView, BillListModel
     private NoMoreBean mNoMoreBean = new NoMoreBean();
     private BillListAdapter mAdapter;
 
-    class BillListAdapter extends CommonAdapter<MultiItem> {
+    private class BillListAdapter extends CommonAdapter<MultiItem> {
 
         BillListAdapter(Context context, List<MultiItem> mDatas) {
             super(context, mDatas);
@@ -46,8 +46,8 @@ public class BillListPresenter extends BasePresenter<BillListView, BillListModel
                 holder.setText(R.id.tv_cztxt, MyFragment.textEmpty(pageDataBean.getCztxt()));
                 holder.setText(R.id.tv_order_bstkd, MyFragment.textEmpty(pageDataBean.getBstkd()));
                 holder.setText(R.id.tv_order_date, MyFragment.textEmpty(pageDataBean.getZdate()));
-                holder.setText(R.id.tv_money, Double.parseDouble(pageDataBean.getMoney()) > 0 ? "+" + MyFragment.textEmptyNumber(pageDataBean.getMoney()) : MyFragment.textEmptyNumber(pageDataBean.getMoney()));
-                holder.setTextColor(R.id.tv_money, Double.parseDouble(pageDataBean.getMoney()) > 0 ? mContext.getResources().getColor(R.color.bg_homepage_new) : mContext.getResources().getColor(R.color.textColor4));
+                holder.setText(R.id.tv_money, ParseUtils.parseDouble(pageDataBean.getMoney()) > 0 ? "+" + MyFragment.textEmptyNumber(pageDataBean.getMoney()) : MyFragment.textEmptyNumber(pageDataBean.getMoney()));
+                holder.setTextColor(R.id.tv_money, ParseUtils.parseDouble(pageDataBean.getMoney()) > 0 ? mContext.getResources().getColor(R.color.bg_homepage_new) : mContext.getResources().getColor(R.color.textColor4));
                 holder.setVisibility(R.id.v_line, getItemCount() != position + 1);
                 holder.itemView.setOnClickListener(v -> {
                     if (getView() != null) {

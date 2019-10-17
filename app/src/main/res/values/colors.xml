@@ -8,6 +8,7 @@
     <color name="color_green">#22CC00</color>
     <color name="color_black">#000000</color>
 
+    <color name="color_bg">#f5faff</color>
     <color name="bg">#f5faff</color>
     <color name="bg_divider">#33007aff</color>
     <color name="bg_state_bar">#dddddd</color>

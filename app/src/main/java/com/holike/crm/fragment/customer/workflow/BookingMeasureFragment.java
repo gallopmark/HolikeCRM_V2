@@ -30,7 +30,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/3.
  * 预约量房
  */
-
+@Deprecated
 public class BookingMeasureFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_booking_measure_time)
     TextView tvTime;

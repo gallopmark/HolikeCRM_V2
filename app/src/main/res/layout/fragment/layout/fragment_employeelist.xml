@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/titleBar"
-        layout="@layout/include_fragment_title_bar" />
+        layout="@layout/include_titlebar" />
 
     <LinearLayout
         android:id="@+id/mSelectLayout"

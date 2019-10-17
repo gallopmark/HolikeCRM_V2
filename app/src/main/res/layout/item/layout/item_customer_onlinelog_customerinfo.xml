@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_corners_bottom_white_5dp"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_customer_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/customer_name_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_customer_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/customer_phone_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tips_province_area"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_province_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tips_detail_address"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_detail_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_house_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/followup_house_status_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_house_area"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/followup_house_area_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_whether_repossess"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_whether_repossess"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_repossession_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_repossession_date"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_renovation_condition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_renovation_condition"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_renovation_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_renovation_date"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followup_custom_products"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_custom_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followup_custom_space_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_custom_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followup_household_demand_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_household_demand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_plate_preference"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_plate_preference"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_style_preferences"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_style_preferences"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tips_jingdong_wantwant_id"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_JD_WW_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_number2_tips"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_13"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_order_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_order_amount"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+
+        <TextView
+            android:id="@+id/tv_gifts_coupons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/tips_gifts_coupons"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_13" />
+    </LinearLayout>
+</LinearLayout>

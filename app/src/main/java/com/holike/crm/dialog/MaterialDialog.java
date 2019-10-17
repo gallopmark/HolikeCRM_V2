@@ -3,6 +3,7 @@ package com.holike.crm.dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,34 +25,35 @@ public class MaterialDialog extends CommonDialog {
     private CharSequence mTitle;
     private CharSequence mMessage;
     private int mGravity;
-    private View mCustomView;
     private boolean isDividerEnabled;
     private CharSequence mNegativeText;
     private CharSequence mPositiveText;
     private DialogInterface.OnClickListener mNegativeClickListener;
     private DialogInterface.OnClickListener mPositiveClickListener;
 
+    private CharSequence mNeutralText;
+    private DialogInterface.OnClickListener mNeutralClickListener;
+
     public MaterialDialog(Builder builder) {
         super(builder.mContext, builder.mStyle);
         this.mTitle = builder.mTitle == null ? mContext.getString(R.string.dialog_title_default) : builder.mTitle;
         this.mMessage = builder.mMessage;
         this.mGravity = builder.mGravity;
-        this.mCustomView = builder.mCustomView;
         this.isDividerEnabled = builder.isDividerEnabled;
         this.mNegativeText = builder.mNegativeText == null ? mContext.getString(R.string.cancel) : builder.mNegativeText;
         this.mNegativeClickListener = builder.mNegativeClickListener;
         this.mPositiveText = builder.mPositiveText == null ? mContext.getString(R.string.confirm) : builder.mPositiveText;
         this.mPositiveClickListener = builder.mPositiveClickListener;
+        this.mNeutralText = builder.mNeutralText;
+        this.mNeutralClickListener = builder.mNeutralClickListener;
         setup();
     }
 
     private void setup() {
         setTitle(mTitle);
         setMessage(mMessage);
-        setCustomContentView(mCustomView);
         setDividerEnabled(isDividerEnabled);
-        setNegativeButton(mNegativeText, mNegativeClickListener);
-        setPositiveButton(mPositiveText, mPositiveClickListener);
+        setButton();
     }
 
     @Override
@@ -83,19 +85,9 @@ public class MaterialDialog extends CommonDialog {
 
     public void setMessage(@Nullable CharSequence message) {
         TextView tvMessage = mContentView.findViewById(R.id.tv_message);
-        if (tvMessage != null) {
-            tvMessage.setGravity(mGravity);
-            tvMessage.setText(message);
-        }
-    }
-
-    public void setCustomContentView(@Nullable View view) {
-        if (view == null) return;
-        LinearLayout llContentLayout = mContentView.findViewById(R.id.ll_content_layout);
-        if (llContentLayout.getChildCount() > 1) {
-            llContentLayout.removeViewAt(1);
-        }
-        llContentLayout.addView(view);
+        tvMessage.setGravity(mGravity);
+        tvMessage.setText(message);
+        tvMessage.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
     public void setDividerEnabled(boolean isEnabled) {
@@ -103,11 +95,28 @@ public class MaterialDialog extends CommonDialog {
         vDivider.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
     }
 
-    public void setNegativeButton(CharSequence text, @Nullable final DialogInterface.OnClickListener listener) {
-        TextView tvNegative = mContentView.findViewById(R.id.tv_negative);
-        if (TextUtils.isEmpty(text)) {
-            tvNegative.setVisibility(View.INVISIBLE);
+    private void setButton() {
+        TextView tvNeutral = mContentView.findViewById(R.id.tv_neutral);
+        if (!TextUtils.isEmpty(mNeutralText)) {
+            mContentView.findViewById(R.id.tv_negative).setVisibility(View.GONE);
+            mContentView.findViewById(R.id.tv_positive).setVisibility(View.GONE);
+            tvNeutral.setVisibility(View.VISIBLE);
+            tvNeutral.setText(mNeutralText);
+            tvNeutral.setOnClickListener(view -> {
+                if (mNeutralClickListener != null) {
+                    mNeutralClickListener.onClick(MaterialDialog.this, DialogInterface.BUTTON_NEUTRAL);
+                }
+            });
         } else {
+            tvNeutral.setVisibility(View.GONE);
+            setNegativeButton(mNegativeText, mNegativeClickListener);
+            setPositiveButton(mPositiveText, mPositiveClickListener);
+        }
+    }
+
+    private void setNegativeButton(@Nullable CharSequence text, @Nullable final DialogInterface.OnClickListener listener) {
+        TextView tvNegative = mContentView.findViewById(R.id.tv_negative);
+        if (!TextUtils.isEmpty(text)) {
             tvNegative.setVisibility(View.VISIBLE);
             tvNegative.setText(text);
             tvNegative.setOnClickListener(view -> {
@@ -117,14 +126,15 @@ public class MaterialDialog extends CommonDialog {
                     dismiss();
                 }
             });
+        } else {
+            tvNegative.setVisibility(View.GONE);
         }
     }
 
-    public void setPositiveButton(CharSequence text, @Nullable final DialogInterface.OnClickListener listener) {
+    private void setPositiveButton(@Nullable CharSequence text, @Nullable final DialogInterface.OnClickListener listener) {
         TextView tvPositive = mContentView.findViewById(R.id.tv_positive);
-        if (TextUtils.isEmpty(text)) {
-            tvPositive.setVisibility(View.INVISIBLE);
-        } else {
+        if (!TextUtils.isEmpty(text)) {
+            tvPositive.setVisibility(View.VISIBLE);
             tvPositive.setText(text);
             tvPositive.setOnClickListener(view -> {
                 if (listener != null) {
@@ -133,6 +143,8 @@ public class MaterialDialog extends CommonDialog {
                     dismiss();
                 }
             });
+        } else {
+            tvPositive.setVisibility(View.GONE);
         }
     }
 
@@ -142,12 +154,14 @@ public class MaterialDialog extends CommonDialog {
         private CharSequence mTitle;
         private CharSequence mMessage;
         private int mGravity = Gravity.CENTER;
-        private View mCustomView;
         private boolean isDividerEnabled = true;
         private CharSequence mNegativeText;
         private CharSequence mPositiveText;
         private DialogInterface.OnClickListener mNegativeClickListener;
         private DialogInterface.OnClickListener mPositiveClickListener;
+
+        private CharSequence mNeutralText;
+        private DialogInterface.OnClickListener mNeutralClickListener;
 
         public Builder(@NonNull Context context) {
             this(context, R.style.Dialog);
@@ -181,11 +195,6 @@ public class MaterialDialog extends CommonDialog {
             return this;
         }
 
-        public Builder customView(@Nullable View view) {
-            this.mCustomView = view;
-            return this;
-        }
-
         public Builder dividerEnabled(boolean dividerEnabled) {
             this.isDividerEnabled = dividerEnabled;
             return this;
@@ -208,6 +217,16 @@ public class MaterialDialog extends CommonDialog {
         public Builder positiveButton(@Nullable CharSequence positiveText, @Nullable DialogInterface.OnClickListener listener) {
             this.mPositiveText = positiveText;
             this.mPositiveClickListener = listener;
+            return this;
+        }
+
+        public Builder neutralButton(@StringRes int neutralTextId, @Nullable DialogInterface.OnClickListener listener) {
+            return neutralButton(mContext.getString(neutralTextId), listener);
+        }
+
+        public Builder neutralButton(@Nullable CharSequence neutralText, @Nullable DialogInterface.OnClickListener listener) {
+            this.mNeutralText = neutralText;
+            this.mNeutralClickListener = listener;
             return this;
         }
 

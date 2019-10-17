@@ -1,15 +1,18 @@
 package com.holike.crm.presenter.activity;
 
-import android.app.Activity;
 import android.text.TextUtils;
 
 import com.holike.crm.base.BasePresenter;
+import com.holike.crm.base.IntentValue;
 import com.holike.crm.base.MyApplication;
 import com.holike.crm.bean.UpdateBean;
+import com.holike.crm.http.RequestCallBack;
 import com.holike.crm.model.activity.MainModel;
+import com.holike.crm.util.AppUtils;
 import com.holike.crm.util.Constants;
 import com.holike.crm.util.IOUtil;
 import com.holike.crm.util.PackageUtil;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.util.SharedPreferencesUtils;
 import com.holike.crm.view.activity.MainView;
 
@@ -26,22 +29,24 @@ public class MainPresenter extends BasePresenter<MainView, MainModel> {
      * 检测系统版本更新
      */
     public void checkVersion() {
-        model.checkVersion(new MainModel.checkListener() {
-            @Override
-            public void success(UpdateBean updateBean) {
-                setUpdateType(updateBean);
-                if (updateBean.getType() != 0) {
-                    if (getView() != null)
-                        getView().hasNewVersion(updateBean);
+        if (getModel() != null) {
+            getModel().checkVersion(new RequestCallBack<UpdateBean>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) getView().onFailure();
                 }
-                SharedPreferencesUtils.saveString(Constants.UPDATE_BEAN, updateBean.toString());
-            }
 
-            @Override
-            public void failed(String reult) {
-                if (getView() != null) getView().onFailure();
-            }
-        });
+                @Override
+                public void onSuccess(UpdateBean updateBean) {
+                    IntentValue.getInstance().setUpdateBean(updateBean);  //缓存值，我的tab会用到
+                    if (getView() != null) {
+                        long currentVersion = AppUtils.getVersionCode(); //当前版本
+                        long serviceVersion = ParseUtils.parseLong(updateBean.getVersion());
+                        getView().onGetVersion(updateBean, serviceVersion > currentVersion);
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -51,7 +56,7 @@ public class MainPresenter extends BasePresenter<MainView, MainModel> {
      */
     public static void setUpdateType(UpdateBean updateBean) {
         int localVersion = PackageUtil.getVersionCode(IOUtil.getCachePath() + "/" + "CRM.apk");     //本地安装包版本
-        int netVersion = Integer.parseInt(updateBean.getVersion());                                                      //线上版本
+        int netVersion = ParseUtils.parseInt(updateBean.getVersion());                                                      //线上版本
         int currentVersion = PackageUtil.getVersionCode();                                                               //当前版本
         if (netVersion > currentVersion || localVersion > currentVersion) {
             if (netVersion > localVersion) {

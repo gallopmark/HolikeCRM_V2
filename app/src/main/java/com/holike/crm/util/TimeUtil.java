@@ -36,7 +36,7 @@ public class TimeUtil {
                     break;
             }
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(type);
-            Date date = new Date(Long.parseLong(stamp));
+            Date date = new Date(ParseUtils.parseLong(stamp));
             return simpleDateFormat.format(date);
         } catch (Exception e) {
             return "无法显示时间";
@@ -168,11 +168,11 @@ public class TimeUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         if (isEndDate) {
-            calendar.set(Calendar.HOUR, 23);
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
             calendar.set(Calendar.MINUTE, 59);
             calendar.set(Calendar.SECOND, 59);
         } else {
-            calendar.set(Calendar.HOUR, 0);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
         }
@@ -187,7 +187,7 @@ public class TimeUtil {
     public static String timeMillsFormat(String timeMills, String pattern) {
         if (TextUtils.isEmpty(timeMills)) return "";
         try {
-            long time = Long.parseLong(timeMills);
+            long time = ParseUtils.parseLong(timeMills);
             return timeMillsFormat(time, pattern);
         } catch (Exception e) {
             return "";
@@ -276,5 +276,31 @@ public class TimeUtil {
             return hour + minute + ":0" + second;
         }
         return hour + minute + ":" + second;
+    }
+
+    /*获取月份的第一天*/
+    public static String getFirstDayOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, 0);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        long time = calendar.getTimeInMillis();
+        return String.valueOf(time > 10000000000L ? time / 1000 : time);
+    }
+
+    /*获取月份的最后一天*/
+    public static String getLastDayOfMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        long time = calendar.getTimeInMillis();
+        return String.valueOf(time > 10000000000L ? time / 1000 : time);
     }
 }

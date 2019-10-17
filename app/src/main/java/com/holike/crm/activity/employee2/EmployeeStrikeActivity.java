@@ -1,6 +1,7 @@
 package com.holike.crm.activity.employee2;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 
@@ -55,7 +56,7 @@ public class EmployeeStrikeActivity extends MyFragmentActivity<EmployeeEditV2Pre
     //    public static void open(BaseActivity<?, ?> activity, List<DistributionStoreBean> shopInfo) {
 //        mShopInfo = shopInfo;
 //        Intent intent = new Intent(activity,EmployeeStrikeActivity.class);
-//        intent.setType(TYPE_SHOP);
+//        intent.withType(TYPE_SHOP);
 //        activity.openActivity(intent);
 //    }
     private EmployeeStrikeHelper mHelper;
@@ -71,7 +72,7 @@ public class EmployeeStrikeActivity extends MyFragmentActivity<EmployeeEditV2Pre
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         mHelper = new EmployeeStrikeHelper(this, this);
         String type = getIntent().getType();
         if (TextUtils.equals(type, TYPE_SHOP)) {

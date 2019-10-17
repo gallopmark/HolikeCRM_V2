@@ -15,5 +15,5 @@ public interface ReportView extends BaseView {
 
     void getPermissionsFailed(String failed);
 
-    void noPromissions();
+    void noPermissions();
 }

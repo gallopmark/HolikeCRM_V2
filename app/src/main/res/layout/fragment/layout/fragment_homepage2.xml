@@ -6,22 +6,15 @@
     android:background="@color/color_f3"
     android:orientation="vertical">
 
-    <com.xcode.general.YouthToolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_44"
-        android:background="@color/textColor14"
-        android:minHeight="@dimen/dp_44"
-        app:contentInsetStart="0dp"
-        app:titleMarginEnd="@dimen/dp_10"
-        app:titleMarginStart="@dimen/dp_10"
-        app:titleTextAppearance="@style/AppToolbarTitleTextStyle2">
+    <galloped.xcode.widget.TitleBar
+        android:id="@id/app_toolbar"
+        style="@style/TitleBarAccentStyle">
 
         <TextView
             android:id="@+id/tv_role"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="?attr/actionBarItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:drawableEnd="@drawable/ic_expand_more_white_24dp"
             android:drawableRight="@drawable/ic_expand_more_white_24dp"
             android:ellipsize="end"
@@ -32,28 +25,7 @@
             android:textSize="@dimen/textSize_14"
             android:textStyle="bold"
             android:visibility="gone" />
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end|center">
-
-            <TextView
-                android:id="@+id/tv_homepage_msg"
-                android:layout_width="@dimen/dp_60"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/message_title"
-                android:textColor="@color/color_while"
-                android:textSize="@dimen/textSize_13" />
-
-            <ImageView
-                android:id="@+id/iv_home_red_point_msg"
-                style="@style/iv_red_point_msg"
-                android:contentDescription="@string/homepage_new"
-                android:visibility="gone" />
-        </FrameLayout>
-    </com.xcode.general.YouthToolbar>
+    </galloped.xcode.widget.TitleBar>
 
     <include
         layout="@layout/include_empty_page"

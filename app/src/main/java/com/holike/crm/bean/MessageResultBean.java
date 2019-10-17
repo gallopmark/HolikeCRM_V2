@@ -1,7 +1,8 @@
 package com.holike.crm.bean;
 
-import android.text.SpannableString;
 import android.text.TextUtils;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,11 @@ public class MessageResultBean {
         public String name;
         String isShow; //1展示重新分配 0不展示重新分配
         String isClick; //1重新分配可点 0重新分配不可点
+        @SerializedName("high_seas_house_flag")
+        String highSeasHouseFlag;
+        String isDetails; //是否可以点击进入客户详情
+        @SerializedName("Details")
+        public String details;
 
         public String getType() {
             if (TextUtils.isEmpty(title)) return "";
@@ -46,7 +52,7 @@ public class MessageResultBean {
             return "";
         }
 
-        public String wrapTitle(){
+        public String wrapTitle() {
             if (TextUtils.isEmpty(title)) return "";
             if (title.contains("【") && title.contains("】")) {
                 try {
@@ -80,8 +86,16 @@ public class MessageResultBean {
             return TextUtils.equals(isClick, "1");
         }
 
-        public void setUnClickable(){
+        public void setUnClickable() {
             isClick = "0";
+        }
+
+        public boolean isHighSeasHouse() {
+            return TextUtils.equals(highSeasHouseFlag, "Y") || TextUtils.equals(highSeasHouseFlag, "y");
+        }
+
+        public boolean canEnterDetail() {
+            return TextUtils.equals(isDetails, "1");
         }
     }
 }

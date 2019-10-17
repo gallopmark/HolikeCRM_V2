@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat;
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
 import com.holike.crm.bean.CustomerListBeanV2;
-import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 
 import java.util.List;
@@ -66,10 +65,12 @@ public class CustomerListAdapter extends CommonAdapter<MultiItem> {
             holder.setText(R.id.tv_followup, obtain(mTipsFollowup, getDefaultText(bean.lastFollowTime), false));
             holder.setText(R.id.tv_name, obtain(mTipsName, getDefaultText(bean.userName), false));
             TextView tvPhone = holder.obtainView(R.id.tv_phone);
-            if (bean.isPhoneNumber()) {  //显示手机号
+            if (!TextUtils.isEmpty(bean.phoneNumber)) { //显示手机号
                 tvPhone.setText(obtain(mTipsPhone, bean.phoneNumber, true));
-            } else {    //显示微信
+            } else if (!TextUtils.isEmpty(bean.wxNumber)) {//显示微信
                 tvPhone.setText(obtain(mWxTips, bean.wxNumber, false));
+            } else {
+                tvPhone.setText(obtain(mWxTips, mTipsEmpty, false));
             }
             holder.setText(R.id.tv_address, obtain(mTipsAddress, getDefaultText(bean.address), false));
             holder.setText(R.id.tv_intention, obtain(mTipsIntention, getDefaultText(bean.intentionLevel), false));

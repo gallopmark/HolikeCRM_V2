@@ -28,7 +28,7 @@ import java.util.List;
  * Created by wqj on 2018/8/22.
  * 客户状态列表
  */
-
+@Deprecated
 public class CustomerStateListPresenter extends BasePresenter<CustomerStateListView, CustomerStateListModel> {
 
     private CustomerListAdapter mAdapter;
@@ -295,7 +295,7 @@ public class CustomerStateListPresenter extends BasePresenter<CustomerStateListV
                     tvReason.setText(leaveResone);
                 }
                 tvPhone.setOnClickListener(v -> ((BaseActivity) mContext).call(dateBean.getPhone()));
-                holder.itemView.setOnClickListener(v -> CustomerDetailV2Activity.open((BaseActivity) mContext, dateBean.getPersonalId(), dateBean.getHouseId()));
+                holder.itemView.setOnClickListener(v -> CustomerDetailV2Activity.open((BaseActivity) mContext, dateBean.getPersonalId(), dateBean.getHouseId(), false));
             } else {
                 holder.setText(R.id.mNoMoreTextView, mContext.getString(R.string.list_no_more));
             }

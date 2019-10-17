@@ -3,6 +3,7 @@ package com.holike.crm.presenter.fragment;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.ActiveMarketBean;
 import com.holike.crm.model.fragment.ActiveMarketModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.ActiveMarketView;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ActiveMarketPresenter extends BasePresenter<ActiveMarketView, Activ
      * 获取数据
      */
     public void getData(String cityCode, String start, String end, String time) {
-        model.getData(cityCode == null ? "" : cityCode, start == null ? "" : String.valueOf(Long.parseLong(start)), end == null ? "" : String.valueOf(Long.parseLong(end)), time == null ? "0" : time, new ActiveMarketModel.GetDataListener() {
+        model.getData(cityCode == null ? "" : cityCode, start == null ? "" : String.valueOf(ParseUtils.parseLong(start)), end == null ? "" : String.valueOf(ParseUtils.parseLong(end)), time == null ? "0" : time, new ActiveMarketModel.GetDataListener() {
             @Override
             public void success(ActiveMarketBean bean) {
                 if (getView() != null)

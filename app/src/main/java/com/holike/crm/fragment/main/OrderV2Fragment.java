@@ -1,9 +1,9 @@
 package com.holike.crm.fragment.main;
 
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,9 +15,9 @@ import com.holike.crm.activity.homepage.OrderDetailsActivity;
 import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.OrderListBean;
 import com.holike.crm.bean.TypeListBean;
-import com.holike.crm.controller.OrderController;
+import com.holike.crm.customView.DrawableCenterTextView;
 import com.holike.crm.presenter.activity.OrderListPresenter;
-import com.holike.crm.presenter.fragment.HomePagePresenter;
+import com.holike.crm.presenter.fragment.HomePagePresenter2;
 import com.holike.crm.view.activity.OrderCenterV2View;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,35 +31,26 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /*v2.0版本订单列表*/
-public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV2View> implements OrderCenterV2View, OrderController.OrderControllerView {
-    @BindView(R.id.et_order_center_search)
-    EditText etSearch;
-    @BindView(R.id.tv_order_center_order_type)
-    TextView tvOrderType;
-    @BindView(R.id.iv_order_center_order_type)
-    ImageView ivOrderType;
-    @BindView(R.id.tv_order_center_order_state)
-    TextView tvOrderState;
-    @BindView(R.id.iv_order_center_order_state)
-    ImageView ivOrderState;
-    @BindView(R.id.iv_home_red_point_msg)
-    ImageView ivRedPoint;
+public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV2View> implements OrderCenterV2View, OrderHelper.OrderControllerView {
+    private EditText mSearchEditText;
+    @BindView(R.id.tv_select_order_type)
+    DrawableCenterTextView mOrderTypeTextView;
+    @BindView(R.id.tv_select_order_state)
+    DrawableCenterTextView mOrderStateTextView;
     @BindView(R.id.dv_order_center_filter)
-    View dvFilter;
+    View mDropDownView;
     @BindView(R.id.srl_order_center)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.mOrderRv)
     RecyclerView mOrderRv;
-    @BindView(R.id.mArrowImageView)
-    ImageView mArrowImageView;
-    @BindView(R.id.mTimeTextView)
+    @BindView(R.id.tv_select_time)
     TextView mTimeTextView;
     @BindView(R.id.tv_amount)
     TextView mAmountTextView;
-    @BindView(R.id.mCountTextView)
+    @BindView(R.id.tv_count)
     TextView mCountTextView;
 
-    private OrderController mOrderHelper;
+    private OrderHelper mOrderHelper;
 
     @Override
     protected OrderListPresenter attachPresenter() {
@@ -73,7 +64,8 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
 
     @Override
     protected void init() {
-        mOrderHelper = new OrderController(mContext, this);
+        mOrderHelper = new OrderHelper(mContext, this);
+        mOrderHelper.setDefaultTime(mTimeTextView);
         mOrderHelper.setOrderListAdapter(mOrderRv);
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -86,9 +78,11 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
                 mOrderHelper.onRefresh();
             }
         });
-        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+        mSearchEditText = setSearchBar(R.string.hint_fragment_order_search, R.drawable.bg_search);
+        mSearchEditText.setGravity(Gravity.CENTER | Gravity.START);
+        mSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                hideSoftInput(etSearch);
+                hideSoftInput(mSearchEditText);
                 search();
             }
             return false;
@@ -105,7 +99,13 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
     public void onResume() {
         super.onResume();
 //        tvMsg.setText(HomePagePresenter.getMsgNum());
-        ivRedPoint.setVisibility(HomePagePresenter.isNewMsg() ? View.VISIBLE : View.GONE);
+        setRightMenuMsg(HomePagePresenter2.isNewMsg());
+//        ivRedPoint.setVisibility(HomePagePresenter.isNewMsg() ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    protected void clickRightMenu(String menuText, View actionView) {
+        startActivity(MessageV2Activity.class);
     }
 
     @Override
@@ -114,21 +114,18 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
         getOrderList();
     }
 
-    @OnClick({R.id.mTimeLayout, R.id.ll_order_center_order_type,
-            R.id.ll_order_center_order_state, R.id.tv_homepage_msg})
+    @OnClick({R.id.tv_select_time, R.id.tv_select_order_type,
+            R.id.tv_select_order_state})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ll_order_center_order_type:
-                mOrderHelper.onClickOrderType(ivOrderType, dvFilter, tvOrderType, mContentView);
+            case R.id.tv_select_order_type:
+                mOrderHelper.onClickOrderType(mDropDownView, mOrderTypeTextView, mContentView);
                 break;
-            case R.id.ll_order_center_order_state:
-                mOrderHelper.onClickOrderStatus(ivOrderState, dvFilter, mContentView);
+            case R.id.tv_select_order_state:
+                mOrderHelper.onClickOrderStatus(mDropDownView, mOrderStateTextView, mContentView);
                 break;
-            case R.id.tv_homepage_msg:
-                startActivity(MessageV2Activity.class);
-                break;
-            case R.id.mTimeLayout:
-                showCalendarDialog();
+            case R.id.tv_select_time:
+                mOrderHelper.showCalendarDialog(mContext, mTimeTextView);
                 break;
         }
     }
@@ -139,10 +136,6 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
         mPresenter.getSelectData();
     }
 
-    private void showCalendarDialog() {
-        mOrderHelper.showCalendarDialog(mContext, mArrowImageView, mTimeTextView);
-    }
-
     @Override
     public void onDateSelected(List<Date> selectedDates, Date start, Date end) {
         getOrderList();
@@ -150,7 +143,7 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
 
     private void search() {
         MobclickAgent.onEvent(mContext, "order_search");
-        mOrderHelper.resetParams(tvOrderType, tvOrderState);
+        mOrderHelper.resetParams(mOrderTypeTextView, mOrderStateTextView);
         getOrderList();
     }
 
@@ -158,14 +151,14 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
     @Override
     public void getOrderList(String orderStatusId, String orderTypeId,
                              Date startDate, Date endDate, String pageNo, String pageSize) {
-        String searchContent = etSearch.getText().toString();
+        String searchContent = mSearchEditText.getText().toString();
         mPresenter.getOrderList(searchContent, orderStatusId, orderTypeId, startDate, endDate, String.valueOf(pageNo), String.valueOf(pageSize));
     }
 
     @Override
     public void getTypeListSuccess(TypeListBean typeListBean) {
         dismissLoading();
-        mOrderHelper.onGetTypeListOk(typeListBean, ivOrderType, ivOrderState, dvFilter, tvOrderType, mContentView);
+        mOrderHelper.onGetTypeListOk(typeListBean, mDropDownView, mOrderTypeTextView, mOrderStateTextView, mContentView);
     }
 
     @Override
@@ -187,7 +180,7 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
         } else {
             if (mOrderHelper.isFirstLoading()) {
                 mOrderHelper.hideViews(mAmountTextView, mCountTextView);
-                showEmptyView(true);
+                showEmptyView(true, failed);
             } else {
                 showShortToast(failed);
             }
@@ -212,7 +205,7 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
     }
 
     private void reset() {
-        etSearch.setText("");
+        mSearchEditText.setText("");
         mOrderHelper.onReset();
     }
 
@@ -225,16 +218,16 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
             setLoadMoreEnabled(!isLoadAll);
         } else {
             if (mOrderHelper.isFirstLoading()) {  //首次加载完成（没有加载到数据）
-                showEmptyView(false);
+                showEmptyView(false, null);
             }
         }
     }
 
     /*显示缺省页*/
-    private void showEmptyView(boolean isNetworkError) {
+    private void showEmptyView(boolean isNetworkError, String failReason) {
         setContentEnabled(false);
         if (isNetworkError) {
-            noNetwork();
+            noNetwork(failReason);
         } else {
             noResult();
         }

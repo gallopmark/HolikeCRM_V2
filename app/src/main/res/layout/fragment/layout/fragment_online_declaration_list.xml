@@ -7,7 +7,7 @@
     android:background="@color/bg"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_4"
-                android:src="@drawable/bill_date_up" />
+                android:src="@drawable/ic_choice_date_down" />
         </LinearLayout>
     </RelativeLayout>
 

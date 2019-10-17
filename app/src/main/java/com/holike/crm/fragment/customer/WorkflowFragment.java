@@ -3,7 +3,9 @@ package com.holike.crm.fragment.customer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.View;
 
@@ -33,7 +35,7 @@ import java.util.List;
  * Created by wqj on 2018/8/27.
  * 操作流程fragment
  */
-
+@Deprecated
 public abstract class WorkflowFragment extends MyFragment<WorkflowPresenter, WorkflowView> {
     protected Bundle bundle;
     protected CustomerDetailBean.CustomerDetailInfoListBean.ListStatusBean listStatusBean;
@@ -50,7 +52,6 @@ public abstract class WorkflowFragment extends MyFragment<WorkflowPresenter, Wor
     private RecyclerView rvImg;
     private String imgText;
     protected String houseType;
-    private TimePickerView pvTime;
 
     @Override
     protected WorkflowPresenter attachPresenter() {
@@ -150,18 +151,13 @@ public abstract class WorkflowFragment extends MyFragment<WorkflowPresenter, Wor
 
     /**
      * 选择时间
-     *
-     * @param context
-     * @param time
      */
     protected void showTimePickerView(Context context, String time, View view) {
         if (view != null) {
             hideSoftInput(view);
         }
-        if (pvTime == null) {
-            pvTime = new TimePickerBuilder(context, (date, v) ->
-                    selectTime(date)).setType(new boolean[]{true, true, true, false, false, false}).build();
-        }
+        TimePickerView pvTime = new TimePickerBuilder(context, (date, v) ->
+                selectTime(date)).setType(new boolean[]{true, true, true, false, false, false}).build();
         if (!TextUtils.isEmpty(time)) {
             pvTime.setDate(TimeUtil.stringToCalendar(time, "yyyy.MM.dd"));
         } else {

@@ -17,91 +17,96 @@ import java.util.Map;
 public class SysCodeItemBean {
     @Nullable
     @SerializedName("dic-CUSTOMER_BUDGET_TYPE")
-    public Map<String, String> customerBudgetType; //预算
+    private Map<String, String> customerBudgetType; //预算
     @Nullable
     @SerializedName("dic-CUSTOMER_GENDER_CODE")
-    public Map<String, String> customerGenderCode; //性别
+    private Map<String, String> customerGenderCode; //性别
     @Nullable
     @SerializedName("dic-CUSTOMER_AGE_TYPE")
-    public Map<String, String> customerAgeType; //年龄段
+    private Map<String, String> customerAgeType; //年龄段
 
     @Nullable
     @SerializedName("dic-CUSTOMER_SOURCE_CODE")
-    public Map<String, String> customerSourceCode; //客户来源
+    private Map<String, String> customerSourceCode; //客户来源
     @Nullable
     @SerializedName("dic-CUSTOMER_EARNESTHOUSE_TYPE")
-    public Map<String, String> customerEarnestHouse; //定制品类
+    private Map<String, String> customerEarnestHouse; //定制品类
     @Nullable
     @SerializedName("dic-CUSTOMER_STATUS_MOVE")
-    public Map<String, String> customerStatusMove; //房屋当前状态
+    private Map<String, String> customerStatusMove; //房屋当前状态
     @Nullable
     @SerializedName("dic-HOUSE_INSTALL_STATE")
-    public Map<String, String> houseInstallState; //房屋安装状态
+    private Map<String, String> houseInstallState; //房屋安装状态
     @Nullable
     @SerializedName("dic-INSTALL_FEEDBACK_STATE")
-    public Map<String, String> installFeedbackState; //安装反馈状态
-    @Nullable
-    @SerializedName("dic-DIGITAL_MARKETING_CUSTOMER_CUSTOM_MADE")
-    public Map<String, String> customerMeasureSpace; //量尺空间
+    private Map<String, String> installFeedbackState; //安装反馈状态
+    //    @Nullable
+//    @SerializedName("dic-DIGITAL_MARKETING_CUSTOMER_CUSTOM_MADE")
+//    private Map<String, String> customerMeasureSpace; //用不到
     @Nullable
     @SerializedName("dic-CUSTOMER_AREA_TYPE")
-    public Map<String, String> customerAreaType; //安装面积
+    private Map<String, String> customerAreaType; //安装面积
     @Nullable
     @SerializedName("dic-CUSTOMER_HOUSE_TYPE")
-    public Map<String, String> customerHouseType; //户型
+    private Map<String, String> customerHouseType; //户型
     @Nullable
     @SerializedName("dic-FLAMILY_MEMBER")
-    public Map<String, String> familyMember; //家庭成员
+    private Map<String, String> familyMember; //家庭成员
     @Nullable
     @SerializedName("dic-CUSTOMER_HOUSING_PRICE_TYPE")
-    public Map<String, String> housePriceType; // 房价
+    private Map<String, String> housePriceType; // 房价
     @Nullable
     @SerializedName("dic-DIGITAL_MARKETING_CUSTOMER_FURNITURE_DEMAND")
-    public Map<String, String> furnitureDemand; //家具需求
+    private Map<String, String> furnitureDemand; //家具需求
     @Nullable
     @SerializedName("dic-DIGITAL_MARKETING_CUSTOMER_DECORATION_STYLE")
-    public Map<String, String> decorationStyle; //装修风格
+    private Map<String, String> decorationStyle; //装修风格
     @Nullable
     @SerializedName("dic-CUSTOMER_DECORATE_PROPERTIES")
-    public Map<String, String> houseStatus; //房屋状态
+    private Map<String, String> houseStatus; //房屋状态
     @Nullable
     @SerializedName("dic-CUSTOMER_DECORATE_PROGRESS")
-    public Map<String, String> decorateProgress; //装修进度
+    private Map<String, String> decorateProgress; //装修进度
     @Nullable
     @SerializedName("dic-CUSTOMER_PRODUCT")
-    public Map<String, String> customerProduct; //产品
+    private Map<String, String> customerProduct; //产品
     @Nullable
     @SerializedName("dic-WHOLE_HOUSE_PRODUCT_SERIES")
-    public Map<String, String> houseSeries; //全屋定制系列
+    private Map<String, String> houseSeries; //全屋定制系列
     @Nullable
-    @SerializedName("dic-CUPBOARD_PRODUCTT_SERIES")
-    public Map<String, String> cupboardSeries; //橱柜系列
+    @SerializedName("dic-CUPBOARD_PRODUCT_SERIES")
+    private Map<String, String> cupboardSeries; //橱柜系列
     @Nullable
     @SerializedName("dic-DOOR_PRODUCT_SERIES")
-    public Map<String, String> doorSeries; //木门系列
+    private Map<String, String> doorSeries; //木门系列
     @Nullable
     @SerializedName("dic-LOSE_OF_THE_REASON")
-    public Map<String, String> loseReason; //流失原因
+    private Map<String, String> loseReason; //流失原因
     @Nullable
     @SerializedName("dic-LOSE_OF_THE_BRAND")
-    public Map<String, String> customerBrand; //客户去向
+    private Map<String, String> customerBrand; //客户去向
     @Nullable
     @SerializedName("dic-PARTNER_SHOP_TYPE")
-    public Map<String, String> partnerShopType; //店面类型,门店渠道类型
+    private Map<String, String> partnerShopType; //店面类型,门店渠道类型
     @Nullable
     @SerializedName("dic-REVIEW_HOUSE_PLAN")
-    public Map<String, String> reviewHousePlan; //主管查房结果
+    private Map<String, String> reviewHousePlan; //主管查房结果
     @Nullable
     @SerializedName("dic-HIGH_SEAS_TYPE")
-    public Map<String, String> highSeasType; //公海客户分类
+    private Map<String, String> highSeasType; //公海客户分类
     @Nullable
     @SerializedName("dic-INTENTION_LEVEL")
-    public Map<String, String> intentionLevel; //意向评级
+    private Map<String, String> intentionLevel; //意向评级
 
     @Nullable
     @SerializedName("dic-PAY_TYPE")
-    public Map<String, String> paymentType; //付款类型
+    private Map<String, String> paymentType; //付款类型
 
+    @SerializedName("dic-CUSTOMIZATION_SPACE")
+    private Map<String, String> customizationSpace; //量尺空间
+
+    @SerializedName("dic-DIGITAL_INVALIDITY_RESON")
+    private Map<String, String> invalidReturn; //无效退回原因字典
 
     @NonNull
     public Map<String, String> getCupboardSeries() {
@@ -148,9 +153,10 @@ public class SysCodeItemBean {
         return nonNullWrap(installFeedbackState);
     }
 
+    /*量尺空间*/
     @NonNull
     public Map<String, String> getCustomerMeasureSpace() {
-        return nonNullWrap(customerMeasureSpace);
+        return nonNullWrap(customizationSpace);
     }
 
     @NonNull
@@ -241,6 +247,16 @@ public class SysCodeItemBean {
     @NonNull
     public Map<String, String> getPaymentType() {
         return nonNullWrap(paymentType);
+    }
+
+    @NonNull
+    public Map<String, String> getCustomizationSpace() {
+        return nonNullWrap(customizationSpace);
+    }
+
+    @NonNull
+    public Map<String, String> getInvalidReturn() {
+        return nonNullWrap(invalidReturn);
     }
 
     private Map<String, String> nonNullWrap(@Nullable Map<String, String> origin) {

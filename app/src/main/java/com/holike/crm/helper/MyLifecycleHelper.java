@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
+import java.util.LinkedList;
 
 /**
  * Created by wqj on 2017/10/19.
@@ -22,12 +23,17 @@ public class MyLifecycleHelper implements Application.ActivityLifecycleCallbacks
     private int stopped;
     private int destroyed;
 
+    private LinkedList<Activity> mActivityCache;
     private WeakReference<Activity> activityWeakReference;
 
+    public MyLifecycleHelper() {
+        mActivityCache = new LinkedList<>();
+    }
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
         ++created;
+        mActivityCache.add(activity);
     }
 
     @Override
@@ -54,6 +60,7 @@ public class MyLifecycleHelper implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
         ++destroyed;
+        mActivityCache.remove(activity);
     }
 
     @Override
@@ -82,5 +89,18 @@ public class MyLifecycleHelper implements Application.ActivityLifecycleCallbacks
             currentActivity = activityWeakReference.get();
         }
         return currentActivity;
+    }
+
+    /*获取栈顶activity*/
+    @Nullable
+    public Activity getTopActivity() {
+        if (mActivityCache.size() == 0) return null;
+        return mActivityCache.getLast();
+    }
+
+    public void finishAllActivities() {
+        for (Activity activity : mActivityCache) {
+            activity.finish();
+        }
     }
 }

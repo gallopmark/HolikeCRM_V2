@@ -9,9 +9,19 @@
     android:paddingRight="@dimen/dp_16"
     android:paddingBottom="@dimen/dp_20">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:text="@string/dialog_month_data_step_one"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
         android:orientation="horizontal">
 
         <View
@@ -35,7 +45,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_16"
         android:orientation="horizontal">
 
         <View
@@ -59,7 +69,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_16"
         android:orientation="horizontal">
 
         <View
@@ -81,15 +91,25 @@
     </LinearLayout>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/dialog_month_data_step_two"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_14"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/tv_know"
         android:layout_width="@dimen/dp_140"
         android:layout_height="@dimen/dp_28"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/color_while"
-        android:textSize="@dimen/textSize_16"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/dp_20"
         android:background="@drawable/bg_clickable_selector"
-        android:text="@string/i_know" />
+        android:gravity="center"
+        android:text="@string/i_know"
+        android:textColor="@color/color_while"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
 </LinearLayout>

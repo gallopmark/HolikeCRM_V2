@@ -12,6 +12,7 @@ import com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView;
 import com.holike.crm.R;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.enumeration.CustomerValue;
+import com.holike.crm.helper.IImageSelectHelper;
 import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by gallop on 2019/7/30.
  * Copyright holike possess 2019.
  */
-public class UploadInstallDrawingHelper extends IBaseHelper {
+public class UploadInstallDrawingHelper extends IImageSelectHelper {
 
     private String mHouseId,//房屋id
             mInstallId, //安装单id(必填)

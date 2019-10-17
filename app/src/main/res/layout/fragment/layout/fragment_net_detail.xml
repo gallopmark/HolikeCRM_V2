@@ -5,7 +5,7 @@
     android:background="@color/color_while"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <TextView
         android:id="@+id/tv_net_detail_date"

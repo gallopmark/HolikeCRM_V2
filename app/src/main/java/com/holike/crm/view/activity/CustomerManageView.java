@@ -13,7 +13,7 @@ import java.util.List;
  * Created by wqj on 2018/2/25.
  * 客户管理
  */
-
+@Deprecated
 public interface CustomerManageView extends BaseView {
     void getCustomerListSuccess(List<CustomerListBean> customerListBeans, @Nullable AttBean attBean);
 

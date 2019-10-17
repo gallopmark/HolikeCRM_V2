@@ -8,17 +8,19 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Typeface;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.holike.crm.base.MyApplication;
 import com.holike.crm.bean.OriginalBoardBean;
 import com.holike.crm.util.CanvasUtil;
 import com.holike.crm.util.DensityUtil;
+import com.holike.crm.util.ParseUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.List;
  * Created by wqj on 2018/6/23.
  * 折线图
  */
-
+@Deprecated
 public class LineChartView extends View {
     private int width;
     private int height;
@@ -52,7 +54,7 @@ public class LineChartView extends View {
 
     private List<OriginalBoardBean.DealerDataBean> datas;
     private boolean isSelect;
-    private boolean needPercen;
+    private boolean needPercent;
     private int select;
 
     public LineChartView(Context context) {
@@ -67,9 +69,9 @@ public class LineChartView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setDatas(List<OriginalBoardBean.DealerDataBean> datas, boolean needPercen) {
+    public void setDatas(List<OriginalBoardBean.DealerDataBean> datas, boolean needPercent) {
         this.datas = new ArrayList<>();
-        this.needPercen = needPercen;
+        this.needPercent = needPercent;
         for (int i = datas.size() - 1; i >= 0; i--) {
             OriginalBoardBean.DealerDataBean bean = datas.get(i);
             if (!bean.getMonth().equals("全年")) {
@@ -128,15 +130,28 @@ public class LineChartView extends View {
             canvas.drawPath(mPath, linePaint);
         }
         //画y轴刻度
-        max = WeekReportChartView.getMaxGraded(getMaxValue());
+        max = getMaxGraded(getMaxValue());
         int average = max / (lineNum);
         for (int i = 0; i <= lineNum; i++) {
-            canvas.drawText(i * average + (needPercen ? "%" : ""), lineTextLeft, height - lineBottom - (i * ySpace), paint);
+            canvas.drawText(i * average + (needPercent ? "%" : ""), lineTextLeft, height - lineBottom - (i * ySpace), paint);
         }
         //画x轴刻度
         for (int i = 0; i < 12; i++) {
             String text = (i + 1) + "月";
-            CanvasUtil.textCenter(text, canvas, lineLeft + xSpace * i - CanvasUtil.getTextWidth(text, paint) / 2, height - lineBottom + DensityUtil.dp2px(16), CanvasUtil.getTextWidth(text, paint), 12, Color.parseColor("#ffffff"));
+            CanvasUtil.textCenter(text, canvas, lineLeft + xSpace * i - CanvasUtil.getTextWidth(text, paint) / 2f, height - lineBottom + DensityUtil.dp2px(16), CanvasUtil.getTextWidth(text, paint), 12, Color.parseColor("#ffffff"));
+        }
+    }
+
+    private int getMaxGraded(float max) {
+        if (max > 10) {
+            int i = 1;
+            for (; max > 10; ) {
+                max = max / 10;
+                i = i * 10;
+            }
+            return (int) (i * (Math.ceil(max)));
+        } else {
+            return 10;
         }
     }
 
@@ -151,9 +166,9 @@ public class LineChartView extends View {
         paint.setColor(Color.parseColor("#FFFF00"));
 //        int start = 0;
 //        for (int i = 0, size = datas.size(); i < size; i++) {
-//            if (!TextUtils.isEmpty(datas.getInstance(i).getCountsComplete())) {
-//                if (!TextUtils.isEmpty(datas.getInstance(start).getCountsComplete())) {
-//            canvas.drawLine(xSpace * (start) + lineLeft, getPointY(getPercent(datas.getInstance(start).getCountsComplete())), xSpace * i + lineLeft, getPointY(getPercent(datas.getInstance(i).getCountsComplete())), paint);
+//            if (!TextUtils.isEmpty(datas.get(i).getCountsComplete())) {
+//                if (!TextUtils.isEmpty(datas.get(start).getCountsComplete())) {
+//            canvas.drawLine(xSpace * (start) + lineLeft, getPointY(getPercent(datas.get(start).getCountsComplete())), xSpace * i + lineLeft, getPointY(getPercent(datas.get(i).getCountsComplete())), paint);
 //                }
 //            start = i;
 //            }
@@ -168,7 +183,7 @@ public class LineChartView extends View {
         boolean isFirst = true;
         float start = lineLeft, end = lineLeft;
         for (int i = 0, size = datas.size(); i < size; i++) {
-//            if (!TextUtils.isEmpty(datas.getInstance(i).getCountsComplete())) {
+//            if (!TextUtils.isEmpty(datas.get(i).getCountsComplete())) {
             if (isFirst) {
                 start = xSpace * i + lineLeft;
                 path.moveTo(xSpace * i + lineLeft, getPointY(getPercent(datas.get(i).getCountsComplete())));
@@ -232,13 +247,13 @@ public class LineChartView extends View {
                 canvas.drawPath(path1, paint);
             } else {
                 textLeft = lineLeft + select * xSpace - textWidth / 2;
-                path1.moveTo(lineLeft + select * xSpace - textWidth / 2, 0);
-                path1.lineTo(lineLeft + select * xSpace + textWidth / 2, 0);
-                path1.lineTo(lineLeft + select * xSpace + textWidth / 2, DensityUtil.dp2px(16));
+                path1.moveTo(lineLeft + select * xSpace - textWidth / 2f, 0);
+                path1.lineTo(lineLeft + select * xSpace + textWidth / 2f, 0);
+                path1.lineTo(lineLeft + select * xSpace + textWidth / 2f, DensityUtil.dp2px(16));
                 path1.lineTo(lineLeft + select * xSpace + DensityUtil.dp2px(4), DensityUtil.dp2px(16));
                 path1.lineTo(lineLeft + select * xSpace, DensityUtil.dp2px(21));
                 path1.lineTo(lineLeft + select * xSpace - DensityUtil.dp2px(4), DensityUtil.dp2px(16));
-                path1.lineTo(lineLeft + select * xSpace - textWidth / 2, DensityUtil.dp2px(16));
+                path1.lineTo(lineLeft + select * xSpace - textWidth / 2f, DensityUtil.dp2px(16));
                 path1.close();
                 canvas.drawPath(path1, paint);
             }
@@ -295,13 +310,9 @@ public class LineChartView extends View {
     }
 
     private float getPercent(String text) {
-        float percent = 0;
+        float percent;
         if (!TextUtils.isEmpty(text)) {
-            try {
-                percent = Float.parseFloat(text.replace("%", ""));
-            } catch (Exception e) {
-                return percent;
-            }
+            percent = ParseUtils.parseFloat(text.replace("%", ""));
         } else {
             return 0;
         }

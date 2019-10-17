@@ -28,6 +28,8 @@ public class UserTypeValue {
 
     public static final String DESIGNER = "8"; //设计师/经理
 
+    public static final String DESIGN_MANAGER = "81"; //设计经理
+
     public static final String GUIDE_SALESMAN_V2 = "9"; //导购/业务
 
     public static final String BOSS_V2 = "10"; //店长老板 V2.0版本

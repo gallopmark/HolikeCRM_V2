@@ -1,6 +1,7 @@
 package com.holike.crm.activity.main;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,8 +54,13 @@ public class PhotoViewActivity extends BaseActivity {
     }
 
     @Override
-    protected void init() {
-        setStatusBarColor(R.color.color_black);
+    protected void setupTheme() {
+        setTheme(R.style.ThemeFullScreen);
+    }
+
+    @Override
+    protected void init(@Nullable Bundle savedInstanceState) {
+//        setStatusBarColor(R.color.color_black);
         Intent intent = getIntent();
         int currentPosition = intent.getIntExtra(Constants.PHOTO_VIEW_POSITION, 0);
         final List<String> images = new ArrayList<>();
@@ -71,11 +78,22 @@ public class PhotoViewActivity extends BaseActivity {
                 setCurrentPosition(position, imageSize);
             }
         });
+        findViewById(R.id.fl_container).setOnClickListener(view -> finish());
     }
 
     private void setCurrentPosition(int position, int size) {
         String text = (position + 1) + "/" + size;
         mTvImageCount.setText(text);
+    }
+
+    /**
+     * 查看图片
+     */
+    public static void openImage(Context context, int currentPosition, @NonNull List<String> images) {
+        Intent intent = new Intent(context, PhotoViewActivity.class);
+        intent.putExtra(Constants.PHOTO_VIEW_POSITION, currentPosition);
+        mImages = new ArrayList<>(images);
+        context.startActivity(intent);
     }
 
     /**
@@ -147,7 +165,7 @@ public class PhotoViewActivity extends BaseActivity {
                         }
                     });
             container.addView(photoView);
-            photoView.setOnPhotoTapListener((view, x, y) -> finish());
+            photoView.setOnClickListener(v -> finish());
             return photoView;
         }
 

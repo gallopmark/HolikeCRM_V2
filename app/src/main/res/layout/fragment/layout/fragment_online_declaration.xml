@@ -6,7 +6,7 @@
     android:background="@color/bg"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,61 +14,90 @@
         android:background="@color/color_while"
         android:orientation="horizontal">
 
-
-        <LinearLayout
-            android:id="@+id/ll_trading_time"
+        <com.holike.crm.customView.DrawableCenterTextView
+            android:id="@+id/tv_trading_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:drawableEnd="@drawable/choice_down"
+            android:drawableRight="@drawable/choice_down"
+            android:drawablePadding="@dimen/dp_3"
+            android:ellipsize="end"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:maxLines="1"
+            android:text="@string/bill_list_trading_time"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
 
-            <TextView
-                android:id="@+id/tv_trading_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:text="@string/bill_list_trading_time"
-                android:textColor="@color/textColor8"
-                android:textSize="@dimen/textSize_14" />
-
-            <ImageView
-                android:id="@+id/iv_customer_manage_customer_source"
-                android:layout_width="@dimen/dp_8"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginLeft="@dimen/dp_3"
-                android:src="@drawable/choice_down" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/ll_documents_state"
+        <com.holike.crm.customView.DrawableCenterTextView
+            android:id="@+id/tv_documents_status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:drawableEnd="@drawable/choice_down"
+            android:drawableRight="@drawable/choice_down"
+            android:drawablePadding="@dimen/dp_3"
+            android:ellipsize="end"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:maxLines="1"
+            android:text="@string/bill_list_documents_state"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
 
-            <TextView
-                android:id="@+id/tv_documents_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:text="@string/bill_list_documents_state"
-                android:textColor="@color/textColor8"
-                android:textSize="@dimen/textSize_14" />
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/ll_trading_time"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:id="@+id/iv_customer_manage_customer_state"
-                android:layout_width="@dimen/dp_8"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginLeft="@dimen/dp_3"
-                android:src="@drawable/choice_down" />
-        </LinearLayout>
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_trading_time"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:ellipsize="end"-->
+        <!--                android:gravity="center"-->
+        <!--                android:maxLines="1"-->
+        <!--                android:text="@string/bill_list_trading_time"-->
+        <!--                android:textColor="@color/textColor8"-->
+        <!--                android:textSize="@dimen/textSize_14" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/iv_customer_manage_customer_source"-->
+        <!--                android:layout_width="@dimen/dp_8"-->
+        <!--                android:layout_height="@dimen/dp_5"-->
+        <!--                android:layout_marginLeft="@dimen/dp_3"-->
+        <!--                android:src="@drawable/choice_down" />-->
+        <!--        </LinearLayout>-->
+
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/ll_documents_state"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_documents_state"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:ellipsize="end"-->
+        <!--                android:gravity="center"-->
+        <!--                android:maxLines="1"-->
+        <!--                android:text="@string/bill_list_documents_state"-->
+        <!--                android:textColor="@color/textColor8"-->
+        <!--                android:textSize="@dimen/textSize_14" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/iv_customer_manage_customer_state"-->
+        <!--                android:layout_width="@dimen/dp_8"-->
+        <!--                android:layout_height="@dimen/dp_5"-->
+        <!--                android:layout_marginLeft="@dimen/dp_3"-->
+        <!--                android:src="@drawable/choice_down" />-->
+        <!--        </LinearLayout>-->
     </LinearLayout>
 
     <View

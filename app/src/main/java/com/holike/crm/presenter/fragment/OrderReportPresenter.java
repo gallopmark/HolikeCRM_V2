@@ -9,6 +9,7 @@ import com.holike.crm.bean.MonthCompleteBean;
 import com.holike.crm.bean.OrderReportBean;
 import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.model.fragment.OrderReportModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.OrderReportView;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public class OrderReportPresenter extends BasePresenter<OrderReportView, OrderRe
      * 获取订单交易报表数据
      */
     public void getOrderReport(String cityCode, String startTime, String endTime, String type, String time) {
-        model.getOrderReport(cityCode == null ? "" : cityCode, startTime == null ? "" : String.valueOf(Long.parseLong(startTime)), endTime == null ? "" : String.valueOf(Long.parseLong(endTime)), type == null ? "" : type, time == null ? "" : time, new OrderReportModel.GetOrderReportListener() {
+        model.getOrderReport(cityCode == null ? "" : cityCode, startTime == null ? "" : String.valueOf(ParseUtils.parseLong(startTime)), endTime == null ? "" : String.valueOf(ParseUtils.parseLong(endTime)), type == null ? "" : type, time == null ? "" : time, new OrderReportModel.GetOrderReportListener() {
             @Override
             public void success(OrderReportBean orderReportBean) {
                 if (getView() != null)

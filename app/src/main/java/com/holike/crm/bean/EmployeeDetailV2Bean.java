@@ -67,7 +67,7 @@ public class EmployeeDetailV2Bean {
         public String userId; //员工id
         public String phone;   //手机
         public String status;  //1有效 0无效
-        String status2;
+        public String status2;
         public String staffId; //工号
         public String gender; //性别
         public String gender2; //类型

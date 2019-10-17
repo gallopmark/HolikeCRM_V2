@@ -30,7 +30,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 已签约
  */
-
+@Deprecated
 public class SignedFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.et_signed_order_money)
     EditText etOrderMoney;

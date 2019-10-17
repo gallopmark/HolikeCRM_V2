@@ -26,8 +26,8 @@ public class OrderReportActivity extends MyFragmentActivity {
 
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         JumpBean.setJumpBack(getIntentData());
         startFragment(new OrderReportFragment());
     }

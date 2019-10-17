@@ -142,7 +142,15 @@ public class EmployeeModel extends BaseModel {
         }));
     }
 
+    public void resetPassword(String userId, String newPassword, RequestCallBack<String> callBack) {
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("password", newPassword);
+        addDisposable(MyHttpClient.postByCliId(UrlPath.URL_EMPLOYEE_EDIT_PASSWORD, null, params, callBack));
+    }
+
     /*重置员工密码*/
+    @Deprecated
     public void resetPassword(String userId, String newPassword, @NonNull OnResetPasswordCallback callback) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", userId);

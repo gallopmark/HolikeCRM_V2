@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="fl_fragment_main" type="id"/>
+    <item name="fl_fragment_main" type="id" />
+    <item name="app_toolbar" type="id" />
+    <item name="app_search_view" type="id" />
+    <item name="right_menu_layout" type="id" />
+    <item name="right_menu_view" type="id" />
+    <item name="right_menu_dot" type="id" />
+
+    <item name="form_data_vs" type="id"/>
 </resources>

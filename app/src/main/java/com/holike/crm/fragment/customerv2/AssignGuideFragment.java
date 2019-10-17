@@ -9,7 +9,6 @@ import com.holike.crm.fragment.customerv2.helper.AssignGuideHelper;
 import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -18,7 +17,7 @@ import java.util.Map;
  * 分配导购
  */
 public class AssignGuideFragment extends GeneralCustomerFragment
-        implements AssignGuideHelper.AssignGuideCallback, GeneralCustomerPresenter.OnQueryGuideCallback {
+        implements AssignGuideHelper.AssignGuideCallback, GeneralCustomerPresenter.OnQueryRoleUserCallback {
     private AssignGuideHelper mHelper;
 
     @Override

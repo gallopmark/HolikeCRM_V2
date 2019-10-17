@@ -18,6 +18,11 @@ public class CustomerListBeanV2 {
     public String total;
     List<CustomerBean> list;
     private String customerStatusId; //默认选择哪些状态 (当前选中的客户状态 多个用@隔开)
+    public String isShow; //（客户列表右上角）是否显示添加客户按钮
+
+    public boolean isShow() {
+        return TextUtils.equals(isShow, "1");
+    }
 
     public List<CustomerBean> getList() {
         return list == null ? new ArrayList<>() : list;
@@ -64,9 +69,15 @@ public class CustomerListBeanV2 {
         @SerializedName("wx_number")
         public String wxNumber;  //微信号
         public String remark;
+        @SerializedName("high_seas_house_flag")
+        String highSeasHouseFlag;
 
         public boolean isPhoneNumber() {
             return TextUtils.equals(type, "1");
+        }
+
+        public boolean isHighSeasHouse() {
+            return TextUtils.equals(highSeasHouseFlag, "Y") || TextUtils.equals(highSeasHouseFlag, "y");
         }
 
         @Override

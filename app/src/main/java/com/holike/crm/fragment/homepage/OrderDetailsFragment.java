@@ -2,10 +2,12 @@ package com.holike.crm.fragment.homepage;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragment;
@@ -21,7 +23,6 @@ import com.holike.crm.fragment.customer.SpaceManifestFragment;
 import com.holike.crm.popupwindown.ListMenuPopupWindow;
 import com.holike.crm.presenter.activity.OrderDetailsPresenter;
 import com.holike.crm.util.Constants;
-import com.holike.crm.util.DensityUtil;
 import com.holike.crm.view.activity.OrderDetailsView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -84,7 +85,7 @@ public class OrderDetailsFragment extends MyFragment<OrderDetailsPresenter, Orde
     LinearLayout llPriceBefore;
     @BindView(R.id.ll_order_details_order_total_price_after)
     LinearLayout llPriceAfter;
-    private String orderId;
+    private String mOrderId = "", mMessageId = "";
 
     @Override
     protected OrderDetailsPresenter attachPresenter() {
@@ -101,28 +102,32 @@ public class OrderDetailsFragment extends MyFragment<OrderDetailsPresenter, Orde
         super.init();
         MobclickAgent.onEvent(mContext, "order_details");
         setTitle(mContext.getString(R.string.order_details_title));
-        showLoading();
+        setOptionsMenu(R.menu.menu_more);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            orderId = String.valueOf(bundle.getSerializable(Constants.ORDER_ID));
-            mPresenter.getOrderDetails(orderId, String.valueOf(bundle.getSerializable(Constants.MESSAGE_ID)));
+            mOrderId = bundle.getString(Constants.ORDER_ID, "");
+            mMessageId = bundle.getString(Constants.MESSAGE_ID, "");
         }
-        setOptionsMenu(R.menu.menu_more);
+        initData();
+    }
+
+    private void initData() {
+        showLoading();
+        mPresenter.getOrderDetails(mOrderId, mMessageId);
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
-        super.clickRightMenu(menuText, actionView);
+    public void onOptionsMenuClick(Toolbar toolbar, MenuItem menuItem) {
 
         ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_order_info, R.array.title_order_info_id, this);
 //        popupWindow.showAsDropDown(actionView, -DensityUtil.dp2px(6), 0, Gravity.END);
-        ToolbarHelper.showPopupWindow(popupWindow, actionView);
+        ToolbarHelper.showPopupWindow(popupWindow, toolbar);
     }
 
     @Override
     public void onSelect(String title) {
         Map<String, Serializable> params = new HashMap<>();
-        params.put(Constants.ORDER_ID, orderId);
+        params.put(Constants.ORDER_ID, mOrderId);
         switch (title) {
             case "物流信息":
                 startFragment(params, new LogisticsInfoFragment());
@@ -190,6 +195,15 @@ public class OrderDetailsFragment extends MyFragment<OrderDetailsPresenter, Orde
     @Override
     public void getDetailsFailed(String failed) {
         dismissLoading();
-        dealWithFailed(failed, true, CompatToast.Gravity.CENTER);
+        if (isNoAuth(failed)) {
+            noAuthority();
+        } else {
+            noNetwork(failed);
+        }
+    }
+
+    @Override
+    protected void reload() {
+        initData();
     }
 }

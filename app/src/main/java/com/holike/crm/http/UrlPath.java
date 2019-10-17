@@ -173,6 +173,8 @@ public class UrlPath {
 
     /*木门业绩报表*/
     public static final String URL_WOODEN_DOOR = HOST + "/member/achievementListForDoor";
+    /*评价报表*/
+    public static final String URL_EVALUATION_REPORT = HOST + "/member/evaluateList";
 
     /*获取个人信息*/
     public static final String URL_GET_USERINFO = HOST + "/member/getCrmUserInfo";

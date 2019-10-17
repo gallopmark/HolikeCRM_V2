@@ -2,9 +2,11 @@ package com.holike.crm.fragment.bank;
 
 import android.content.Intent;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +22,6 @@ import com.holike.crm.model.event.MessageEvent;
 import com.holike.crm.popupwindown.ListMenuPopupWindow;
 import com.holike.crm.presenter.fragment.PayDetailsPresenter;
 import com.holike.crm.util.Constants;
-import com.holike.crm.util.DensityUtil;
 import com.holike.crm.view.fragment.PayDetailsView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -146,14 +147,21 @@ public class DetailsFragment extends MyFragment<PayDetailsPresenter, PayDetailsV
     }
 
     @Override
+    public void onOptionsMenuClick(Toolbar toolbar, MenuItem menuItem) {
+        ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_credit_info, R.array.title_credit_info_id, this);
+//                popupWindow.showAsDropDown(mContentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
+        ToolbarHelper.showPopupWindow(popupWindow, toolbar);
+    }
+
+    @Override
     protected void clickRightMenu(String text, View actionView) {
         super.clickRightMenu(text, actionView);
         switch (text) {
-            case "":
-                ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_credit_info, R.array.title_credit_info_id, this);
-//                popupWindow.showAsDropDown(mContentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
-                ToolbarHelper.showPopupWindow(popupWindow, actionView);
-                break;
+//            case "":
+//                ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_credit_info, R.array.title_credit_info_id, this);
+////                popupWindow.showAsDropDown(mContentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
+//                ToolbarHelper.showPopupWindow(popupWindow, actionView);
+//                break;
             case "修改":
                 Map<String, Serializable> params = new HashMap<>();
                 params.put(Constants.PAY_LIST, payListBean);

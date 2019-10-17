@@ -25,7 +25,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 上传复尺结果
  */
-
+@Deprecated
 public class UploadReMeasureFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_upload_remeasure_time)
     TextView tvTime;

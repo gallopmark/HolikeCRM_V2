@@ -16,8 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.holike.crm.R;
 import com.holike.crm.activity.customer.CustomerDetailV2Activity;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
+import com.holike.crm.adapter.customer.CustomerStatusListAdapter;
 import com.holike.crm.adapter.customer.CustomerCollectMoneyAdapter;
+import com.holike.crm.adapter.customer.CustomerDepositAdapter;
 import com.holike.crm.adapter.customer.CustomerDrawingAdapter;
 import com.holike.crm.adapter.customer.CustomerHighSeasAdapter;
 import com.holike.crm.adapter.customer.CustomerInstalledAdapter;
@@ -33,7 +34,8 @@ import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.NoMoreBean;
 import com.holike.crm.customView.DrawableCenterTextView;
 import com.holike.crm.enumeration.CustomerValue;
-import com.holike.crm.controller.MultiItemListController;
+import com.holike.crm.helper.MultiItemListHelper;
+import com.holike.crm.helper.ICallPhoneHelper;
 import com.holike.crm.popupwindown.MultipleSelectPopupWindow;
 import com.holike.crm.popupwindown.StringItemPopupWindow;
 
@@ -46,7 +48,7 @@ import java.util.List;
  * Copyright (c) 2019 holike
  * 客户状态列表帮助类
  */
-public class CustomerStatusListHelper extends MultiItemListController {
+public class CustomerStatusListHelper extends MultiItemListHelper {
 
     public interface CustomerStatusListCallback {
 
@@ -84,6 +86,8 @@ public class CustomerStatusListHelper extends MultiItemListController {
 
     private List<MultipleSelectPopupWindow.Item> mSelectedCustomerStatusItems; //已选客户状态集合
 
+    private int mViewPosition = -1;
+
     public String getStateName() {
         return mStatusName;
     }
@@ -100,8 +104,10 @@ public class CustomerStatusListHelper extends MultiItemListController {
 
     private void setupAdapter() {
         if (TextUtils.equals(mStatusName, CustomerValue.POTENTIAL)) { //潜在客户
-            mOrderBy = "desc"; //潜在客户可以按时间排序
+            mOrderBy = "asc"; //潜在客户可以按时间排序
+            isDescByTime = false;
             mAdapter = new CustomerPotentialAdapter(mActivity, mListBeans);
+            ((CustomerStatusListAdapter) mAdapter).setDesc(isDescByTime);
         } else if (TextUtils.equals(mStatusName, CustomerValue.STAY_MEASURE)) { //待量尺客户
             mAdapter = new CustomerMeasureAdapter(mActivity, mListBeans);
         } else if (TextUtils.equals(mStatusName, CustomerValue.STAY_DRAWING)) { //待出图客户
@@ -126,7 +132,10 @@ public class CustomerStatusListHelper extends MultiItemListController {
             mAdapter = new CustomerInstalledAdapter(mActivity, mListBeans);
         } else if (TextUtils.equals(mStatusName, CustomerValue.HIGH_SEAS)) { //公海客户
             mOrderBy = "desc"; //公海客户可以按时间排序查询
+            isDescByTime = true;
             mAdapter = new CustomerHighSeasAdapter(mActivity, mListBeans);
+        } else if (TextUtils.equals(mStatusName, CustomerValue.DEPOSIT_RECEIVED)) { //已收订金客户
+            mAdapter = new CustomerDepositAdapter(mActivity, mListBeans);
         }
     }
 
@@ -138,13 +147,17 @@ public class CustomerStatusListHelper extends MultiItemListController {
             mAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
                 CustomerStatusBean.InnerBean bean = getItem(position);
                 if (bean != null) {
-                    CustomerDetailV2Activity.open(mActivity, bean.personalId, bean.houseId);
+                    onItemClick(position,bean);
                 }
             });
             mAdapter.setOnItemChildClickListener((adapter, holder, view, position) -> {
-                CustomerStatusBean.InnerBean item = getItem(position);
-                if (item != null && !TextUtils.isEmpty(item.phoneNumber)) {
-                    mActivity.call(item.phoneNumber);
+                CustomerStatusBean.InnerBean bean = getItem(position);
+                if (bean != null) {
+                    if (!TextUtils.isEmpty(bean.phoneNumber)) { //手机号才能拨打
+                        ICallPhoneHelper.with((BaseActivity<?, ?>) mContext).requestCallPhone(bean.personalId, bean.houseId, bean.phoneNumber);
+                    } else {
+                        onItemClick(position, bean);
+                    }
                 }
             });
             mAdapter.setOnItemChildLongClickListener((adapter, holder, view, position) -> {
@@ -165,6 +178,11 @@ public class CustomerStatusListHelper extends MultiItemListController {
         return null;
     }
 
+    private void onItemClick(int position, CustomerStatusBean.InnerBean bean) {
+        mViewPosition = position;
+        CustomerDetailV2Activity.open(mActivity, bean.personalId, bean.houseId, bean.isHighSeasHouse());
+    }
+
     @Override
     public void onStartLoad(boolean isFirstLoading) {
         getCustomerStatusList(isFirstLoading);
@@ -176,7 +194,7 @@ public class CustomerStatusListHelper extends MultiItemListController {
     }
 
     @Override
-    public void onRefreshSuccess(boolean isEmpty, boolean isLoadAll) {
+    public void onRefreshSuccess(boolean isFirstLoad, boolean isEmpty, boolean isLoadAll) {
         mStatusCallback.refreshSuccess(isEmpty, isLoadAll);
     }
 
@@ -214,6 +232,9 @@ public class CustomerStatusListHelper extends MultiItemListController {
         } else if (TextUtils.equals(mStatusName, CustomerValue.HIGH_SEAS)) {
             //公海客户
             updateHighSeasTop(bean);
+        } else if (TextUtils.equals(mStatusName, CustomerValue.DEPOSIT_RECEIVED)) {
+            //已收订金客户
+            updateDepositTop(bean);
         } else {
             updateOtherTop(bean);
         }
@@ -275,11 +296,11 @@ public class CustomerStatusListHelper extends MultiItemListController {
         if (isDescByTime) {
             mOrderBy = "asc";
             isDescByTime = false;
-            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.po_cu_gr_do, 0);
+            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_orderby_asc, 0);
         } else {
             mOrderBy = "desc";
             isDescByTime = true;
-            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.po_cu_as_or, 0);
+            tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_orderby_desc, 0);
         }
         if (mAdapter != null) {
             ((CustomerStatusListAdapter) mAdapter).setDesc(isDescByTime);
@@ -535,6 +556,22 @@ public class CustomerStatusListHelper extends MultiItemListController {
         popupWindow.setOnDismissListener(() -> setArrowDown(tv));
     }
 
+    /*已收订金客户头部布局*/
+    private void updateDepositTop(CustomerStatusBean bean) {
+        if (mTopView == null) {
+            mViewStub.setLayoutResource(R.layout.viewstub_customer_deposit_top);
+            mTopView = mViewStub.inflate();
+        }
+        TextView tvCount = mTopView.findViewById(R.id.tv_count);
+        String origin = TextUtils.isEmpty(mStatusName) ? mContext.getString(R.string.deposit_received_customer_tips) : mStatusName + "：";
+        tvCount.setText(obtainText(origin, bean.total));
+        TextView tvStatus = mTopView.findViewById(R.id.tv_status);
+        tvStatus.setOnClickListener(view -> {
+            //客户状态
+            onSelectCustomerStatus(tvStatus, bean);
+        });
+    }
+
     /*其他客户头部布局*/
     private void updateOtherTop(CustomerStatusBean bean) {
         if (mTopView == null) {
@@ -619,5 +656,12 @@ public class CustomerStatusListHelper extends MultiItemListController {
     /*设置角标朝下*/
     private void setArrowDown(TextView textView) {
         textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.choice_down, 0);
+    }
+
+    public void onReceiveHouseOk() {
+        if (mViewPosition >= 0 && mViewPosition < mListBeans.size()) {
+            mListBeans.remove(mViewPosition);
+            notifyDataSetChanged();
+        }
     }
 }

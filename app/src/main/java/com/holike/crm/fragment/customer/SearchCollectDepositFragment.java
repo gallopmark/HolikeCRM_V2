@@ -82,6 +82,11 @@ public class SearchCollectDepositFragment extends MyFragment<CollectDepositPrese
         }
 
         @Override
+        public int getItemViewType(int position) {
+            return mDatas.get(position).getItemType();
+        }
+
+        @Override
         protected int bindView(int viewType) {
             if (viewType == 2) {
                 return R.layout.item_nomore_data;

@@ -2,11 +2,14 @@ package com.holike.crm.presenter.fragment;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.ActivityPoliceBean;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.CustomerManagerV2Bean;
+import com.holike.crm.bean.CustomerOnlineLogBean;
 import com.holike.crm.bean.DealerInfoBean;
 import com.holike.crm.bean.ShopGroupBean;
 import com.holike.crm.bean.ShopRoleUserBean;
@@ -17,6 +20,7 @@ import com.holike.crm.http.RequestCallBack;
 import com.holike.crm.model.customer.GeneralCustomerModel;
 import com.holike.crm.view.fragment.GeneralCustomerView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +76,110 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
         }
     }
 
+    /*get请求*/
+    public void getCustomerDetail(String personalId, boolean isHighSeasHouse) {
+//        personalId = "C2019070000747"; //测试公海客户
+        if (getModel() != null) {
+            getModel().doGet(personalId, isHighSeasHouse, new RequestCallBack<CustomerManagerV2Bean>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null)
+                        getView().onFailure(failReason);
+                }
+
+                @Override
+                public void onSuccess(CustomerManagerV2Bean bean) {
+                    if (getView() != null)
+                        getView().onSuccess(bean);
+                }
+            });
+        }
+    }
+
+//    /*已改为get请求*/
+//    @Deprecated
+//    public void request(String personalId) {
+//        if (getModel() != null) {
+//            getModel().doRequest(personalId, new RequestCallBack<CustomerManagerV2Bean>() {
+//                @Override
+//                public void onFailed(String failReason) {
+//                    if (getView() != null)
+//                        getView().onFailure(failReason);
+//                }
+//
+//                @Override
+//                public void onSuccess(CustomerManagerV2Bean bean) {
+//                    if (getView() != null)
+//                        getView().onSuccess(bean);
+//                }
+//            });
+//        }
+//    }
+
+    /*发布留言*/
+    public void publishMessage(String houseId, String message) {
+        if (getModel() != null) {
+            getModel().publishMessage(houseId, message, new RequestCallBack<String>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    if (getView() != null) {
+                        getView().onSuccess(MyJsonParser.getShowMessage(result));
+                    }
+                }
+            });
+        }
+    }
+
+    /*公海客户领取房屋*/
+    public void receiveHouse(String houseId, String shopId, String groupId, String salesId) {
+        if (getModel() != null) {
+            String body = ParamHelper.Customer.receiveHouse(houseId, shopId, groupId, salesId);
+            getModel().receiveHouse(body, new RequestCallBack<String>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    if (getView() != null) {
+                        getView().onSuccess(MyJsonParser.getShowMessage(result));
+                    }
+                }
+            });
+        }
+    }
+
+    /*客户管理-确认流失房屋*/
+    public void confirmLostHouse(String houseId) {
+        if (getModel() != null) {
+            getModel().confirmLoseHouse(houseId, new RequestCallBack<String>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    if (getView() != null) {
+                        getView().onSuccess(MyJsonParser.getShowMessage(result));
+                    }
+                }
+            });
+        }
+    }
+
     /*获取活动优惠政策*/
     public void getActivityPolice(String dealerId) {
         if (getModel() != null) {
@@ -91,6 +199,29 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
                 }
             });
         }
+    }
+
+    /*获取活动优惠政策*/
+    public void getActivityPolice(String dealerId, final OnQueryActivityPoliceCallback callback) {
+        if (getModel() != null) {
+            getModel().getActivityPolice(dealerId, new RequestCallBack<List<ActivityPoliceBean>>() {
+                @Override
+                public void onFailed(String failReason) {
+                    callback.onQueryActivityPoliceFailure(failReason);
+                }
+
+                @Override
+                public void onSuccess(List<ActivityPoliceBean> list) {
+                    callback.onQueryActivityPolice(list);
+                }
+            });
+        }
+    }
+
+    public interface OnQueryActivityPoliceCallback {
+        void onQueryActivityPoliceFailure(String failReason);
+
+        void onQueryActivityPolice(List<ActivityPoliceBean> dataList);
     }
 
     /*客户管理-获取门店导购-设计师-业务员*/
@@ -151,6 +282,24 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
         }
     }
 
+    public void getShopGroupByUser(String shopId, final OnQueryShopGroupListener listener) {
+        if (getModel() != null) {
+            if (getModel() != null) {
+                getModel().getShopGroupByUser(shopId, new RequestCallBack<List<ShopGroupBean>>() {
+                    @Override
+                    public void onFailed(String failReason) {
+                        listener.onQueryFailure(failReason);
+                    }
+
+                    @Override
+                    public void onSuccess(List<ShopGroupBean> result) {
+                        listener.onQuerySuccess(result);
+                    }
+                });
+            }
+        }
+    }
+
     public interface OnQueryShopGroupListener {
         void onQuerySuccess(List<ShopGroupBean> result);
 
@@ -158,7 +307,7 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*获取门店导购*/
-    public void getShopGuide(String shopId, final OnQueryGuideCallback callBack) {
+    public void getShopGuide(String shopId, final OnQueryRoleUserCallback callBack) {
         if (getModel() != null) {
             getModel().getShopGuide(shopId, new RequestCallBack<List<ShopRoleUserBean.UserBean>>() {
                 @Override
@@ -175,14 +324,14 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*获取导购人员回调*/
-    public interface OnQueryGuideCallback {
+    public interface OnQueryRoleUserCallback {
         void onSuccess(List<ShopRoleUserBean.UserBean> list);
 
         void onFailure(String failReason);
     }
 
     /*获取分组导购*/
-    public void getGroupGuide(String groupId, final OnQueryGuideCallback callBack) {
+    public void getGroupGuide(String groupId, final OnQueryRoleUserCallback callBack) {
         if (getModel() != null) {
             getModel().getGroupGuide(groupId, new RequestCallBack<List<ShopRoleUserBean.UserBean>>() {
                 @Override
@@ -193,6 +342,23 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
                 @Override
                 public void onSuccess(List<ShopRoleUserBean.UserBean> result) {
                     callBack.onSuccess(result);
+                }
+            });
+        }
+    }
+
+    /*获取量尺人员*/
+    public void getMeasurePerson(String shopId, @NonNull final OnQueryRoleUserCallback callback) {
+        if (getModel() != null) {
+            getModel().getMeasurePerson(shopId, new RequestCallBack<List<ShopRoleUserBean.UserBean>>() {
+                @Override
+                public void onFailed(String failReason) {
+                    callback.onFailure(failReason);
+                }
+
+                @Override
+                public void onSuccess(List<ShopRoleUserBean.UserBean> list) {
+                    callback.onSuccess(list);
                 }
             });
         }
@@ -210,10 +376,9 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
                 }
 
                 @Override
-                public void onSuccess(String result) {
-                    if (getView() != null) {
-                        getView().onSuccess(MyJsonParser.getShowMessage(result));
-                    }
+                public void onSuccess(String json) {
+                    if (getView() != null)
+                        getView().onSuccess(json);
                 }
             });
         }
@@ -231,10 +396,9 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
                 }
 
                 @Override
-                public void onSuccess(String result) {
-                    if (getView() != null) {
-                        getView().onSuccess(MyJsonParser.getShowMessage(result));
-                    }
+                public void onSuccess(String json) {
+                    if (getView() != null)
+                        getView().onSuccess(json);
                 }
             });
         }
@@ -346,6 +510,7 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*获取经销商下所有设计师*/
+    @Deprecated
     public void getDealerDesigner() {
         if (getModel() != null) {
             getModel().getDealerDesigner(new RequestCallBack<List<DealerInfoBean>>() {
@@ -414,26 +579,26 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*删除方案图片*/
-    @Deprecated
-    public void deleteSchemeImage(String schemeImgId) {
-        if (getModel() != null) {
-            getModel().deleteSchemeImage(schemeImgId, new RequestCallBack<String>() {
-                @Override
-                public void onFailed(String failReason) {
-                    if (getView() != null) {
-                        getView().onFailure(failReason);
-                    }
-                }
-
-                @Override
-                public void onSuccess(String result) {
-                    if (getView() != null) {
-                        getView().onSuccess(MyJsonParser.getShowMessage(result));
-                    }
-                }
-            });
-        }
-    }
+//    @Deprecated
+//    public void deleteSchemeImage(String schemeImgId) {
+//        if (getModel() != null) {
+//            getModel().deleteSchemeImage(schemeImgId, new RequestCallBack<String>() {
+//                @Override
+//                public void onFailed(String failReason) {
+//                    if (getView() != null) {
+//                        getView().onFailure(failReason);
+//                    }
+//                }
+//
+//                @Override
+//                public void onSuccess(String result) {
+//                    if (getView() != null) {
+//                        getView().onSuccess(MyJsonParser.getShowMessage(result));
+//                    }
+//                }
+//            });
+//        }
+//    }
 
     /*上传安装图纸*/
     public void uploadInstallDrawing(Context context, List<String> removedImages, String houseId, String installId,
@@ -458,26 +623,26 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*客户管理-删除安装图，效果图片记录*/
-    @Deprecated
-    public void deleteInstallImage(String installImgId) {
-        if (getModel() != null) {
-            getModel().deleteInstallImage(installImgId, new RequestCallBack<String>() {
-                @Override
-                public void onFailed(String failReason) {
-                    if (getView() != null) {
-                        getView().onFailure(failReason);
-                    }
-                }
-
-                @Override
-                public void onSuccess(String result) {
-                    if (getView() != null) {
-                        getView().onSuccess(MyJsonParser.getShowMessage(result));
-                    }
-                }
-            });
-        }
-    }
+//    @Deprecated
+//    public void deleteInstallImage(String installImgId) {
+//        if (getModel() != null) {
+//            getModel().deleteInstallImage(installImgId, new RequestCallBack<String>() {
+//                @Override
+//                public void onFailed(String failReason) {
+//                    if (getView() != null) {
+//                        getView().onFailure(failReason);
+//                    }
+//                }
+//
+//                @Override
+//                public void onSuccess(String result) {
+//                    if (getView() != null) {
+//                        getView().onSuccess(MyJsonParser.getShowMessage(result));
+//                    }
+//                }
+//            });
+//        }
+//    }
 
     /*客户管理-流失房屋*/
     public void leaveHouse(String body) {
@@ -564,9 +729,9 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*客户管理-安装完成*/
-    public void finishInstall(String body) {
+    public void finishInstall(Context context, final Map<String, Object> params, List<String> imagePaths) {
         if (getModel() != null) {
-            getModel().finishInstall(body, new RequestCallBack<String>() {
+            getModel().finishInstall(context, params, imagePaths, new RequestCallBack<String>() {
                 @Override
                 public void onFailed(String failReason) {
                     if (getView() != null) {
@@ -588,6 +753,27 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     public void getShopPaymentUsers(String shopId) {
         if (getModel() != null) {
             getModel().getShopPaymentUsers(shopId, new RequestCallBack<List<ShopRoleUserBean.UserBean>>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(List<ShopRoleUserBean.UserBean> result) {
+                    if (getView() != null) {
+                        getView().onSuccess(result);
+                    }
+                }
+            });
+        }
+    }
+
+    /*客户管理-获取门店签约人*/
+    public void getShopContractUsers(String shopId) {
+        if (getModel() != null) {
+            getModel().getShopContractUsers(shopId, new RequestCallBack<List<ShopRoleUserBean.UserBean>>() {
                 @Override
                 public void onFailed(String failReason) {
                     if (getView() != null) {
@@ -669,7 +855,8 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*公海客户领取房屋*/
-    public void receiveHouse(String houseId, String shopId, String groupId, String salesId, final OnReceivingCustomerListener listener) {
+    public void receiveHouse(final String personalId, final String houseId, String shopId,
+                             String groupId, String salesId, final OnReceivingCustomerListener listener) {
         if (getModel() != null) {
             String body = ParamHelper.Customer.receiveHouse(houseId, shopId, groupId, salesId);
             getModel().receiveHouse(body, new RequestCallBack<String>() {
@@ -680,7 +867,7 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
 
                 @Override
                 public void onSuccess(String result) {
-                    listener.onReceivingSuccess(MyJsonParser.getShowMessage(result));
+                    listener.onReceivingSuccess(MyJsonParser.getShowMessage(result), personalId, houseId);
                 }
             });
         }
@@ -689,7 +876,7 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     public interface OnReceivingCustomerListener {
         void onReceivingFailure(String failReason);
 
-        void onReceivingSuccess(String message);
+        void onReceivingSuccess(String message, String personalId, String hosueId);
     }
 
     /*客户管理-推送系统消息(重新分配客户)*/
@@ -713,5 +900,79 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
         void onMsgPushFailure(String failReason);
 
         void onMsgPushSuccess(String message);
+    }
+
+    public void invalidReturn(String body) {
+        if (getModel() != null) {
+            getModel().invalidReturn(body, new RequestCallBack<String>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    if (getView() != null) {
+                        getView().onSuccess(MyJsonParser.getShowMessage(result));
+                    }
+                }
+            });
+        }
+    }
+
+    /*客户管理-激活线上客户*/
+    public void activationCustomer(final String personalId, final String houseId, String
+            shopId, String groupId, String guideId, final OnActivationCallback callback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("houseId", houseId);
+        params.put("shopId", shopId);
+        params.put("groupId", groupId);
+        params.put("guideId", guideId);
+        if (getModel() != null) {
+            getModel().activationCustomer(ParamHelper.toBody(params), new RequestCallBack<String>() {
+                @Override
+                public void onFailed(String failReason) {
+                    callback.onActivationFailure(failReason);
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    callback.onActivationSuccess(MyJsonParser.getShowMessage(result), personalId, houseId);
+                }
+            });
+        }
+    }
+
+    public interface OnActivationCallback {
+        void onActivationFailure(String failReason);
+
+        void onActivationSuccess(String message, String personalId, String houseId);
+    }
+
+    /**
+     * 线上记录
+     *
+     * @param customerId 客户id
+     */
+    public void getCustomerOnlineLog(String customerId) {
+        if (getModel() != null) {
+            getModel().getCustomerOnlineLog(customerId, new RequestCallBack<CustomerOnlineLogBean>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(CustomerOnlineLogBean result) {
+                    if (getView() != null) {
+                        getView().onSuccess(result);
+                    }
+                }
+            });
+        }
     }
 }

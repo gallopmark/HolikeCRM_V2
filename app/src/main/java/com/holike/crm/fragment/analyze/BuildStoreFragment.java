@@ -19,6 +19,7 @@ import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.BuildStoreBean;
 import com.holike.crm.presenter.fragment.BuildStorePresenter;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.BuildStoreView;
 
 import java.io.Serializable;
@@ -163,7 +164,7 @@ public class BuildStoreFragment extends MyFragment<BuildStorePresenter, BuildSto
 
                 }
             });
-            tabType.setCurrentTab(TextUtils.isEmpty(time) ? 0 : Integer.parseInt(time) - 1);
+            tabType.setCurrentTab(TextUtils.isEmpty(time) ? 0 : ParseUtils.parseInt(time) - 1);
         }
     }
 

@@ -23,6 +23,7 @@ import com.holike.crm.bean.TypeIdBean;
 import com.holike.crm.model.activity.CustomerManageModel;
 import com.holike.crm.popupwindown.FilterPopupWindow;
 import com.holike.crm.util.KeyBoardUtil;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.activity.CustomerManageView;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import java.util.Map;
  * Created by wqj on 2018/2/25.
  * 客户管理
  */
-
+@Deprecated
 public class CustomerManagePresenter extends BasePresenter<CustomerManageView, CustomerManageModel> {
     private List<MultiItem> mBeans = new ArrayList<>();
     private NoMoreBean noMoreBean = new NoMoreBean();
@@ -166,7 +167,7 @@ public class CustomerManagePresenter extends BasePresenter<CustomerManageView, C
         //客户总数
         int totalRows1;
         try {
-            totalRows1 = Integer.parseInt(totalRows);
+            totalRows1 = ParseUtils.parseInt(totalRows);
         } catch (Exception e) {
             totalRows1 = 0;
         }

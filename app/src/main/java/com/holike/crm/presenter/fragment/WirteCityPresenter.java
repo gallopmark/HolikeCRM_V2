@@ -6,6 +6,7 @@ import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.WriteCityBean;
 import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.model.fragment.WriteCityModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.WirteCityView;
 
 import java.util.Calendar;
@@ -56,7 +57,7 @@ public class WirteCityPresenter extends BasePresenter<WirteCityView, WriteCityMo
         } else {
             if (getView() != null)
                 getView().loading();
-            model.saveCity(selectDataBean.getDealerId(), String.valueOf(Long.parseLong(start)), String.valueOf(Long.parseLong(end)), new WriteCityModel.SaveCityListener() {
+            model.saveCity(selectDataBean.getDealerId(), String.valueOf(ParseUtils.parseLong(start)), String.valueOf(ParseUtils.parseLong(end)), new WriteCityModel.SaveCityListener() {
                 @Override
                 public void success(String success) {
                     WriteCityBean.ActiveRecordBean bean = new WriteCityBean.ActiveRecordBean(selectDataBean.getDealerId(), selectDataBean.getDealerName(), time);

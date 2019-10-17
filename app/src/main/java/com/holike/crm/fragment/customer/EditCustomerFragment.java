@@ -21,7 +21,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/8.
  * 编辑客户信息
  */
-
+@Deprecated
 public class EditCustomerFragment extends WorkflowFragment implements WorkflowView {
     protected final int TYPE_CUSTOMER_GENDER = 1;
     protected final int TYPE_CUSTOMER_SOURCE = 2;

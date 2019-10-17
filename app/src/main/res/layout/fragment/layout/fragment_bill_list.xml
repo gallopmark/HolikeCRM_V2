@@ -6,7 +6,7 @@
     android:background="@color/bg"
     android:orientation="vertical">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
 
     <RelativeLayout
@@ -17,8 +17,9 @@
 
         <LinearLayout
             android:id="@+id/ll_select_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:minWidth="@dimen/dp_50"
             android:orientation="horizontal">
 
             <TextView
@@ -26,7 +27,7 @@
                 style="@style/tv_item_base_customer_black"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="left|center"
+                android:layout_gravity="start|center"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_6"
                 android:drawableLeft="@drawable/icon_date_choice"
@@ -37,34 +38,35 @@
                 android:id="@+id/iv_select_date"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/bill_date_up" />
+                android:src="@drawable/ic_choice_date_down" />
         </LinearLayout>
 
 
+        <!--  <TextView
+              android:id="@+id/tv_day_sum"
+              style="@style/tv_item_base_customer_gray"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_gravity="right|center"
+              android:layout_toEndOf="@+id/ll_select_date"
+              android:layout_toRightOf="@+id/ll_select_date"
+              android:text="共9天"
+              android:textSize="@dimen/textSize_10"
+              android:textStyle="normal"
+              android:visibility="visible" />
+  -->
         <TextView
-            android:id="@+id/tv_day_sum"
-            style="@style/tv_item_base_customer_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right|center"
-            android:layout_toEndOf="@+id/ll_select_date"
-            android:layout_toRightOf="@+id/ll_select_date"
-            android:text="共9天"
-            android:textSize="10sp"
-            android:textStyle="normal"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/tv_all"
+            android:id="@+id/tv_this_month"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="0dp"
             android:gravity="center"
             android:paddingLeft="@dimen/dp_6"
             android:paddingRight="@dimen/dp_6"
-            android:text="本月"
+            android:text="@string/this_month"
             android:textColor="@color/textColor5"
             android:textStyle="bold" />
     </RelativeLayout>

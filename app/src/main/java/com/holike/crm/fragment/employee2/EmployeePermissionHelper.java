@@ -17,7 +17,7 @@ import com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView;
 import com.holike.crm.R;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.RoleDataBean;
-import com.holike.crm.manager.FlowLayoutManager;
+import com.holike.crm.helper.FlexboxManagerHelper;
 
 import java.util.ArrayList;
 
@@ -102,12 +102,12 @@ class EmployeePermissionHelper {
             roleDataList = new ArrayList<>(roleList);
             List<RoleDataBean> defaultList = IntentValue.getInstance().getRoleData();
             for (RoleDataBean bean : roleDataList) {
-                if (bean.isSelected()) {
-                    selectRoles.add(bean);
-                }
                 int index = defaultList.indexOf(bean);
                 if (index >= 0) {   //设置角色的默认权限
                     bean.setActionList(defaultList.get(index).getActionList());
+                }
+                if (bean.isSelected()) {
+                    selectRoles.add(bean);
                 }
             }
         } else { //新增员工，从缓存冲获取角色数据
@@ -151,7 +151,7 @@ class EmployeePermissionHelper {
     private View obtain(ViewGroup parent) {
         View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_employee_permission, parent, false);
         RecyclerView rvRole = headerView.findViewById(R.id.rv_role);
-        rvRole.setLayoutManager(new FlowLayoutManager());
+        rvRole.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
         rvRole.setAdapter(mRoleAdapter);
         mRoleAdapter.setOnRoleSelectedListener(() -> {
             List<RoleDataBean.AuthInfoBean.PArrBean> list = new ArrayList<>();
@@ -165,20 +165,6 @@ class EmployeePermissionHelper {
                     }
                 }
             }
-//            for (int i = 0; i < mSelectedRoleList.size(); i++) {
-//                //动作actionList，角色默认权限集合
-//                List<RoleDataBean.Action> actionList = mSelectedRoleList.get(i).getActionList();
-//                for (int j = 0; j < actionList.size(); j++) {
-//                    for (int k = 0; k < mAuthItems.size(); k++) {
-//                        List<RoleDataBean.AuthInfoBean.PArrBean> pArrBeanList = mAuthItems.get(k).getAuthData();
-//                        for (int l = 0; l < pArrBeanList.size(); l++) {
-//                            if (TextUtils.equals(pArrBeanList.get(l).actionId, actionList.get(j).actionId)) {
-//                                list.add(pArrBeanList.get(l));
-//                            }
-//                        }
-//                    }
-//                }
-//            }
             mSelectedAuthList.clear();
             mSelectedAuthList.addAll(list);
             mAuthAdapter.notifyDataSetChanged();
@@ -219,7 +205,7 @@ class EmployeePermissionHelper {
         public void onBindHolder(RecyclerHolder holder, RoleDataBean.AuthInfoBean bean, int position) {
             holder.setText(R.id.tv_title, bean.pName);
             RecyclerView recyclerView = holder.obtainView(R.id.rv_auth_info);
-            recyclerView.setLayoutManager(new FlowLayoutManager());
+            recyclerView.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
             recyclerView.setAdapter(new InnerFlowAdapter(mContext, bean.getAuthData()));
             if (getItemCount() == 1) {
                 holder.itemView.setBackgroundResource(R.drawable.bg_corners_white_5dp);
@@ -306,10 +292,16 @@ class EmployeePermissionHelper {
 
     /*获取已选的角色id，多个用","隔开*/
     String getStationIds() {
+        List<String> roleCodeList = new ArrayList<>();
+        for (RoleDataBean bean : mSelectedRoleList) {
+            if (!roleCodeList.contains(bean.roleCode)) {
+                roleCodeList.add(bean.roleCode);
+            }
+        }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < mSelectedRoleList.size(); i++) {
-            sb.append(mSelectedRoleList.get(i).roleCode);
-            if (i < mSelectedRoleList.size() - 1) {
+        for (int i = 0; i < roleCodeList.size(); i++) {
+            sb.append(roleCodeList.get(i));
+            if (i < roleCodeList.size() - 1) {
                 sb.append(",");
             }
         }
@@ -318,10 +310,17 @@ class EmployeePermissionHelper {
 
     /*获取已选的权限id*/
     String getAuthIds() {
+        /*去重处理*/
+        List<String> actionIdList = new ArrayList<>();
+        for (RoleDataBean.AuthInfoBean.PArrBean bean : mSelectedAuthList) {
+            if (!actionIdList.contains(bean.actionId)) {
+                actionIdList.add(bean.actionId);
+            }
+        }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < mSelectedAuthList.size(); i++) {
-            sb.append(mSelectedAuthList.get(i).actionId);
-            if (i < mSelectedAuthList.size() - 1) {
+        for (int i = 0; i < actionIdList.size(); i++) {
+            sb.append(actionIdList.get(i));
+            if (i < actionIdList.size() - 1) {
                 sb.append(",");
             }
         }

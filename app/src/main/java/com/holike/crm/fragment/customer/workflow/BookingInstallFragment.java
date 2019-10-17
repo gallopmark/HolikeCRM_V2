@@ -21,7 +21,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 预约安装
  */
-
+@Deprecated
 public class BookingInstallFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_booking_install_time)
     TextView tvTime;

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f3"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_titlebar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/bg_corners_white_5dp"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            tools:ignore="ContentDescription,UselessParent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextView_TipsStyleSp14"
+                    android:text="@string/reset_password_new_tips"
+                    android:textColor="@color/textColor4" />
+
+                <EditText
+                    android:id="@+id/et_new_pw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/bg_transparent"
+                    android:gravity="center|start"
+                    android:hint="@string/employee_password_hint"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textColor21"
+                    android:textSize="@dimen/textSize_14" />
+
+                <ImageView
+                    android:id="@+id/iv_clear_pw"
+                    style="@style/Clear_ImageViewStyle" />
+
+                <ImageView
+                    android:id="@+id/iv_eye_pw"
+                    style="@style/Eye_ImageViewStyle" />
+            </LinearLayout>
+
+            <View style="@style/divider_horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextView_TipsStyleSp14"
+                    android:text="@string/reset_password_confirm_tips"
+                    android:textColor="@color/textColor4" />
+
+                <EditText
+                    android:id="@+id/et_confirm_pw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/bg_transparent"
+                    android:gravity="center|start"
+                    android:hint="@string/employee_password_hint"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textColor21"
+                    android:textSize="@dimen/textSize_14" />
+
+                <ImageView
+                    android:id="@+id/iv_clear_confirm_pw"
+                    style="@style/Clear_ImageViewStyle" />
+
+                <ImageView
+                    android:id="@+id/iv_eye_confirm_pw"
+                    style="@style/Eye_ImageViewStyle" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <include layout="@layout/include_savelayout_56dp" />
+</LinearLayout>

@@ -2,6 +2,8 @@ package com.holike.crm.bean;
 
 import androidx.annotation.NonNull;
 
+import com.holike.crm.bean.internal.Dictionary;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,9 +59,19 @@ public class ShopRoleUserBean {
         }
     }
 
-    public static class UserBean {
+    public static class UserBean implements Dictionary {
         public String stationId;
         public String userId;
         public String userName;
+
+        @Override
+        public String getId() {
+            return userId;
+        }
+
+        @Override
+        public String getName() {
+            return userName;
+        }
     }
 }

@@ -19,10 +19,8 @@ import androidx.core.content.ContextCompat;
 import com.holike.crm.R;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BaseFragment;
-import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
-import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.bean.internal.Installer;
 import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.helper.TextSpanHelper;
@@ -31,29 +29,27 @@ import com.holike.crm.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-/**
- * Created by gallop on 2019/8/18.
- * Copyright holike possess 2019.
- */
 class IHouseHelper {
 
+    /*操作流程状态码*/
     static class OperateCode {
-        static final String CODE_GUIDE = "01";
-        static final String CODE_UNMEASURED = "04";
-        static final String CODE_DESIGNER = "05";
-        static final String CODE_MEASURED = "06";
-        static final String CODE_UPLOAD_PLAN = "07";
-        static final String CODE_ROUNDS = "08";
-        static final String CODE_CONTRACT = "09";
-        static final String CODE_ORDER = "11";
-        static final String CODE_LOSE = "12";
-        static final String CODE_UNINSTALL = "15";
-        static final String CODE_INSTALLED = "16";
-        static final String CODE_INSTALL_DRAWING = "17";
-        static final String CODE_MESSAGE_BOARD = "18";
-        static final String CODE_RECEIPT = "19";
+        static final String CODE_GUIDE = "01"; //分配导购
+        static final String CODE_UNMEASURED = "04"; //预约量尺
+        static final String CODE_DESIGNER = "05";   //分配设计师
+        static final String CODE_MEASURED = "06";   //量尺结果
+        static final String CODE_UPLOAD_PLAN = "07";    //上传方案
+        static final String CODE_ROUNDS = "08"; //主管查房
+        static final String CODE_CONTRACT = "09";   //合同登记
+        static final String CODE_ORDER = "11";  //生成订单
+        static final String CODE_LOSE = "12";   //已流失
+        static final String CODE_UNINSTALL = "15";  //预约安装
+        static final String CODE_INSTALLED = "16";  //安装完成
+        static final String CODE_INSTALL_DRAWING = "17";    //上传安装图纸
+        static final String CODE_MESSAGE_BOARD = "18";  //留言记录
+        static final String CODE_RECEIPT = "19";    //收款
+        static final String CODE_CONFIRM_LOSE = "21";   //确认流失
+        static final String CODE_INVALID_RETURN = "22";  //（线上引流）无效退回
     }
 
     TextSpanHelper mTextHelper;
@@ -93,13 +89,14 @@ class IHouseHelper {
     private static final String URL_SHOW_IMAGE = CustomerUrlPath.URL_SHOW_IMAGE;
 
     BaseFragment<?, ?> mFragment;
-    BaseActivity mContext;
+    BaseActivity<?, ?> mContext;
 
     CustomerManagerV2Bean mManagerV2Bean;
     CustomerManagerV2Bean.PersonalInfoBean mCustomerInfoBean; //客户信息
     CustomerManagerV2Bean.HouseDetailBean mCurrentHouseDetailBean; //当前选中的房屋信息
     CustomerManagerV2Bean.HouseInfoBean mCurrentHouseInfoBean; //当前选中的房屋
     List<CustomerManagerV2Bean.HistoryBean> mCurrentHistoryList; //房屋历史记录
+    List<CustomerManagerV2Bean.OperateItemBean> mCurrentOperateList; //当前房屋下的操作流程控制数组
     /*操作记录代码，01分配导购，04预约量房，05分配设计师，06量房完成，07上传方案，08主管查房，
     09合同登记，11下单，12流失，15预约安装，16安装完成，17上传安装图纸，18留言板，19收款*/
     List<MultiItem> mMultipleItems;
@@ -210,34 +207,12 @@ class IHouseHelper {
     /*收款item*/
     class ReceiptItem extends MultiHouseItem {
         CustomerManagerV2Bean.PaymentBean bean;
-        String customProduct; //定制品类
         boolean isLastPosition;
         List<String> images = new ArrayList<>();
 
         ReceiptItem(CustomerManagerV2Bean.PaymentBean bean, boolean isLastPosition) {
             super(MultiHouseItem.TYPE_RECEIPT);
             this.bean = bean;
-            if (TextUtils.isEmpty(bean.category)) customProduct = "";
-            SysCodeItemBean systemCode = IntentValue.getInstance().getSystemCode();
-            if (systemCode != null) {  //通过字典去匹配
-                try {
-                    StringBuilder sb = new StringBuilder();
-                    String[] array = this.bean.category.split(",");
-                    Map<String, String> typeMap = systemCode.getCustomerEarnestHouse();
-                    for (int i = 0; i < array.length; i++) {
-                        String value = typeMap.get(array[i]);
-                        if (!TextUtils.isEmpty(value)) {
-                            sb.append(value);
-                            if (i < array.length - 1) {
-                                sb.append("、");
-                            }
-                        }
-                    }
-                    customProduct = sb.toString();
-                } catch (Exception e) {
-                    customProduct = "";
-                }
-            }
             this.isLastPosition = isLastPosition;
             for (CustomerManagerV2Bean.GeneralImageBean imageBean : bean.getPaymentImg()) {
                 this.images.add(CustomerUrlPath.URL_SHOW_IMAGE + imageBean.resourceId);
@@ -421,6 +396,7 @@ class IHouseHelper {
     }
 
     /*流失记录*/
+    @SuppressWarnings("unused")
     @Nullable
     CustomerManagerV2Bean.HistoryBean getLoseHistory() {
         return getHistoryByCode(OperateCode.CODE_LOSE);
@@ -458,6 +434,55 @@ class IHouseHelper {
             return mCurrentHistoryList.get(index);
         }
         return null;
+    }
+
+    /*预约量尺 编辑按钮是否显示*/
+    boolean isUnmeasuredEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_UNMEASURED);
+    }
+
+    /*量尺结果 编辑按钮是否显示*/
+    boolean isMeasuredEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_MEASURED);
+    }
+
+    /*上传方案 编辑按钮是否显示*/
+    boolean isUploadPlanEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_UPLOAD_PLAN);
+    }
+
+    /*主管查房 编辑按钮是否显示*/
+    boolean isRoundsEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_ROUNDS);
+    }
+
+    /*合同登记 编辑按钮是佛显示*/
+    boolean isContractEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_CONTRACT);
+    }
+
+    /*预约安装 编辑按钮是否显示*/
+    boolean isUninstallEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_UNINSTALL);
+    }
+
+    /*上传安装图纸 编辑按钮是否显示*/
+    boolean isInstallDrawingEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_INSTALL_DRAWING);
+    }
+
+    /*安装完成 编辑按钮是佛硻*/
+    boolean isInstalledEditVisibility() {
+        return isOperateItemEnabled(OperateCode.CODE_INSTALLED);
+    }
+
+    /*操作菜单是否被锁上*/
+    private boolean isOperateItemEnabled(String operateCode) {
+        int index = mCurrentOperateList.indexOf(CustomerManagerV2Bean.OperateItemBean.newInstance(operateCode));
+        if (index >= 0) {
+            return !mCurrentOperateList.get(index).isLock();
+        }
+        return false;
     }
 
     /*分配导购*/
@@ -518,10 +543,22 @@ class IHouseHelper {
         bundle.putString("decorateProgress", mCurrentHouseDetailBean.decorateProgress); //装修进度
         bundle.putString("plannedStayDate", mCurrentHouseDetailBean.plannedStayDate); //计划入住时间
         bundle.putString("amountOfDate", mCurrentHouseDetailBean.amountOfDate); //量房完成时间
-        bundle.putString("measureShopId", mCurrentHouseDetailBean.measureShopId); //实际量尺门店
-        bundle.putString("measureShopName", mCurrentHouseDetailBean.measureShopName);
-        bundle.putString("measureBy", mCurrentHouseDetailBean.measureBy); //量尺人员id
-        bundle.putString("measureByName", mCurrentHouseDetailBean.measureByName); //量房人员
+        if (!TextUtils.isEmpty(mCurrentHouseDetailBean.measureShopId)) { //如果已经填过“量尺结果”
+            bundle.putString("shopId", mCurrentHouseDetailBean.measureShopId); //实际量尺门店
+            bundle.putString("shopName", mCurrentHouseDetailBean.measureShopName);
+            bundle.putString("measureBy", mCurrentHouseDetailBean.measureBy); //实际量尺人员id
+            bundle.putString("measureByName", mCurrentHouseDetailBean.measureByName); //实际量尺人员名字
+        } else {
+            if (!TextUtils.isEmpty(mCurrentHouseDetailBean.appointShopId)) { //没有填过“量尺结果”，但是已经填过“预约量尺”
+                bundle.putString("shopId", mCurrentHouseDetailBean.appointShopId); //预约量尺门店id
+                bundle.putString("shopName", mCurrentHouseDetailBean.appointShopName); //预约量尺门店名
+                bundle.putString("measureBy", mCurrentHouseDetailBean.appointMeasureBy); //预约量尺人员id
+                bundle.putString("measureByName", mCurrentHouseDetailBean.appointMeasureByName); //预约量尺人员id
+            } else {  //没有填过“预约量尺”，也没有填过“量尺结果”，则默认拿该房屋所属门店，不展示默认量尺人员
+                bundle.putString("shopId", mCurrentHouseDetailBean.shopId); //房屋所属门店
+                bundle.putString("shopName", mCurrentHouseDetailBean.shopName); //房屋所属门店名
+            }
+        }
         bundle.putString("measureAppConfirmTime", mCurrentHouseDetailBean.measureAppComfirmTime); //预约确图时间
         CustomerManagerV2Bean.HistoryBean historyBean = getMeasuredHistory();
         if (historyBean != null) {
@@ -576,6 +613,7 @@ class IHouseHelper {
         bundle.putString("shopId", mCurrentHouseDetailBean.shopId);
         bundle.putString("salesAmount", mCurrentHouseDetailBean.salesAmount); //合同成交金额
         bundle.putString("payAmount", mCurrentHouseDetailBean.payAmount); //总收款
+        bundle.putString("lastRemaining", mCurrentHouseDetailBean.lastRemaining);
         return bundle;
     }
 
@@ -644,7 +682,6 @@ class IHouseHelper {
         if (personalBean != null) {
             bundle.putString(CustomerValue.PERSONAL_ID, personalBean.personalId);
             bundle.putString("name", personalBean.userName);
-//            bundle.putString("phone", TextUtils.isEmpty(personalBean.phoneNumber) ? personalBean.wxNumber : personalBean.phoneNumber);
             bundle.putString("phone", personalBean.phoneNumber);
             bundle.putString("address", mCurrentHouseDetailBean.address);
         }
@@ -656,11 +693,16 @@ class IHouseHelper {
         }
         List<CustomerManagerV2Bean.InstallUserBean> installUserList = mCurrentHouseInfoBean.getInstallUserInfo();
         ArrayList<Installer> installers = new ArrayList<>();
-        for (CustomerManagerV2Bean.InstallUserBean userBean : installUserList) {
-            String id = userBean.id == null ? "" : userBean.id;
-            String installUserId = userBean.installUserId == null ? "" : userBean.installUserId;
-            String installUserName = userBean.installUserName == null ? "" : userBean.installUserName;
-            installers.add(new Installer(id, installUserId, installUserName));
+        for (int i = 0; i < installUserList.size(); i++) {
+            CustomerManagerV2Bean.InstallUserBean userBean = installUserList.get(i);
+            if (installers.size() < 20) {
+                String id = userBean.id == null ? "" : userBean.id;
+                String installUserId = userBean.installUserId == null ? "" : userBean.installUserId;
+                String installUserName = userBean.installUserName == null ? "" : userBean.installUserName;
+                installers.add(new Installer(id, installUserId, installUserName, userBean.feedBackFlag));
+            } else {
+                break;
+            }
         }
         bundle.putParcelableArrayList("installers", installers);
         CustomerManagerV2Bean.HistoryBean historyBean = getUninstallHistory();
@@ -677,10 +719,18 @@ class IHouseHelper {
         if (bean != null) {
             bundle.putString("installId", bean.id);
         }
-        CustomerManagerV2Bean.HistoryBean historyBean = getInstalledHistory();
-        if (historyBean != null) {
-            bundle.putString("remark", historyBean.remark);
+        List<CustomerManagerV2Bean.InstallUserBean> installUserList = mCurrentHouseInfoBean.getInstallUserInfo();
+        ArrayList<Installer> installers = new ArrayList<>();
+        for (int i = 0; i < installUserList.size(); i++) {
+            CustomerManagerV2Bean.InstallUserBean userBean = installUserList.get(i);
+            if (!userBean.isFeedback()) {  //未填写过的安装师傅
+                String id = userBean.id == null ? "" : userBean.id;
+                String installUserId = userBean.installUserId == null ? "" : userBean.installUserId;
+                String installUserName = userBean.installUserName == null ? "" : userBean.installUserName;
+                installers.add(new Installer(id, installUserId, installUserName, userBean.feedBackFlag));
+            }
         }
+        bundle.putParcelableArrayList("installers", installers);
         return bundle;
     }
 }

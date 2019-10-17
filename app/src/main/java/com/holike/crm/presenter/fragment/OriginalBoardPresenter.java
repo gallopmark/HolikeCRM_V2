@@ -3,6 +3,7 @@ package com.holike.crm.presenter.fragment;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.OriginalBoardBean;
 import com.holike.crm.model.fragment.OriginalBoardModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.OriginalBoardView;
 
 /**
@@ -15,7 +16,7 @@ public class OriginalBoardPresenter extends BasePresenter<OriginalBoardView, Ori
      * 获取数据
      */
     public void getData(String cityCode, String startTime, String endTime, String time, String type) {
-        model.getData(cityCode == null ? "" : cityCode, startTime == null ? "" : String.valueOf(Long.parseLong(startTime)), endTime == null ? "" : String.valueOf(Long.parseLong(endTime)), time == null ? "1" : time, type == null ? "" : type, new OriginalBoardModel.getDataListener() {
+        model.getData(cityCode == null ? "" : cityCode, startTime == null ? "" : String.valueOf(ParseUtils.parseLong(startTime)), endTime == null ? "" : String.valueOf(ParseUtils.parseLong(endTime)), time == null ? "1" : time, type == null ? "" : type, new OriginalBoardModel.getDataListener() {
             @Override
             public void success(OriginalBoardBean bean) {
                 if (getView() != null)

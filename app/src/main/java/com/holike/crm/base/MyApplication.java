@@ -3,16 +3,15 @@ package com.holike.crm.base;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.multidex.MultiDex;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDexApplication;
 
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -29,13 +28,9 @@ import com.holike.crm.http.CustomerUrlPath;
 import com.holike.crm.http.MyHttpClient;
 import com.holike.crm.http.RequestCallBack;
 import com.holike.crm.util.SharedPreferencesUtils;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
@@ -68,10 +63,10 @@ import cn.jpush.android.api.JPushInterface;
  *         佛祖保佑       永无BUG
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     public int screenWidth, screenHeight;
     private static MyApplication myApplication;
-    public MyLifecycleHelper lifecycleHelper;
+    public MyLifecycleHelper mLifecycleHelper;
     private Handler mHandler;
 
     public static MyApplication getInstance() {
@@ -93,6 +88,15 @@ public class MyApplication extends Application {
     }
 
     static {
+        /*
+         * 兼容5.0以下系统
+         */
+        /*获取当前系统的android版本号*/
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            //适配android5.0以下
+            /*解决低版本手机vectorDrawable不支持儿闪退问题*/
+            AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+        }
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> new WaterDropHeader(context));
         //设置全局的Footer构建器
@@ -100,18 +104,12 @@ public class MyApplication extends Application {
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(base);
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
         myApplication = this;
-        lifecycleHelper = new MyLifecycleHelper();
+        mLifecycleHelper = new MyLifecycleHelper();
         getDisplay();
-        registerActivityLifecycleCallbacks(lifecycleHelper);
+        registerActivityLifecycleCallbacks(mLifecycleHelper);
         initJpush();
         initUm();
         BlockCanary.install(this, new AppContext()).start();
@@ -124,6 +122,8 @@ public class MyApplication extends Application {
 //        startService(new Intent(this, PhoneStateService.class));
         initBugly();
         mHandler = new Handler();
+        /*文件下载器 初始化*/
+        FileDownloader.setupOnApplicationOnCreate(this);
         getSystemCodeItems();
     }
 
@@ -155,21 +155,26 @@ public class MyApplication extends Application {
      */
     @Nullable
     public Activity getCurrentActivity() {
-        return lifecycleHelper.getCurrentActivity();
+        return mLifecycleHelper.getCurrentActivity();
+    }
+
+    @Nullable
+    public Activity getTopActivity() {
+        return mLifecycleHelper.getTopActivity();
     }
 
     /**
      * 判断应用是否前台运行
      */
     public boolean isForeground() {
-        return lifecycleHelper.isApplicationInForeground();
+        return mLifecycleHelper.isApplicationInForeground();
     }
 
     /**
      * 判断是否退出了应用
      */
     public boolean isExit() {
-        return lifecycleHelper.isExit();
+        return mLifecycleHelper.isExit();
     }
 
     //参数设置
@@ -257,6 +262,11 @@ public class MyApplication extends Application {
     public void resetSystem() {
         mIsGetSystemCode = false;
         mIsGetUserInfo = false;
+        finishAllActivities();
+    }
+
+    public void finishAllActivities() {
+        mLifecycleHelper.finishAllActivities();
     }
 
     @Override

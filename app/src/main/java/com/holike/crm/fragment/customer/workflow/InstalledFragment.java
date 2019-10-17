@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 安装完成
  */
-
+@Deprecated
 public class InstalledFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_installed_time)
     TextView tvTime;

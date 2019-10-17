@@ -3,34 +3,28 @@ package com.holike.crm.fragment.customerv2.helper;
 
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.SuperscriptSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.holike.crm.R;
 import com.holike.crm.adapter.SingleChoiceAdapter;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.CashierInputFilter;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.base.SimpleTextWatcher;
-import com.holike.crm.bean.DealerInfoBean;
 import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.bean.internal.Installer;
 import com.holike.crm.enumeration.CustomerValue;
+import com.holike.crm.helper.FlexboxManagerHelper;
+import com.holike.crm.helper.IImageSelectHelper;
 import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.helper.TextSpanHelper;
 import com.holike.crm.http.ParamHelper;
-import com.holike.crm.manager.FlowLayoutManager;
 import com.holike.crm.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -38,15 +32,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
  * Created by gallop on 2019/7/25.
  * Copyright holike possess 2019.
  */
-public class InstalledHelper extends IBaseHelper implements View.OnClickListener {
+public class InstalledHelper extends IImageSelectHelper implements View.OnClickListener {
     private TextView mInstallTimeTextView;
     private TextView mInstallMasterTextView;
     private EditText mInstallAreaEditText;
@@ -63,7 +53,7 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
             mInstallUserName, //安装工姓名(必填)
             mInstallState; //安装状态(必填)
     private SysCodeItemBean mSystemCode;
-    private List<DealerInfoBean.UserBean> mInstallerList;
+    private List<Installer> mInstallerList;
 
     public InstalledHelper(BaseFragment<?, ?> fragment, Callback callback) {
         super(fragment);
@@ -99,14 +89,10 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
         if (bundle != null) {
             mHouseId = bundle.getString(CustomerValue.HOUSE_ID);
             mInstallId = bundle.getString("installId");
-            String actualInstallDate = bundle.getString("actualInstallDate"); //long
-            mActualInstallDate = TimeUtil.timeMillsFormat(actualInstallDate, "yyyy-MM-dd");
-            mInstallTimeTextView.setText(TimeUtil.timeMillsFormat(actualInstallDate));
-            mInstallUserId = bundle.getString("installUserId");
-            mInstallUserName = bundle.getString("installUserName");
-            mInstallMasterTextView.setText(mInstallUserName);
-            mInstallAreaEditText.setText(bundle.getString("installArea"));
-            mInstallState = bundle.getString("installState");
+            ArrayList<Installer> installers = bundle.getParcelableArrayList("installers");
+            if (installers != null && !installers.isEmpty()) {
+                mInstallerList = new ArrayList<>(installers);
+            }
         }
     }
 
@@ -126,7 +112,7 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
     }
 
     private void setInstallStatus() {
-        mStatusRecyclerView.setLayoutManager(new FlowLayoutManager());
+        mStatusRecyclerView.setLayoutManager(FlexboxManagerHelper.getDefault(mContext));
         List<DictionaryBean> list = new ArrayList<>();
         for (Map.Entry<String, String> entry : mSystemCode.getInstallFeedbackState().entrySet()) {
             list.add(new DictionaryBean(entry.getKey(), entry.getValue()));
@@ -148,11 +134,16 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
                 onPickerTime();
                 break;
             case R.id.tv_install_master:
-                if (mInstallerList == null) {
-                    mCallback.onQueryInstaller();
-                } else {
+                if (mInstallerList != null) {
                     onSelectInstaller();
+                } else {
+                    mCallback.onRequired(mContext.getString(R.string.followup_installation_uninstall_error));
                 }
+//                if (mInstallerList == null) {
+//                    mCallback.onQueryInstaller();
+//                } else {
+//                    onSelectInstaller();
+//                }
                 break;
             case R.id.tvSave:
                 onSaved();
@@ -160,10 +151,10 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
         }
     }
 
-    /*选择实际安装时间*/
+    /*选择实际安装时间 不能选未来时间*/
     private void onPickerTime() {
-        PickerHelper.showTimePicker(mContext, (date, v) -> { //不能选未来时间
-            if (date.after(new Date())) { //选择了未来时间
+        PickerHelper.showTimePicker(mContext, null, new Date(), date -> {
+            if (date.after(new Date())) {
                 mActualInstallDate = TimeUtil.timeMillsFormat(new Date(), "yyyy-MM-dd");
                 mInstallTimeTextView.setText(TimeUtil.timeMillsFormat(new Date()));
             } else {
@@ -173,20 +164,15 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
         });
     }
 
-    public void setInstaller(List<DealerInfoBean.UserBean> list) {
-        mInstallerList = new ArrayList<>(list);
-        onSelectInstaller();
-    }
-
     /*选择安装师傅*/
     private void onSelectInstaller() {
-        List<String> optionItems = new ArrayList<>();
-        for (DealerInfoBean.UserBean userBean : mInstallerList) {
-            optionItems.add(userBean.userName);
+        List<DictionaryBean> optionItems = new ArrayList<>();
+        for (Installer installer : mInstallerList) {
+            optionItems.add(new DictionaryBean(installer.getInstallUserId(), installer.getInstallUserName()));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mInstallUserId = mInstallerList.get(options1).userId;
-            mInstallUserName = mInstallerList.get(options1).userName;
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position,bean) -> {
+            mInstallUserId = bean.id;
+            mInstallUserName = bean.name;
             mInstallMasterTextView.setText(mInstallUserName);
         });
     }
@@ -207,7 +193,7 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
                     } else {
                         mCallback.onSaved(ParamHelper.Customer.finishInstall(mHouseId, mInstallId, mActualInstallDate,
                                 mInstallUserId, mInstallUserName, installArea,
-                                mInstallState, mRemarkEditText.getText().toString()));
+                                mInstallState, mRemarkEditText.getText().toString()), mImageHelper.getSelectedImages());
                     }
                 }
             }
@@ -221,6 +207,6 @@ public class InstalledHelper extends IBaseHelper implements View.OnClickListener
 
         void onRequired(CharSequence text);
 
-        void onSaved(String body);
+        void onSaved(Map<String, Object> params, List<String> imagePaths);
     }
 }

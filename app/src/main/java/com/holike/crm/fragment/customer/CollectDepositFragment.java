@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
-import com.holike.crm.activity.homepage.AddCustomerActivity;
+import com.holike.crm.activity.customer.CustomerEditActivity;
 import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.CollectDepositListBean;
 import com.holike.crm.bean.CustomerDetailBean;
@@ -34,6 +34,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/20.
  * 首页进入收取订金页
  */
+@Deprecated
 public class CollectDepositFragment extends MyFragment<CollectDepositPresenter, CollectDepositView> implements CollectDepositView {
     @BindView(R.id.rv_collect_deposit)
     RecyclerView rv;
@@ -73,7 +74,7 @@ public class CollectDepositFragment extends MyFragment<CollectDepositPresenter, 
      */
     @Override
     protected void clickRightMenu(String text, View actionView) {
-        Intent intent = new Intent(mContext, AddCustomerActivity.class);   //v2.0 CustomerEditActivity
+        Intent intent = new Intent(mContext, CustomerEditActivity.class);   //v2.0 CustomerEditActivity
         intent.putExtra(Constants.IS_EARNEST, "1");
         startActivityForResult(intent, REQUEST_CODE);
     }

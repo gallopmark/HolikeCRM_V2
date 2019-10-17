@@ -158,11 +158,11 @@ public class NotifyFragment extends MessageFragment {
      * 打开通知
      */
     @Override
-    public void openMessage(MessageBean.MessageListBean messageListBean) {
-        if (messageListBean == null) return;
+    public void openMessage(MessageBean.MessageListBean bean) {
+        if (bean == null) return;
 //        ((MessageV2Activity) mContext).showUnreadMsg(messageBean.getNoticeRead(), messageBean.getAnnouncementRead());
 //        if (TextUtils.isEmpty(messageListBean.getOrderId())) {
-        CustomerDetailV2Activity.open((BaseActivity) mContext, messageListBean.getPersonalId(), messageListBean.getMessageId());
+        CustomerDetailV2Activity.open((BaseActivity) mContext, bean.getPersonalId(), bean.getMessageId(), false);
 //        } else {
 //            startOrderDetails(this, messageListBean.getOrderId(), messageListBean.getMessageId(), REQUEST_CODE);
 //

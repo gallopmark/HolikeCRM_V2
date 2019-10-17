@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.holike.crm.R;
@@ -53,21 +52,14 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
     RecyclerView mRecyclerView;
     @BindView(R.id.srl_online_list)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.ll_trading_time)
-    LinearLayout llTradingTime;
-    @BindView(R.id.ll_documents_state)
-    LinearLayout llDocumentsState;
-    @BindView(R.id.iv_customer_manage_customer_source)
-    View vRollTrading;
-    @BindView(R.id.iv_customer_manage_customer_state)
-    View vRollDocuments;
     @BindView(R.id.v_select_line)
     View vSelectLine;
     private EditText etSearch;
-    @BindView(R.id.tv_documents_state)
-    TextView tvDocumentsState;
     @BindView(R.id.tv_trading_time)
-    TextView tvTradingTime;
+    TextView mTradingTimeTextView;
+    @BindView(R.id.tv_documents_status)
+    TextView mDocumentsStatusTextView;
+
 
     private int pageNo = 1;
     private String startTime = "";
@@ -140,8 +132,6 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
             }
         }
         pageNo++;
-        llDocumentsState.setOnClickListener(this);
-        llTradingTime.setOnClickListener(this);
     }
 
     private void onLoadComplete() {
@@ -206,18 +196,17 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
 
     @Override
     public void onPopupWindowShowing() {
-        vRollDocuments.setRotation(180);
-        tvDocumentsState.setTextColor(ContextCompat.getColor(mContext, R.color.textColor5));
+        mDocumentsStatusTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_up), null);
     }
 
     @Override
     public void onFilterItemSelect(HomepageBean.TypeListBean.BrankDataBean bean) {
         if (TextUtils.isEmpty(bean.getBarkId())) {
-            tvDocumentsState.setText(mContext.getString(R.string.bill_list_documents_state));
-            tvDocumentsState.setTextColor(ContextCompat.getColor(mContext, R.color.textColor8));
+            mDocumentsStatusTextView.setText(mContext.getString(R.string.bill_list_documents_state));
+            mDocumentsStatusTextView.setTextColor(ContextCompat.getColor(mContext, R.color.textColor8));
         } else {
-            tvDocumentsState.setText(bean.getBarkName());
-            tvDocumentsState.setTextColor(ContextCompat.getColor(mContext, R.color.textColor4));
+            mDocumentsStatusTextView.setText(bean.getBarkName());
+            mDocumentsStatusTextView.setTextColor(ContextCompat.getColor(mContext, R.color.textColor4));
         }
         status = bean.getBarkId();
         refresh(true);
@@ -225,16 +214,16 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
 
     @Override
     public void onPopupWindowDismiss() {
-        vRollDocuments.setRotation(0);
+        mDocumentsStatusTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_down), null);
     }
 
-    @OnClick({R.id.ll_trading_time, R.id.ll_documents_state})
+    @OnClick({R.id.tv_trading_time, R.id.tv_documents_status})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_trading_time:
+            case R.id.tv_trading_time:
                 showCalendarDialog();
                 break;
-            case R.id.ll_documents_state:
+            case R.id.tv_documents_status:
                 mPresenter.showStatePopupWindow(mContext, mContentView, vSelectLine);
                 break;
         }
@@ -250,9 +239,6 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
                 .calendarRangeSelectedListener(new CalendarPickerDialog.OnCalendarRangeSelectedListener() {
                     @Override
                     public void onLeftClicked(CalendarPickerDialog dialog) {
-//                resetParams();
-//                onRefresh(true);
-//                dialog.dismiss();
                     }
 
                     @Override
@@ -266,17 +252,16 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
                             String text = startTxt + "-" + endTxt;
                             startTime = TimeUtil.dateToStamp(start, false);
                             endTime = TimeUtil.dateToStamp(end, true);
-                            tvTradingTime.setTextColor(ContextCompat.getColor(mContext, R.color.textColor4));
-                            tvTradingTime.setText(text);
+                            mTradingTimeTextView.setTextColor(ContextCompat.getColor(mContext, R.color.textColor4));
+                            mTradingTimeTextView.setText(text);
                         } else {
                             resetParams();
                         }
                         refresh(true);
                     }
-                }).onShowListener(dialogInterface -> {
-            vRollTrading.setRotation(180);
-            tvTradingTime.setTextColor(ContextCompat.getColor(mContext, R.color.textColor5));
-        }).dismissListener(dialogInterface -> vRollTrading.setRotation(0)).show();
+                }).onShowListener(dialogInterface -> mTradingTimeTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_up), null))
+                .dismissListener(dialogInterface -> mTradingTimeTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_down), null))
+                .show();
     }
 
     @Override
@@ -291,8 +276,8 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
         pageNo = 1;
         startTime = "";
         endTime = "";
-        tvTradingTime.setText(mContext.getString(R.string.bill_list_trading_time));
-        tvTradingTime.setTextColor(ContextCompat.getColor(mContext, R.color.textColor8));
+        mTradingTimeTextView.setText(mContext.getString(R.string.bill_list_trading_time));
+        mTradingTimeTextView.setTextColor(ContextCompat.getColor(mContext, R.color.textColor8));
     }
 
     @Override

@@ -36,10 +36,11 @@ public class ContractRegisterFragment extends GeneralCustomerFragment implements
         mHelper.onActivityResult(requestCode, resultCode, data);
     }
 
+    /*客户管理-获取门店签约人*/
     @Override
-    public void onQueryPaymentUsers(String shopId) {
+    public void onQueryContractUsers(String shopId) {
         showLoading();
-        mPresenter.getShopPaymentUsers(shopId);
+        mPresenter.getShopContractUsers(shopId);
     }
 
     @Override

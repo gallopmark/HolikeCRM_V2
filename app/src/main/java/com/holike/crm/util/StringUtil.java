@@ -89,7 +89,7 @@ public class StringUtil {
         String[] strs = str.split(regex);
         int[] ints = new int[strs.length];
         for (int i = 0, length = strs.length; i < length; i++) {
-            ints[i] = Integer.parseInt(strs[i]);
+            ints[i] = ParseUtils.parseInt(strs[i]);
         }
         return ints;
     }

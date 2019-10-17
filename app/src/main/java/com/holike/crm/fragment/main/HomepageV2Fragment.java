@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,32 +16,24 @@ import com.holike.crm.activity.message.MessageDetailsActivity;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.bean.HomepageBean;
-import com.holike.crm.controller.HomepageController;
-import com.holike.crm.presenter.fragment.HomePagePresenter;
 import com.holike.crm.presenter.fragment.HomePagePresenter2;
 import com.holike.crm.util.Constants;
 import com.holike.crm.view.fragment.HomePageView2;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.xcode.general.YouthToolbar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /*新首页，旧版为HomepageFragment*/
-public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePageView2> implements HomePageView2,
-        HomepageController.HomepageControllerView {
-    @BindView(R.id.toolBar)
-    YouthToolbar mToolbar;
+public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePageView2> implements HomePageView2, HomepageHelper.Callback {
     @BindView(R.id.tv_role)
     TextView mRoleTextView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.ll_content_layout)
     LinearLayout mContentLayout;
-    @BindView(R.id.iv_home_red_point_msg)
-    ImageView mRedPointImageView;
 
-    private HomepageController mHomepageController;
+    private HomepageHelper mHomepageHelper;
 
     @Override
     protected HomePagePresenter2 attachPresenter() {
@@ -56,8 +47,8 @@ public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePag
 
     @Override
     protected void init() {
-        mToolbar.setTitle(mContext.getString(R.string.homepage));
-        mHomepageController = new HomepageController((BaseActivity<?, ?>) mContext, mContentLayout, getChildFragmentManager(), this);
+        setTitle(mContext.getString(R.string.homepage));
+        mHomepageHelper = new HomepageHelper((BaseActivity<?, ?>) mContext, mContentLayout, getChildFragmentManager(), this);
         mRefreshLayout.setOnRefreshListener(refreshLayout -> initData(false));
         initData(true);
     }
@@ -77,16 +68,20 @@ public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePag
     public void onResume() {
         super.onResume();
 //        tvMsg.setText(HomePagePresenter.getMsgNum());
-        mRedPointImageView.setVisibility(HomePagePresenter.isNewMsg() ? View.VISIBLE : View.GONE);
+        setRightMenuMsg(HomePagePresenter2.isNewMsg());
     }
 
-    @OnClick({R.id.tv_role, R.id.tv_homepage_msg, R.id.mMoreTextView})
+    @Override
+    protected void clickRightMenu(String menuText, View actionView) {
+        startActivity(MessageV2Activity.class);
+    }
+
+    @OnClick({R.id.tv_role, R.id.mMoreTextView})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_role:
-                mHomepageController.switchRole(mRoleTextView);
+                mHomepageHelper.switchRole(mRoleTextView);
                 break;
-            case R.id.tv_homepage_msg:
             case R.id.mMoreTextView:
                 startActivity(MessageV2Activity.class);
                 break;
@@ -97,8 +92,8 @@ public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePag
     public void getHomepageDataSuccess(HomepageBean bean) {
         dismissLoading();
         setContentEnabled(true);
-        mRedPointImageView.setVisibility(HomePagePresenter.isNewMsg() ? View.VISIBLE : View.GONE);
-        mHomepageController.onHttpOk(bean, mRoleTextView);
+        mHomepageHelper.onHttpOk(bean, mRoleTextView);
+        setRightMenuMsg(HomePagePresenter2.isNewMsg());
     }
 
     private void setContentEnabled(boolean isEnabled) {
@@ -121,7 +116,7 @@ public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePag
                 MessageDetailsActivity.open(this, bean.getMessageId(), REQUEST_CODE);
 //                AnnounceFragment.startMessageDetailsActivity(HomepageV2Fragment.this, bean.getMessageId(), REQUEST_CODE);
             } else {
-                CustomerDetailV2Activity.open((BaseActivity) mContext, bean.getPersonalId(), bean.getMessageId());
+                CustomerDetailV2Activity.open((BaseActivity) mContext, bean.getPersonalId(), bean.getMessageId(), bean.isHighSeasHouse());
             }
         }
     }
@@ -149,6 +144,10 @@ public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePag
     public void getHomepageDataFailed(String failed) {
         dismissLoading();
         setContentEnabled(false);
-        dealWithFailed(failed, true);
+        if (isNoAuth(failed)) {
+            noAuthority();
+        } else {
+            noNetwork(failed);
+        }
     }
 }

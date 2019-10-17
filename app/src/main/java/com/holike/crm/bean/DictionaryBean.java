@@ -5,6 +5,7 @@ import android.text.TextUtils;
 /**
  * Created by gallop on 2019/7/23.
  * Copyright holike possess 2019.
+ * 字典实体类
  */
 public class DictionaryBean {
     public String id;

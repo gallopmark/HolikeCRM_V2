@@ -16,7 +16,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/3.
  * 分配设计师
  */
-
+@Deprecated
 public class DivideDesignerFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_divide_designer_select)
     TextView tvSelect;

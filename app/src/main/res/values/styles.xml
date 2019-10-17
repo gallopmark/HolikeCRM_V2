@@ -6,14 +6,32 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarNavigationButtonStyle">@style/NavigationStyle</item>
         <item name="android:textViewStyle">@style/MyTextViewStyle</item>
         <item name="android:editTextStyle">@style/MyTextViewStyle</item>
         <item name="android:buttonStyle">@style/MyTextViewStyle</item>
     </style>
 
-    <style name="ThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
+    <!--启动页风格-->
+    <style name="ThemeSplash" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="android:background">@drawable/star_page</item>
+    </style>
+
+    <!--全屏-->
+    <style name="ThemeFullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="NavigationIconStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:minWidth">@dimen/dp_56</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <!--返回键风格-->
+    <style name="NavigationStyle" parent="NavigationIconStyle">
+        <item name="android:background">?attr/actionBarItemBackground</item>
     </style>
 
     <style name="MyTextViewStyle">
@@ -23,18 +41,18 @@
 
     <style name="divider_horizontal">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_height">@dimen/dp_0_5</item>
         <item name="android:background">@color/bg_divider</item>
     </style>
 
     <style name="divider_horizontal_crude">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_height">@dimen/dp_1</item>
         <item name="android:background">@color/bg_divider</item>
     </style>
 
     <style name="divider_vertical">
-        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_width">@dimen/dp_0_5</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/bg_divider</item>
     </style>
@@ -360,9 +378,8 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="AppToolBarStyle" parent="Widget.AppCompat.Toolbar">
+    <style name="TitleBarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/color_while</item>
-        <item name="titleTextAppearance">@style/AppToolbarTitleTextStyle</item>
         <item name="contentInsetStart">0dp</item>
         <item name="titleMarginStart">@dimen/dp_10</item>
         <item name="titleMarginEnd">@dimen/dp_10</item>
@@ -372,21 +389,25 @@
         <!--<item name="android:minHeight">?attr/actionBarSize</item>-->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_44</item>
+        <item name="tb_titleTextColor">@color/textColor4</item>
+        <item name="tb_titleTextSize">@dimen/textSize_18</item>
+        <item name="tb_titleTextStyle">bold</item>
     </style>
 
-    <!-- toolbar标题文字大小 -->
-    <style name="AppToolbarTitleTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">@dimen/textSize_18</item>
-        <!--<item name="android:textColor">@color/col_black</item>-->
-        <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/textColor4</item>
-    </style>
-    <!-- toolbar标题文字大小 -->
-    <style name="AppToolbarTitleTextStyle2" parent="AppToolbarTitleTextStyle">
-        <item name="android:textColor">@color/color_while</item>
+    <style name="TitleBarTransparentStyle" parent="TitleBarStyle">
+        <item name="android:tag">transparent</item>
+        <item name="android:background">@color/bg_transparent</item>
+        <item name="navigationIcon">@drawable/ic_back_left_white_24dp</item>
+        <item name="tb_titleTextColor">@color/color_while</item>
     </style>
 
+    <style name="TitleBarAccentStyle" parent="TitleBarStyle">
+        <item name="android:tag">transparent</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="navigationIcon">@null</item>
+        <item name="tb_titleTextColor">@color/color_while</item>
+        <!--<item name="android:minHeight">?attr/actionBarSize</item>-->
+    </style>
 
     <style name="AppToastStyle" parent="@android:style/Animation.Toast">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
@@ -423,6 +444,21 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@null</item>
+    </style>
+
+    <!--备注信息限制只能输入150字-->
+    <style name="EditText_Remark_Style">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLength">150</item>
+        <item name="android:textColorHint">@color/textColor21</item>
+        <item name="android:minLines">5</item>
+        <item name="android:hint">@string/tips_customer_remark_hint2</item>
+        <item name="android:textSize">@dimen/textSize_14</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:textColor">@color/textColor4</item>
+        <item name="android:background">@color/bg_transparent</item>
     </style>
 </resources>
 

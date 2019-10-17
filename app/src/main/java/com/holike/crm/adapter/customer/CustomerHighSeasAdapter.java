@@ -3,7 +3,6 @@ package com.holike.crm.adapter.customer;
 import android.content.Context;
 
 import com.holike.crm.R;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
 import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 

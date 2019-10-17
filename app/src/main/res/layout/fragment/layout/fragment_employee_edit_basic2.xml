@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--外层套ScrollView目的是解决软键盘弹出挡住输入框的问题-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -53,8 +55,6 @@
                     style="@style/TextView_TipsStyleSp14"
                     android:text="@string/employee_phone_tips" />
 
-                <TextView style="@style/TextViewAsteriskStyle" />
-
                 <EditText
                     android:id="@+id/mPhoneEditText"
                     style="@style/EditText_Height50dp"
@@ -80,33 +80,32 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="RtlSymmetry">
 
-                    <CheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/cb_man"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_marginEnd="@dimen/dp_40"
                         android:layout_marginRight="@dimen/dp_40"
-                        android:button="@null"
-                        android:drawableStart="@drawable/bg_checkbox_selector"
-                        android:drawableLeft="@drawable/bg_checkbox_selector"
-                        android:drawablePadding="@dimen/dp_6"
+                        android:paddingStart="@dimen/dp_6"
+                        android:paddingLeft="@dimen/dp_6"
                         android:text="@string/sex_man"
-                        android:textColor="@color/bg_checkbox_textcolor_selector" />
+                        android:textColor="@color/bg_checkbox_textcolor_selector"
+                        app:buttonCompat="@drawable/bg_checkbox_selector" />
 
-                    <CheckBox
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/cb_women"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:button="@null"
-                        android:drawableStart="@drawable/bg_checkbox_selector"
-                        android:drawableLeft="@drawable/bg_checkbox_selector"
-                        android:drawablePadding="@dimen/dp_6"
+                        android:paddingStart="@dimen/dp_6"
+                        android:paddingLeft="@dimen/dp_6"
                         android:text="@string/sex_woman"
-                        android:textColor="@color/bg_checkbox_textcolor_selector" />
+                        android:textColor="@color/bg_checkbox_textcolor_selector"
+                        app:buttonCompat="@drawable/bg_checkbox_selector" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -23,6 +23,7 @@ public class CustomerValue {
     public static final String STAY_INSTALL = "待安装客户";
     public static final String INSTALLED = "已安装客户";
     public static final String HIGH_SEAS = "公海客户";
+    public static final String DEPOSIT_RECEIVED = "已收订金客户";
     public static final String FEEDBACK = "售后反馈";
     public static final String FEEDBACK_RECORD = "反馈记录";
     public static final String RECEIPT_SCAN = "收货扫码";
@@ -45,4 +46,18 @@ public class CustomerValue {
 
     public static final String HOUSE_ID = "houseId"; //房屋id bundle传值
     public static final String PERSONAL_ID = "personalId"; //客户id bundle传值
+    public static final String HIGH_SEAS_HOUSE_FLAG = "isHighSeasHouse"; //是否是公海房屋 boolean
+
+    public static final String EVENT_TYPE_ALTER_CUSTOMER = "event.type.ALTER.CUSTOMER";  //修改客户信息
+    public static final String EVENT_TYPE_ADD_CUSTOMER = "event.type.ADD.CUSTOMER"; //新增客户信息
+    public static final String EVENT_TYPE_RECEIVE_HOUSE = "event.type.RECEIVE.HOUSE"; //领取房屋
+    public static final String EVENT_TYPE_CONFIRM_LOST_HOUSE = "event.type.CONFIRM.LOST.HOUSE"; //确认流失房屋
+    public static final String EVENT_TYPE_LOST_HOUSE = "event.type.LOST_HOUSE"; //流失房屋
+
+    public static final int RESULT_CODE_EDIT_CUSTOMER = 1001; //新增或修改客户信息成功返回码
+    public static final int RESULT_CODE_LOST_HOUSE = 1002; //流失房屋成功返回码
+    public static final int RESULT_CODE_RECEIVE_HOUSE = 1003; //领取房屋成功
+
+    public static final int RESULT_CODE_ACTIVATION = 1006; //激活客户成功返回码
+    public static final int RESULT_CODE_HIGH_SEAS = 1007; //领取公海客户成功
 }

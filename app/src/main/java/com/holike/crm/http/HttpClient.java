@@ -25,30 +25,30 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class HttpClient {
     private volatile static HttpClient instance = null;
-    public static final String BASE_URL = "http://39.108.84.67:3333";
+    static final String BASE_URL = "http://39.108.84.67:3333";
     private static final int DEFAULT_TIMEOUT = 20;
 
-    private OkHttpClient httpClient;
-    private Retrofit retrofit;
+    private OkHttpClient mHttpClient;
+    private Retrofit mRetrofit;
 //    private List<RequestCallBack> callBacks;
 //    private RequestCallBack currentCallBack;
 
     //构造方法私有
     private HttpClient() {
         //手动创建一个OkHttpClient并设置超时时间
-        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //开启builder日志 等级BODY
 //        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 //        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        httpClientBuilder.addInterceptor(loggingInterceptor);
         //---
 
-        httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        httpClientBuilder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        httpClient = httpClientBuilder.build();
+        builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        builder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        mHttpClient = builder.build();
 //        callBacks = new ArrayList<>();
 
-        retrofit = new Retrofit.Builder().client(httpClient).addConverterFactory(ScalarsConverterFactory.create())
+        mRetrofit = new Retrofit.Builder().client(mHttpClient).addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).baseUrl(BASE_URL).build();
 
     }
@@ -75,11 +75,11 @@ public class HttpClient {
 //    }
 
     public OkHttpClient getHttpClient() {
-        return httpClient;
+        return mHttpClient;
     }
 
     public Retrofit getRetrofit() {
-        return retrofit;
+        return mRetrofit;
     }
 
     /*get请求方式*/
@@ -88,6 +88,14 @@ public class HttpClient {
         if (url == null) {
             return null;
         }
+        return CallbackHelper.deliveryResult(get(url, header, params), callBack);
+    }
+
+    public Observable<String> get(String url, Map<String, String> params) {
+        return get(url, null, params);
+    }
+
+    public Observable<String> get(String url, @Nullable Map<String, String> header, Map<String, String> params) {
         if (header == null) {
             header = new HashMap<>();
         }
@@ -96,7 +104,7 @@ public class HttpClient {
         header.put(Constants.CLIENT, Constants.ANDROID);
 //        header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE, ""));
         header.put(Constants.COOKIE, SharedPreferencesUtils.getString(Constants.COOKIE2, ""));
-        GetService service = retrofit.create(GetService.class);
+        GetService service = mRetrofit.create(GetService.class);
         Observable<String> call;
 //        if (header == null) {
 //            if (params == null) {
@@ -114,11 +122,7 @@ public class HttpClient {
             call = service.getHeaderParams(url, header, params);
             LogCat.v_request("GET url:" + url + "\nheader:" + header.toString() + "\nparams:" + params);
         }
-//        }
-//        currentCallBack = callBack;
-//        callBacks.add(currentCallBack);
-        return CallbackHelper.deliveryResult(call, callBack);
-//        call.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(callBack);
+        return call;
     }
 
     /*post请求方式*/
@@ -127,7 +131,7 @@ public class HttpClient {
         if (url == null) {
             return null;
         }
-        PostService service = retrofit.create(PostService.class);
+        PostService service = mRetrofit.create(PostService.class);
         Observable<String> call;
         if (header == null) {
             header = new HashMap<>();
@@ -163,7 +167,7 @@ public class HttpClient {
     }
 
     public Observable<String> postByBody(String url, @Nullable Map<String, String> header, String params) {
-        BodyService service = retrofit.create(BodyService.class);
+        BodyService service = mRetrofit.create(BodyService.class);
         Observable<String> call;
         LogCat.v_request(url);
         if (header == null) {
@@ -200,7 +204,7 @@ public class HttpClient {
         if (url == null) {
             return null;
         }
-//        UploadService service = retrofit.create(UploadService.class);
+//        UploadService service = mRetrofit.create(UploadService.class);
         Observable<String> call = getUploadObservable(url, header, params, parts);
 //        if (header == null) {
 //            if (params == null) {
@@ -226,12 +230,12 @@ public class HttpClient {
     }
 
     public Observable<String> getUploadObservable(String url, MultipartBody multipartBody) {
-        UploadService service = retrofit.create(UploadService.class);
+        UploadService service = mRetrofit.create(UploadService.class);
         return service.upload(url, multipartBody);
     }
 
     public Observable<String> getUploadObservable(String url, Map<String, String> header, Map<String, String> params, List<MultipartBody.Part> parts) {
-        UploadService service = retrofit.create(UploadService.class);
+        UploadService service = mRetrofit.create(UploadService.class);
         Observable<String> call;
         if (header == null) {
             if (params == null) {
@@ -259,7 +263,7 @@ public class HttpClient {
         if (url == null) {
             return null;
         }
-        UploadService service = retrofit.create(UploadService.class);
+        UploadService service = mRetrofit.create(UploadService.class);
         Observable<String> call = service.upLoad(url, header, toRequestBody(relationId), parts);
 //        currentCallBack = callBack;
 //        callBacks.add(currentCallBack);

@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 上传量房结果
  */
-
+@Deprecated
 public class UploadMeasureFragment extends WorkflowFragment implements WorkflowView {
     private final int TYPE_MEASURE = 1;
     private final int TYPE_IMG = 2;

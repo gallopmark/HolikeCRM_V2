@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:src="@drawable/bill_date_up" />
+                android:src="@drawable/ic_choice_date_down" />
         </LinearLayout>
 
         <TextView

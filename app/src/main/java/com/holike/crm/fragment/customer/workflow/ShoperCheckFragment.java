@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/6.
  * 店长查房
  */
-
+@Deprecated
 public class ShoperCheckFragment extends WorkflowFragment implements WorkflowView {
     @BindView(R.id.tv_shoper_check_result)
     TextView tvResult;

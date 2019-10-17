@@ -1,6 +1,7 @@
 package com.holike.crm.activity.analyze;
 
 import android.app.Dialog;
+import android.os.Bundle;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragmentActivity;
@@ -38,8 +39,8 @@ public class MonthPkActivity extends MyFragmentActivity<MonthPkPresenter, MonthP
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item15_title));
         setLeft(getString(R.string.report_title));

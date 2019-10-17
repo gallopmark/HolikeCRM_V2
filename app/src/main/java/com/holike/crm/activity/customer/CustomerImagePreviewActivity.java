@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.holike.crm.R;
@@ -13,12 +11,10 @@ import com.holike.crm.activity.customer.helper.CustomerImagePreviewHelper;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.base.MyFragmentActivity;
-import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by gallop on 2019/8/2.
@@ -42,7 +38,7 @@ public class CustomerImagePreviewActivity extends MyFragmentActivity {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         String title = getIntent().getStringExtra("title");
         setTitle(title);
         List<String> images = (List<String>) IntentValue.getInstance().get(IMAGE_DATA);

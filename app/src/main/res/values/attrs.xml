@@ -38,12 +38,6 @@
         <attr name="sfl_offsetY" format="dimension" />
     </declare-styleable>
 
-
-    <declare-styleable name="MyLinearLayout">
-        <attr name="mll_HeightRatio" format="reference|float" />
-        <attr name="mll_HeightDimen" format="reference|dimension" />
-    </declare-styleable>
-
     <declare-styleable name="ClearEditText">
         <attr name="clearIcon" format="reference" />
         <attr name="scaleSize" format="float" />

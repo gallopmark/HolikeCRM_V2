@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="NavigationStyle" parent="NavigationIconStyle">
+        <item name="android:background">@drawable/titlebar_control_background_20dp</item>
+    </style>
+</resources>

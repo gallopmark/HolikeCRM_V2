@@ -7,5 +7,5 @@
     android:background="@color/bg"
     tools:context="com.holike.crm.activity.analyze.OriginalBoardActivity">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 </FrameLayout>

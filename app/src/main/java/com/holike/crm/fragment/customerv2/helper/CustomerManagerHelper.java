@@ -3,6 +3,7 @@ package com.holike.crm.fragment.customerv2.helper;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -24,23 +25,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView;
 import com.holike.crm.R;
 import com.holike.crm.activity.customer.CustomerImagePreviewActivity;
 import com.holike.crm.activity.customer.CustomerMultiTypeActivity;
+import com.holike.crm.activity.customer.CustomerOnlineLogActivity;
 import com.holike.crm.activity.homepage.OrderDetailsActivity;
-import com.holike.crm.activity.main.PhotoViewActivity;
+import com.holike.crm.adapter.SquareImageGridAdapter;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.IntentValue;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
+import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.dialog.ReceivingCustomerDialog;
 import com.holike.crm.enumeration.CustomerValue;
+import com.holike.crm.helper.ICallPhoneHelper;
 import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
-import com.holike.crm.rxbus.MessageEvent;
-import com.holike.crm.rxbus.RxBus;
+import com.holike.crm.util.DensityUtil;
 import com.holike.crm.util.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -53,24 +55,38 @@ import java.util.List;
  */
 public class CustomerManagerHelper extends IHouseHelper {
 
+    private boolean mHighSeasFlag; //是否是公海标识，从bundle带过来，如果为true，则调公海客户详情接口
+    private String mPersonalId = "";
+    private String mSelectedHouseId;  //选中的房屋（进来默认选中那个房屋）
     private WrapperRecyclerView mRecyclerView;
     private View mHeaderView,
             mFooterView,
             mHouseInfoView;
+    private TextView mOnlineLogTextView;  //线上引流客户（线上记录）
     private FrameLayout mReceiveLayout; //如果是公海客户 底部显示“领取客户按钮”
+    private List<CustomerManagerV2Bean.HouseInfoBean> mHouseInfoList;
     private CustomerManagerAdapter mAdapter;
-    private int mCurrentIndex;
-    private boolean mIsHighSeaHouse = false; //是否是公海房屋
+    private boolean mFirstLoadCompleted;  //是否是第一次加载成功
+    private int mSelectPosition; //当前选择的房屋位置
+    private boolean mIsHighSeaHouse = false; //当前房屋是否是公海房屋
 
     private CustomerManagerCallback mCallback;
 
     public CustomerManagerHelper(BaseFragment<?, ?> fragment, CustomerManagerCallback callback) {
         super(fragment);
         this.mCallback = callback;
+        Bundle bundle = fragment.getArguments();
+        if (bundle != null) {
+            mHighSeasFlag = bundle.getBoolean(CustomerValue.HIGH_SEAS_HOUSE_FLAG, false);
+            mSelectedHouseId = bundle.getString(CustomerValue.HOUSE_ID);
+            mPersonalId = bundle.getString(CustomerValue.PERSONAL_ID, "");
+        }
         View contentView = fragment.getContentView();
         mRecyclerView = contentView.findViewById(R.id.recyclerView);
+        mOnlineLogTextView = contentView.findViewById(R.id.tv_online_logs);
         mReceiveLayout = contentView.findViewById(R.id.fl_receive);
         setup();
+        doRequest();
     }
 
     private void setup() {
@@ -82,11 +98,41 @@ public class CustomerManagerHelper extends IHouseHelper {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    /*领取客户成功，则调用客户详情接口，将公海标识设为false*/
+    public void onReceiveHouseSuccess() {
+        mHighSeasFlag = false;
+        doRequest();
+    }
+
+    public void doRequest() {
+        mCallback.onGetCustomerDetail(mPersonalId, mHighSeasFlag);
+    }
+
+    public void setActivityPoliceEnabled(boolean isEmpty) {
+        if (isEmpty) {
+            mHeaderView.findViewById(R.id.ll_activity_police_layout).setVisibility(View.GONE);
+        } else {
+            mHeaderView.findViewById(R.id.ll_activity_police_layout).setVisibility(View.VISIBLE);
+        }
+    }
+
     public void onHttpResponse(CustomerManagerV2Bean bean) {
         this.mManagerV2Bean = bean;
         this.mCustomerInfoBean = mManagerV2Bean.getPersonalInfo();
+        mHouseInfoList = new ArrayList<>(mManagerV2Bean.getHouseInfoList());
+        if (!mFirstLoadCompleted) {
+            for (int i = 0; i < mHouseInfoList.size(); i++) {
+                CustomerManagerV2Bean.HouseDetailBean detailBean = mHouseInfoList.get(i).getHouseDetail();
+                if (detailBean != null && TextUtils.equals(detailBean.houseId, mSelectedHouseId)) {
+                    mSelectPosition = i;
+                    break;
+                }
+            }
+            mFirstLoadCompleted = true;
+        }
+        validOnlineLog();
         updateHeadView();
-        updateHouseInfo(mCurrentIndex);
+        updateHouseInfo(mSelectPosition);
     }
 
     private String getPersonalId() {
@@ -94,67 +140,56 @@ public class CustomerManagerHelper extends IHouseHelper {
         return this.mCustomerInfoBean.personalId;
     }
 
+    private void validOnlineLog() {
+        if (mCustomerInfoBean != null && TextUtils.equals(mCustomerInfoBean.source, "09")) { //线上引流客户
+            mOnlineLogTextView.setVisibility(View.VISIBLE);
+            mOnlineLogTextView.setOnClickListener(view -> CustomerOnlineLogActivity.open(mContext, mCustomerInfoBean.personalId));
+        } else {
+            mOnlineLogTextView.setVisibility(View.GONE);
+        }
+    }
+
     private void updateHeadView() {
-        boolean isHighSeaHouse = false;
         if (mCustomerInfoBean != null) {
-            TextView tvEditInfo = mHeaderView.findViewById(R.id.tv_edit_info); //编辑客户信息
-            isHighSeaHouse = mCustomerInfoBean.isHighSeasPerson();
-            if (isHighSeaHouse) {
-                tvEditInfo.setVisibility(View.GONE);
-            } else {
-                tvEditInfo.setVisibility(View.VISIBLE);
-                tvEditInfo.setOnClickListener((v -> mCallback.onEditInfo(alterCustomer())));
-            }
             TextView tvName = mHeaderView.findViewById(R.id.tv_name);
             TextView tvIntention = mHeaderView.findViewById(R.id.tv_intention);
             TextView tvSource = mHeaderView.findViewById(R.id.tv_source);
-            TextView tvPhoneWx = mHeaderView.findViewById(R.id.tv_phoneWx);
+            TextView tvPhone = mHeaderView.findViewById(R.id.tv_phone);
+            TextView tvWechat = mHeaderView.findViewById(R.id.tv_wechat);
             TextView tvCreateTime = mHeaderView.findViewById(R.id.tv_create_time);
             TextView tvGeneration = mHeaderView.findViewById(R.id.tv_generation);
             TextView tvNextDate = mHeaderView.findViewById(R.id.tv_next_date);
             TextView tvPolicy = mHeaderView.findViewById(R.id.tv_policy);
-            tvName.setText(transform(R.string.customer_name_tips, mCustomerInfoBean.userName)); //姓名
+            tvName.setText(transform(0, mCustomerInfoBean.userName, mHeaderView.findViewById(R.id.tv_name_tips))); //姓名
+            Drawable drawableLeft = null;
+            if (TextUtils.equals(mCustomerInfoBean.gender, "2")) { //先生
+                drawableLeft = ContextCompat.getDrawable(mContext, R.drawable.ic_sex_man);
+            } else if (TextUtils.equals(mCustomerInfoBean.gender, "1")) { //女士
+                drawableLeft = ContextCompat.getDrawable(mContext, R.drawable.ic_sex_lady);
+            }
+            if (drawableLeft != null) {
+                tvName.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
+            }
             tvIntention.setText(transform(R.string.tips_customer_intent2, mCustomerInfoBean.getIntentionLevel()));  //意向评级
             tvSource.setText(transform(R.string.tips_customer_source2, mCustomerInfoBean.getSource()));//客户来源
             if (!TextUtils.isEmpty(mCustomerInfoBean.phoneNumber)) { //手机号不为空，则显示手机
-                tvPhoneWx.setText(mTextHelper.obtainColorBoldStyle(R.string.customer_phone_tips, mCustomerInfoBean.phoneNumber, R.color.colorAccent));
+                tvPhone.setText(mTextHelper.obtainColorBoldStyle(R.string.customer_phone_tips, mCustomerInfoBean.phoneNumber, R.color.colorAccent));
 //                tvPhoneWx.setText(transform(R.string.customer_phone_tips, mCustomerInfoBean.phoneNumber));
-                tvPhoneWx.setEnabled(true);
-            } else if (!TextUtils.isEmpty(mCustomerInfoBean.wxNumber)) { //微信号不为空，则显示微信
-                tvPhoneWx.setText(transform(R.string.customer_wechat_tips, mCustomerInfoBean.wxNumber));
-                tvPhoneWx.setEnabled(false);
-            } else {  //否则显示未填写
-                tvPhoneWx.setText(transform(R.string.customer_phone_tips, ""));
-                tvPhoneWx.setEnabled(false);
+                tvPhone.setOnClickListener(view -> onCallPhone());
+            } else {
+                tvPhone.setText(transform(R.string.customer_phone_tips, ""));
             }
-            tvPhoneWx.setOnClickListener(view -> onCallPhone());
+            tvWechat.setText(transform(R.string.customer_wechat_tips, mCustomerInfoBean.wxNumber));
             tvCreateTime.setText(transform(R.string.create_time_tips, mCustomerInfoBean.getCreateDate())); //创建时间
             tvGeneration.setText(transform(R.string.tips_customer_age2, mCustomerInfoBean.getAgeType())); //年龄段
             tvNextDate.setText(transform(R.string.followup_nextDate_tips, mCustomerInfoBean.getNextFollowTime())); //下次跟进日期
-            tvPolicy.setText(transform(R.string.tips_customer_activity_policy2, mCustomerInfoBean.activityPolicy)); //活动优惠政策
-        }
-        TextView tvAddHouse = mHeaderView.findViewById(R.id.tv_add_house); //添加房屋
-        TextView tvEditHouse = mHeaderView.findViewById(R.id.tv_edit_house); //编辑房屋信息
-        if (isHighSeaHouse) {  //公海客户不可编辑 不可添加房屋
-            tvAddHouse.setVisibility(View.GONE);
-            tvEditHouse.setVisibility(View.GONE);
-        } else {
-            tvAddHouse.setVisibility(View.VISIBLE);
-            tvEditHouse.setVisibility(View.VISIBLE);
-            View.OnClickListener listener = v -> {
-                if (v.getId() == R.id.tv_add_house) {
-                    mCallback.onEditHouse(obtainBundle(null));
-                } else if (v.getId() == R.id.tv_edit_house) {
-                    mCallback.onEditHouse(obtainBundle(mCurrentHouseDetailBean));
-                }
-            };
-            tvAddHouse.setOnClickListener(listener);
-            tvEditHouse.setOnClickListener(listener);
+            tvPolicy.setText(transform(0, mCustomerInfoBean.activityPolicy, mHeaderView.findViewById(R.id.tv_policy_tips))); //活动优惠政策
         }
         RecyclerView recyclerView = mHeaderView.findViewById(R.id.rv_house_list); //房屋列表
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
-        final HouseListAdapter adapter = new HouseListAdapter(mContext, mManagerV2Bean.getHouseInfoList());
+        final HouseListAdapter adapter = new HouseListAdapter(mContext, mHouseInfoList, mSelectPosition);
         recyclerView.setAdapter(adapter);
+        recyclerView.smoothScrollToPosition(mSelectPosition);
         adapter.setOnItemClickListener((apt, holder, view, position) -> {
             adapter.setSelectPosition(position);
             updateHouseInfo(position);
@@ -163,14 +198,7 @@ public class CustomerManagerHelper extends IHouseHelper {
 
     /*拨打电话*/
     private void onCallPhone() {
-        MessageEvent event = new MessageEvent();
-        Bundle bundle = new Bundle();
-        bundle.putString("phoneNumber", mCustomerInfoBean.phoneNumber);
-        bundle.putString(CustomerValue.PERSONAL_ID, mCustomerInfoBean.personalId);
-        bundle.putString(CustomerValue.HOUSE_ID, mCurrentHouseDetailBean.houseId);
-        event.setArguments(bundle);
-        RxBus.getInstance().post(event);
-        mFragment.callPhone(mCustomerInfoBean.phoneNumber);
+        ICallPhoneHelper.with(mContext).requestCallPhone(mCustomerInfoBean.personalId, mCurrentHouseDetailBean.houseId, mCustomerInfoBean.phoneNumber);
     }
 
     /*修改客户信息传值*/
@@ -180,6 +208,7 @@ public class CustomerManagerHelper extends IHouseHelper {
         bundle.putString("recordStatus", mCustomerInfoBean.recordStatus);
         bundle.putString("versionNumber", mCustomerInfoBean.versionNumber);
         bundle.putString("userName", mCustomerInfoBean.userName);
+        bundle.putBoolean("isValidCustomer", mCustomerInfoBean.isValidCustomer());
         bundle.putString("phoneNumber", mCustomerInfoBean.phoneNumber); //手机号
         bundle.putString("wxNumber", mCustomerInfoBean.wxNumber); //微信号
         bundle.putString("gender", mCustomerInfoBean.gender); //性别
@@ -201,7 +230,24 @@ public class CustomerManagerHelper extends IHouseHelper {
         bundle.putString(CustomerValue.PERSONAL_ID, getPersonalId());
         if (detailBean != null) {
             bundle.putBoolean("isEdit", true);
-            bundle.putSerializable("detail", detailBean);
+            bundle.putString("houseId", detailBean.houseId);
+            bundle.putString("recordStatus", detailBean.recordStatus);
+            bundle.putString("versionNumber", detailBean.versionNumber);
+            bundle.putString("provinceCode", detailBean.provinceCode);
+            bundle.putString("cityCode", detailBean.cityCode);
+            bundle.putString("districtCode", detailBean.districtCode);
+            bundle.putString("provinceName", detailBean.provinceName);
+            bundle.putString("cityName", detailBean.cityName);
+            bundle.putString("districtName", detailBean.districtName);
+            bundle.putString("shopId", detailBean.shopId);
+            bundle.putString("shopName", detailBean.shopName);
+            bundle.putString("groupId", detailBean.groupId);
+            bundle.putString("groupName", detailBean.groupName);
+            bundle.putString("budgetTypeCode", detailBean.budgetTypeCode);
+            bundle.putString("address", detailBean.address);
+            bundle.putString("spareContact", detailBean.spareContact);
+            bundle.putString("spareContactPhone", detailBean.spareContactPhone);
+            bundle.putString("remark", detailBean.remark);
         } else {
             bundle.putBoolean("isEdit", false);
         }
@@ -211,20 +257,21 @@ public class CustomerManagerHelper extends IHouseHelper {
     /*更新房屋信息*/
     private void updateHouseInfo(int currentHouse) {
         onResetStatus();
-        List<CustomerManagerV2Bean.HouseInfoBean> houseItems = mManagerV2Bean.getHouseInfoList();
-        if (houseItems.isEmpty() || currentHouse < 0 || currentHouse >= houseItems.size()) {
+        if (mHouseInfoList.isEmpty() || currentHouse < 0 || currentHouse >= mHouseInfoList.size()) {
             return;
         }
-        this.mCurrentIndex = currentHouse;
-        mCurrentHouseInfoBean = houseItems.get(currentHouse);
+        this.mSelectPosition = currentHouse;
+        mCurrentHouseInfoBean = mHouseInfoList.get(currentHouse);
         mCurrentHistoryList = new ArrayList<>(mCurrentHouseInfoBean.getHistoryList());
+        mCurrentOperateList = new ArrayList<>(mCurrentHouseInfoBean.getMobileIcon());
         mCurrentHouseDetailBean = mCurrentHouseInfoBean.getHouseDetail();
         mMultipleItems.clear();
         if (mCurrentHouseDetailBean != null) {
             mIsHighSeaHouse = mCurrentHouseDetailBean.isHighSeasHouse();
-            if (mCurrentHouseDetailBean.isExistHighSeasHistory()) {  //存在公海历史记录
+            if (mCurrentHouseDetailBean.isExistHighSeasHistory() && !mHighSeasFlag) {  //存在公海历史记录
                 mFragment.setRightMenu(R.string.history_record, view -> mCallback.onHighSeasHistory(getPersonalId(), mCurrentHouseDetailBean.houseId));
             }
+            updateEditButton();
             updateSingleHouseInfo();
             updateMultiHouseInfo();
             if (mIsHighSeaHouse) {
@@ -239,6 +286,9 @@ public class CustomerManagerHelper extends IHouseHelper {
     /*恢复到初始状态*/
     private void onResetStatus() {
         mHeaderView.findViewById(R.id.cl_house_info).setVisibility(View.GONE);
+        mHeaderView.findViewById(R.id.tv_edit_info).setVisibility(View.GONE); //编辑客户按钮
+        mHeaderView.findViewById(R.id.tv_edit_house).setVisibility(View.GONE); //编辑房屋按钮
+        mHeaderView.findViewById(R.id.tv_add_house).setVisibility(View.GONE); //添加房屋按钮
         mIsHighSeaHouse = false;
         mFragment.hideRightMenu();
         mReceiveLayout.setVisibility(View.GONE);
@@ -249,6 +299,25 @@ public class CustomerManagerHelper extends IHouseHelper {
         ReceivingCustomerDialog dialog = new ReceivingCustomerDialog(mContext);
         dialog.setOnSelectedListener((shopId, groupId) -> mCallback.doReceive(mCurrentHouseDetailBean.houseId, shopId, groupId, SharedPreferencesUtils.getUserId()));
         dialog.show();
+    }
+
+    /*判断是否是公海房屋，如果是则不能编辑客户信息*/
+    private void updateEditButton() {
+        TextView tvEditInfo = mHeaderView.findViewById(R.id.tv_edit_info); //编辑客户信息
+        TextView tvAddHouse = mHeaderView.findViewById(R.id.tv_add_house); //添加房屋
+        TextView tvEditHouse = mHeaderView.findViewById(R.id.tv_edit_house); //编辑房屋信息
+        if (mIsHighSeaHouse) { //公海客户隐藏 编辑客户信息按钮、添加房屋按钮、编辑房屋信息按钮
+            tvEditInfo.setVisibility(View.GONE);
+            tvAddHouse.setVisibility(View.GONE);
+            tvEditHouse.setVisibility(View.GONE);
+        } else {
+            tvEditInfo.setVisibility(View.VISIBLE);
+            tvAddHouse.setVisibility(View.VISIBLE);
+            tvEditHouse.setVisibility(View.VISIBLE);
+            tvEditInfo.setOnClickListener((v -> mCallback.onEditInfo(alterCustomer())));
+            tvAddHouse.setOnClickListener(view -> mCallback.onEditHouse(obtainBundle(null)));
+            tvEditHouse.setOnClickListener(view -> mCallback.onEditHouse(obtainBundle(mCurrentHouseDetailBean)));
+        }
     }
 
     /*更新房屋信息*/
@@ -276,7 +345,18 @@ public class CustomerManagerHelper extends IHouseHelper {
         }
         tvBudget.setText(transform(R.string.tips_customer_custom_budget, mCurrentHouseDetailBean.getBudget()));    //定制预算
         tvContact.setText(transform(R.string.tips_customer_standby_contact2, mCurrentHouseDetailBean.spareContact)); //备用联系人
-        tvPhone.setText(transform(R.string.tips_customer_standby_phone2, mCurrentHouseDetailBean.spareContactPhone)); //备用电话
+        final String sparePhone = mCurrentHouseDetailBean.spareContactPhone;
+        if (TextUtils.isEmpty(sparePhone)) {
+            tvPhone.setText(transform(R.string.tips_customer_standby_phone2, ""));
+            tvPhone.setEnabled(false);
+        } else {
+            tvPhone.setEnabled(true);
+            tvPhone.setText(mTextHelper.obtainColorBoldStyle(R.string.tips_customer_standby_phone2, sparePhone, R.color.colorAccent)); //备用电话
+        }
+        tvPhone.setOnClickListener(view -> {
+            if (!TextUtils.isEmpty(sparePhone))
+                mFragment.callPhone(sparePhone);
+        });
         tvRemark.setText(transform(0, mCurrentHouseDetailBean.remark, tvRemarkTips));
     }
 
@@ -330,9 +410,8 @@ public class CustomerManagerHelper extends IHouseHelper {
             }
             removeFooterView();
         } else {  //跟进中的房屋 才显示操作菜单
-            List<CustomerManagerV2Bean.OperateItemBean> statusBeans = mCurrentHouseInfoBean.getMobileIcon();
-            if (!statusBeans.isEmpty()) { //操作菜单
-                mMultipleItems.add(new OperateItem(statusBeans));
+            if (!mCurrentOperateList.isEmpty()) { //操作菜单
+                mMultipleItems.add(new OperateItem(mCurrentOperateList));
             }
             mMultipleItems.add(new MultiHouseItem(MultiHouseItem.TYPE_TITLE_TIPS)); //跟进记录
             wrapGuideItem(); //分配导购
@@ -486,14 +565,6 @@ public class CustomerManagerHelper extends IHouseHelper {
         tvPublish.setOnClickListener(view -> {
             String content = editText.getText().toString();
             mCallback.onPublishMessage(mCurrentHouseDetailBean.houseId, content);
-//            for (MultiItem item : mMultipleItems) {
-//                if (item instanceof MessageLogsItem) {
-//                    ((MessageLogsItem) item).isLastPosition = false;
-//                }
-//            }
-//            String date = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(new Date());
-//            mMultipleItems.add(new MessageLogsItem(date + "-gallopMark", content, false, true));
-//            mAdapter.notifyDataSetChanged();
             mRecyclerView.smoothScrollToPosition(mMultipleItems.size() + 1);
             editText.setText("");  //清空留言板
         });
@@ -611,9 +682,12 @@ public class CustomerManagerHelper extends IHouseHelper {
 
         /*菜单列表适配器*/
         class OperateGridAdapter extends CommonAdapter<CustomerManagerV2Bean.OperateItemBean> {
+            int mSize;
 
             OperateGridAdapter(Context context, List<CustomerManagerV2Bean.OperateItemBean> mDatas) {
                 super(context, mDatas);
+                int width = (DensityUtil.getScreenWidth(context) - mContext.getResources().getDimensionPixelSize(R.dimen.dp_10) * 2) / 4;
+                mSize = Math.round(width * 7 / 9f);
             }
 
             @Override
@@ -624,23 +698,31 @@ public class CustomerManagerHelper extends IHouseHelper {
             @Override
             public void onBindHolder(RecyclerHolder holder, CustomerManagerV2Bean.OperateItemBean bean, int position) {
                 ImageView iv = holder.obtainView(R.id.iv_operate_icon);
+                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+                params.height = mSize;
                 Glide.with(mContext).load(bean.iconPath).into(iv);
-                holder.setText(R.id.tv_content, bean.iconName);
+                holder.itemView.setEnabled(!bean.isLock());
+                holder.itemView.setOnClickListener(view -> onOperateClick(bean));
             }
         }
 
+        /*展示操作流程*/
         private void setOperate(RecyclerHolder holder, OperateItem item) {
             RecyclerView rvOperate = holder.obtainView(R.id.rv_operate);
             final List<CustomerManagerV2Bean.OperateItemBean> beans = item.beans;
             OperateGridAdapter adapter = new OperateGridAdapter(mContext, beans);
             rvOperate.setAdapter(adapter);
-            adapter.setOnItemClickListener((a, h, view, position) -> {
-                if (position >= 0 && position < beans.size()) {
-                    onOperateClick(beans.get(position));
-                }
-            });
+//            adapter.setOnItemClickListener((a, h, view, position) -> {
+//                if (position >= 0 && position < beans.size()) {
+//                    CustomerManagerV2Bean.OperateItemBean bean = beans.get(position);
+//                    if (!bean.isLock()) {   //没有锁上  可以编辑
+//                        onOperateClick(bean);
+//                    }
+//                }
+//            });
         }
 
+        /*操作流程点击*/
         private void onOperateClick(CustomerManagerV2Bean.OperateItemBean bean) {
             String code = bean.iconCode;
             if (TextUtils.equals(code, OperateCode.CODE_MESSAGE_BOARD)) {  //留言板
@@ -654,23 +736,27 @@ public class CustomerManagerHelper extends IHouseHelper {
             } else if (TextUtils.equals(code, OperateCode.CODE_LOSE)) { //已流失
                 openMultipleActivity(CustomerValue.TYPE_BEEN_LOST, null);
             } else if (TextUtils.equals(code, OperateCode.CODE_UNMEASURED)) { //预约量尺
-                openMultipleActivity(CustomerValue.TYPE_UNMEASURED, unmeasuredBundle());
+                toUnmeasured();
             } else if (TextUtils.equals(code, OperateCode.CODE_MEASURED)) { //量尺结果
-                openMultipleActivity(CustomerValue.TYPE_MEASURE_RESULT, measureResultBundle());
-            } else if (TextUtils.equals(code, OperateCode.CODE_UPLOAD_PLAN)) { //量尺结果
-                openMultipleActivity(CustomerValue.TYPE_UPLOAD_PLAN, uploadPlanBundle());
-            } else if (TextUtils.equals(code, OperateCode.CODE_ROUNDS)) { //量尺结果
-                openMultipleActivity(CustomerValue.TYPE_ROUNDS, supervisorRounds());
+                toMeasured();
+            } else if (TextUtils.equals(code, OperateCode.CODE_UPLOAD_PLAN)) { //上传方案
+                toUploadPlan();
+            } else if (TextUtils.equals(code, OperateCode.CODE_ROUNDS)) { //主管查房
+                toRounds();
             } else if (TextUtils.equals(code, OperateCode.CODE_CONTRACT)) { //合同登记（仅能登记一次）
                 if (!mCurrentHouseDetailBean.isContractRegistration()) {  //没有填过合同登记
-                    openMultipleActivity(CustomerValue.TYPE_CONTRACT_REGISTER, contractRegister());
+                    toContractRegister();
                 }
             } else if (TextUtils.equals(code, OperateCode.CODE_INSTALL_DRAWING)) { //上传安装图纸
-                openMultipleActivity(CustomerValue.TYPE_INSTALL_DRAWING, uploadInstallDrawing());
+                toInstallDrawing();
             } else if (TextUtils.equals(code, OperateCode.CODE_UNINSTALL)) { //预约安装
-                openMultipleActivity(CustomerValue.TYPE_UNINSTALL, uninstall());
+                toUninstall();
             } else if (TextUtils.equals(code, OperateCode.CODE_INSTALLED)) { //安装完成
-                openMultipleActivity(CustomerValue.TYPE_INSTALLED, finishInstall());
+                toInstalled();
+            } else if (TextUtils.equals(code, OperateCode.CODE_CONFIRM_LOSE)) { //确认流失
+                toConfirmLose();
+            } else if (TextUtils.equals(code, OperateCode.CODE_INVALID_RETURN)) { //无效退回
+                toInvalidReturn();
             }
         }
 
@@ -678,9 +764,10 @@ public class CustomerManagerHelper extends IHouseHelper {
             holder.setText(R.id.tv_title, mContext.getString(R.string.house_manage_divide_guide));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
-            holder.setText(R.id.tv_store, transform(R.string.tips_customer_store_belong2, mCurrentHouseDetailBean.shopName));  //所属门店
-            holder.setText(R.id.tv_guide, transform(R.string.customer_guide_tips, mCurrentHouseDetailBean.salesName)); //导购
-//            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_ASSIGN_GUIDE, assignGuide()));
+            String shopTemp = mCurrentHouseDetailBean.shopName + (TextUtils.isEmpty(mCurrentHouseDetailBean.groupName) ? ""
+                    : "-" + mCurrentHouseDetailBean.groupName);
+            holder.setText(R.id.tv_store, transform(0, shopTemp, holder.obtainView(R.id.tv_shop_tips)));  //所属门店
+            holder.setText(R.id.tv_guide, transform(0, mCurrentHouseDetailBean.salesName, holder.obtainView(R.id.tv_guide_tips))); //导购
         }
 
         private void setCallLogs(RecyclerHolder holder, PhoneRecordItem item) {
@@ -705,13 +792,13 @@ public class CustomerManagerHelper extends IHouseHelper {
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
             holder.setText(R.id.tv_reservation_time, transform(R.string.followup_reservation_time_tips, mCurrentHouseDetailBean.getAppointmentTime())); //预约时间
-            holder.setText(R.id.tv_ruler, transform(R.string.customer_ruler_tips, mCurrentHouseDetailBean.appointMeasureByName)); //量尺人员
+            holder.setText(R.id.tv_ruler, transform(0, mCurrentHouseDetailBean.appointMeasureByName, holder.obtainView(R.id.tv_ruler_tips))); //量尺人员
             holder.setText(R.id.tv_measure_store, transform(0, mCurrentHouseDetailBean.appointShopName, holder.obtainView(R.id.tv_measure_store_tips))); //量尺门店
             holder.setText(R.id.tv_measure_space, transform(0, mCurrentHouseDetailBean.getAppointMeasureSpace(), holder.obtainView(R.id.tv_measure_space_tips)));
             holder.setText(R.id.tv_remark, transform(0, item.remark, holder.obtainView(R.id.tv_remark_tips))); //备注信息
             holder.setVisibility(R.id.tv_edit_unmeasured, View.VISIBLE);
-            holder.setVisibility(R.id.tv_edit_unmeasured, !mIsHighSeaHouse);
-            holder.setOnClickListener(R.id.tv_edit_unmeasured, view -> openMultipleActivity(CustomerValue.TYPE_UNMEASURED, unmeasuredBundle()));
+            holder.setVisibility(R.id.tv_edit_unmeasured, !mIsHighSeaHouse && isUnmeasuredEditVisibility());
+            holder.setOnClickListener(R.id.tv_edit_unmeasured, view -> toUnmeasured());
         }
 
         /*分配设计师*/
@@ -719,17 +806,17 @@ public class CustomerManagerHelper extends IHouseHelper {
             holder.setText(R.id.tv_title, mContext.getString(R.string.followup_distribution_designer2));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
-            holder.setText(R.id.tv_store, transform(R.string.tips_customer_store_belong2, mCurrentHouseDetailBean.designerShopName)); //所属门店
-            holder.setText(R.id.tv_designer, transform(R.string.followup_designer, mCurrentHouseDetailBean.designerName));
-//            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_ASSIGN_DESIGNER, assignDesigner()));
+            holder.setText(R.id.tv_store, transform(0, mCurrentHouseDetailBean.designerShopName, holder.obtainView(R.id.tv_shop_tips))); //所属门店
+            holder.setText(R.id.tv_designer, transform(0, mCurrentHouseDetailBean.designerName, holder.obtainView(R.id.tv_designer_tips))); //设计师
         }
 
+        /*展示量尺结果数据*/
         private void setMeasureResult(RecyclerHolder holder, MeasureResultItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.customer_measure_result_tips));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
             holder.setText(R.id.tv_house_price, transform(R.string.followup_house_price_square, mCurrentHouseDetailBean.getHousePrice())); //每平方米房价
-            holder.setText(R.id.tv_house_area, transform(R.string.followup_house_area_tips, mCurrentHouseDetailBean.getAreaType())); //房屋面积
+            holder.setText(R.id.tv_house_area, transform(R.string.followup_house_area_tips, mCurrentHouseDetailBean.getHouseArea())); //房屋面积
             holder.setText(R.id.tv_house_type, transform(R.string.followup_house_type_tips, mCurrentHouseDetailBean.getHouseType())); //户型
             holder.setText(R.id.tv_family_member, transform(0, mCurrentHouseDetailBean.getFamilyMember(), holder.obtainView(R.id.tv_family_member_tips))); //家庭成员
             holder.setText(R.id.tv_custom_space, transform(0, mCurrentHouseDetailBean.getCustomizeTheSpace(), holder.obtainView(R.id.tv_custom_space_tips))); //定制空间
@@ -740,8 +827,8 @@ public class CustomerManagerHelper extends IHouseHelper {
             holder.setText(R.id.tv_decoration_progress, transform(R.string.followup_decoration_progress_tips, mCurrentHouseDetailBean.getDecorateProgress())); //装修进度
             holder.setText(R.id.tv_plan_stay, transform(R.string.followup_plan_to_stay_tips, mCurrentHouseDetailBean.getPlannedStayDate())); //计划入住
             holder.setText(R.id.tv_actual_gauge, transform(R.string.followup_actual_gauge_tips, mCurrentHouseDetailBean.getAmountOfDate())); //实际量尺
-            holder.setText(R.id.tv_measure_shop, transform(R.string.followup_measure_store_tips, mCurrentHouseDetailBean.measureShopName));//量尺门店
-            holder.setText(R.id.tv_ruler, transform(R.string.customer_ruler_tips, mCurrentHouseDetailBean.measureByName));//量尺人员
+            holder.setText(R.id.tv_measure_shop, transform(0, mCurrentHouseDetailBean.measureShopName, holder.obtainView(R.id.tv_measure_shop_tips)));//量尺门店
+            holder.setText(R.id.tv_ruler, transform(0, mCurrentHouseDetailBean.measureByName, holder.obtainView(R.id.tv_ruler_tips)));//量尺人员
             holder.setText(R.id.tv_reservation_drawing, transform(R.string.followup_reservation, mCurrentHouseDetailBean.getMeasureAppConfirmTime())); //预约确图
             holder.setText(R.id.tv_remark, transform(0, item.remark, holder.obtainView(R.id.tv_remark_tips)));
             List<String> images = new ArrayList<>(item.images);
@@ -754,8 +841,8 @@ public class CustomerManagerHelper extends IHouseHelper {
             setImageGrid(holder.obtainView(R.id.rv_pictures), images);
             holder.setOnClickListener(R.id.tv_more_pictures, view -> CustomerImagePreviewActivity.open(mContext, mContext.getString(R.string.title_measure_pictures), item.images));
             holder.setVisibility(R.id.tv_edit_measure_result, View.VISIBLE);
-            holder.setVisibility(R.id.tv_edit_measure_result, !mIsHighSeaHouse);
-            holder.setOnClickListener(R.id.tv_edit_measure_result, view -> openMultipleActivity(CustomerValue.TYPE_MEASURE_RESULT, measureResultBundle()));
+            holder.setVisibility(R.id.tv_edit_measure_result, !mIsHighSeaHouse && isMeasuredEditVisibility());
+            holder.setOnClickListener(R.id.tv_edit_measure_result, view -> toMeasured());
         }
 
         /*上传方案*/
@@ -778,20 +865,22 @@ public class CustomerManagerHelper extends IHouseHelper {
             }
             setImageGrid(holder.obtainView(R.id.rv_pictures), images);
             holder.setOnClickListener(R.id.tv_more_pictures, view -> CustomerImagePreviewActivity.open(mContext, mContext.getString(R.string.title_scheme_pictures), item.images));
-            holder.setVisibility(R.id.tv_edit_upload_plan, !mIsHighSeaHouse);
-            holder.setOnClickListener(R.id.tv_edit_upload_plan, view -> openMultipleActivity(CustomerValue.TYPE_UPLOAD_PLAN, uploadPlanBundle()));
+            holder.setVisibility(R.id.tv_edit_upload_plan, !mIsHighSeaHouse && isUploadPlanEditVisibility());
+            holder.setOnClickListener(R.id.tv_edit_upload_plan, view -> toUploadPlan());
         }
 
+        /*展示主管查房数据*/
         private void setRounds(RecyclerHolder holder, MultiHouseItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.followup_supervisor_rounds_title));
             holder.setText(R.id.tv_date, item.operateTime);
             holder.setText(R.id.tv_user, transform(R.string.tips_fill_in_person, item.operator)); //填写人
             holder.setText(R.id.tv_rounds_result, transform(0, mCurrentHouseDetailBean.getMeasureResult(), holder.obtainView(R.id.tv_rounds_result_tips))); //查房结果
             holder.setText(R.id.tv_remark, transform(0, item.remark, holder.obtainView(R.id.tv_remark_tips)));
-            holder.setVisibility(R.id.tv_edit_rounds, !mIsHighSeaHouse);
-            holder.setOnClickListener(R.id.tv_edit_rounds, view -> openMultipleActivity(CustomerValue.TYPE_ROUNDS, supervisorRounds()));
+            holder.setVisibility(R.id.tv_edit_rounds, !mIsHighSeaHouse && isRoundsEditVisibility());
+            holder.setOnClickListener(R.id.tv_edit_rounds, view -> toRounds());
         }
 
+        /*展示收款数据*/
         private void setReceipt(RecyclerHolder holder, ReceiptItem item) {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
             if (item.isLastPosition) {
@@ -805,22 +894,14 @@ public class CustomerManagerHelper extends IHouseHelper {
             holder.setText(R.id.tv_receipt_person, transform(R.string.followup_receipt_person_tips, item.bean.receiver)); //收款人
             holder.setText(R.id.tv_receipt_category, transform(R.string.followup_receipt_category_tips, item.bean.type)); //收款类别
             holder.setText(R.id.tv_receipt_amount, transform(R.string.followup_receipt_amount_tips, item.bean.amount)); //收款金额
-            if (TextUtils.isEmpty(item.customProduct)) {//定制品类
+            if (TextUtils.isEmpty(item.bean.getCategory())) {//定制品类
                 holder.setVisibility(R.id.tv_custom_product_tips, View.GONE);
                 holder.setVisibility(R.id.tv_custom_product, View.GONE);
             } else {
-                holder.setText(R.id.tv_custom_product, transform(0, item.customProduct, holder.obtainView(R.id.tv_custom_product_tips))); //定制品类
+                holder.setText(R.id.tv_custom_product, transform(0, item.bean.getCategory(), holder.obtainView(R.id.tv_custom_product_tips))); //定制品类
                 holder.setVisibility(R.id.tv_custom_product_tips, View.VISIBLE);
                 holder.setVisibility(R.id.tv_custom_product, View.VISIBLE);
             }
-//            if (item.bean.isTailType()) {      //收尾款
-//                holder.setVisibility(R.id.tv_custom_product_tips, View.GONE);
-//                holder.setVisibility(R.id.tv_custom_product, View.GONE);
-//            } else {
-//                holder.setText(R.id.tv_custom_product, transform(0, item.customProduct, holder.obtainView(R.id.tv_custom_product_tips))); //定制品类
-//                holder.setVisibility(R.id.tv_custom_product_tips, View.VISIBLE);
-//                holder.setVisibility(R.id.tv_custom_product, View.VISIBLE);
-//            }
             holder.setText(R.id.tv_remark, transform(0, item.bean.remark, holder.obtainView(R.id.tv_remark_tips)));//备注信息
             List<String> images = new ArrayList<>(item.images);
             if (images.size() > 3) {
@@ -836,9 +917,9 @@ public class CustomerManagerHelper extends IHouseHelper {
                 holder.setVisibility(R.id.tv_more_pictures, View.GONE);
             }
             holder.setOnClickListener(R.id.tv_more_pictures, view -> CustomerImagePreviewActivity.open(mContext, mContext.getString(R.string.title_payment_pictures), item.images));
-//            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_RECEIPT, payment()));
         }
 
+        /*展示合同登记数据*/
         private void setContractRegister(RecyclerHolder holder, final ContractItem item) {
             holder.setText(R.id.tv_title, mContext.getString(R.string.followup_contract_title));
             if (mCurrentHouseDetailBean.isContractRegistration()) {  //已经登记了合同
@@ -861,6 +942,7 @@ public class CustomerManagerHelper extends IHouseHelper {
                 }
                 setImageGrid(holder.obtainView(R.id.rv_pictures), images);
                 holder.setOnClickListener(R.id.tv_more_pictures, view -> CustomerImagePreviewActivity.open(mContext, mContext.getString(R.string.title_contract_register_pictures), item.images));
+                holder.setVisibility(R.id.tv_edit_contract, View.GONE);
             } else {
                 final String empty = "";
                 holder.setText(R.id.tv_date, empty);
@@ -875,8 +957,9 @@ public class CustomerManagerHelper extends IHouseHelper {
                 holder.setText(R.id.tv_remark, transform(0, empty, holder.obtainView(R.id.tv_remark_tips)));//备注信息
                 holder.setVisibility(R.id.rv_pictures, View.GONE);
                 holder.setVisibility(R.id.tv_more_pictures, View.GONE);
+                holder.setVisibility(R.id.tv_edit_contract, !mIsHighSeaHouse && isContractEditVisibility());
             }
-//            holder.itemView.setOnClickListener(view -> openMultipleActivity(CustomerValue.TYPE_CONTRACT_REGISTER, contractRegister()));
+            holder.setOnClickListener(R.id.tv_edit_contract, view -> toContractRegister());
         }
 
         /*生成订单*/
@@ -892,7 +975,7 @@ public class CustomerManagerHelper extends IHouseHelper {
             String source = mContext.getString(R.string.order_number_tips);
             if (TextUtils.isEmpty(item.bean.orderId)) {
                 holder.setText(R.id.tv_order_number, transform(R.string.order_number_tips, "")); //订单号
-                holder.setDrawableRight(R.id.tv_order_number, 0);
+                holder.setDrawableRight(R.id.tv_order_number, null);
                 holder.setEnabled(R.id.tv_order_number, false);
             } else {
                 int start = source.length();
@@ -901,14 +984,14 @@ public class CustomerManagerHelper extends IHouseHelper {
                 ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.textColor14)), start, source.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
                 ss.setSpan(new StyleSpan(Typeface.BOLD), start, source.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
                 holder.setText(R.id.tv_order_number, ss);
-                holder.setDrawableRight(R.id.tv_order_number, R.drawable.ic_arrow_right_accent);
+                holder.setDrawableRight(R.id.tv_order_number, ContextCompat.getDrawable(mContext, R.drawable.layer_arrow_right_accent));
                 holder.setEnabled(R.id.tv_order_number, true);
             }
-            holder.setOnClickListener(R.id.tv_order_number, view -> OrderDetailsActivity.open(mFragment,item.bean.orderId));
-            holder.setText(R.id.tv_order_person, transform(R.string.order_player_tips, item.bean.orderBy)); //下单人
-            holder.setText(R.id.tv_order_time, transform(R.string.order_time_tips, item.bean.orderTime));//下单时间、
-            holder.setText(R.id.tv_space, transform(R.string.order_space_tips, item.bean.space)); //下单空间
-            holder.setText(R.id.tv_order_status, transform(R.string.order_status_tips, item.bean.status)); //下单状态
+            holder.setOnClickListener(R.id.tv_order_number, view -> OrderDetailsActivity.open(mFragment, item.bean.orderId));
+            holder.setText(R.id.tv_order_person, transform(R.string.order_player_tips, item.bean.creater)); //下单人
+            holder.setText(R.id.tv_order_time, transform(R.string.order_time_tips, item.bean.getCreateDate()));//下单时间、
+            holder.setText(R.id.tv_space, transform(R.string.order_space_tips, item.bean.houseName)); //下单空间
+            holder.setText(R.id.tv_order_status, transform(R.string.order_status_tips, item.bean.orderStatusName)); //下单状态
         }
 
         /*预约安装*/
@@ -920,8 +1003,8 @@ public class CustomerManagerHelper extends IHouseHelper {
             holder.setText(R.id.tv_install_area, item.area); //安装面积
             holder.setText(R.id.tv_installer, transform(0, item.installUser, holder.obtainView(R.id.tv_installer_tips))); //安装师傅
             holder.setText(R.id.tv_remark, transform(0, item.remark, holder.obtainView(R.id.tv_remark_tips)));//备注信息
-            holder.setVisibility(R.id.tv_edit_uninstall, !mIsHighSeaHouse);  //非公海客户才能编辑
-            holder.setOnClickListener(R.id.tv_edit_uninstall, view -> openMultipleActivity(CustomerValue.TYPE_UNINSTALL, uninstall()));
+            holder.setVisibility(R.id.tv_edit_uninstall, !mIsHighSeaHouse && isUninstallEditVisibility());  //非公海客户才能编辑
+            holder.setOnClickListener(R.id.tv_edit_uninstall, view -> toUninstall());
         }
 
         /*上传安装图纸*/
@@ -940,8 +1023,8 @@ public class CustomerManagerHelper extends IHouseHelper {
             }
             setImageGrid(rvPictures, images);
             holder.setOnClickListener(R.id.tv_more_pictures, view -> CustomerImagePreviewActivity.open(mContext, mContext.getString(R.string.title_install_drawing_pictures), item.images));
-            holder.setVisibility(R.id.tv_edit_install_drawing, !mIsHighSeaHouse);
-            holder.setOnClickListener(R.id.tv_edit_install_drawing, view -> openMultipleActivity(CustomerValue.TYPE_INSTALL_DRAWING, uploadInstallDrawing()));
+            holder.setVisibility(R.id.tv_edit_install_drawing, !mIsHighSeaHouse && isInstallDrawingEditVisibility());
+            holder.setOnClickListener(R.id.tv_edit_install_drawing, view -> toInstallDrawing());
         }
 
         /*已安装完成*/
@@ -976,8 +1059,12 @@ public class CustomerManagerHelper extends IHouseHelper {
             }
             setImageGrid(rvPictures, images);
             holder.setOnClickListener(R.id.tv_more_pictures, view -> CustomerImagePreviewActivity.open(mContext, mContext.getString(R.string.title_install_drawing_pictures), item.images));
+            //编辑按钮显示在安装完成步骤最后一个item
+            holder.setVisibility(R.id.tv_edit_installed, !mIsHighSeaHouse && isInstalledEditVisibility() && item.isLastPosition);
+            holder.setOnClickListener(R.id.tv_edit_installed, view -> toInstalled());
         }
 
+        /*展示留言记录*/
         private void setMessageLogs(RecyclerHolder holder, MessageLogsItem item, int position) {
             if (position == getItemCount() - 1) {
                 holder.itemView.setBackgroundResource(R.drawable.bg_corners_bottom_white_5dp);
@@ -993,18 +1080,25 @@ public class CustomerManagerHelper extends IHouseHelper {
                 String user = TextUtils.isEmpty(item.bean.createName) ? "" : item.bean.createName;
                 holder.setText(R.id.tv_user, mContext.getString(R.string.tips_fill_in_person) + user);
                 if (item.bean.isAssignGuide()) {
-                    holder.setText(R.id.tv_shop, transform(R.string.tips_customer_store_belong2, item.bean.shopName));
-                    holder.setText(R.id.tv_user_name, transform(R.string.customer_guide_tips, item.bean.userName));
+                    holder.setText(R.id.tv_user_name_tips, mContext.getString(R.string.customer_guide_tips));
+                    holder.setText(R.id.tv_shop, transform(0, item.bean.shopName, holder.obtainView(R.id.tv_shop_tips)));
+                    holder.setText(R.id.tv_user_name, transform(0, item.bean.userName, holder.obtainView(R.id.tv_user_name_tips)));
+//                    holder.setText(R.id.tv_shop2, transform(0, mCurrentHouseDetailBean.promoterShopName, holder.obtainView(R.id.tv_shop_tips2)));
+//                    holder.setText(R.id.tv_user_name2, transform(0, mCurrentHouseDetailBean.promoter, holder.obtainView(R.id.tv_user_name_tips2)));
                     holder.setVisibility(R.id.ll_assign_type, View.VISIBLE);
+//                    holder.setVisibility(R.id.ll_salesman_layout, View.VISIBLE);
                     holder.setVisibility(R.id.tv_message, View.GONE);
                 } else if (item.bean.isAssignDesigner()) {
-                    holder.setText(R.id.tv_shop, transform(R.string.tips_customer_store_belong2, item.bean.shopName));
-                    holder.setText(R.id.tv_user_name, transform(R.string.followup_designer, item.bean.userName));
+                    holder.setText(R.id.tv_user_name_tips, mContext.getString(R.string.followup_designer));
+                    holder.setText(R.id.tv_shop, transform(0, item.bean.shopName, holder.obtainView(R.id.tv_shop_tips)));
+                    holder.setText(R.id.tv_user_name, transform(0, item.bean.userName, holder.obtainView(R.id.tv_user_name_tips)));
                     holder.setVisibility(R.id.ll_assign_type, View.VISIBLE);
+//                    holder.setVisibility(R.id.ll_salesman_layout, View.GONE);
                     holder.setVisibility(R.id.tv_message, View.GONE);
                 } else {
                     holder.setText(R.id.tv_message, item.bean.message);
                     holder.setVisibility(R.id.ll_assign_type, View.GONE);
+//                    holder.setVisibility(R.id.ll_salesman_layout, View.GONE);
                     holder.setVisibility(R.id.tv_message, View.VISIBLE);
                 }
             }
@@ -1022,27 +1116,8 @@ public class CustomerManagerHelper extends IHouseHelper {
                     rvPictures.addItemDecoration(itemDecoration);
                     rvPictures.setTag(itemDecoration);
                 }
-                ImageGridAdapter adapter = new ImageGridAdapter(mContext, images);
+                SquareImageGridAdapter adapter = new SquareImageGridAdapter(mContext, images);
                 rvPictures.setAdapter(adapter);
-                adapter.setOnItemClickListener((adapter1, holder, view, p) -> PhotoViewActivity.openImage(mFragment, p, images));
-            }
-        }
-
-        class ImageGridAdapter extends CommonAdapter<String> {
-
-            ImageGridAdapter(Context context, List<String> mDatas) {
-                super(context, mDatas);
-            }
-
-            @Override
-            protected int bindView(int viewType) {
-                return R.layout.item_square_image;
-            }
-
-            @Override
-            public void onBindHolder(RecyclerHolder holder, String url, int position) {
-                ImageView iv = holder.obtainView(R.id.iv_image);
-                Glide.with(mContext).load(url).apply(new RequestOptions().placeholder(R.drawable.loading_photo).error(0).centerCrop()).into(iv);
             }
         }
     }
@@ -1051,11 +1126,12 @@ public class CustomerManagerHelper extends IHouseHelper {
     private class HouseListAdapter extends CommonAdapter<CustomerManagerV2Bean.HouseInfoBean> {
         private int mSelectPosition;
 
-        HouseListAdapter(Context context, List<CustomerManagerV2Bean.HouseInfoBean> mDatas) {
+        HouseListAdapter(Context context, List<CustomerManagerV2Bean.HouseInfoBean> mDatas, int selectPosition) {
             super(context, mDatas);
+            mSelectPosition = selectPosition;
         }
 
-        public void setSelectPosition(int selectPosition) {
+        void setSelectPosition(int selectPosition) {
             this.mSelectPosition = selectPosition;
             notifyDataSetChanged();
         }
@@ -1063,14 +1139,14 @@ public class CustomerManagerHelper extends IHouseHelper {
         @Override
         public void onBindHolder(RecyclerHolder holder, CustomerManagerV2Bean.HouseInfoBean bean, final int position) {
             TextView tvName = holder.obtainView(R.id.tv_house_name);
-            String text = mContext.getString(R.string.house) + (position + 1);
+            String text = mContext.getString(R.string.house) + (getItemCount() - position); //最新的排前面
             tvName.setText(text);
             if (mSelectPosition == position) {
                 tvName.setTextColor(ContextCompat.getColor(mContext, R.color.color_while));
                 tvName.setBackgroundResource(R.drawable.bg_corners5dp_top_coloraccent);
             } else {
                 tvName.setTextColor(ContextCompat.getColor(mContext, R.color.textColor5));
-                tvName.setBackgroundResource(R.color.bg_transparent);
+                tvName.setBackgroundResource(R.drawable.bg_corners5dp_top_bg);
             }
         }
 
@@ -1078,6 +1154,61 @@ public class CustomerManagerHelper extends IHouseHelper {
         protected int bindView(int viewType) {
             return R.layout.item_customer_manager_house;
         }
+    }
+
+    /*预约量尺*/
+    private void toUnmeasured() {
+        openMultipleActivity(CustomerValue.TYPE_UNMEASURED, unmeasuredBundle());
+    }
+
+    /*量尺结果*/
+    private void toMeasured() {
+        openMultipleActivity(CustomerValue.TYPE_MEASURE_RESULT, measureResultBundle());
+    }
+
+    /*上传方案*/
+    private void toUploadPlan() {
+        openMultipleActivity(CustomerValue.TYPE_UPLOAD_PLAN, uploadPlanBundle());
+    }
+
+    /*主管查房*/
+    private void toRounds() {
+        openMultipleActivity(CustomerValue.TYPE_ROUNDS, supervisorRounds());
+    }
+
+    /*合同登记*/
+    private void toContractRegister() {
+        openMultipleActivity(CustomerValue.TYPE_CONTRACT_REGISTER, contractRegister());
+    }
+
+    /*预约安装*/
+    private void toUninstall() {
+        openMultipleActivity(CustomerValue.TYPE_UNINSTALL, uninstall());
+    }
+
+    /*上传安装图纸*/
+    private void toInstallDrawing() {
+        openMultipleActivity(CustomerValue.TYPE_INSTALL_DRAWING, uploadInstallDrawing());
+    }
+
+    /*安装完成*/
+    private void toInstalled() {
+        openMultipleActivity(CustomerValue.TYPE_INSTALLED, finishInstall());
+    }
+
+    /*确认流失*/
+    private void toConfirmLose() {
+        new MaterialDialog.Builder(mContext)
+                .message(R.string.dialog_message_confirm_lose_house)
+                .positiveButton(R.string.confirm, (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    mCallback.onConfirmLoseHouse(mCurrentHouseDetailBean.houseId);
+                }).show();
+    }
+
+    /*无效退回*/
+    private void toInvalidReturn() {
+        openMultipleActivity(CustomerValue.TYPE_INVALID_RETURN, null);
     }
 
     private void openMultipleActivity(String type, @Nullable Bundle extras) {
@@ -1091,7 +1222,10 @@ public class CustomerManagerHelper extends IHouseHelper {
         mFragment.openActivityForResult(intent, extras);
     }
 
+
     public interface CustomerManagerCallback {
+        void onGetCustomerDetail(String personalId, boolean isHighSeasHouse);
+
         void onHighSeasHistory(String personalId, String houseId);
 
         void onEditInfo(Bundle bundle);
@@ -1101,5 +1235,7 @@ public class CustomerManagerHelper extends IHouseHelper {
         void onPublishMessage(String houseId, String content);
 
         void doReceive(String houseId, String shopId, String groupId, String salesId);
+
+        void onConfirmLoseHouse(String houseId);
     }
 }

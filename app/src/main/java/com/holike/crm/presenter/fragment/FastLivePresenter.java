@@ -7,6 +7,7 @@ import com.holike.crm.base.BasePresenter;
 import com.holike.crm.bean.FastLiveBean;
 import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.model.fragment.FastLiveModel;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.FastLiveView;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public class FastLivePresenter extends BasePresenter<FastLiveView, FastLiveModel
      * 获取订单交易报表数据
      */
     public void getOrderReport(String cityCode, String startTime, String endTime, String type, String time) {
-        model.getOrderReport(cityCode == null ? "" : cityCode, startTime == null ? "" : String.valueOf(Long.parseLong(startTime)), endTime == null ? "" : String.valueOf(Long.parseLong(endTime)), type == null ? "" : type, time == null ? "" : time, new FastLiveModel.GetOrderReportListener() {
+        model.getOrderReport(cityCode == null ? "" : cityCode, startTime == null ? "" : String.valueOf(ParseUtils.parseLong(startTime)), endTime == null ? "" : String.valueOf(ParseUtils.parseLong(endTime)), type == null ? "" : type, time == null ? "" : time, new FastLiveModel.GetOrderReportListener() {
             @Override
             public void success(FastLiveBean orderReportBean) {
                 if (getView() != null)

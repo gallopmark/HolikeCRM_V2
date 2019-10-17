@@ -4,20 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.holike.crm.bean.DepositBean;
 import com.holike.crm.bean.DistributionStoreBean;
-import com.holike.crm.bean.EmployeeDetailBean;
 import com.holike.crm.bean.HomepageBean;
 import com.holike.crm.bean.RoleDataBean;
 import com.holike.crm.bean.SourceBean;
 import com.holike.crm.http.MyJsonParser;
 
 import java.util.List;
-import java.util.Map;
 
 /*保存首页数据*/
+@Deprecated
 public class MainDataSource {
 
     private static final String FILE_LOCAL = "mainData";
@@ -43,7 +40,8 @@ public class MainDataSource {
         HomepageBean.TypeListBean listBean = bean.getTypeList();
         if (listBean != null) {
             /*店铺数据*/
-            if (listBean.getShopData() != null && !listBean.getShopData().isEmpty()) {
+            listBean.getShopData();
+            if (!listBean.getShopData().isEmpty()) {
                 saveShopData(context, MyJsonParser.fromBeanToJson(listBean.getShopData()));
             }
             /*客户来源*/

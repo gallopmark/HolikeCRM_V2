@@ -22,7 +22,7 @@ public class CustomerStatusListPresenter extends BasePresenter<CustomerStatusLis
      * @param customerStatus  客户状态 多个用@隔开
      * @param orderBy         desc 升序 asc 降序
      * @param tailStatus      尾款情况
-     * @param seaStatus 公海分类
+     * @param seaStatus       公海分类
      * @param pageNo          页码
      * @param pageSize        页面大小
      */
@@ -44,14 +44,16 @@ public class CustomerStatusListPresenter extends BasePresenter<CustomerStatusLis
             statusMove = "09";
         } else if (TextUtils.equals(statusName, CustomerValue.ORDER)) {//订单客户
             statusMove = "11";
-        } else if(TextUtils.equals(statusName,CustomerValue.ORDER_PLACED)){  //已下单客户
+        } else if (TextUtils.equals(statusName, CustomerValue.ORDER_PLACED)) {  //已下单客户
             statusMove = "12";
-        }else if (TextUtils.equals(statusName, CustomerValue.STAY_INSTALL)) { //待安装客户
+        } else if (TextUtils.equals(statusName, CustomerValue.STAY_INSTALL)) { //待安装客户
             statusMove = "06";
         } else if (TextUtils.equals(statusName, CustomerValue.INSTALLED)) { //已安装客户
             statusMove = "07";
         } else if (TextUtils.equals(statusName, CustomerValue.HIGH_SEAS)) { //公海客户
             statusMove = "08";
+        } else if (TextUtils.equals(statusName, CustomerValue.DEPOSIT_RECEIVED)) { //已收订金客户
+            statusMove = "15";
         }
         if (getModel() != null) {
             getModel().getCustomerStatusList(statusMove, earnestStatus, intentionStatus, customerStatus, tailStatus, seaStatus,

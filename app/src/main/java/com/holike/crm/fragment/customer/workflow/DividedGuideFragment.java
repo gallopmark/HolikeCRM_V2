@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/2.
  * 分配导购
  */
-
+@Deprecated
 public class DividedGuideFragment extends WorkflowFragment implements WorkflowView {
     private final int TYPE_DIVIDE = 1;
     private final int TYPE_USEFUL = 2;

@@ -1,12 +1,19 @@
 package com.holike.crm.activity.customer;
 
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.holike.crm.R;
 import com.holike.crm.activity.customer.helper.CustomerEditHouseHelper;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.ShopGroupBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
+import com.holike.crm.util.SharedPreferencesUtils;
 
 import java.util.List;
 
@@ -16,7 +23,9 @@ import java.util.List;
  * Copyright holike possess 2019.
  * 客户添加房屋或编辑房屋
  */
-public class CustomerEditHouseActivity extends GeneralCustomerActivity implements CustomerEditHouseHelper.CustomerEditHouseCallback, GeneralCustomerPresenter.OnQueryShopGroupListener {
+public class CustomerEditHouseActivity extends GeneralCustomerActivity implements CustomerEditHouseHelper.CustomerEditHouseCallback,
+        GeneralCustomerPresenter.OnQueryShopGroupListener, GeneralCustomerPresenter.OnReceivingCustomerListener,
+        GeneralCustomerPresenter.OnDistributionMsgPushListener, GeneralCustomerPresenter.OnActivationCallback {
 
     private CustomerEditHouseHelper mHelper;
 
@@ -31,7 +40,7 @@ public class CustomerEditHouseActivity extends GeneralCustomerActivity implement
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         mHelper = new CustomerEditHouseHelper(this, this);
     }
 
@@ -51,7 +60,7 @@ public class CustomerEditHouseActivity extends GeneralCustomerActivity implement
     @Override
     public void onQueryShopGroup(String shopId) {
         showLoading();
-        mPresenter.getShopGroup(shopId,this);
+        mPresenter.getShopGroupByUser(shopId, this);
     }
 
     /*保存房屋信息*/
@@ -66,9 +75,53 @@ public class CustomerEditHouseActivity extends GeneralCustomerActivity implement
     }
 
     @Override
-    protected void onDestroy() {
-        mHelper.onDetached();
-        super.onDestroy();
+    public void onReceivingCustomer(String personalId, String houseId, String shopId, String groupId) {
+        showLoading();
+        mPresenter.receiveHouse(personalId, houseId, shopId, groupId, SharedPreferencesUtils.getUserId(), this);
+    }
+
+    /*激活客户*/
+    @Override
+    public void onActivationCustomer(String personalId, String houseId, String shopId, String groupId, String guideId) {
+        showLoading();
+        mPresenter.activationCustomer(personalId, houseId, shopId, groupId, guideId, this);
+    }
+
+    /*重新分配客户*/
+    @Override
+    public void onDistributionMsgPush(String requestBody) {
+        showLoading();
+        mPresenter.distributionMsgPush(requestBody, this);
+    }
+
+    /*领取客户失败*/
+    @Override
+    public void onReceivingFailure(String failReason) {
+        onFailure(failReason);
+    }
+
+    /*领取客户成功*/
+    @Override
+    public void onReceivingSuccess(String message, String personalId, String houseId) {
+        dismissLoading();
+        showShortToast(message);
+        RxBus.getInstance().post(new MessageEvent(CustomerValue.EVENT_TYPE_RECEIVE_HOUSE));
+        Intent intent = new Intent();
+        intent.putExtra(CustomerValue.PERSONAL_ID, personalId);
+        intent.putExtra(CustomerValue.HOUSE_ID, houseId);
+        setResult(CustomerValue.RESULT_CODE_HIGH_SEAS, intent);
+        finish();
+    }
+
+    @Override
+    public void onMsgPushFailure(String failReason) {
+        onFailure(failReason);
+    }
+
+    @Override
+    public void onMsgPushSuccess(String message) {
+        dismissLoading();
+        showShortToast(message);
     }
 
     @Override
@@ -78,8 +131,8 @@ public class CustomerEditHouseActivity extends GeneralCustomerActivity implement
             mHelper.setSysCode((SysCodeItemBean) object);
         } else if (object instanceof CurrentUserBean) {
             mHelper.setCurrentUser((CurrentUserBean) object);
-        } else {  //新增房屋或修改房屋成功
-            setResultOk(object);
+        } else if (object instanceof String) {  //新增房屋或修改房屋成功
+            mHelper.onSaveResult((String) object);
         }
     }
 
@@ -91,7 +144,29 @@ public class CustomerEditHouseActivity extends GeneralCustomerActivity implement
 
     @Override
     public void onQueryFailure(String failReason) {
-        dismissLoading();
-        showShortToast(failReason);
+        onFailure(failReason);
     }
+
+    @Override
+    public void onActivationFailure(String failReason) {
+        onFailure(failReason);
+    }
+
+    @Override
+    public void onActivationSuccess(String message, String personalId, String houseId) {
+        dismissLoading();
+        showShortToast(message);
+        Intent intent = new Intent();
+        intent.putExtra(CustomerValue.PERSONAL_ID, personalId);
+        intent.putExtra(CustomerValue.HOUSE_ID, houseId);
+        setResult(CustomerValue.RESULT_CODE_ACTIVATION, intent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mHelper.onDetached();
+        super.onDestroy();
+    }
+
 }

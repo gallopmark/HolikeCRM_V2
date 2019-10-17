@@ -1,13 +1,11 @@
 package com.holike.crm.activity.employee2;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragmentActivity;
@@ -15,8 +13,6 @@ import com.holike.crm.bean.EmployeeBeanV2;
 import com.holike.crm.presenter.activity.EmployeeListV2Presenter;
 import com.holike.crm.view.activity.EmployeeListV2View;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -49,7 +45,7 @@ public class EmployeeListV2Activity extends MyFragmentActivity<EmployeeListV2Pre
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         mSearchEditText = setSearchBar(R.string.employee_list_search_hint2);
         mSearchEditText.setGravity(Gravity.CENTER | Gravity.START);
         mHelper = new EmployeeListHelper(this, this);

@@ -90,11 +90,13 @@ public class EmployeeBasicDetailsFragment extends MyFragment implements Compound
             } else if (infoBean.isMs()) {
                 mWomenCheckbox.setChecked(true);
             }
+            mGender = infoBean.gender2;
             if (infoBean.isValid()) {
                 mRadioGroup.check(R.id.rb_valid);
             } else {
                 mRadioGroup.check(R.id.rb_invalid);
             }
+            mStatus = infoBean.status2;
             mCreateTimeTextView.setText(infoBean.createTime);
             mCreatorTextView.setText(infoBean.createBy);
             mLastAlterTextView.setText(infoBean.updateTime);
@@ -168,16 +170,11 @@ public class EmployeeBasicDetailsFragment extends MyFragment implements Compound
             return false;
         } else {
             String phone = mPhoneEditText.getText().toString();
-            if (TextUtils.isEmpty(phone)) {
-                showShortToast(mPhoneEditText.getHint());
+            if (!TextUtils.isEmpty(phone) && !CheckUtils.isMobile(phone)) {
+                showShortToast(mContext.getString(R.string.please_input_correct_phone));
                 return false;
             } else {
-                if (!CheckUtils.isMobile(phone)) {
-                    showShortToast(mContext.getString(R.string.please_input_correct_phone));
-                    return false;
-                } else {
-                    return true;
-                }
+                return true;
             }
         }
     }

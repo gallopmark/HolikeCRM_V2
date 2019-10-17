@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.holike.crm.R;
-import com.holike.crm.base.BasePresenter;
-import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.activity.customer.helper.HighSeasHistoryHelper;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.enumeration.CustomerValue;
@@ -22,6 +20,7 @@ public class CustomerHighSeasHistoryActivity extends GeneralCustomerActivity {
     @BindView(R.id.ll_content_layout)
     LinearLayout mContentLayout;
 
+    private String mPersonalId = "", mHouseId = "";
     private HighSeasHistoryHelper mHelper;
 
     @Override
@@ -30,27 +29,25 @@ public class CustomerHighSeasHistoryActivity extends GeneralCustomerActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
         setTitle(getString(R.string.history_record));
         mHelper = new HighSeasHistoryHelper(this);
         obtainBundleValue();
+        getHighSeasHistory();
     }
 
     private void obtainBundleValue() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String personalId = bundle.getString(CustomerValue.PERSONAL_ID);
-            String houseId = bundle.getString(CustomerValue.HOUSE_ID);
-            getHighSeasHistory(personalId, houseId);
-        } else {
-            noResult();
+            mPersonalId = bundle.getString(CustomerValue.PERSONAL_ID, "");
+            mHouseId = bundle.getString(CustomerValue.HOUSE_ID, "");
         }
     }
 
-    private void getHighSeasHistory(String personalId, String houseId) {
+    private void getHighSeasHistory() {
         showLoading();
-        mPresenter.getHighSeasHistory(personalId, houseId);
+        mPresenter.getHighSeasHistory(mPersonalId, mHouseId);
     }
 
     @Override
@@ -74,5 +71,10 @@ public class CustomerHighSeasHistoryActivity extends GeneralCustomerActivity {
         dismissLoading();
         mContentLayout.setVisibility(View.GONE);
         noNetwork(failReason);
+    }
+
+    @Override
+    public void reload() {
+        getHighSeasHistory();
     }
 }

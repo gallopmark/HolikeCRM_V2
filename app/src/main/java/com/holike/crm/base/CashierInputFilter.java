@@ -4,6 +4,8 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 
+import com.holike.crm.util.ParseUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +18,7 @@ public class CashierInputFilter implements InputFilter {
     private Pattern mPattern;
 
     //输入的最大金额
-    private static final int MAX_VALUE = Integer.MAX_VALUE;
+    private static final double MAX_VALUE = Long.MAX_VALUE;
     //小数点后的位数
     private static final int POINTER_LENGTH = 2;
 
@@ -83,7 +85,7 @@ public class CashierInputFilter implements InputFilter {
         }
 
         //验证输入金额的大小
-        double sumText = Double.parseDouble(destText + sourceText);
+        double sumText = ParseUtils.parseDouble(destText + sourceText);
         if (sumText > MAX_VALUE) {
             return dest.subSequence(dstart, dend);
         }

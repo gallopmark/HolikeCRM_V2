@@ -1,5 +1,7 @@
 package com.holike.crm.bean;
 
+import com.holike.crm.util.ParseUtils;
+
 import java.io.Serializable;
 
 /**
@@ -35,11 +37,7 @@ public class ReportPermissionsBean implements Serializable {
     }
 
     public int getType() {
-        try {
-            return Integer.parseInt(type);
-        } catch (Exception e) {
-            return 0;
-        }
+        return ParseUtils.parseInt(type);
     }
 
     public void setType(String type) {

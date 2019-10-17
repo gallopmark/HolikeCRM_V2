@@ -76,4 +76,19 @@
         <item>@string/valid</item>
         <item>@string/invalid</item>
     </string-array>
+
+    <string-array name="line_chart_months">
+        <item>1\n月</item>
+        <item>2\n月</item>
+        <item>3\n月</item>
+        <item>4\n月</item>
+        <item>5\n月</item>
+        <item>6\n月</item>
+        <item>7\n月</item>
+        <item>8\n月</item>
+        <item>9\n月</item>
+        <item>10\n月</item>
+        <item>11\n月</item>
+        <item>12\n月</item>
+    </string-array>
 </resources>

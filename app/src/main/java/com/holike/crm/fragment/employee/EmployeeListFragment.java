@@ -31,7 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-
+@Deprecated
 public class EmployeeListFragment extends MyFragment<EmployeeListPresenter, EmployeeListView>
         implements View.OnClickListener, EmployeeListView, EmployeeListPresenter.OnItemClickListener, EmployeeModel.OnGetStoreCallback {
 
@@ -76,6 +76,7 @@ public class EmployeeListFragment extends MyFragment<EmployeeListPresenter, Empl
     private void initViewData() {
         mSearchEditText = setSearchBar(R.string.employee_list_search_hint);
         mSearchEditText.setGravity(Gravity.CENTER | Gravity.START);
+        setSearchViewWidth(R.dimen.dp_250);
         mPresenter.setAdapter(mContext, mRecyclerView, this);
         mStoreTextView.setOnClickListener(this);
         mBillTextView.setOnClickListener(this);

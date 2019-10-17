@@ -3,7 +3,6 @@ package com.holike.crm.adapter.customer;
 import android.content.Context;
 
 import com.holike.crm.R;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
 import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 
@@ -33,7 +32,7 @@ public class CustomerUninstallAdapter extends CustomerStatusListAdapter {
     public void setup(RecyclerHolder holder, CustomerStatusBean.InnerBean bean, int position) {
         holder.setText(R.id.tv_install_date, obtain2(mTipsReservationInstall, wrap(bean.appointmentInstallDate))); //预约安装日期
         holder.setText(R.id.tv_signDate, obtain(mTipsSignDate, wrap(bean.contractDate), false)); //签约日期
-        holder.setText(R.id.tv_source, obtain(mTipsSource, bean.source, false)); //来源
+        holder.setText(R.id.tv_source, obtain(mTipsSource, wrap(bean.source), false)); //来源
         holder.setText(R.id.tv_order_date, obtain(mTipsOrderDate, wrap(bean.orderDate), false)); //下单日期
         holder.setText(R.id.tv_guide, obtain(mTipsGuide, wrap(bean.salesName), false)); //导购
         holder.setText(R.id.tv_designer, obtain(mTipsDesigner, wrap(bean.designer), false)); //设计师

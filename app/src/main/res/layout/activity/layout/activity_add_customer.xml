@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="com.holike.crm.activity.homepage.AddCustomerActivity">
 
-    <include layout="@layout/include_fragment_title_bar" />
+    <include layout="@layout/include_titlebar" />
 
     <ScrollView
         android:layout_width="match_parent"

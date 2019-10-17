@@ -23,12 +23,8 @@ public class EmployeeResetPasswordPresenter extends BasePresenter<EmployeeResetP
                         final TextView mSaveTextView) {
         mPwdEditText.addTextChangedListener(new FillWatcher(mPwdTwiceEditText, mClearImageView, mSaveTextView));
         mPwdTwiceEditText.addTextChangedListener(new FillWatcher(mPwdEditText, mClearImageView2, mSaveTextView));
-        mClearImageView.setOnClickListener(v -> {
-            mPwdEditText.setText("");
-        });
-        mClearImageView2.setOnClickListener(v -> {
-            mPwdTwiceEditText.setText("");
-        });
+        mClearImageView.setOnClickListener(v -> mPwdEditText.setText(""));
+        mClearImageView2.setOnClickListener(v -> mPwdTwiceEditText.setText(""));
     }
 
     private class FillWatcher implements TextWatcher {
@@ -83,26 +79,28 @@ public class EmployeeResetPasswordPresenter extends BasePresenter<EmployeeResetP
     }
 
     public void onResetPassword(String userId, String newPassword) {
-        model.resetPassword(userId, newPassword, new EmployeeModel.OnResetPasswordCallback() {
-            @Override
-            public void onResetStart() {
-                if (getView() != null) getView().onShowLoading();
-            }
+        if (getModel() != null) {
+            getModel().resetPassword(userId, newPassword, new EmployeeModel.OnResetPasswordCallback() {
+                @Override
+                public void onResetStart() {
+                    if (getView() != null) getView().onShowLoading();
+                }
 
-            @Override
-            public void onSuccess() {
-                if (getView() != null) getView().onResetSuccess();
-            }
+                @Override
+                public void onSuccess() {
+                    if (getView() != null) getView().onResetSuccess();
+                }
 
-            @Override
-            public void onFailure(String message) {
-                if (getView() != null) getView().onResetFailure(message);
-            }
+                @Override
+                public void onFailure(String message) {
+                    if (getView() != null) getView().onResetFailure(message);
+                }
 
-            @Override
-            public void onResetComplete() {
-                if (getView() != null) getView().onHideLoading();
-            }
-        });
+                @Override
+                public void onResetComplete() {
+                    if (getView() != null) getView().onHideLoading();
+                }
+            });
+        }
     }
 }

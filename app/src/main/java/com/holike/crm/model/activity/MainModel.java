@@ -17,23 +17,7 @@ public class MainModel extends BaseModel {
     /**
      * 检测系统版本更新
      */
-    public void checkVersion(final checkListener checkListener) {
-       addDisposable(MyHttpClient.post(UrlPath.URL_CHECK_VERSION, new RequestCallBack<UpdateBean>() {
-            @Override
-            public void onFailed(String failReason) {
-                checkListener.failed(failReason);
-            }
-
-            @Override
-            public void onSuccess(UpdateBean result) {
-                checkListener.success(result);
-            }
-        }));
-    }
-
-    public interface checkListener {
-        void success(UpdateBean updateBean);
-
-        void failed(String reult);
+    public void checkVersion(RequestCallBack<UpdateBean> callBack) {
+        addDisposable(MyHttpClient.post(UrlPath.URL_CHECK_VERSION, callBack));
     }
 }

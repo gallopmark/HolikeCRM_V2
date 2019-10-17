@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_title_tips"
         style="@style/Customer_Edit_TextViewStyle"
         android:layout_gravity="start"
         android:layout_marginStart="@dimen/dp_20"
@@ -29,7 +30,7 @@
                 android:text="@string/tips_customer_area" />
 
             <TextView
-                android:id="@+id/tvSelectArea"
+                android:id="@+id/tv_select_area"
                 style="@style/Customer_Edit_EditTextStyle"
                 android:drawableEnd="@drawable/choice_down"
                 android:drawableRight="@drawable/choice_down"
@@ -46,9 +47,10 @@
                 android:text="@string/tips_customer_house_address" />
 
             <EditText
-                android:id="@+id/etAddress"
+                android:id="@+id/et_address"
                 style="@style/Customer_Edit_EditTextStyle"
-                android:hint="@string/tips_customer_house_address_hint" />
+                android:hint="@string/tips_customer_house_address_hint"
+                android:maxLength="100" />
         </LinearLayout>
 
         <View style="@style/divider_horizontal" />
@@ -62,7 +64,7 @@
             <TextView style="@style/Customer_Edit_TextViewFillInStyle" />
 
             <TextView
-                android:id="@+id/tvSelectStore"
+                android:id="@+id/tv_select_shop"
                 style="@style/Customer_Edit_EditTextStyle"
                 android:drawableEnd="@drawable/choice_down"
                 android:drawableRight="@drawable/choice_down"
@@ -108,7 +110,7 @@
                 android:text="@string/tips_customer_budget" />
 
             <TextView
-                android:id="@+id/tvSelectBudget"
+                android:id="@+id/tv_select_budget"
                 style="@style/Customer_Edit_EditTextStyle"
                 android:drawableEnd="@drawable/choice_down"
                 android:drawableRight="@drawable/choice_down"
@@ -125,9 +127,10 @@
                 android:text="@string/tips_customer_standby_contact" />
 
             <EditText
-                android:id="@+id/etContact"
+                android:id="@+id/et_spare_contact"
                 style="@style/Customer_Edit_EditTextStyle"
-                android:hint="@string/tips_customer_standby_contact_hint" />
+                android:hint="@string/tips_customer_standby_contact_hint"
+                android:maxLines="30" />
         </LinearLayout>
 
         <View style="@style/divider_horizontal" />
@@ -139,13 +142,20 @@
                 android:text="@string/tips_customer_standby_phone" />
 
             <EditText
-                android:id="@+id/etPhone"
+                android:id="@+id/et_spare_phone"
                 style="@style/Customer_Edit_EditTextStyle"
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:hint="@string/tips_customer_standby_phone_hint"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:maxLength="15" />
         </LinearLayout>
+
+        <ViewStub
+            android:id="@+id/vs_receipt_deposit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/viewstub_customer_deposit_received" />
 
         <View style="@style/divider_horizontal" />
 
@@ -157,15 +167,19 @@
             android:text="@string/tips_customer_remark" />
 
         <EditText
-            android:id="@+id/etRemark"
+            android:id="@+id/et_remark"
+            style="@style/EditText_Remark_Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:gravity="start|top"
-            android:hint="@string/tips_customer_remark_hint"
-            android:maxLines="5"
-            android:minLines="5"
-            android:textColorHint="@color/textColor21"
-            android:textSize="@dimen/textSize_14" />
+            android:hint="@string/tips_customer_remark_hint" />
+
+        <ViewStub
+            android:id="@+id/vs_select_deposit_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout="@layout/viewstub_customer_deposit_received_selectimage" />
     </LinearLayout>
 </LinearLayout>

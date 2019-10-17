@@ -35,7 +35,8 @@
         android:id="@+id/rv_flow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager=".manager.FlowLayoutManager" />
+        android:orientation="horizontal"
+        app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager" />
 
     <View style="@style/divider_horizontal" />
 

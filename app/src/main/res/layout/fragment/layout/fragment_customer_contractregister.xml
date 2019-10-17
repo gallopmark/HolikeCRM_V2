@@ -152,10 +152,12 @@
                     android:id="@+id/tv_remain_tail"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dp_4"
+                    android:layout_marginLeft="@dimen/dp_4"
                     android:layout_weight="1"
                     android:background="@color/bg_transparent"
                     android:gravity="center|start"
-                    android:textColor="@color/textColor4"
+                    android:textColor="@color/textColor15"
                     android:textColorHint="@color/textColor21"
                     android:textSize="@dimen/textSize_14" />
             </LinearLayout>
@@ -234,20 +236,10 @@
 
             <EditText
                 android:id="@+id/et_remark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/EditText_Remark_Style"
                 android:layout_marginTop="@dimen/dp_14"
-                android:background="@color/bg_transparent"
-                android:gravity="top|start"
-                android:hint="@string/tips_customer_remark_hint2"
-                android:maxLines="5"
-                android:minLines="5"
                 android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"
-                android:textColor="@color/textColor4"
-                android:textColorHint="@color/textColor21"
-                android:textSize="@dimen/textSize_14" />
-
+                android:paddingRight="@dimen/dp_10" />
 
             <View
                 style="@style/divider_horizontal"

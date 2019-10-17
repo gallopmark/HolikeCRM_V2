@@ -10,6 +10,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.holike.crm.R;
 import com.holike.crm.bean.AreaBean;
+import com.holike.crm.util.ParseUtils;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -222,7 +223,7 @@ public class AreaHelper {
      */
     public static int[] getSelectOptions(final AreaBean areaBean, String id) {
         int[] result = new int[3];
-        if (!TextUtils.isEmpty(id) && Integer.parseInt(id) > 0) {
+        if (!TextUtils.isEmpty(id) && ParseUtils.parseInt(id) > 0) {
             List<AreaBean.Province> provinces = areaBean.getOptions1Items();
             for (int i1 = 0, length1 = provinces.size(); i1 < length1; i1++) {
                 AreaBean.Province province = provinces.get(i1);

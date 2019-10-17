@@ -8,10 +8,13 @@ import android.widget.EditText;
 import com.holike.crm.R;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.base.MyFragment;
+import com.holike.crm.base.SimpleTextWatcher;
 import com.holike.crm.util.CheckUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 
@@ -49,6 +52,29 @@ public class EmployeeBasicFragment extends MyFragment implements CompoundButton.
     protected void init() {
         mManCheckBox.setOnCheckedChangeListener(this);
         mWomenCheckbox.setOnCheckedChangeListener(this);
+        mPwdEditText.addTextChangedListener(new PasswordWatcher(mPwdEditText));
+        mPwdTwiceEditText.addTextChangedListener(new PasswordWatcher(mPwdTwiceEditText));
+    }
+
+    class PasswordWatcher extends SimpleTextWatcher {
+        EditText mEditText;
+
+        PasswordWatcher(EditText editText) {
+            mEditText = editText;
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String editable = mEditText.getText().toString();
+            String regex = "[^a-zA-Z0-9]";  //只能输入字母、数字
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(editable);
+            String source = m.replaceAll("").trim();    //删掉不是字母或数字的字符
+            if (!editable.equals(source)) {
+                mEditText.setText(source);  //设置EditText的字符
+                mEditText.setSelection(source.length()); //因为删除了字符，要重写设置新的光标所在位置
+            }
+        }
     }
 
     @Override
@@ -78,22 +104,26 @@ public class EmployeeBasicFragment extends MyFragment implements CompoundButton.
             return false;
         } else {
             String phone = mPhoneEditText.getText().toString();
-            if (TextUtils.isEmpty(phone)) {
-                showShortToast(mPhoneEditText.getHint());
+//            if (TextUtils.isEmpty(phone)) {
+//                showShortToast(mPhoneEditText.getHint());
+//                return false;
+//            } else {
+            if (!TextUtils.isEmpty(phone) && !CheckUtils.isMobile(phone)) {
+                showShortToast(mContext.getString(R.string.please_input_correct_phone));
                 return false;
             } else {
-                if (!CheckUtils.isMobile(phone)) {
-                    showShortToast(mContext.getString(R.string.please_input_correct_phone));
+                String password = mPwdEditText.getText().toString();
+                if (TextUtils.isEmpty(password)) {
+                    showShortToast(mContext.getString(R.string.employee_twice_password_tips));
                     return false;
                 } else {
-                    String password = mPwdEditText.getText().toString();
-                    if (TextUtils.isEmpty(password)) {
-                        showShortToast(mPwdEditText.getHint());
+                    if (!CheckUtils.isPassword(password)) {
+                        showShortToast(mContext.getString(R.string.hint_password_regex_tips));
                         return false;
                     } else {
                         String password2 = mPwdTwiceEditText.getText().toString();
                         if (TextUtils.isEmpty(password2)) {
-                            showShortToast(mPwdTwiceEditText.getHint());
+                            showShortToast(mContext.getString(R.string.employee_twice_password_empty_input));
                             return false;
                         } else {
                             if (!TextUtils.equals(password, password2)) {
@@ -110,11 +140,11 @@ public class EmployeeBasicFragment extends MyFragment implements CompoundButton.
     }
 
     public Map<String, String> obtain() {
-        Map<String,String> params = new HashMap<>();
-        params.put("userName",mNameEditText.getText().toString().trim());
-        params.put("phone",mPhoneEditText.getText().toString());
-        params.put("gender",mGender);
-        params.put("password",mPwdEditText.getText().toString());
+        Map<String, String> params = new HashMap<>();
+        params.put("userName", mNameEditText.getText().toString().trim());
+        params.put("phone", mPhoneEditText.getText().toString());
+        params.put("gender", mGender);
+        params.put("password", mPwdEditText.getText().toString());
         return params;
     }
 }

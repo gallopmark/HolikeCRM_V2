@@ -1,7 +1,11 @@
 package com.holike.crm.bean;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -172,7 +176,7 @@ public class HomepageBean implements Serializable {
         String scaleCount; //量尺数
         String likeCount; //意向客户数
         String time; //时间描述
-        String usrType;
+        public String usrType;
 
         public String prescaleCount; //预约量房数
         public String firstSuccess; //一次完成安装率
@@ -287,6 +291,8 @@ public class HomepageBean implements Serializable {
             public String likeCount; //意向客户数
             public String time; //时间描述
             public String usrType;
+            @SerializedName("isClike")
+            String isClick;
 
             public String prescaleCount; //预约量房数
             public String firstSuccess; //一次完成安装率
@@ -309,6 +315,11 @@ public class HomepageBean implements Serializable {
             public List<ItemListBean> getItemList() {
                 if (itemList == null) return new ArrayList<>();
                 return itemList;
+            }
+
+            /*主要针对老板本月数据是否可点击*/
+            public boolean isClick() {
+                return TextUtils.equals(isClick, "1");
             }
         }
 
@@ -592,7 +603,10 @@ public class HomepageBean implements Serializable {
         private String time;
         private String title;
         private int type;
-        private String personalId;
+        public String personalId;
+        public String houseId;
+        @SerializedName("high_seas_house_flag")
+        String highSeasHouseFlag;
 
         public String getPersonalId() {
             return personalId;
@@ -630,40 +644,24 @@ public class HomepageBean implements Serializable {
             return messageId;
         }
 
-        public void setMessageId(String messageId) {
-            this.messageId = messageId;
-        }
-
         public String getOrderId() {
             return orderId;
-        }
-
-        public void setOrderId(String orderId) {
-            this.orderId = orderId;
         }
 
         public String getTime() {
             return time;
         }
 
-        public void setTime(String time) {
-            this.time = time;
-        }
-
         public String getTitle() {
             return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
         }
 
         public int getType() {
             return type;
         }
 
-        public void setType(int type) {
-            this.type = type;
+        public boolean isHighSeasHouse() {
+            return TextUtils.equals(highSeasHouseFlag, "Y") || TextUtils.equals(highSeasHouseFlag, "y");
         }
     }
 

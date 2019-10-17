@@ -52,6 +52,7 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
     private Map<String, Integer> mSelectCityCache;
     private Map<String, List<RegionBean>> mDistrictCache;
     private Map<String, Integer> mSelectDistrictCache;
+
     private String mEqualsText;
 
     public void setOnRegionSelectedListener(OnRegionSelectedListener listener) {
@@ -82,11 +83,11 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
 
     private void setCurrentTab(int position) {
         if (position == 0) {
-            updateProvince(mProvinceDatas);
+            updateProvince();
         } else if (position == 1) {
-            updateCity(mCityCache.get(mCurrentProvinceCode));
+            updateCityLevel();
         } else {
-            updateDistrict(mDistrictCache.get(mCurrentCityCode));
+            updateDistrictLevel();
         }
         mTabAdapter.setSelectPosition(position);
     }
@@ -156,8 +157,8 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         if (mGetType == 1) {  //获取省份成功
             if (list != null && !list.isEmpty()) {
                 mProvinceDatas = new ArrayList<>(list);
+                updateProvince();
             }
-            updateProvince(list);
         } else if (mGetType == 2) { //获取市成功
             if (list == null || list.isEmpty()) {  //选择香港、澳门、台湾等  没有市区
                 onSelected();
@@ -175,11 +176,11 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         }
     }
 
-    private void updateProvince(final List<RegionBean> list) {
-        if (list == null || list.isEmpty()) return;
-        RegionAdapter regionAdapter = new RegionAdapter(mContext, list, mSelectProvince);
+    private void updateProvince() {
+        if (mProvinceDatas == null || mProvinceDatas.isEmpty()) return;
+        RegionAdapter regionAdapter = new RegionAdapter(mContext, mProvinceDatas, mSelectProvince);
         mRegionRv.setAdapter(regionAdapter);
-        regionAdapter.setOnItemClickListener((adapter, holder, view, position) -> setSelectProvince(position, list));
+        regionAdapter.setOnItemClickListener((adapter, holder, view, position) -> setSelectProvince(position, mProvinceDatas));
     }
 
     private void setSelectProvince(int position, final List<RegionBean> list) {
@@ -202,11 +203,7 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         resetAll();
         mCurrentProvinceCode = regionCode;
         mCurrentProvinceName = list.get(position).regionName;
-        if (mCityCache.get(mCurrentProvinceCode) == null) {
-            getChildRegion(2, mCurrentProvinceCode, 2);
-        } else {
-            updateCity(mCityCache.get(mCurrentProvinceCode));
-        }
+        updateCityLevel();
     }
 
     private void resetAll() {
@@ -224,6 +221,15 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
     private void resetDistrict() {
         mCurrentDistrictCode = null;
         mCurrentDistrictName = null;
+    }
+
+    private void updateCityLevel() {
+        List<RegionBean> list = mCityCache.get(mCurrentProvinceCode);
+        if (list != null) {
+            updateCity(list);
+        } else {
+            getChildRegion(2, mCurrentProvinceCode, 2);
+        }
     }
 
     private void updateCity(final List<RegionBean> list) {
@@ -249,13 +255,18 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
             mTabList.get(2).title = mEqualsText;
         }
         mTabList.get(1).title = list.get(position).regionName;
+        resetAll();
         mCurrentCityCode = regionCode;
         mCurrentCityName = list.get(position).regionName;
-        resetDistrict();
-        if (mDistrictCache.get(mCurrentCityCode) == null) {
-            getChildRegion(3, mCurrentCityCode, 3);
+        updateDistrictLevel();
+    }
+
+    private void updateDistrictLevel() {
+        List<RegionBean> list = mDistrictCache.get(mCurrentCityCode);
+        if (list != null) {
+            updateDistrict(list);
         } else {
-            updateCity(mDistrictCache.get(mCurrentCityCode));
+            getChildRegion(3, mCurrentCityCode, 3);
         }
     }
 
@@ -279,7 +290,8 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
     }
 
     private void setSelectDistrict(int position, List<RegionBean> list) {
-        if (list.isEmpty() || position < 0 || position > list.size()) return;
+        mTabList.get(2).title = list.get(position).regionName;
+        mTabAdapter.notifyDataSetChanged();
         mSelectDistrictCache.put(mCurrentCityCode, position);
         mCurrentDistrictCode = list.get(position).regionCode;
         mCurrentDistrictName = list.get(position).regionName;

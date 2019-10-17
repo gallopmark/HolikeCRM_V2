@@ -84,7 +84,7 @@ public class SelectImageHelper {
         return this;
     }
 
-    public SelectImageHelper attachRecyclerView(RecyclerView recyclerView) {
+    public void attachRecyclerView(RecyclerView recyclerView) {
         Context context = recyclerView.getContext();
         recyclerView.setLayoutManager(new GridLayoutManager(context, mSpanCount));
         if (recyclerView.getItemDecorationCount() == 0) {
@@ -95,7 +95,6 @@ public class SelectImageHelper {
         mItems.add(mAddItem);
         mImageAdapter = new SelectImageAdapter(context, mItems);
         recyclerView.setAdapter(mImageAdapter);
-        return this;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

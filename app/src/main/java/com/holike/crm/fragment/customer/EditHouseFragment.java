@@ -32,7 +32,7 @@ import butterknife.OnClick;
  * Created by wqj on 2018/8/8.
  * 编辑房屋信息
  */
-
+@Deprecated
 public class EditHouseFragment extends WorkflowFragment implements WorkflowView, HouseMutilSelectHelper.HouseMutilSelectListener {
     protected final int TYPE_SHOP = 5;
     protected final int TYPE_ASSOCIATES = 6;

@@ -18,6 +18,7 @@ import com.holike.crm.bean.DealerRankBean;
 import com.holike.crm.presenter.fragment.DealerRankPresenter;
 import com.holike.crm.presenter.fragment.PerformancePresenter;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.DealerRankView;
 
 import java.util.ArrayList;
@@ -144,7 +145,7 @@ public class DealerRankFragment extends MyFragment<DealerRankPresenter, DealerRa
                 ivRanking.setVisibility(View.GONE);
                 tvRank.setVisibility(View.GONE);
                 if (!rankListBean.getRank().equals("-")) {
-                    switch (Integer.parseInt(rankListBean.getRank())) {
+                    switch (ParseUtils.parseInt(rankListBean.getRank())) {
                         case 1:
                             ivRanking.setVisibility(View.VISIBLE);
                             ivRanking.setBackgroundResource(R.drawable.ranking_first);

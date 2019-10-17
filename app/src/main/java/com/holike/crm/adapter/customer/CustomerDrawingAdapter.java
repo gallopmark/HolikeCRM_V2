@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.holike.crm.R;
-import com.holike.crm.adapter.CustomerStatusListAdapter;
 import com.holike.crm.bean.CustomerStatusBean;
 import com.holike.crm.bean.MultiItem;
 
@@ -31,10 +30,15 @@ public class CustomerDrawingAdapter extends CustomerStatusListAdapter {
 
     @Override
     public void setup(RecyclerHolder holder, CustomerStatusBean.InnerBean bean, int position) {
-        holder.setText(R.id.tv_rulerDate, obtain2(mTipsRuleDate, wrap(bean.appointmentTime))); //量尺日期
+        holder.setText(R.id.tv_rulerDate, obtain2(mTipsRuleDate, wrap(bean.amountOfDate))); //量尺日期
         holder.setText(R.id.tv_source, obtain(mTipsSource, wrap(bean.source), false)); //来源
         holder.setText(R.id.tv_ruler, obtain(mTipsRuler, wrap(bean.appointMeasureBy), false)); //量尺人员
-        holder.setText(R.id.tv_reservation, obtain2(mTipsReservation, wrap(bean.measureAppConfirmTime))); //预约确图
+        if (!TextUtils.isEmpty(bean.measureAppConfirmTime)) {  //预约确图
+            holder.setText(R.id.tv_reservation, obtain2(mTipsReservation, bean.measureAppConfirmTime));
+            holder.setVisibility(R.id.tv_reservation, View.VISIBLE);
+        } else {
+            holder.setVisibility(R.id.tv_reservation, View.GONE);
+        }
         if (TextUtils.isEmpty(bean.customerProtectTime)) {
             holder.setVisibility(R.id.tv_countdown, View.GONE);
         } else {

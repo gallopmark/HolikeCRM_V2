@@ -3,6 +3,7 @@ package com.holike.crm.bean;
 import androidx.annotation.NonNull;
 
 import com.contrarywind.interfaces.IPickerViewData;
+import com.holike.crm.util.ParseUtils;
 
 import org.parceler.Parcel;
 
@@ -254,7 +255,7 @@ public class TypeIdBean {
         @Override
         public int compareTo(@NonNull TypeIdItem o) {
             try {
-                return Integer.parseInt(this.getId()) > Integer.parseInt(o.getId()) ? 1 : -1;
+                return ParseUtils.parseInt(this.getId()) > ParseUtils.parseInt(o.getId()) ? 1 : -1;
             } catch (Exception e) {
                 return 0;
             }

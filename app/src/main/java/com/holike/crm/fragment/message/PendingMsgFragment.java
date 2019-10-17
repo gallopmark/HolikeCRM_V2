@@ -18,11 +18,9 @@ import java.util.List;
 /**
  * Created by gallop on 2019/8/21.
  * Copyright holike possess 2019.
- * 待处理时间
+ * 待处理事项
  */
 public class PendingMsgFragment extends IMessageFragment {
-
-    private int mCurrentIndex = -1;
 
     @Override
     String getType() {
@@ -37,7 +35,11 @@ public class PendingMsgFragment extends IMessageFragment {
 
     @Override
     void onItemClick(MessageResultBean.MessageBean bean, int position) {
-        CustomerDetailV2Activity.open((BaseActivity) mContext, bean.personalId, bean.messageId);
+        if (bean.canEnterDetail()) {
+            CustomerDetailV2Activity.open((BaseActivity) mContext, bean.personalId, bean.messageId, bean.isHighSeasHouse());
+        } else {
+            showShortToast(bean.details);
+        }
     }
 
     class PendingMsgAdapter extends CommonAdapter<MessageResultBean.MessageBean> {
@@ -84,19 +86,18 @@ public class PendingMsgFragment extends IMessageFragment {
 
             holder.setOnClickListener(R.id.tv_refuse, view -> {
                 if (bean.isClick()) {
-                    redistribute(position, bean, "disAgree");//拒绝分配
+                    redistribute(bean, "disAgree");//拒绝分配
                 }
             });
             holder.setOnClickListener(R.id.tv_agree, view -> {
                 if (bean.isClick()) {
-                    redistribute(position, bean, "agree");  //同意分配
+                    redistribute(bean, "agree");  //同意分配
                 }
             });
         }
     }
 
-    private void redistribute(int position, MessageResultBean.MessageBean bean, String type) {
-        mCurrentIndex = position;
+    private void redistribute(MessageResultBean.MessageBean bean, String type) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext);
         builder.title(R.string.dialog_title_assign_customer);
         String name = TextUtils.isEmpty(bean.name) ? "" : bean.name;
@@ -111,14 +112,5 @@ public class PendingMsgFragment extends IMessageFragment {
             mPresenter.redistribute(bean.messageId, type);
         });
         builder.show();
-    }
-
-    @Override
-    public void onRedistributeSuccess(String message) {
-        super.onRedistributeSuccess(message);
-        if (mCurrentIndex >= 0 && mCurrentIndex < mMessageList.size()) {
-            mMessageList.get(mCurrentIndex).setUnClickable();
-            mAdapter.notifyDataSetChanged();
-        }
     }
 }

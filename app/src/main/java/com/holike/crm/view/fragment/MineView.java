@@ -14,7 +14,7 @@ public interface MineView extends BaseView {
 
     void getUserInfoFailed(String failed);
 
-    void isLastVersion();
+    void checkForUpdateSuccess(UpdateBean updateBean, boolean hasNewVersion);
 
-    void hasNewVersion(UpdateBean updateBean, boolean isDownload);
+    void checkForUpdateFailure(String failReason);
 }

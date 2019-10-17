@@ -1,22 +1,22 @@
 package com.holike.crm.fragment.customerv2.helper;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.holike.crm.R;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.bean.CurrentUserBean;
+import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.http.ParamHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -74,41 +74,40 @@ public class AssignDesignerHelper extends GeneralHelper {
     private void onSelectShop() {
         final List<CurrentUserBean.ShopInfo> list = mCurrentUser.getShopInfo();
         if (list.isEmpty()) return;
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (CurrentUserBean.ShopInfo bean : mCurrentUser.getShopInfo()) {
-            optionItems.add(bean.shopName);
+            optionItems.add(new DictionaryBean(bean.shopId, bean.shopName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            mShopIndex = options1;
-            String shopId = list.get(options1).shopId;
+        PickerHelper.showOptionsPicker(mContext, optionItems, mShopIndex, (position, bean) -> {
+            mShopIndex = position;
+            String shopId = bean.id;
             if (!TextUtils.equals(mDesignerShopId, shopId)) {  //选择的门店发生了改变
                 reset();
-                mDesignerShopId = list.get(options1).shopId;
-                mShopTextView.setText(list.get(options1).shopName);
+                mDesignerShopId = shopId;
+                mShopTextView.setText(bean.name);
                 mCallback.onQueryDesigner(mDesignerShopId); //回调方法，查询当前所选门店下的所有设计师
             }
-        }, mShopIndex);
+        });
     }
 
     private void reset() {
         mDesignerId = null;
-        mDesignerTextView.setText("");
+        mDesignerTextView.setText(null);
+        mDesignerTextView.setHint(mContext.getString(R.string.tips_please_select));
         mDesignerLayout.setVisibility(View.GONE);
     }
 
     //选择设计师
     private void onSelectDesigner() {
-        List<String> optionItems = new ArrayList<>();
+        List<DictionaryBean> optionItems = new ArrayList<>();
         for (ShopRoleUserBean.UserBean userBean : mCurrentDesignerList) {
-            optionItems.add(userBean.userName);
+            optionItems.add(new DictionaryBean(userBean.userId, userBean.userName));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (options1, options2, options3, v) -> {
-            if (options1 >= 0 && options1 < mCurrentDesignerList.size()) {
-                mDesignerIndex = options1;
-                mDesignerId = mCurrentDesignerList.get(options1).userId;
-                mDesignerTextView.setText(mCurrentDesignerList.get(options1).userName);
-            }
-        }, mDesignerIndex);
+        PickerHelper.showOptionsPicker(mContext, optionItems, mDesignerIndex, (position, bean) -> {
+            mDesignerIndex = position;
+            mDesignerId = bean.id;
+            mDesignerTextView.setText(bean.name);
+        });
     }
 
     /*选择设计师*/
@@ -117,11 +116,15 @@ public class AssignDesignerHelper extends GeneralHelper {
         for (ShopRoleUserBean.InnerBean bean : list) {
             userList.addAll(bean.getUserList());
         }
+        mDesignerLayout.setVisibility(View.VISIBLE);
         if (!userList.isEmpty()) {
             mCurrentDesignerList = new ArrayList<>(userList);
-            mDesignerLayout.setVisibility(View.VISIBLE);
+            mDesignerTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_down), null);
+            mDesignerTextView.setEnabled(true);
         } else {
-            mDesignerLayout.setVisibility(View.GONE);
+            mDesignerTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            mDesignerTextView.setHint(mContext.getString(R.string.empty_shop_designer));
+            mDesignerTextView.setEnabled(false);
         }
     }
 

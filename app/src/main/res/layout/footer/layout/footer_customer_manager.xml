@@ -22,16 +22,11 @@
 
     <EditText
         android:id="@+id/et_message"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_130"
-        android:background="@color/bg_transparent"
-        android:gravity="start|top"
+        style="@style/EditText_Remark_Style"
+        android:minHeight="@dimen/dp_130"
         android:hint="@string/tips_message_board_hint"
-        android:textColorHint="@color/textColor21"
-        android:inputType="text"
         android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10"
-        android:textSize="@dimen/textSize_13" />
+        android:paddingBottom="@dimen/dp_10" />
 
     <View style="@style/divider_horizontal" />
 
