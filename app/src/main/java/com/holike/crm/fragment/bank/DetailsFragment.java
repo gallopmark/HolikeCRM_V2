@@ -154,9 +154,9 @@ public class DetailsFragment extends MyFragment<PayDetailsPresenter, PayDetailsV
     }
 
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         super.clickRightMenu(text, actionView);
-        switch (text) {
+        switch (text.toString()) {
 //            case "":
 //                ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_credit_info, R.array.title_credit_info_id, this);
 ////                popupWindow.showAsDropDown(mContentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);

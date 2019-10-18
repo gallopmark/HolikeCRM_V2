@@ -112,7 +112,7 @@ public class OnlineDeclarationFragment extends MyFragment<OnlineDeclarationPrese
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         super.clickRightMenu(menuText, actionView);
         startActivity(MessageV2Activity.class);
     }

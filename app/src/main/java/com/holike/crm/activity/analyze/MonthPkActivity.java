@@ -43,7 +43,6 @@ public class MonthPkActivity extends MyFragmentActivity<MonthPkPresenter, MonthP
         super.init(savedInstanceState);
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item15_title));
-        setLeft(getString(R.string.report_title));
         showLoading();
         mPresenter.getData(null);
     }

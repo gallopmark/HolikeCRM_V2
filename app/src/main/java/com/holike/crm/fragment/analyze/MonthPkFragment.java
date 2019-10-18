@@ -50,7 +50,6 @@ public class MonthPkFragment extends MyFragment<MonthPkPresenter, MonthPkView> i
     protected void init() {
         super.init();
         setStatusBar();
-        setLeft(getString(R.string.report_title));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         tabTimeType.setTabData(titleTimes);
         tabTimeType.setOnTabSelectListener(new OnTabSelectListener() {

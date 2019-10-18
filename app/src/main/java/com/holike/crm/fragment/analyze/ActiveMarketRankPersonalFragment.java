@@ -43,7 +43,7 @@ public class ActiveMarketRankPersonalFragment extends MyFragment {
     protected void init() {
         super.init();
         setStatusBar();
-        setTitleBg(R.color.bg_transparent);
+        setTitleBackground(R.color.bg_transparent);
         setTitle(getString(R.string.report_item17_title));
         Bundle bundle = getArguments();
         if (bundle != null) {

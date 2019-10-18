@@ -41,8 +41,8 @@ public class FeedbackActivity extends MyFragmentActivity {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        if (requestCode == 10086 && data != null) {
 //            ArrayList<String> images = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
-//            if (fragmentManager.getFragments().size() > 0) {
-//                FeedbackFragment fragment = (FeedbackFragment) fragmentManager.getFragments().getInstance(0);
+//            if (mFragmentManager.getFragments().size() > 0) {
+//                FeedbackFragment fragment = (FeedbackFragment) mFragmentManager.getFragments().getInstance(0);
 //                fragment.onActivityResult(images);
 //            }
 //        }

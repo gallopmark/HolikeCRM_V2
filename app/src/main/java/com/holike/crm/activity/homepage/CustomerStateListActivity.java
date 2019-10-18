@@ -67,7 +67,6 @@ public class CustomerStateListActivity extends MyFragmentActivity<CustomerStateL
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        setLeft(getString(R.string.homepage));
 //        isBoss = getIntent().getBooleanExtra(Constants.IS_BOSS, false);
         stateName = getIntent().getStringExtra("stateName");
         setTitle(stateName);
@@ -148,7 +147,7 @@ public class CustomerStateListActivity extends MyFragmentActivity<CustomerStateL
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         startActivity(MessageV2Activity.class);
     }
 

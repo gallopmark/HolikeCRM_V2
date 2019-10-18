@@ -49,7 +49,7 @@ class IHouseHelper {
         static final String CODE_MESSAGE_BOARD = "18";  //留言记录
         static final String CODE_RECEIPT = "19";    //收款
         static final String CODE_CONFIRM_LOSE = "21";   //确认流失
-        static final String CODE_INVALID_RETURN = "22";  //（线上引流）无效退回
+        static final String CODE_INVALID_RETURN = "23";  //（线上引流）无效退回
     }
 
     TextSpanHelper mTextHelper;

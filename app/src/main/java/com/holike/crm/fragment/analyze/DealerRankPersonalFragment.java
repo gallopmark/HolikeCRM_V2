@@ -60,7 +60,6 @@ public class DealerRankPersonalFragment extends MyFragment {
         super.init();
         setStatusBar();
         setTitle(getString(R.string.report_item11_title));
-        setLeft(getString(R.string.report_title));
         Bundle bundle = getArguments();
         if (bundle != null) {
             DealerRankBean dealerDataBean = ((DealerRankBean) bundle.getSerializable(Constants.DEALER_RANK));

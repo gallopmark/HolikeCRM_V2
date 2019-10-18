@@ -73,7 +73,7 @@ public class BossMonthDataFragment extends MyFragment<MonthDataBossPresenter,
 
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         mHelper.onSelectCalendar();
     }
 

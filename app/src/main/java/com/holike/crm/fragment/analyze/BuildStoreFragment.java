@@ -67,8 +67,6 @@ public class BuildStoreFragment extends MyFragment<BuildStorePresenter, BuildSto
             time = bundle.getString(Constants.TIME);
             type = bundle.getString(Constants.TYPE);
             title = bundle.getString(Constants.TITLE);
-        } else {
-            setLeft(getString(R.string.report_title));
         }
         if (title != null) {
             setTitle(getString(R.string.report_item6_title) + "—" + title);

@@ -40,7 +40,7 @@ public class EmployeeDetailsActivity extends MyFragmentActivity<EmployeeDetailsP
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
         setTitle(getString(R.string.employee_details_title));
-        mPresenter.init(this, fragmentManager, mTabLayout);
+        mPresenter.init(this, mFragmentManager, mTabLayout);
         mSaveTextView.setOnClickListener(view -> mPresenter.saveEmployee(this));
     }
 

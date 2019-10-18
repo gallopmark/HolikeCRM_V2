@@ -48,11 +48,6 @@ public class PerformancePersonalFragment extends MyFragment {
         super.init();
         setStatusBar();
         setTitle(getString(R.string.report_item8_title));
-        if (TextUtils.equals(JumpBean.getJumpBack(), getString(R.string.homepage))) {
-            setLeft(getString(R.string.homepage));
-        } else {
-            setLeft(getString(R.string.report_title));
-        }
         rv.setLayoutManager(new LinearLayoutManager(mContext));
         Bundle bundle = getArguments();
         if (bundle != null) {

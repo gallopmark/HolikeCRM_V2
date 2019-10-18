@@ -75,12 +75,6 @@ public class OrderReportFragment extends MyFragment<OrderReportPresenter, OrderR
             type = bundle.getString(Constants.TYPE);
             title = bundle.getString(Constants.TITLE);
             time = bundle.getString(Constants.TIME);
-        } else {
-            if (JumpBean.getJumpBack().equals(getString(R.string.homepage))) {
-                setLeft(getString(R.string.homepage));
-            } else {
-                setLeft(getString(R.string.report_title));
-            }
         }
         setTitle(getString(R.string.report_item2_title) + (TextUtils.isEmpty(title) ? "" : "—" + title));
         if (startTime != null) {
@@ -213,7 +207,7 @@ public class OrderReportFragment extends MyFragment<OrderReportPresenter, OrderR
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         showLoading();
         mPresenter.getCompleteData(cityCode, type);
     }

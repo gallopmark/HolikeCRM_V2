@@ -89,7 +89,7 @@ public class CustomerDetailFragment extends MyFragment<CustomerDetailPresenter, 
     }
 
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         super.clickRightMenu(text, actionView);
         startActivity(MessageV2Activity.class);
     }

@@ -74,7 +74,7 @@ public class ActiveMarketRankFragment extends MyFragment<ActiveMarketRankPresent
     private List<Date> mSelectedDates;
 
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         OrderReportPresenter.selectDate(mContext, mSelectedDates, new CalendarPickerDialog.OnCalendarRangeSelectedListener() {
             @Override
             public void onLeftClicked(CalendarPickerDialog dialog) {

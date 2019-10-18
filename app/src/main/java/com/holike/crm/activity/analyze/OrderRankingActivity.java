@@ -72,7 +72,6 @@ public class OrderRankingActivity extends MyFragmentActivity<OrderRankingPresent
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
         setTitle(getString(R.string.report_item4_title));
-        setLeft(getString(R.string.report_title));
         setRightMenu(getString(R.string.report_select_date));
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setNestedScrollingEnabled(false);
@@ -90,7 +89,7 @@ public class OrderRankingActivity extends MyFragmentActivity<OrderRankingPresent
     private List<Date> mSelectedDates;
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         OrderReportPresenter.selectDate(this, mSelectedDates, new CalendarPickerDialog.OnCalendarRangeSelectedListener() {
             @Override
             public void onLeftClicked(CalendarPickerDialog dialog) {

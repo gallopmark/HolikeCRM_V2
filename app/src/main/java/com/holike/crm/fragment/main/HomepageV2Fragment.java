@@ -72,7 +72,7 @@ public class HomepageV2Fragment extends BaseFragment<HomePagePresenter2, HomePag
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         startActivity(MessageV2Activity.class);
     }
 

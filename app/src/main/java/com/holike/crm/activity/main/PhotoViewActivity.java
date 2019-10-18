@@ -54,11 +54,6 @@ public class PhotoViewActivity extends BaseActivity {
     }
 
     @Override
-    protected void setupTheme() {
-        setTheme(R.style.ThemeFullScreen);
-    }
-
-    @Override
     protected void init(@Nullable Bundle savedInstanceState) {
 //        setStatusBarColor(R.color.color_black);
         Intent intent = getIntent();

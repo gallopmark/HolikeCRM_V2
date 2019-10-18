@@ -156,7 +156,7 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         startActivity(MessageV2Activity.class);
     }
 

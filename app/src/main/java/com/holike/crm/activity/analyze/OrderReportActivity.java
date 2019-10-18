@@ -36,7 +36,6 @@ public class OrderReportActivity extends MyFragmentActivity {
     public String getIntentData(){
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
-            setLeft(getString(R.string.homepage));
             return getString(R.string.homepage);
         }
         return getString(R.string.report_title);

@@ -83,7 +83,6 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
     protected void init() {
         super.init();
         setTitle(getString(R.string.receiving_scan));
-        setLeft(getString(R.string.homepage));
         mPresenter.setEditTextWatcher(etScanGun);
         loopTask = new RxLoopTask();
         loopTask.doLoopTask(300, () -> { //循环器 循环监听文本长度
@@ -92,7 +91,7 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         super.clickRightMenu(menuText, actionView);
         startActivity(MessageV2Activity.class);
     }

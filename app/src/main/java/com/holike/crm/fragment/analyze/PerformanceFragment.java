@@ -75,13 +75,6 @@ public class PerformanceFragment extends MyFragment<PerformancePresenter, Perfor
             time = bundle.getString(Constants.TIME) == null ? "0" : bundle.getString(Constants.TIME);
             type = bundle.getString(Constants.TYPE);
             title = bundle.getString(Constants.TITLE);
-            if (cityCode == null) {
-                if (JumpBean.getJumpBack() != null && JumpBean.getJumpBack().equals(getString(R.string.homepage))) {
-                    setLeft(getString(R.string.homepage));
-                } else {
-                    setLeft(getString(R.string.report_title));
-                }
-            }
             getBean();
         }
         setTitle();

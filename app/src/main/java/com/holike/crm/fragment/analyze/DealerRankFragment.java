@@ -58,7 +58,6 @@ public class DealerRankFragment extends MyFragment<DealerRankPresenter, DealerRa
         super.init();
         setStatusBar(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item11_title));
-        setLeft(getString(R.string.report_title));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Bundle bundle = getArguments();
         if (bundle != null) {

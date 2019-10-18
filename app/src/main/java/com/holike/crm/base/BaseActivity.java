@@ -11,15 +11,12 @@ import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +25,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,15 +59,14 @@ import galloped.xcode.widget.TitleBar;
 
 public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> extends AppCompatActivity {
     public final int REQUEST_CODE = new Random().nextInt(65536);
-    protected CountDownTimer timer;
     protected P mPresenter;
-    protected Dialog loadingDialog;
+    protected Dialog mLoadingDialog;
     /*权限申请请求码*/
     private int mPermissionsRequestCode;
     /*权限申请回调*/
     private OnRequestPermissionsCallback mRequestPermissionsCallback;
-    protected FragmentManager fragmentManager;
-    protected List<Fragment> fragmentList = new ArrayList<>();
+    protected FragmentManager mFragmentManager;
+    protected List<Fragment> mFragmentList = new ArrayList<>();
 
     protected int mActivityCloseEnterAnimation = -1;
 
@@ -81,12 +76,11 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupTheme();
         setupWindow();
         setOrientation();
         setContentView(setContentViewId());
         ButterKnife.bind(this);
-        fragmentManager = getSupportFragmentManager();
+        mFragmentManager = getSupportFragmentManager();
         try {
             mPresenter = attachPresenter();
 //            mPresenter = ((Class<P>) GenericsUtils.getSuperClassGenricType(getClass())).newInstance();
@@ -97,7 +91,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
             LogCat.e(e);
         }
         if (isFullScreen()) {
-            fullScreen();
+            requestFullScreen();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 setStatusBarColor(R.color.color_while);
@@ -108,10 +102,6 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         }
         setupTitleBar();
         init(savedInstanceState);
-    }
-
-    protected void setupTheme() {
-
     }
 
     /*activity动画兼容性,style 退出动画 解决退出动画无效问题*/
@@ -172,106 +162,47 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置右边菜单文字
      */
     @Nullable
-    protected FrameLayout setRightMenu(final String text) {
-        final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            titleBar.getMenu().clear();
-            if (TextUtils.isEmpty(text)) {
-                return null;
-            }
-            ToolbarHelper.inflateMenu(titleBar, R.menu.menu_main);
-            final View actionView = titleBar.getMenu().findItem(R.id.menu_main).getActionView();
-            TextView tvMenu = actionView.findViewById(R.id.right_menu_view);
-            tvMenu.setText(text);
-            if (titleBar.getTag() != null) {
-                tvMenu.setTextColor(ContextCompat.getColor(this, R.color.color_while));
-            }
-            actionView.setOnClickListener(view -> clickRightMenu(text, actionView));
-            return actionView.findViewById(R.id.right_menu_layout);
-        }
-        return null;
+    protected FrameLayout setRightMenu(final CharSequence menuText) {
+        return ToolbarHelper.setRightMenu(getTitleBar(), menuText, view -> clickRightMenu(menuText, view));
     }
 
+    /*设置菜单*/
     protected void setOptionsMenu(@MenuRes int menuId) {
-        final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            titleBar.getMenu().clear();
-            ToolbarHelper.inflateMenu(titleBar, menuId);
-            titleBar.setOnMenuItemClickListener(item -> {
-                onOptionsMenuClick(titleBar, item);
-                return true;
-            });
-        }
+        ToolbarHelper.setOptionsMenu(getTitleBar(), menuId, item -> {
+            onOptionsMenuClick(item);
+            return true;
+        });
     }
 
-    protected void onOptionsMenuClick(Toolbar toolbar, MenuItem menuItem) {
+    @SuppressWarnings("unused")
+    protected void onOptionsMenuClick(MenuItem menuItem) {
 
     }
 
     /**
      * 设置右边菜单文字
      */
-    protected void setRightMsg(final boolean isNewMsg) {
-        final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            FrameLayout menuLayout = setRightMenu(getString(R.string.message_title));
-            if (isNewMsg) {
-                setRightDot(menuLayout);
-            } else {
-                hideRightDot(menuLayout);
-            }
-        }
+    protected void setRightMsg(final boolean hasNewMsg) {
+        FrameLayout menuLayout = setRightMenu(getString(R.string.message_title));
+        ToolbarHelper.setMessageMenu(menuLayout, hasNewMsg);
     }
 
     /*显示消息红点*/
-    protected void setRightDot(@Nullable FrameLayout actionView) {
-        if (actionView != null) {
-            ImageView ivDot = actionView.findViewById(R.id.right_menu_dot);
-            if (ivDot == null) {
-                ivDot = new ImageView(this);
-                ivDot.setId(R.id.right_menu_dot);
-                int size = getResources().getDimensionPixelSize(R.dimen.dp_8);
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
-                params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dp_6);
-                params.topMargin = size;
-                params.gravity = Gravity.END;
-                ivDot.setLayoutParams(params);
-            }
-            ivDot.setImageResource(R.drawable.ic_red_point);
-        }
+    @SuppressWarnings("unused")
+    protected void setRightDot(@Nullable FrameLayout menuLayout) {
+        ToolbarHelper.setMessageRedDot(menuLayout);
     }
 
     /*移除消息红点*/
+    @SuppressWarnings("unused")
     protected void hideRightDot(@Nullable FrameLayout menuLayout) {
-        if (menuLayout != null) {
-            View vDot = menuLayout.findViewById(R.id.right_menu_dot);
-            if (vDot != null) {
-                menuLayout.removeView(vDot);
-            }
-        }
+        ToolbarHelper.hideMessageRedDot(menuLayout);
     }
 
     /**
      * 点击右边菜单
      */
-    protected void clickRightMenu(String menuText, View actionView) {
-    }
-
-    /**
-     * 设置左边菜单文字
-     */
-    @Deprecated
-    protected void setLeft(String left) {
-//        TextView tvLeft = findViewById(R.id.tv_left);
-//        if (tvLeft != null) {
-//            if (left == null || left.equals("")) {
-//                tvLeft.setVisibility(View.GONE);
-//            } else
-//                tvLeft.setText(getString(R.string.back));
-//            if (tvLeft.getVisibility() != View.GONE) {
-//                tvLeft.setVisibility(View.GONE);
-//            }
-//        }
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
     }
 
     public void setTitle(@StringRes int titleId) {
@@ -299,19 +230,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置搜索栏
      */
     protected EditText setSearchBar(CharSequence hint) {
-        TitleBar titleBar = getTitleBar();
-        if (titleBar == null) return null;
-        return ToolbarHelper.addSearchContainer(titleBar, hint, -1, (searchView, actionId, event) -> doSearch());
-    }
-
-    protected void setSearchViewWidth(@DimenRes int id) {
-        TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            View searchContainer = ToolbarHelper.getSearchContainer(titleBar);
-            if (searchContainer != null) {
-                ((TitleBar.LayoutParams) searchContainer.getLayoutParams()).width = getResources().getDimensionPixelSize(id);
-            }
-        }
+        return ToolbarHelper.addSearchContainer(getTitleBar(), hint, -1, (searchView, actionId, event) -> doSearch());
     }
 
     /**
@@ -324,7 +243,8 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     /**
      * 设置标题背景
      */
-    protected void setTitleBg(int resId) {
+    @SuppressWarnings("unused")
+    protected void setTitleBackground(int resId) {
         TitleBar titleBar = getTitleBar();
         if (titleBar != null) {
             titleBar.setBackgroundResource(resId);
@@ -352,15 +272,11 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
         if (mPresenter != null) {
             mPresenter.deAttach();
             mPresenter = null;
         }
+        super.onDestroy();
     }
 
     @Override
@@ -375,13 +291,6 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      */
     protected boolean isFullScreen() {
         return false;
-    }
-
-    /**
-     * 是否修改导航栏颜色
-     */
-    protected boolean isSetStatusBarColor() {
-        return true;
     }
 
     public void openActivity(@NonNull Intent intent) {
@@ -430,12 +339,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
             }
             fragment.setArguments(bundle);
         }
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (needAnimation) {
             transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_right_out);
         }
         transaction.add(R.id.fl_fragment_main, fragment, fragment.getTag()).commitAllowingStateLoss();
-        fragmentList.add(fragment);
+        mFragmentList.add(fragment);
     }
 
     public void startFragment(Fragment fragment, @Nullable Bundle options) {
@@ -454,12 +363,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         if (options != null) {
             fragment.setArguments(options);
         }
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (needAnimation) {
             transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_right_out);
         }
         transaction.add(containerViewId, fragment, fragment.getTag()).commitAllowingStateLoss();
-        fragmentList.add(fragment);
+        mFragmentList.add(fragment);
     }
 
     /**
@@ -474,29 +383,17 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     protected void finishFragment(int requestCode, int resultCode, Map<String, Serializable> result, boolean needAnimation) {
-        int position = fragmentList.size() - 1;
+        int position = mFragmentList.size() - 1;
         if (position > 0) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
             if (needAnimation) {
                 transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_right_out);
             }
-            transaction.remove(fragmentList.get(position)).commitAllowingStateLoss();
-            fragmentList.remove(position);
-            ((BaseFragment) fragmentList.get(position - 1)).onFinishResult(requestCode, resultCode, result);
+            transaction.remove(mFragmentList.remove(position)).commitAllowingStateLoss();
+            ((BaseFragment) mFragmentList.get(position - 1)).onFinishResult(requestCode, resultCode, result);
         } else {
             finish();
         }
-//        if (position == 0) {
-//            finish();
-//        } else {
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            if (needAnimation) {
-//                transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_right_out);
-//            }
-//            transaction.remove(fragmentList.getInstance(position)).commitAllowingStateLoss();
-//            fragmentList.remove(position);
-//            ((MyFragment) fragmentList.getInstance(position - 1)).onFinishResult(requestCode, resultCode, result);
-//        }
     }
 
     /**
@@ -507,41 +404,20 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     /**
-     * 返回
-     */
-    public void back(View view) {
-        hideSoftInput(getWindow().getDecorView());
-        finish();
-    }
-
-    /**
-     * 显示键盘
-     */
-    protected void showSoftInput(View view) {
-        if (view instanceof EditText) {
-            ((EditText) view).setSelection(((EditText) view).getText().toString().length());
-        }
-        view.requestFocus();
-        view.setFocusable(true);
-        view.setFocusableInTouchMode(true);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
-    }
-
-    /**
      * 隐藏键盘
      */
     protected void hideSoftInput(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (imm != null && view.getWindowToken() != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     /**
      * 通过设置全屏，设置状态栏透明
      */
-    protected void fullScreen() {
+    protected void requestFullScreen() {
         SystemTintHelper.fullScreen(this);
-//        SystemBarTintHelper.fullScreen(this);
     }
 
     /**
@@ -683,21 +559,21 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      */
     public void showLoading() {
         dismissLoading();
-        if (loadingDialog == null) {
-            loadingDialog = getLoadingDialog();
+        if (mLoadingDialog == null) {
+            mLoadingDialog = getLoadingDialog();
         }
-        loadingDialog.show();
-//        loadingDialog.show(getSupportFragmentManager(), "loading");
+        mLoadingDialog.show();
+//        mLoadingDialog.show(getSupportFragmentManager(), "loading");
     }
 
     /**
      * 隐藏正在加载
      */
     public void dismissLoading() {
-//        if ((loadingDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag("loading")) != null) {
-//            loadingDialog.dismissAllowingStateLoss();
+//        if ((mLoadingDialog = (DialogFragment) getSupportFragmentManager().findFragmentByTag("loading")) != null) {
+//            mLoadingDialog.dismissAllowingStateLoss();
 //        }
-        if (loadingDialog != null) loadingDialog.dismiss();
+        if (mLoadingDialog != null) mLoadingDialog.dismiss();
     }
 
     protected Dialog getLoadingDialog() {
@@ -777,13 +653,6 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     }
 
     /**
-     * 判断TextView是否空
-     */
-    public boolean textEmpty(TextView textView) {
-        return textView.getText().toString().length() == 0;
-    }
-
-    /**
      * 获取TextView内容
      */
     public String getText(TextView textView) {
@@ -806,6 +675,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * @param requestCode 请求码
      * @param callback    callback
      */
+    @SuppressWarnings("unused")
     public void requestPermission(@NonNull String permission, int requestCode, OnRequestPermissionsCallback callback) {
         requestPermissions(new String[]{permission}, requestCode, callback);
     }
@@ -842,17 +712,4 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
             overridePendingTransition(mActivityCloseEnterAnimation, mActivityCloseExitAnimation);
         }
     }
-
-    /*
-     * 做法是为了快速点击按钮，多次触发启动activity等问题
-     */
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-//            if (CheckUtils.isFastDoubleClick()) {
-//                return true;
-//            }
-//        }
-//        return super.dispatchTouchEvent(ev);
-//    }
 }

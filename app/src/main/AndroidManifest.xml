@@ -87,7 +87,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.main.PhotoViewActivity" />
+        <activity
+            android:name=".activity.main.PhotoViewActivity"
+            android:theme="@style/ThemeFullScreen" />
         <activity android:name=".activity.analyze.TranslateReportActivity" />
         <activity android:name=".activity.analyze.OrderRankingActivity" />
         <activity android:name=".activity.analyze.ProductTransactionReportActivity" />

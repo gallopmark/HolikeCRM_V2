@@ -30,7 +30,7 @@ public class CustomerChargeDepositActivity extends GeneralCustomerActivity {
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         Intent intent = new Intent(this, CustomerEditActivity.class);
         intent.putExtra("isDeposit", true);
         openActivity(intent);

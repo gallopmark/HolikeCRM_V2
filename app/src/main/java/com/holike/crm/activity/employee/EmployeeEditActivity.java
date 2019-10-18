@@ -53,7 +53,7 @@ public class EmployeeEditActivity extends MyFragmentActivity<EmployeeEditPresent
         super.init(savedInstanceState);
         setStatusBarColor(R.color.textColor14);
         findViewById(R.id.mBackIv).setOnClickListener(v -> onBackPressed());
-        mPresenter.init(this,fragmentManager);
+        mPresenter.init(this, mFragmentManager);
         mPreviousStepTv.setOnClickListener(this);
         mNextStepTv.setOnClickListener(this);
     }

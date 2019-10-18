@@ -302,7 +302,7 @@ public class PayListFragment extends MyFragment<PayListPresenter, PayListView> i
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         super.clickRightMenu(menuText, actionView);
         startActivity(MessageV2Activity.class);
     }

@@ -26,7 +26,6 @@ public class InstallEvaluateActivity extends MyFragmentActivity<InstallEvaluateP
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
         setTitle(getString(R.string.report_item7_title));
-        setLeft(getString(R.string.back));
         setRightMenu(getString(R.string.report_select_date));
     }
 

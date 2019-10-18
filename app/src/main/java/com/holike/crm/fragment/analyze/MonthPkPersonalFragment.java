@@ -67,7 +67,6 @@ public class MonthPkPersonalFragment extends MyFragment {
         super.init();
         setStatusBar();
         setTitle(getString(R.string.report_item15_title));
-        setLeft(getString(R.string.report_title));
         Bundle bundle = getArguments();
         if (bundle != null) {
             MonthPkBean monthPkBean = (MonthPkBean) bundle.getSerializable(Constants.MONTH_PK);

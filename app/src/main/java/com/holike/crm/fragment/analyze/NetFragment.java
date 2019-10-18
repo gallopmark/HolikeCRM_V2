@@ -39,7 +39,6 @@ public class NetFragment extends MyFragment<NetPresenter, NetView> implements Ne
     protected void init() {
         super.init();
         setTitle(getString(R.string.report_item14_title));
-        setLeft(getString(R.string.report_title));
         rv.setLayoutManager(new LinearLayoutManager(mContext));
         getData();
     }

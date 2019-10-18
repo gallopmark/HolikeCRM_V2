@@ -165,7 +165,7 @@ public class BillListFragment extends MyFragment<BillListPresenter, BillListView
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         if (billListBean == null) return;
         showAll = !TimeUtil.stampToString(startTime, "yyyy.MM.dd").equals(TimeUtil.stampToString(billListBean.getStartTime(), "yyyy.MM.dd")) ||
                 !TimeUtil.stampToString(endTime, "yyyy.MM.dd").equals(TimeUtil.stampToString(billListBean.getEndTime(), "yyyy.MM.dd"));

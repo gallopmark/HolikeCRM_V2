@@ -97,7 +97,7 @@ public class ProductTransactionDefaultFragment extends MyFragment<ProductTrading
      * 各月完成率
      */
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         startFragment(new ProductCompleteFragment());
     }
 

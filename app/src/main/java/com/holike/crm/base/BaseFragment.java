@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
@@ -19,11 +18,8 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -67,6 +63,7 @@ import galloped.xcode.widget.TitleBar;
 public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> extends Fragment
         implements View.OnTouchListener, FragmentBackHandler {
     protected final int REQUEST_CODE = new Random().nextInt(65536);
+    @SuppressWarnings("WeakerAccess")
     protected final int REQUEST_PERMISSION_CODE = new Random().nextInt(65536);
     protected View mContentView;
     private Unbinder mUnbinder;
@@ -194,32 +191,11 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     }
 
     /**
-     * 设置左边按钮文字
-     */
-    @Deprecated
-    protected void setLeft(String left) {
-//        TextView tvLeft = mContentView.findViewById(R.id.tv_left);
-//        if (tvLeft != null) {
-//            if (left == null || left.equals("")) {
-//                tvLeft.setVisibility(View.GONE);
-//            } else
-//                tvLeft.setText(getString(R.string.back));
-//            tvLeft.setVisibility(View.GONE);
-//        }
-    }
-
-    /**
      * 设置标题背景
      */
-    protected void setTitleBg(@DrawableRes int resId) {
-//        View flTitle = mContentView.findViewById(R.id.fl_fragment_title_bar);
-//        if (flTitle != null) {
-//            flTitle.setBackgroundResource(resId);
-//        }
-        TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            titleBar.setBackgroundResource(resId);
-        }
+    @SuppressWarnings("SameParameterValue")
+    protected void setTitleBackground(@DrawableRes int resId) {
+        ToolbarHelper.setTitleBackgroundResource(getTitleBar(), resId);
     }
 
     /**
@@ -244,20 +220,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
      * 设置搜索栏
      */
     protected EditText setSearchBar(CharSequence hint, @DrawableRes int resId) {
-        TitleBar titleBar = getTitleBar();
-        if (titleBar == null) return null;
-        return ToolbarHelper.addSearchContainer(titleBar, hint, resId, (searchView, actionId, event) -> doSearch());
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    protected void setSearchViewWidth(@DimenRes int id) {
-        TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            View searchContainer = ToolbarHelper.getSearchContainer(titleBar);
-            if (searchContainer != null) {
-                ((TitleBar.LayoutParams) searchContainer.getLayoutParams()).width = mContext.getResources().getDimensionPixelSize(id);
-            }
-        }
+        return ToolbarHelper.addSearchContainer(getTitleBar(), hint, resId, (searchView, actionId, event) -> doSearch());
     }
 
     /**
@@ -281,100 +244,50 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
      * 设置右边菜单文字
      */
     @Nullable
-    public FrameLayout setRightMenu(final String text) {
+    public FrameLayout setRightMenu(final CharSequence text) {
         return setRightMenu(text, null);
     }
 
     @Nullable
-    public FrameLayout setRightMenu(final String text, @Nullable final View.OnClickListener listener) {
-        final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            titleBar.getMenu().clear();
-            ToolbarHelper.inflateMenu(titleBar, R.menu.menu_main);
-            final View actionView = titleBar.getMenu().findItem(R.id.menu_main).getActionView();
-            TextView tvMenu = actionView.findViewById(R.id.right_menu_view);
-            tvMenu.setText(text);
-            if (titleBar.getTag() != null) {
-                tvMenu.setTextColor(ContextCompat.getColor(mContext, R.color.color_while));
-            }
-            actionView.setOnClickListener(view -> {
-                if (listener != null) {
-                    listener.onClick(actionView);
-                } else {
-                    clickRightMenu(text, actionView);
-                }
-            });
-            return actionView.findViewById(R.id.right_menu_layout);
+    public FrameLayout setRightMenu(final CharSequence text, @Nullable View.OnClickListener listener) {
+        if (listener == null) {
+            return ToolbarHelper.setRightMenu(getTitleBar(), text, view -> clickRightMenu(text, view));
+        } else {
+            return ToolbarHelper.setRightMenu(getTitleBar(), text, listener);
         }
-        return null;
     }
 
     /*隐藏右边菜单栏*/
     public void hideRightMenu() {
-        final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            titleBar.getMenu().clear();
-//            View view = getMenuLayout(toolbar);
-//            if (view != null) {
-//                view.setVisibility(View.INVISIBLE);
-//            }
-        }
+        ToolbarHelper.hideOptionsMenu(getTitleBar());
     }
 
     public void setOptionsMenu(@MenuRes int menuId) {
         final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            titleBar.getMenu().clear();
-            ToolbarHelper.inflateMenu(titleBar, menuId);
-            titleBar.setOnMenuItemClickListener(item -> {
-                onOptionsMenuClick(titleBar, item);
-                return true;
-            });
-        }
+        ToolbarHelper.setOptionsMenu(getTitleBar(), menuId, item -> {
+            onOptionsMenuClick(titleBar, item);
+            return true;
+        });
     }
 
     /**
      * 设置右边菜单图标
      */
     protected void setRightMenuMsg(final boolean isNewMsg) {
-        final TitleBar titleBar = getTitleBar();
-        if (titleBar != null) {
-            FrameLayout menuLayout = setRightMenu(getString(R.string.message_title));
-            if (isNewMsg) {
-                setRightDot(menuLayout);
-            } else {
-                hideRightDot(menuLayout);
-            }
-        }
+        FrameLayout menuLayout = setRightMenu(getString(R.string.message_title));
+        ToolbarHelper.setMessageMenu(menuLayout, isNewMsg);
     }
 
     /*显示消息红点*/
-    protected void setRightDot(@Nullable FrameLayout actionView) {
-        if (actionView != null) {
-            ImageView ivDot = actionView.findViewById(R.id.right_menu_dot);
-            if (ivDot == null) {
-                ivDot = new ImageView(mContext);
-                ivDot.setId(R.id.right_menu_dot);
-                int size = getResources().getDimensionPixelSize(R.dimen.dp_8);
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
-                params.rightMargin = getResources().getDimensionPixelSize(R.dimen.dp_6);
-                params.topMargin = size;
-                params.gravity = Gravity.END;
-                ivDot.setLayoutParams(params);
-                actionView.addView(ivDot);
-            }
-            ivDot.setImageResource(R.drawable.ic_red_point);
-        }
+    @SuppressWarnings("unused")
+    protected void setRightDot(@Nullable FrameLayout menuLayout) {
+        ToolbarHelper.setMessageRedDot(menuLayout);
     }
 
     /*移除消息红点*/
+    @SuppressWarnings("unused")
     protected void hideRightDot(@Nullable FrameLayout menuLayout) {
-        if (menuLayout != null) {
-            View vDot = menuLayout.findViewById(R.id.right_menu_dot);
-            if (vDot != null) {
-                menuLayout.removeView(vDot);
-            }
-        }
+        ToolbarHelper.hideMessageRedDot(menuLayout);
     }
 
     public void onOptionsMenuClick(Toolbar toolbar, MenuItem menuItem) {
@@ -384,7 +297,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     /**
      * 点击右边菜单
      */
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
     }
 
     /**
@@ -667,15 +580,6 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     }
 
     /**
-     * 显示键盘
-     */
-    protected void showSoftInput(View view) {
-        if (getActivity() != null) {
-            ((BaseActivity) getActivity()).showSoftInput(view);
-        }
-    }
-
-    /**
      * 没有查询结果
      */
     public void noResult() {
@@ -710,10 +614,12 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
         return TextUtils.equals(failed, mContext.getString(R.string.noAuthority)) || TextUtils.equals(failed, mContext.getString(R.string.tips_nopermissions));
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void dealWithFailed(String failed, boolean showToast) {
         dealWithFailed(failed, showToast, -1);
     }
 
+    @SuppressWarnings("WeakerAccess")
     /*处理接口返回的结果 如果是无权限则展示“当前角色无操作权限”页面*/
     public void dealWithFailed(String failed, boolean showToast, int gravity) {
         if (isNoAuth(failed)) {
@@ -755,6 +661,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     }
 
     /*是否已经注册了拨打电话权限*/
+    @SuppressWarnings("WeakerAccess")
     public boolean hasCallPermission() {
         return ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
     }
@@ -772,6 +679,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     }
 
     /*请求拨打电话的权限*/
+    @SuppressWarnings("WeakerAccess")
     protected void onRequestCallPhone(String phoneNumber) {
         requestPermission(Manifest.permission.CALL_PHONE, new OnRequestPermissionsCallback() {
 
@@ -819,15 +727,8 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-//        InputMethodManager manager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             KeyBoardUtil.hideSoftInput((Activity) mContext);
-//            if (manager != null
-//                    && ((Activity) mContext).getCurrentFocus() != null
-//                    && ((Activity) mContext).getCurrentFocus().getWindowToken() != null) {
-//                manager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//            }
         }
         return false;
     }
@@ -854,20 +755,22 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     }
 
     @SuppressWarnings("unused")
-    protected void showLongToast(@StringRes int resId) {
+    public void showLongToast(@StringRes int resId) {
         showLongToast(resId, -1);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void showLongToast(@StringRes int resId, int gravity) {
         showLongToast(mContext.getString(resId), gravity);
     }
 
     @SuppressWarnings("unused")
-    protected void showLongToast(CharSequence text) {
+    public void showLongToast(CharSequence text) {
         showLongToast(text, -1);
     }
 
-    protected void showLongToast(CharSequence text, int gravity) {
+    @SuppressWarnings("WeakerAccess")
+    public void showLongToast(CharSequence text, int gravity) {
         if (TextUtils.isEmpty(text)) return;
         AppToastCompat.from(mContext.getApplicationContext())
                 .with(text)
@@ -875,11 +778,13 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
                 .setGravity(gravity).show();
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void requestPermission(@NonNull String permission, OnRequestPermissionsCallback callback) {
         requestPermission(permission, REQUEST_PERMISSION_CODE, callback);
     }
 
-    protected void requestPermission(@NonNull String permission, int requestCode, OnRequestPermissionsCallback callback) {
+    @SuppressWarnings("WeakerAccess")
+    public void requestPermission(@NonNull String permission, int requestCode, OnRequestPermissionsCallback callback) {
         requestPermissions(new String[]{permission}, requestCode, callback);
     }
 
@@ -894,17 +799,6 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == mRequestPermissionCode) {
             PermissionHelper.convert(this, requestCode, permissions, grantResults, mRequestPermissionsCallback);
-        }
-    }
-
-    /*打开app设置页面*/
-    public void openSettings() {
-        try {
-            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            Uri uri = Uri.fromParts("package", mContext.getApplicationContext().getPackageName(), null);
-            intent.setData(uri);
-            startActivity(intent);
-        } catch (Exception ignored) {
         }
     }
 }

@@ -168,7 +168,6 @@ public class AddCustomerActivity extends MyFragmentActivity<AddCustomerPresenter
         if (isEarnest.equals("1")) {
             llCollectDeposit.setVisibility(View.VISIBLE);
             llCustomCategory.setVisibility(View.VISIBLE);
-            setLeft(getString(R.string.back));
             setTitle(getString(R.string.receive_deposit_add_customer));
             rv.setNestedScrollingEnabled(false);
             rv.setLayoutManager(new GridLayoutManager(this, 3));
@@ -186,7 +185,6 @@ public class AddCustomerActivity extends MyFragmentActivity<AddCustomerPresenter
             };
             UploadImgHelper.setImgList(getActivity(), rv, imgs, getString(R.string.feedback_add_deposit_receipt), 9, clickImgListener);
         } else {
-            setLeft(getString(R.string.homepage_customer));
             setTitle(getString(R.string.customer_manage_add_customer));
         }
         mPresenter.getTypeId();

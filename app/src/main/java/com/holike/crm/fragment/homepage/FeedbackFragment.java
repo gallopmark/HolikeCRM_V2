@@ -76,7 +76,6 @@ public class FeedbackFragment extends MyFragment<FeedbackPresenter, FeedbackView
     protected void init() {
         super.init();
         setTitle(getString(R.string.feedback));
-        setLeft(getString(R.string.homepage));
         setRightMenu(getString(R.string.feedback_record));
         rvProblemClassify1.setNestedScrollingEnabled(false);
         rvProblemClassify2.setNestedScrollingEnabled(false);
@@ -97,7 +96,7 @@ public class FeedbackFragment extends MyFragment<FeedbackPresenter, FeedbackView
      * 反馈记录
      */
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         super.clickRightMenu(menuText, actionView);
         startActivity(FeedbackRecordActivity.class);
     }

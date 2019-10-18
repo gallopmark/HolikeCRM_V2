@@ -69,11 +69,6 @@ public class FastLiveFragment extends MyFragment<FastLivePresenter, FastLiveView
             title = bundle.getString(Constants.TITLE);
             time = bundle.getString(Constants.TIME);
         } else {
-            if (JumpBean.getJumpBack() != null && JumpBean.getJumpBack().equals(getString(R.string.homepage))) {
-                setLeft(getString(R.string.homepage));
-            } else {
-                setLeft(getString(R.string.report_title));
-            }
             time = "1";
         }
         setTitle(getString(R.string.fast_live_report) + (TextUtils.isEmpty(title) ? "" : "—" + title));

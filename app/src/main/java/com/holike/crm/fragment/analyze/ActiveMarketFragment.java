@@ -19,7 +19,6 @@ import com.holike.crm.dialog.SelectAreaDialog;
 import com.holike.crm.presenter.fragment.ActiveMarketPresenter;
 import com.holike.crm.presenter.fragment.DealerRankPresenter;
 import com.holike.crm.presenter.fragment.OrderReportPresenter;
-import com.holike.crm.presenter.fragment.PerformancePresenter;
 import com.holike.crm.util.TimeUtil;
 import com.holike.crm.view.fragment.ActiveMarketView;
 
@@ -85,7 +84,7 @@ public class ActiveMarketFragment extends MyFragment<ActiveMarketPresenter, Acti
     }
 
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         startFragment(null, new WirteCityFragment());
     }
 

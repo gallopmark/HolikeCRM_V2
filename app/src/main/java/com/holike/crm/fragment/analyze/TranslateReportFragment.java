@@ -68,8 +68,6 @@ public class TranslateReportFragment extends MyFragment<TranslateReportPresenter
             endTime = bundle.getString(Constants.END_TIME);
             type = bundle.getString(Constants.TYPE);
             title = bundle.getString(Constants.TITLE);
-        } else {
-            setLeft(getString(R.string.report_title));
         }
         setTitle(getString(R.string.report_item3_title) + (TextUtils.isEmpty(title) ? "" : "—" + title));
         setRightMenu(getString(R.string.report_select_date));
@@ -163,7 +161,7 @@ public class TranslateReportFragment extends MyFragment<TranslateReportPresenter
     private List<Date> mSelectedDates;
 
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         OrderReportPresenter.selectDate(mContext, mSelectedDates, new CalendarPickerDialog.OnCalendarRangeSelectedListener() {
             @Override
             public void onLeftClicked(CalendarPickerDialog dialog) {

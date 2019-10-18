@@ -104,7 +104,7 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
     }
 
     @Override
-    protected void clickRightMenu(String menuText, View actionView) {
+    protected void clickRightMenu(CharSequence menuText, View actionView) {
         startActivity(MessageV2Activity.class);
     }
 

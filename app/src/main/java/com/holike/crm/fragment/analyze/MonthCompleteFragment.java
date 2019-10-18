@@ -28,7 +28,7 @@ public class MonthCompleteFragment extends MyFragment {
     protected void init() {
         super.init();
         setStatusBar(R.color.bg_transparent);
-        setTitleBg(R.color.bg_transparent);
+        setTitleBackground(R.color.bg_transparent);
         setTitle(getString(R.string.translate_report_month_complete));
         Bundle bundle = getArguments();
         if (bundle != null) {

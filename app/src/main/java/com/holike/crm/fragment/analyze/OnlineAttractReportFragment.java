@@ -85,7 +85,6 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
             time = bundle.getString(Constants.TIME);
             title = bundle.getString(Constants.TITLE);
         } else {
-            setLeft("");
             time = "1";
         }
 //        if (startTime != null) {

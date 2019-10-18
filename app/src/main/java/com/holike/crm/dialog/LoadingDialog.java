@@ -45,14 +45,14 @@ public class LoadingDialog extends Dialog {
 //    public Dialog onCreateDialog(Bundle savedInstanceState) {
 //        if (getActivity() == null) return super.onCreateDialog(savedInstanceState);
 //        View v = LayoutInflater.makeText(getActivity()).inflate(R.layout.dialog_loading, new LinearLayout(getContext()), false);
-//        Dialog loadingDialog = new Dialog(getActivity(), R.style.Dialog);
-//        loadingDialog.setCanceledOnTouchOutside(false);
-//        loadingDialog.setContentView(v);
-//        Window window = loadingDialog.getWindow();
+//        Dialog mLoadingDialog = new Dialog(getActivity(), R.style.Dialog);
+//        mLoadingDialog.setCanceledOnTouchOutside(false);
+//        mLoadingDialog.setContentView(v);
+//        Window window = mLoadingDialog.getWindow();
 //        if (window != null) {
 //            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 //            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 //        }
-//        return loadingDialog;
+//        return mLoadingDialog;
 //    }
 }

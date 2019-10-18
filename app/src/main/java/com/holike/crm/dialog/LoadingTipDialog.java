@@ -51,15 +51,15 @@ public class LoadingTipDialog extends Dialog {
 //        View v = LayoutInflater.makeText(getContext()).inflate(R.layout.dialog_loading_tip, new LinearLayout(getContext()), false);
 //        ImageView mLoadingImageView = v.findViewById(R.id.mLoadingImageView);
 //        Glide.with(getActivity()).asGif().load(R.drawable.loading).into(mLoadingImageView);
-//        Dialog loadingDialog = new Dialog(getActivity(), R.style.Dialog);
-//        loadingDialog.setCanceledOnTouchOutside(false);
-//        loadingDialog.setContentView(v);
-//        Window window = loadingDialog.getWindow();
+//        Dialog mLoadingDialog = new Dialog(getActivity(), R.style.Dialog);
+//        mLoadingDialog.setCanceledOnTouchOutside(false);
+//        mLoadingDialog.setContentView(v);
+//        Window window = mLoadingDialog.getWindow();
 //        if (window != null) {
 //            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 //            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 //        }
-//        return loadingDialog;
+//        return mLoadingDialog;
 //    }
 
 }

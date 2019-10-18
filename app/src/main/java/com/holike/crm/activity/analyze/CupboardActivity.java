@@ -17,7 +17,6 @@ public class CupboardActivity extends PerformanceActivity {
     protected void init(Bundle savedInstanceState) {
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item9_title));
-        fragmentManager = getSupportFragmentManager();
         mPresenter.getCupboardData(null, null, null);
         showLoading();
     }

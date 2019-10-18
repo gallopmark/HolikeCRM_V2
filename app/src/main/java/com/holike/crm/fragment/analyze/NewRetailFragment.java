@@ -1,9 +1,11 @@
 package com.holike.crm.fragment.analyze;
 
 import android.os.Bundle;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -70,8 +72,6 @@ public class NewRetailFragment extends MyFragment<NewRetailPresenter, NewRetailV
             time = bundle.getString(Constants.TIME);
             type = bundle.getString(Constants.TYPE);
             title = bundle.getString(Constants.TITLE);
-        } else {
-            setLeft(getString(R.string.report_title));
         }
         setTitle(getString(R.string.report_item13_title) + (title == null ? "" : "—" + title));
         getData();
@@ -138,7 +138,6 @@ public class NewRetailFragment extends MyFragment<NewRetailPresenter, NewRetailV
 
     /**
      * 获取数据失败
-     *
      */
     @Override
     public void getDataFailed(String failed) {
@@ -148,7 +147,6 @@ public class NewRetailFragment extends MyFragment<NewRetailPresenter, NewRetailV
 
     /**
      * 切换导航
-     *
      */
     private void initTab(final List<NewRetailBean.SelectDataBean> selectDataBeans) {
         if (mTabEntities == null) {

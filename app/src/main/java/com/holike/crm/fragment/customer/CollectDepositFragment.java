@@ -52,8 +52,6 @@ public class CollectDepositFragment extends MyFragment<CollectDepositPresenter, 
     @Override
     protected void init() {
         super.init();
-
-        setLeft(getString(R.string.homepage));
         setTitle(getString(R.string.receive_deposit_title));
         setRightMenu(getString(R.string.receive_deposit_add_customer));
         rv.setLayoutManager(new LinearLayoutManager(mContext));
@@ -73,7 +71,7 @@ public class CollectDepositFragment extends MyFragment<CollectDepositPresenter, 
      * 新建客户
      */
     @Override
-    protected void clickRightMenu(String text, View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         Intent intent = new Intent(mContext, CustomerEditActivity.class);   //v2.0 CustomerEditActivity
         intent.putExtra(Constants.IS_EARNEST, "1");
         startActivityForResult(intent, REQUEST_CODE);

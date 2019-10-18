@@ -43,7 +43,6 @@ public class DealerRankActivity extends MyFragmentActivity<DealerRankPresenter, 
         super.init(savedInstanceState);
         setStatusBarColor(R.color.bg_state_bar);
         setTitle(getString(R.string.report_item11_title));
-        setLeft(getString(R.string.report_title));
         getData(null);
     }
 

@@ -13,28 +13,106 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.holike.crm.R;
 import com.holike.crm.util.DensityUtil;
 
-/**
- * Created by gallop on 2019/7/31.
- * Copyright holike possess 2019.
- */
+import galloped.xcode.widget.TitleBar;
+
 public class ToolbarHelper {
 
-    static void inflateMenu(@NonNull Toolbar toolbar, @MenuRes int menuId) {
-        toolbar.inflateMenu(menuId);
+    static void setTitleBackgroundResource(@Nullable TitleBar titleBar, @DrawableRes int resId) {
+        if (titleBar != null) {
+            titleBar.setBackgroundResource(resId);
+        }
+    }
+
+    @Nullable
+    static FrameLayout setRightMenu(@Nullable TitleBar titleBar, @Nullable CharSequence menuText, View.OnClickListener actionClickListener) {
+        if (titleBar == null) return null;
+        titleBar.getMenu().clear();
+        if (TextUtils.isEmpty(menuText)) {
+            return null;
+        }
+        inflateMenu(titleBar, R.menu.menu_main);
+        final View actionView = titleBar.getMenu().findItem(R.id.menu_main).getActionView();
+        TextView tvMenu = actionView.findViewById(R.id.right_menu_view);
+        tvMenu.setText(menuText);
+        if (titleBar.getTag() != null) {
+            tvMenu.setTextColor(ContextCompat.getColor(titleBar.getContext(), R.color.color_while));
+        }
+        actionView.setOnClickListener(actionClickListener);
+        return actionView.findViewById(R.id.right_menu_layout);
+    }
+
+    static void setOptionsMenu(@Nullable TitleBar titleBar, @MenuRes int menuId, TitleBar.OnMenuItemClickListener menuItemClickListener) {
+        if (titleBar != null) {
+            titleBar.getMenu().clear();
+            inflateMenu(titleBar, menuId);
+            titleBar.setOnMenuItemClickListener(menuItemClickListener);
+        }
+    }
+
+    static void hideOptionsMenu(@Nullable TitleBar titleBar) {
+        if (titleBar != null) {
+            titleBar.getMenu().clear();
+        }
+    }
+
+    static void setMessageMenu(@Nullable FrameLayout menuLayout, boolean hasNewMsg) {
+        if (hasNewMsg) {
+            setMessageRedDot(menuLayout);
+        } else {
+            hideMessageRedDot(menuLayout);
+        }
+    }
+
+    /*显示消息红点*/
+    static void setMessageRedDot(@Nullable FrameLayout menuLayout) {
+        if (menuLayout != null) {
+            Context context = menuLayout.getContext();
+            ImageView ivDot = menuLayout.findViewById(R.id.right_menu_dot);
+            if (ivDot == null) {
+                ivDot = new ImageView(context);
+                ivDot.setId(R.id.right_menu_dot);
+                int size = context.getResources().getDimensionPixelSize(R.dimen.dp_8);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
+                params.rightMargin = context.getResources().getDimensionPixelSize(R.dimen.dp_6);
+                params.topMargin = size;
+                params.gravity = Gravity.END;
+                ivDot.setLayoutParams(params);
+                menuLayout.addView(ivDot);
+            }
+            ivDot.setImageResource(R.drawable.ic_red_point);
+        }
+    }
+
+    /*移除消息红点*/
+    static void hideMessageRedDot(@Nullable FrameLayout menuLayout) {
+        if (menuLayout != null) {
+            View vDot = menuLayout.findViewById(R.id.right_menu_dot);
+            if (vDot != null) {
+                menuLayout.removeView(vDot);
+            }
+        }
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    static void inflateMenu(@NonNull TitleBar titleBar, @MenuRes int menuId) {
+        titleBar.inflateMenu(menuId);
         /*取消menu长按显示Toast*/
-        for (int i = 0; i < toolbar.getMenu().size(); i++) {
-            toolbar.getMenu().getItem(i).setTitle("");
+        for (int i = 0; i < titleBar.getMenu().size(); i++) {
+            titleBar.getMenu().getItem(i).setTitle(null);
         }
     }
 
@@ -54,14 +132,17 @@ public class ToolbarHelper {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    static EditText addSearchContainer(@NonNull Toolbar toolbar, CharSequence hint,
+    static EditText addSearchContainer(@Nullable TitleBar titleBar, CharSequence hint,
                                        @DrawableRes int resId, OnSearchClickListener onSearchClickListener) {
-        Context context = toolbar.getContext();
-        View searchView = getSearchContainer(toolbar);
-        if (searchView == null) { //没有添加过searchContainer，为空判断为了避免重复添加toolbar view
-            LayoutInflater.from(context).inflate(R.layout.include_search_layout, toolbar, true);
+        if (titleBar == null) {
+            return null;
         }
-        EditText searchEditText = toolbar.findViewById(R.id.app_search_view);
+        Context context = titleBar.getContext();
+        View searchView = getSearchContainer(titleBar);
+        if (searchView == null) { //没有添加过searchContainer，为空判断为了避免重复添加toolbar view
+            LayoutInflater.from(context).inflate(R.layout.include_search_layout, titleBar, true);
+        }
+        EditText searchEditText = titleBar.findViewById(R.id.app_search_view);
         int pixels = getScreenWidth(context) - context.getResources().getDimensionPixelSize(R.dimen.dp_56) * 2
                 - context.getResources().getDimensionPixelSize(R.dimen.dp_6) * 2;
         searchEditText.setMinWidth(pixels);
@@ -143,39 +224,10 @@ public class ToolbarHelper {
                 editText.getCompoundDrawables()[1], clearDrawable, editText.getCompoundDrawables()[3]);
     }
 
-    private static boolean isMenuEmpty(@NonNull Toolbar toolbar) {
-        if (toolbar.getMenu() == null) return true;
-        for (int i = 0; i < toolbar.getMenu().size(); i++) {
-            if (toolbar.getMenu().getItem(i).isVisible()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    @SuppressWarnings("WeakerAccess")
     @Nullable
-    static View getSearchContainer(@NonNull Toolbar toolbar) {
-        return toolbar.findViewById(R.id.app_search_view);
-    }
-
-    @Deprecated
-    public static void addToolbarSearchMargin(Toolbar toolbar) {
-        if (isMenuEmpty(toolbar)) {  //没有添加任何菜单，或者添加的菜单全部不可见，设置搜索布局的右边距为56dp
-            int[] margins = defaultMargin(toolbar.getContext());
-            addToolbarSearchMargin(toolbar, margins[0], margins[1]);
-        } else { //添加了菜单 搜索布局的左右边距设置为0
-            addToolbarSearchMargin(toolbar, 0, 0);
-        }
-    }
-
-    private static void addToolbarSearchMargin(Toolbar toolbar, int leftMargin, int rightMargin) {
-        View searchLayout = getSearchContainer(toolbar);
-        if (searchLayout == null) return;
-        if (searchLayout.getLayoutParams() instanceof Toolbar.LayoutParams) {
-            Toolbar.LayoutParams params = (Toolbar.LayoutParams) searchLayout.getLayoutParams();
-            params.leftMargin = leftMargin;
-            params.rightMargin = rightMargin;
-        }
+    static View getSearchContainer(@NonNull TitleBar titleBar) {
+        return titleBar.findViewById(R.id.app_search_view);
     }
 
     public interface OnSearchClickListener {

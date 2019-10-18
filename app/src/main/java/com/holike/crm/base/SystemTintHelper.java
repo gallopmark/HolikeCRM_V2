@@ -23,6 +23,7 @@ public class SystemTintHelper {
      *
      * @return 1:MIUUI 2:Flyme 3:android6.0
      */
+    @SuppressWarnings("UnusedReturnValue")
     static int setStatusBarLightMode(Activity activity) {
         return setStatusBarLightMode(activity.getWindow());
     }

@@ -58,7 +58,7 @@ public class InstallManagerMonthDataFragment extends MyFragment<MonthDataInstall
     }
 
     @Override
-    protected void clickRightMenu(String text,View actionView) {
+    protected void clickRightMenu(CharSequence text, View actionView) {
         mHelper.onSelectCalendar();
     }
 

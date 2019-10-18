@@ -1,9 +1,11 @@
 package com.holike.crm.fragment.analyze;
 
 import android.os.Bundle;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,8 +58,6 @@ public class TerminalCheckFragment extends MyFragment<TerminalCheckPresenter, Te
             cityCode = bundle.getString(Constants.CITY_CODE);
             type = bundle.getString(Constants.TYPE);
             title = bundle.getString(Constants.TITLE);
-        } else {
-            setLeft(getString(R.string.report_title));
         }
         setTitle(getString(R.string.report_item12_title) + (TextUtils.isEmpty(title) ? "" : "—" + title));
         getData();
