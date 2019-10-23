@@ -20,7 +20,7 @@
             android:gravity="center"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:text="@string/order_time_tips"
+            android:text="@string/tips_evaluation_time"
             android:textColor="@color/textColor8"
             android:textSize="@dimen/textSize_14" />
     </FrameLayout>

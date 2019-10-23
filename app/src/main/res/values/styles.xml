@@ -460,5 +460,19 @@
         <item name="android:textColor">@color/textColor4</item>
         <item name="android:background">@color/bg_transparent</item>
     </style>
+
+    <style name="FirstRowTextStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColor4</item>
+        <item name="android:textSize">@dimen/textSize_12</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="FormTextStyle">
+        <item name="android:textSize">@dimen/textSize_12</item>
+        <item name="android:textColor">@color/textColor8</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
 

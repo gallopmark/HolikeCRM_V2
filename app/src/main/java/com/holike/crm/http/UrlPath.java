@@ -280,4 +280,7 @@ public class UrlPath {
 
     /*本月数据-财务*/
     public static final String URL_FINANCE_MONTH_DATA = HOST + "/member/financeData";
+
+    /*新增编辑规则*/
+    public static final String URL_SETTINGS_RULE = HOST + "/member/editRule";
 }

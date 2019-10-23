@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
+import com.holike.crm.activity.customer.ScanByPhoneActivity;
 import com.holike.crm.activity.homepage.MessageV2Activity;
+import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.MyFragment;
 import com.holike.crm.base.OnRequestPermissionsCallback;
 import com.holike.crm.customView.CompatToast;
@@ -209,13 +211,16 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
     }
 
     //    @NeedsPermission(Manifest.permission.CAMERA)
-    void needCamera() {
+    private void needCamera() {
         if (results.size() > 0) {
-            Map<String, Serializable> params = new HashMap<>(0);
-            params.put("a", new EventCurrentResult(results.get(results.size() - 1).getResult(), results.size(), results));
-            startFragment(params, new ScanByPhoneFragment());
-        } else
-            startFragment(new ScanByPhoneFragment(), true);
+//            Map<String, Serializable> params = new HashMap<>(0);
+//            params.put("a", new EventCurrentResult(results.get(results.size() - 1).getResult(), results.size(), results));
+//            startFragment(params, new ScanByPhoneFragment());
+            ScanByPhoneActivity.open((BaseActivity<?, ?>) mContext, new EventCurrentResult(results.get(results.size() - 1).getResult(), results.size(), results));
+        } else{
+            ScanByPhoneActivity.open((BaseActivity<?, ?>) mContext,null);
+        }
+//            startFragment(new ScanByPhoneFragment(), true);
     }
 
 //    @Override

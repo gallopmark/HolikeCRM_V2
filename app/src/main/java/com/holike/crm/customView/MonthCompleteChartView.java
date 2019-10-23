@@ -26,7 +26,7 @@ import java.util.List;
  * Created by wqj on 2018/4/18.
  * 各月完成率柱状图
  */
-
+@Deprecated
 public class MonthCompleteChartView extends View {
     private int MAX = 100;
     private int width;

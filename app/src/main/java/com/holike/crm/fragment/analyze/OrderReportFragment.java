@@ -1,9 +1,11 @@
 package com.holike.crm.fragment.analyze;
 
 import android.os.Bundle;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -37,7 +39,7 @@ import butterknife.OnClick;
 
 /**
  * Created by wqj on 2018/4/10.
- * 订金交易报表
+ * 订单交易报表
  */
 
 public class OrderReportFragment extends MyFragment<OrderReportPresenter, OrderReportView> implements OrderReportView {
@@ -105,10 +107,10 @@ public class OrderReportFragment extends MyFragment<OrderReportPresenter, OrderR
     @Override
     public void getCompleteDataSuccess(List<MonthCompleteBean> bean, String title) {
         dismissLoading();
-        Map<String, Serializable> params = new HashMap<>();
-        params.put(Constants.MONTH_COMPLETE, (Serializable) bean);
-        params.put(Constants.TITLE, title);
-        startFragment(params, new MonthCompleteFragment());
+//        Map<String, Serializable> params = new HashMap<>();
+//        params.put(Constants.MONTH_COMPLETE, (Serializable) bean);
+//        params.put(Constants.TITLE, title);
+        startFragment(null, MonthCompleteFragment.newInstance(title, bean));
     }
 
     /**
@@ -118,7 +120,7 @@ public class OrderReportFragment extends MyFragment<OrderReportPresenter, OrderR
     public void showDate(String startTime, String endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
-        String dateTime = TimeUtil.stampToString(startTime, "yyyy.MM.dd") + "—" +  TimeUtil.stampToString(endTime, "yyyy.MM.dd");
+        String dateTime = TimeUtil.stampToString(startTime, "yyyy.MM.dd") + "—" + TimeUtil.stampToString(endTime, "yyyy.MM.dd");
         tvDate.setText(dateTime);
     }
 

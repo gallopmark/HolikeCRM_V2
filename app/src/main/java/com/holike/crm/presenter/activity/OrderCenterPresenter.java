@@ -31,7 +31,7 @@ import java.util.List;
  * Created by wqj on 2018/2/25.
  * 订单中心
  */
-
+@Deprecated
 public class OrderCenterPresenter extends BasePresenter<OrderCenterView, OrderCenterModel> {
     private List<MultiItem> mBeans = new ArrayList<>();
     private NoMoreBean noMoreBean = new NoMoreBean();

@@ -15925,55 +15925,55 @@ com.holike.crm.activity.employee.ResetPasswordActivity_ViewBinding -> com.holike
     com.holike.crm.activity.employee.ResetPasswordActivity target -> b
     void unbind() -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeEditHelper$VmTF7RkMxAIkMqbJLtOZAe6gNGI -> com.holike.crm.activity.employee2.a:
-    com.holike.crm.activity.employee2.EmployeeEditHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeEditHelper f$0 -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeEditHelper$yFSzmLtkFKq3dzCO0iFe7IoBLig -> com.holike.crm.activity.employee2.b:
     com.holike.crm.activity.employee2.-$$Lambda$EmployeeEditHelper$yFSzmLtkFKq3dzCO0iFe7IoBLig INSTANCE -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$3riqcGG1KsnHNLd15l_Lby2l4iA -> com.holike.crm.activity.employee2.c:
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     void onItemClick(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter,com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,android.view.View,int) -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$8F0du_maYyDwMaujh6GpdvNe8LQ -> com.holike.crm.activity.employee2.d:
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     android.view.View f$1 -> b
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$EDMXA0iBSZBd-fCD1SadtW74dfk -> com.holike.crm.activity.employee2.e:
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     android.view.View f$1 -> b
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$GvpGaBvbkuQp-WL6E9spZCTzlYg -> com.holike.crm.activity.employee2.f:
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     android.widget.TextView f$1 -> b
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$UQk-DuruG0_Z6qyCtYF6STwYZVU -> com.holike.crm.activity.employee2.g:
     java.util.List f$1 -> b
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     android.widget.TextView f$2 -> c
     void onMenuItemClick(com.holike.crm.popupwindown.StringItemPopupWindow,int,java.lang.String) -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$VJhw_NG5j0wn2Toecvs4qh5fF7Q -> com.holike.crm.activity.employee2.h:
     java.util.List f$1 -> b
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     android.widget.TextView f$2 -> c
     void onMenuItemClick(com.holike.crm.popupwindown.StringItemPopupWindow,int,java.lang.String) -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListHelper$thQBW9NAsvecNwgQW1Au8C1gXn8 -> com.holike.crm.activity.employee2.i:
-    com.holike.crm.activity.employee2.EmployeeListHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListHelper f$0 -> a
     android.widget.TextView f$1 -> b
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeListV2Activity$nZXaKe-G_SvmnLCQS0vcguAa_kw -> com.holike.crm.activity.employee2.j:
-    com.holike.crm.activity.employee2.EmployeeListV2Activity f$0 -> a
+    com.holike.crm.activity.employee.EmployeeListV2Activity f$0 -> a
     void onRefresh(com.scwang.smartrefresh.layout.api.RefreshLayout) -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeResetPwHelper$GN_-vSsO6PhtCrR1fu4R-xSsLrQ -> com.holike.crm.activity.employee2.k:
-    com.holike.crm.activity.employee2.EmployeeResetPwHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeResetPwHelper f$0 -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeResetPwHelper$ZthgqKoEYX734Nz1FK5j-Y0JWJ8 -> com.holike.crm.activity.employee2.l:
     android.widget.EditText f$0 -> a
     android.widget.ImageView f$1 -> b
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeResetPwHelper$dLGdWjNA4DxTvgH4xxo7_XOUvfc -> com.holike.crm.activity.employee2.m:
-    com.holike.crm.activity.employee2.EmployeeResetPwHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeResetPwHelper f$0 -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeResetPwHelper$tCNDuOiB6AZR7FOW1O19uDiU7cg -> com.holike.crm.activity.employee2.n:
-    com.holike.crm.activity.employee2.EmployeeResetPwHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeResetPwHelper f$0 -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeStrikeHelper$Gw5p8J0eGhwEvrPn_X3w84dW4Pc -> com.holike.crm.activity.employee2.o:
-    com.holike.crm.activity.employee2.EmployeeStrikeHelper f$0 -> a
+    com.holike.crm.activity.employee.EmployeeStrikeHelper f$0 -> a
 com.holike.crm.activity.employee2.-$$Lambda$EmployeeStrikeHelper$Pqu0AL5iLcW6-T1yEcWb9_YOWJ0 -> com.holike.crm.activity.employee2.p:
     com.holike.crm.activity.employee2.-$$Lambda$EmployeeStrikeHelper$Pqu0AL5iLcW6-T1yEcWb9_YOWJ0 INSTANCE -> a
-com.holike.crm.activity.employee2.EmployeeDetailHelper -> com.holike.crm.activity.employee2.q:
+com.holike.crm.activity.employee.EmployeeDetailHelper -> com.holike.crm.activity.employee2.q:
     androidx.fragment.app.FragmentManager mFragmentManager -> b
     com.holike.crm.bean.EmployeeDetailV2Bean mDetailBean -> e
     com.holike.crm.base.BaseActivity mActivity -> a
-    com.holike.crm.activity.employee2.EmployeeDetailHelper$Callback mCallback -> c
+    com.holike.crm.activity.employee.EmployeeDetailHelper$Callback mCallback -> c
     java.lang.String mUserId -> d
     void onActivityResult(com.holike.crm.bean.EmployeeEditResultBean) -> a
     void onAssociateShop() -> a
@@ -15985,11 +15985,11 @@ com.holike.crm.activity.employee2.EmployeeDetailHelper -> com.holike.crm.activit
     java.lang.String spliceRole() -> f
     java.lang.String spliceShop() -> g
     void startFragment() -> h
-com.holike.crm.activity.employee2.EmployeeDetailHelper$Callback -> com.holike.crm.activity.employee2.q$a:
+com.holike.crm.activity.employee.EmployeeDetailHelper$Callback -> com.holike.crm.activity.employee2.q$a:
     void onSave(java.util.Map) -> a
     void onQuery(java.lang.String) -> p
-com.holike.crm.activity.employee2.EmployeeDetailsActivity -> com.holike.crm.activity.employee2.EmployeeDetailsActivity:
-    com.holike.crm.activity.employee2.EmployeeDetailHelper mHelper -> b
+com.holike.crm.activity.employee.EmployeeDetailsV2Activity -> com.holike.crm.activity.employee.EmployeeDetailsV2Activity:
+    com.holike.crm.activity.employee.EmployeeDetailHelper mHelper -> b
     com.holike.crm.presenter.activity.EmployeeEditV2Presenter mEditPresenter -> a
     void onSave(java.util.Map) -> a
     void onSaveSuccess(com.holike.crm.bean.EmployeeEditResultBean) -> a
@@ -15998,19 +15998,19 @@ com.holike.crm.activity.employee2.EmployeeDetailsActivity -> com.holike.crm.acti
     void onSaveFailure(java.lang.String) -> f
     void onQuery(java.lang.String) -> p
 com.holike.crm.activity.employee2.EmployeeDetailsActivity_ViewBinding -> com.holike.crm.activity.employee2.EmployeeDetailsActivity_ViewBinding:
-    com.holike.crm.activity.employee2.EmployeeDetailsActivity target -> b
+    com.holike.crm.activity.employee.EmployeeDetailsV2Activity target -> b
     android.view.View view7f0903f5 -> c
     void unbind() -> a
 com.holike.crm.activity.employee2.EmployeeDetailsActivity_ViewBinding$1 -> com.holike.crm.activity.employee2.EmployeeDetailsActivity_ViewBinding$a:
-    com.holike.crm.activity.employee2.EmployeeDetailsActivity val$target -> c
+    com.holike.crm.activity.employee.EmployeeDetailsV2Activity val$target -> c
     void doClick(android.view.View) -> a
-com.holike.crm.activity.employee2.EmployeeEditHelper -> com.holike.crm.activity.employee2.r:
+com.holike.crm.activity.employee.EmployeeEditHelper -> com.holike.crm.activity.employee2.r:
     androidx.fragment.app.FragmentManager mFragmentManager -> b
-    com.holike.crm.activity.employee2.EmployeeEditHelper$Callback mCallback -> e
+    com.holike.crm.activity.employee.EmployeeEditHelper$Callback mCallback -> e
     boolean isGoNext -> f
     java.lang.String mCurrentTab -> c
     androidx.fragment.app.Fragment mShowingFragment -> d
-    com.holike.crm.activity.employee2.EmployeeEditV2Activity mActivity -> a
+    com.holike.crm.activity.employee.EmployeeEditV2Activity mActivity -> a
     void lambda$onBackPressed$1(android.content.DialogInterface,int) -> a
     void onBackPressed() -> a
     void onViewClicked(android.view.View) -> a
@@ -16021,29 +16021,29 @@ com.holike.crm.activity.employee2.EmployeeEditHelper -> com.holike.crm.activity.
     void previous() -> d
     void setPrevious() -> e
     void setSave() -> f
-com.holike.crm.activity.employee2.EmployeeEditHelper$Callback -> com.holike.crm.activity.employee2.r$a:
+com.holike.crm.activity.employee.EmployeeEditHelper$Callback -> com.holike.crm.activity.employee2.r$a:
     void onSave(java.util.Map) -> a
     void onTabChanged(int) -> a
-com.holike.crm.activity.employee2.EmployeeEditV2Activity -> com.holike.crm.activity.employee2.EmployeeEditV2Activity:
-    com.holike.crm.activity.employee2.EmployeeEditHelper mHelper -> a
+com.holike.crm.activity.employee.EmployeeEditV2Activity -> com.holike.crm.activity.employee.EmployeeEditV2Activity:
+    com.holike.crm.activity.employee.EmployeeEditHelper mHelper -> a
     void onSave(java.util.Map) -> a
     void onSaveSuccess(com.holike.crm.bean.EmployeeEditResultBean) -> a
     void onTabChanged(int) -> a
     void onSaveFailure(java.lang.String) -> f
 com.holike.crm.activity.employee2.EmployeeEditV2Activity_ViewBinding -> com.holike.crm.activity.employee2.EmployeeEditV2Activity_ViewBinding:
-    com.holike.crm.activity.employee2.EmployeeEditV2Activity target -> b
+    com.holike.crm.activity.employee.EmployeeEditV2Activity target -> b
     android.view.View view7f0906df -> c
     android.view.View view7f090681 -> d
     void unbind() -> a
 com.holike.crm.activity.employee2.EmployeeEditV2Activity_ViewBinding$1 -> com.holike.crm.activity.employee2.EmployeeEditV2Activity_ViewBinding$a:
-    com.holike.crm.activity.employee2.EmployeeEditV2Activity val$target -> c
+    com.holike.crm.activity.employee.EmployeeEditV2Activity val$target -> c
     void doClick(android.view.View) -> a
 com.holike.crm.activity.employee2.EmployeeEditV2Activity_ViewBinding$2 -> com.holike.crm.activity.employee2.EmployeeEditV2Activity_ViewBinding$b:
-    com.holike.crm.activity.employee2.EmployeeEditV2Activity val$target -> c
+    com.holike.crm.activity.employee.EmployeeEditV2Activity val$target -> c
     void doClick(android.view.View) -> a
-com.holike.crm.activity.employee2.EmployeeListHelper -> com.holike.crm.activity.employee2.s:
-    com.holike.crm.activity.employee2.EmployeeListHelper$EmployeeListAdapter mAdapter -> h
-    com.holike.crm.activity.employee2.EmployeeListHelper$Callback mCallback -> i
+com.holike.crm.activity.employee.EmployeeListHelper -> com.holike.crm.activity.employee2.s:
+    com.holike.crm.activity.employee.EmployeeListHelper$EmployeeListAdapter mAdapter -> h
+    com.holike.crm.activity.employee.EmployeeListHelper$Callback mCallback -> i
     boolean mIsRefresh -> f
     int mSelectShop -> d
     com.holike.crm.base.BaseActivity mActivity -> a
@@ -16073,15 +16073,15 @@ com.holike.crm.activity.employee2.EmployeeListHelper -> com.holike.crm.activity.
     void onSelectRole(android.widget.TextView) -> e
     void onSelectShop(android.widget.TextView) -> f
     void setSelected(android.widget.TextView) -> g
-com.holike.crm.activity.employee2.EmployeeListHelper$Callback -> com.holike.crm.activity.employee2.s$a:
+com.holike.crm.activity.employee.EmployeeListHelper$Callback -> com.holike.crm.activity.employee2.s$a:
     void onQuery(java.lang.String,java.lang.String,boolean) -> a
-com.holike.crm.activity.employee2.EmployeeListHelper$EmployeeListAdapter -> com.holike.crm.activity.employee2.s$b:
+com.holike.crm.activity.employee.EmployeeListHelper$EmployeeListAdapter -> com.holike.crm.activity.employee2.s$b:
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,com.holike.crm.bean.MultiItem,int) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,java.lang.Object,int) -> a
     int getItemViewType(int) -> b
     int bindView(int) -> d
-com.holike.crm.activity.employee2.EmployeeListV2Activity -> com.holike.crm.activity.employee2.EmployeeListV2Activity:
-    com.holike.crm.activity.employee2.EmployeeListHelper mHelper -> b
+com.holike.crm.activity.employee.EmployeeListV2Activity -> com.holike.crm.activity.employee.EmployeeListV2Activity:
+    com.holike.crm.activity.employee.EmployeeListHelper mHelper -> b
     android.widget.EditText mSearchEditText -> a
     void lambda$init$0(com.scwang.smartrefresh.layout.api.RefreshLayout) -> a
     void onQuery(java.lang.String,java.lang.String,boolean) -> a
@@ -16091,80 +16091,80 @@ com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding -> com.holi
     android.view.View view7f09047d -> c
     android.view.View view7f090766 -> e
     android.view.View view7f090767 -> d
-    com.holike.crm.activity.employee2.EmployeeListV2Activity target -> b
+    com.holike.crm.activity.employee.EmployeeListV2Activity target -> b
     void unbind() -> a
 com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding$1 -> com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding$a:
-    com.holike.crm.activity.employee2.EmployeeListV2Activity val$target -> c
+    com.holike.crm.activity.employee.EmployeeListV2Activity val$target -> c
     void doClick(android.view.View) -> a
 com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding$2 -> com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding$b:
-    com.holike.crm.activity.employee2.EmployeeListV2Activity val$target -> c
+    com.holike.crm.activity.employee.EmployeeListV2Activity val$target -> c
     void doClick(android.view.View) -> a
 com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding$3 -> com.holike.crm.activity.employee2.EmployeeListV2Activity_ViewBinding$c:
-    com.holike.crm.activity.employee2.EmployeeListV2Activity val$target -> c
+    com.holike.crm.activity.employee.EmployeeListV2Activity val$target -> c
     void doClick(android.view.View) -> a
-com.holike.crm.activity.employee2.EmployeeResetPwActivity -> com.holike.crm.activity.employee2.EmployeeResetPwActivity:
+com.holike.crm.activity.employee.EmployeeResetPwActivity -> com.holike.crm.activity.employee.EmployeeResetPwActivity:
     void onResetSuccess(java.lang.String) -> O
     void onSave(java.lang.String,java.lang.String) -> a
     void onResetFailure(java.lang.String) -> i
-com.holike.crm.activity.employee2.EmployeeResetPwHelper -> com.holike.crm.activity.employee2.t:
-    com.holike.crm.activity.employee2.EmployeeResetPwHelper$Callback mCallback -> b
+com.holike.crm.activity.employee.EmployeeResetPwHelper -> com.holike.crm.activity.employee2.t:
+    com.holike.crm.activity.employee.EmployeeResetPwHelper$Callback mCallback -> b
     android.widget.EditText mConfirmPwEditText -> e
     android.widget.ImageView mClearImageView2 -> f
     android.widget.EditText mNewPwEditText -> c
     android.widget.TextView mSaveTextView -> g
     java.lang.String mUserId -> a
     android.widget.ImageView mClearImageView -> d
-    android.widget.TextView access$000(com.holike.crm.activity.employee2.EmployeeResetPwHelper) -> a
-    java.lang.String access$300(com.holike.crm.activity.employee2.EmployeeResetPwHelper,android.widget.TextView) -> a
+    android.widget.TextView access$000(com.holike.crm.activity.employee.EmployeeResetPwHelper) -> a
+    java.lang.String access$300(com.holike.crm.activity.employee.EmployeeResetPwHelper,android.widget.TextView) -> a
     void addTextWatcher() -> a
     void lambda$initView$0(android.view.View) -> a
     void lambda$switchPassword$3(android.widget.EditText,android.widget.ImageView,android.view.View) -> a
     void switchPassword(android.widget.EditText,android.widget.ImageView) -> a
-    android.widget.ImageView access$100(com.holike.crm.activity.employee2.EmployeeResetPwHelper) -> b
-    java.lang.String access$600(com.holike.crm.activity.employee2.EmployeeResetPwHelper,android.widget.TextView) -> b
+    android.widget.ImageView access$100(com.holike.crm.activity.employee.EmployeeResetPwHelper) -> b
+    java.lang.String access$600(com.holike.crm.activity.employee.EmployeeResetPwHelper,android.widget.TextView) -> b
     void initView() -> b
     void lambda$initView$1(android.view.View) -> b
-    android.widget.EditText access$200(com.holike.crm.activity.employee2.EmployeeResetPwHelper) -> c
+    android.widget.EditText access$200(com.holike.crm.activity.employee.EmployeeResetPwHelper) -> c
     void lambda$initView$2(android.view.View) -> c
     void onSave() -> c
-    android.widget.ImageView access$400(com.holike.crm.activity.employee2.EmployeeResetPwHelper) -> d
-    android.widget.EditText access$500(com.holike.crm.activity.employee2.EmployeeResetPwHelper) -> e
-com.holike.crm.activity.employee2.EmployeeResetPwHelper$1 -> com.holike.crm.activity.employee2.t$a:
-    com.holike.crm.activity.employee2.EmployeeResetPwHelper this$0 -> a
-com.holike.crm.activity.employee2.EmployeeResetPwHelper$2 -> com.holike.crm.activity.employee2.t$b:
-    com.holike.crm.activity.employee2.EmployeeResetPwHelper this$0 -> a
-com.holike.crm.activity.employee2.EmployeeResetPwHelper$Callback -> com.holike.crm.activity.employee2.t$c:
+    android.widget.ImageView access$400(com.holike.crm.activity.employee.EmployeeResetPwHelper) -> d
+    android.widget.EditText access$500(com.holike.crm.activity.employee.EmployeeResetPwHelper) -> e
+com.holike.crm.activity.employee.EmployeeResetPwHelper$1 -> com.holike.crm.activity.employee2.t$a:
+    com.holike.crm.activity.employee.EmployeeResetPwHelper this$0 -> a
+com.holike.crm.activity.employee.EmployeeResetPwHelper$2 -> com.holike.crm.activity.employee2.t$b:
+    com.holike.crm.activity.employee.EmployeeResetPwHelper this$0 -> a
+com.holike.crm.activity.employee.EmployeeResetPwHelper$Callback -> com.holike.crm.activity.employee2.t$c:
     void onSave(java.lang.String,java.lang.String) -> a
-com.holike.crm.activity.employee2.EmployeeStrikeActivity -> com.holike.crm.activity.employee2.EmployeeStrikeActivity:
-    com.holike.crm.activity.employee2.EmployeeStrikeHelper mHelper -> a
+com.holike.crm.activity.employee.EmployeeStrikeActivity -> com.holike.crm.activity.employee.EmployeeStrikeActivity:
+    com.holike.crm.activity.employee.EmployeeStrikeHelper mHelper -> a
     void onSave(int,java.util.Map) -> a
     void onSaveSuccess(com.holike.crm.bean.EmployeeEditResultBean) -> a
     void open(com.holike.crm.base.BaseActivity,java.util.List,java.lang.String,boolean) -> a
     void open(com.holike.crm.base.BaseActivity,java.util.List,java.util.List,java.lang.String) -> a
     void onSaveFailure(java.lang.String) -> f
 com.holike.crm.activity.employee2.EmployeeStrikeActivity_ViewBinding -> com.holike.crm.activity.employee2.EmployeeStrikeActivity_ViewBinding:
-    com.holike.crm.activity.employee2.EmployeeStrikeActivity target -> b
+    com.holike.crm.activity.employee.EmployeeStrikeActivity target -> b
     android.view.View view7f0903f5 -> c
     void unbind() -> a
 com.holike.crm.activity.employee2.EmployeeStrikeActivity_ViewBinding$1 -> com.holike.crm.activity.employee2.EmployeeStrikeActivity_ViewBinding$a:
-    com.holike.crm.activity.employee2.EmployeeStrikeActivity val$target -> c
+    com.holike.crm.activity.employee.EmployeeStrikeActivity val$target -> c
     void doClick(android.view.View) -> a
-com.holike.crm.activity.employee2.EmployeeStrikeHelper -> com.holike.crm.activity.employee2.u:
+com.holike.crm.activity.employee.EmployeeStrikeHelper -> com.holike.crm.activity.employee2.u:
     androidx.fragment.app.FragmentManager mFragmentManager -> b
     com.holike.crm.base.BaseActivity mActivity -> a
     java.lang.String mUserId -> c
     boolean mIsBoss -> d
-    com.holike.crm.activity.employee2.EmployeeStrikeHelper$Callback mCallback -> e
+    com.holike.crm.activity.employee.EmployeeStrikeHelper$Callback mCallback -> e
     void lambda$showTipsDialog$1(android.content.DialogInterface,int) -> a
     void onBackPressed() -> a
     void lambda$showTipsDialog$0(android.content.DialogInterface,int) -> b
     void onSave() -> b
     void toRole() -> c
     void toShop() -> d
-    com.holike.crm.fragment.employee2.EmployeePermissionFragment getPermissionFragment() -> e
-    com.holike.crm.fragment.employee2.EmployeeStoreFragment getStoreFragment() -> f
+    com.holike.crm.fragment.employee.EmployeePermissionFragment getPermissionFragment() -> e
+    com.holike.crm.fragment.employee.EmployeeStoreFragment getStoreFragment() -> f
     void showTipsDialog() -> g
-com.holike.crm.activity.employee2.EmployeeStrikeHelper$Callback -> com.holike.crm.activity.employee2.u$a:
+com.holike.crm.activity.employee.EmployeeStrikeHelper$Callback -> com.holike.crm.activity.employee2.u$a:
     void onSave(int,java.util.Map) -> a
 com.holike.crm.activity.homepage.-$$Lambda$AddCustomerActivity$jywisMOy6OKbFh8mRHzDA7Y_5IE -> com.holike.crm.activity.homepage.a:
     com.holike.crm.activity.homepage.AddCustomerActivity f$0 -> a
@@ -16357,7 +16357,7 @@ com.holike.crm.activity.homepage.OrderDetailsActivity -> com.holike.crm.activity
     void open(com.holike.crm.base.BaseActivity,java.lang.String,java.lang.String) -> a
     void open(com.holike.crm.base.BaseFragment,java.lang.String) -> a
     void open(com.holike.crm.base.BaseFragment,java.lang.String,java.lang.String) -> a
-com.holike.crm.activity.homepage2.MonthDataActivity -> com.holike.crm.activity.homepage2.MonthDataActivity:
+com.holike.crm.activity.homepage.ThisMonthDataActivity -> com.holike.crm.activity.homepage.ThisMonthDataActivity:
     void start(com.holike.crm.base.BaseActivity,java.lang.String) -> a
 com.holike.crm.activity.login.CheckAccountActivity -> com.holike.crm.activity.login.CheckAccountActivity:
     boolean isShowPassword -> a
@@ -21098,35 +21098,35 @@ com.holike.crm.fragment.employee.EmployeeListFragment_ViewBinding -> com.holike.
     com.holike.crm.fragment.employee.EmployeeListFragment target -> b
     void unbind() -> a
 com.holike.crm.fragment.employee2.-$$Lambda$EmployeePermissionHelper$AuthItemAdapter$InnerFlowAdapter$jbB7HY_Ftfx4S_HPilTNG4mksSg -> com.holike.crm.fragment.employee2.a:
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper$AuthItemAdapter$InnerFlowAdapter f$0 -> a
+    com.holike.crm.fragment.employee.EmployeePermissionHelper$AuthItemAdapter$InnerFlowAdapter f$0 -> a
     android.widget.TextView f$3 -> d
     com.holike.crm.bean.RoleDataBean$AuthInfoBean$PArrBean f$1 -> b
     android.widget.ImageView f$2 -> c
 com.holike.crm.fragment.employee2.-$$Lambda$EmployeePermissionHelper$SelectRoleAdapter$Yy4J7aie45CHkIo8dD74NUcyH88 -> com.holike.crm.fragment.employee2.b:
     android.widget.TextView f$3 -> d
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper$SelectRoleAdapter f$0 -> a
+    com.holike.crm.fragment.employee.EmployeePermissionHelper$SelectRoleAdapter f$0 -> a
     com.holike.crm.bean.RoleDataBean f$1 -> b
     android.widget.ImageView f$2 -> c
 com.holike.crm.fragment.employee2.-$$Lambda$EmployeePermissionHelper$w7AOrxEMRvhhglG1DVlu7KWwBNs -> com.holike.crm.fragment.employee2.c:
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper f$0 -> a
+    com.holike.crm.fragment.employee.EmployeePermissionHelper f$0 -> a
     void onRoleSelectChanged() -> a
 com.holike.crm.fragment.employee2.-$$Lambda$EmployeeStoreHelper$StoreAdapter$8-9wXd5UDsiErq5-Bj99mj2JqtQ -> com.holike.crm.fragment.employee2.d:
     com.holike.crm.bean.DistributionStoreBean f$1 -> b
-    com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter f$0 -> a
+    com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter f$0 -> a
 com.holike.crm.fragment.employee2.-$$Lambda$EmployeeStoreHelper$StoreAdapter$GroupAdapter$UzeWr04IB3veUs9LDRHH3aVN1PU -> com.holike.crm.fragment.employee2.e:
-    com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter$GroupAdapter f$0 -> a
+    com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter$GroupAdapter f$0 -> a
     com.holike.crm.bean.DistributionStoreBean$Group f$1 -> b
     com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder f$2 -> c
-com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment -> com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment:
-    com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment$OnViewClickListener mListener -> c
+com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment -> com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment:
+    com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment$OnViewClickListener mListener -> c
     java.lang.String mGender -> a
     java.lang.String mStatus -> b
-    void setOnViewClickListener(com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment$OnViewClickListener) -> a
+    void setOnViewClickListener(com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment$OnViewClickListener) -> a
     void setData(android.os.Bundle) -> d
     void setRelatedInfo(java.lang.String,java.lang.String) -> f
     boolean canGoNext() -> u
     java.util.Map obtain() -> v
-com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment$OnViewClickListener -> com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment$a:
+com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment$OnViewClickListener -> com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment$a:
     void onAssociateShop() -> a
     void onSelectRole() -> b
     void onResetPassword() -> c
@@ -21134,49 +21134,49 @@ com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding -> co
     android.view.View view7f090749 -> c
     android.view.View view7f09074c -> e
     android.view.View view7f09041b -> d
-    com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment target -> b
+    com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment target -> b
     void unbind() -> a
 com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding$1 -> com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding$a:
-    com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment val$target -> c
+    com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment val$target -> c
     void doClick(android.view.View) -> a
 com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding$2 -> com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding$b:
-    com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment val$target -> c
+    com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment val$target -> c
     void doClick(android.view.View) -> a
 com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding$3 -> com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment_ViewBinding$c:
-    com.holike.crm.fragment.employee2.EmployeeBasicDetailsFragment val$target -> c
+    com.holike.crm.fragment.employee.EmployeeBasicDetailsFragment val$target -> c
     void doClick(android.view.View) -> a
-com.holike.crm.fragment.employee2.EmployeeBasicFragment -> com.holike.crm.fragment.employee2.EmployeeBasicFragment:
+com.holike.crm.fragment.employee.EmployeeBasicFragment -> com.holike.crm.fragment.employee.EmployeeBasicFragment:
     java.lang.String mGender -> a
     boolean canGoNext() -> u
     java.util.Map obtain() -> v
-com.holike.crm.fragment.employee2.EmployeeBasicFragment$PasswordWatcher -> com.holike.crm.fragment.employee2.EmployeeBasicFragment$a:
+com.holike.crm.fragment.employee.EmployeeBasicFragment$PasswordWatcher -> com.holike.crm.fragment.employee.EmployeeBasicFragment$a:
     android.widget.EditText mEditText -> a
 com.holike.crm.fragment.employee2.EmployeeBasicFragment_ViewBinding -> com.holike.crm.fragment.employee2.EmployeeBasicFragment_ViewBinding:
-    com.holike.crm.fragment.employee2.EmployeeBasicFragment target -> b
+    com.holike.crm.fragment.employee.EmployeeBasicFragment target -> b
     void unbind() -> a
-com.holike.crm.fragment.employee2.EmployeePermissionFragment -> com.holike.crm.fragment.employee2.EmployeePermissionFragment:
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper mHelper -> a
-    com.holike.crm.fragment.employee2.EmployeePermissionFragment newInstance(java.lang.String,java.lang.String) -> f
+com.holike.crm.fragment.employee.EmployeePermissionFragment -> com.holike.crm.fragment.employee.EmployeePermissionFragment:
+    com.holike.crm.fragment.employee.EmployeePermissionHelper mHelper -> a
+    com.holike.crm.fragment.employee.EmployeePermissionFragment newInstance(java.lang.String,java.lang.String) -> f
     boolean isDataChanged() -> u
     boolean isSelectRoles() -> v
     java.util.Map obtain() -> w
 com.holike.crm.fragment.employee2.EmployeePermissionFragment_ViewBinding -> com.holike.crm.fragment.employee2.EmployeePermissionFragment_ViewBinding:
-    com.holike.crm.fragment.employee2.EmployeePermissionFragment target -> b
+    com.holike.crm.fragment.employee.EmployeePermissionFragment target -> b
     void unbind() -> a
-com.holike.crm.fragment.employee2.EmployeePermissionHelper -> com.holike.crm.fragment.employee2.f:
+com.holike.crm.fragment.employee.EmployeePermissionHelper -> com.holike.crm.fragment.employee2.f:
     android.content.Context mContext -> a
     java.util.List mOldAuthList -> f
     java.util.List mOldRoleList -> e
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper$SelectRoleAdapter mRoleAdapter -> b
+    com.holike.crm.fragment.employee.EmployeePermissionHelper$SelectRoleAdapter mRoleAdapter -> b
     java.util.List mAuthItems -> c
     java.util.List mSelectedAuthList -> h
     java.util.List mSelectedRoleList -> g
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper$AuthItemAdapter mAuthAdapter -> d
-    java.util.List access$000(com.holike.crm.fragment.employee2.EmployeePermissionHelper) -> a
+    com.holike.crm.fragment.employee.EmployeePermissionHelper$AuthItemAdapter mAuthAdapter -> d
+    java.util.List access$000(com.holike.crm.fragment.employee.EmployeePermissionHelper) -> a
     void attach(com.gallopmark.recycler.widgetwrapper.WrapperRecyclerView) -> a
     java.lang.String getAuthIds() -> a
     android.view.View obtain(android.view.ViewGroup) -> a
-    java.util.List access$100(com.holike.crm.fragment.employee2.EmployeePermissionHelper) -> b
+    java.util.List access$100(com.holike.crm.fragment.employee.EmployeePermissionHelper) -> b
     java.lang.String getStationIds() -> b
     boolean isDataChanged() -> c
     boolean isSelectRoles() -> d
@@ -21185,59 +21185,59 @@ com.holike.crm.fragment.employee2.EmployeePermissionHelper -> com.holike.crm.fra
     java.util.List getAllSelectedRoleActionList() -> g
     boolean isAuthSelectChanged() -> h
     boolean isRoleSelectChanged() -> i
-com.holike.crm.fragment.employee2.EmployeePermissionHelper$AuthItemAdapter -> com.holike.crm.fragment.employee2.f$a:
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper this$0 -> j
+com.holike.crm.fragment.employee.EmployeePermissionHelper$AuthItemAdapter -> com.holike.crm.fragment.employee2.f$a:
+    com.holike.crm.fragment.employee.EmployeePermissionHelper this$0 -> j
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,com.holike.crm.bean.RoleDataBean$AuthInfoBean,int) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,java.lang.Object,int) -> a
     int bindView(int) -> d
-com.holike.crm.fragment.employee2.EmployeePermissionHelper$AuthItemAdapter$InnerFlowAdapter -> com.holike.crm.fragment.employee2.f$a$a:
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper$AuthItemAdapter this$1 -> j
+com.holike.crm.fragment.employee.EmployeePermissionHelper$AuthItemAdapter$InnerFlowAdapter -> com.holike.crm.fragment.employee2.f$a$a:
+    com.holike.crm.fragment.employee.EmployeePermissionHelper$AuthItemAdapter this$1 -> j
     void lambda$onBindHolder$0(com.holike.crm.bean.RoleDataBean$AuthInfoBean$PArrBean,android.widget.ImageView,android.widget.TextView,android.view.View) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,com.holike.crm.bean.RoleDataBean$AuthInfoBean$PArrBean,int) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,java.lang.Object,int) -> a
     void setChecked(android.widget.ImageView,android.widget.TextView,boolean) -> a
     int bindView(int) -> d
-com.holike.crm.fragment.employee2.EmployeePermissionHelper$OnRoleSelectedListener -> com.holike.crm.fragment.employee2.f$b:
+com.holike.crm.fragment.employee.EmployeePermissionHelper$OnRoleSelectedListener -> com.holike.crm.fragment.employee2.f$b:
     void onRoleSelectChanged() -> a
-com.holike.crm.fragment.employee2.EmployeePermissionHelper$SelectRoleAdapter -> com.holike.crm.fragment.employee2.f$c:
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper$OnRoleSelectedListener mOnRoleSelectedListener -> j
-    com.holike.crm.fragment.employee2.EmployeePermissionHelper this$0 -> k
+com.holike.crm.fragment.employee.EmployeePermissionHelper$SelectRoleAdapter -> com.holike.crm.fragment.employee2.f$c:
+    com.holike.crm.fragment.employee.EmployeePermissionHelper$OnRoleSelectedListener mOnRoleSelectedListener -> j
+    com.holike.crm.fragment.employee.EmployeePermissionHelper this$0 -> k
     void lambda$onBindHolder$0(com.holike.crm.bean.RoleDataBean,android.widget.ImageView,android.widget.TextView,android.view.View) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,com.holike.crm.bean.RoleDataBean,int) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,java.lang.Object,int) -> a
     void setChecked(android.widget.ImageView,android.widget.TextView,boolean) -> a
-    void setOnRoleSelectedListener(com.holike.crm.fragment.employee2.EmployeePermissionHelper$OnRoleSelectedListener) -> a
+    void setOnRoleSelectedListener(com.holike.crm.fragment.employee.EmployeePermissionHelper$OnRoleSelectedListener) -> a
     int bindView(int) -> d
-com.holike.crm.fragment.employee2.EmployeeStoreFragment -> com.holike.crm.fragment.employee2.EmployeeStoreFragment:
-    com.holike.crm.fragment.employee2.EmployeeStoreHelper mHelper -> a
-    com.holike.crm.fragment.employee2.EmployeeStoreFragment newInstance(java.lang.String,boolean) -> b
+com.holike.crm.fragment.employee.EmployeeStoreFragment -> com.holike.crm.fragment.employee.EmployeeStoreFragment:
+    com.holike.crm.fragment.employee.EmployeeStoreHelper mHelper -> a
+    com.holike.crm.fragment.employee.EmployeeStoreFragment newInstance(java.lang.String,boolean) -> b
     boolean isDataChanged() -> u
     boolean isSelected() -> v
     java.util.Map obtain() -> w
 com.holike.crm.fragment.employee2.EmployeeStoreFragment_ViewBinding -> com.holike.crm.fragment.employee2.EmployeeStoreFragment_ViewBinding:
-    com.holike.crm.fragment.employee2.EmployeeStoreFragment target -> b
+    com.holike.crm.fragment.employee.EmployeeStoreFragment target -> b
     void unbind() -> a
-com.holike.crm.fragment.employee2.EmployeeStoreHelper -> com.holike.crm.fragment.employee2.g:
+com.holike.crm.fragment.employee.EmployeeStoreHelper -> com.holike.crm.fragment.employee2.g:
     android.content.Context mContext -> a
-    com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter mAdapter -> c
+    com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter mAdapter -> c
     java.util.List mSelectedShop -> f
     java.util.List mOldSelectedGroups -> e
     java.util.List mOldSelectedShops -> d
     java.util.List mSelectedGroup -> g
     boolean mIsBoss -> b
-    java.util.List access$000(com.holike.crm.fragment.employee2.EmployeeStoreHelper) -> a
+    java.util.List access$000(com.holike.crm.fragment.employee.EmployeeStoreHelper) -> a
     void attach(androidx.recyclerview.widget.RecyclerView) -> a
     java.lang.String getGroupIds() -> a
-    boolean access$100(com.holike.crm.fragment.employee2.EmployeeStoreHelper) -> b
+    boolean access$100(com.holike.crm.fragment.employee.EmployeeStoreHelper) -> b
     java.lang.String getShopIds() -> b
-    java.util.List access$200(com.holike.crm.fragment.employee2.EmployeeStoreHelper) -> c
+    java.util.List access$200(com.holike.crm.fragment.employee.EmployeeStoreHelper) -> c
     boolean isDataChanged() -> c
     boolean isSelected() -> d
     boolean isGroupChanged() -> e
     boolean isShopChanged() -> f
-com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter -> com.holike.crm.fragment.employee2.g$a:
-    com.holike.crm.fragment.employee2.EmployeeStoreHelper this$0 -> j
-    void access$300(com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter,int,java.util.List) -> a
+com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter -> com.holike.crm.fragment.employee2.g$a:
+    com.holike.crm.fragment.employee.EmployeeStoreHelper this$0 -> j
+    void access$300(com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter,int,java.util.List) -> a
     void lambda$onBindHolder$0(com.holike.crm.bean.DistributionStoreBean,android.view.View) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,com.holike.crm.bean.DistributionStoreBean,int) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,java.lang.Object,int) -> a
@@ -21245,9 +21245,9 @@ com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter -> com.holike
     void setCheckedItem(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder) -> a
     void setUncheckedItem(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder) -> b
     int bindView(int) -> d
-com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter$GroupAdapter -> com.holike.crm.fragment.employee2.g$a$a:
+com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter$GroupAdapter -> com.holike.crm.fragment.employee2.g$a$a:
     int mParentPosition -> j
-    com.holike.crm.fragment.employee2.EmployeeStoreHelper$StoreAdapter this$1 -> l
+    com.holike.crm.fragment.employee.EmployeeStoreHelper$StoreAdapter this$1 -> l
     java.util.List mInnerSelectedGroup -> k
     void lambda$onBindHolder$0(com.holike.crm.bean.DistributionStoreBean$Group,com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,android.view.View) -> a
     void onBindHolder(com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter$RecyclerHolder,com.holike.crm.bean.DistributionStoreBean$Group,int) -> a

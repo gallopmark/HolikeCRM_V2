@@ -23,6 +23,10 @@ public class CustomerSatisfactionBean {
     public String time; //时间描述
     @SuppressWarnings("WeakerAccess")
     String isShop; //是否是门店数据
+    @SuppressWarnings("WeakerAccess")
+    String power; //是否显示设置按钮
+    public String param2; //-1没有设置过规则 1可看订单 0不可看订单
+    public String id; //规则id  没设置过规则是空字符串
 
     public boolean isShop() {
         return TextUtils.equals(isShop, "1");
@@ -34,6 +38,10 @@ public class CustomerSatisfactionBean {
 
     public List<ShopDataBean> getShopData() {
         return shopData == null ? new ArrayList<>() : shopData;
+    }
+
+    public boolean isShowSettings(){
+        return TextUtils.equals(power,"1");
     }
 
     public static class SelectDataBean {

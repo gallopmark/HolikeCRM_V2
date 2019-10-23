@@ -36,7 +36,7 @@
             android:ellipsize="end"
             android:gravity="center|start"
             android:maxLines="1"
-            android:text="@string/order_time_tips"
+            android:text="@string/tips_evaluation_time"
             android:textColor="@color/textColor8"
             android:textSize="@dimen/textSize_14" />
     </LinearLayout>

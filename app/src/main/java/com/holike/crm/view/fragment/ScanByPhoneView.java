@@ -10,7 +10,5 @@ public interface ScanByPhoneView extends BaseView {
 
     void onFail(String reason);
 
-    void resumeCamera();
-
     void onDelayDone();
 }

@@ -1,19 +1,26 @@
 package com.holike.crm.fragment.analyze;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.holike.crm.R;
 import com.holike.crm.base.MyFragment;
+import com.holike.crm.bean.MonthCompleteBean;
 import com.holike.crm.bean.OrderRankingBean;
 import com.holike.crm.bean.ProductCompleteBean;
-import com.holike.crm.customView.MonthCompleteChartView;
 import com.holike.crm.dialog.SelectAreaDialog;
 import com.holike.crm.presenter.fragment.ProductCompletePresenter;
+import com.holike.crm.util.ParseUtils;
 import com.holike.crm.view.fragment.ProductCompleteView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import pony.xcode.chart.BarChartView;
+import pony.xcode.chart.data.BarChartData;
 
 /**
  * Created by wqj on 2018/5/9.
@@ -25,9 +32,11 @@ public class ProductCompleteFragment extends MyFragment<ProductCompletePresenter
     TextView tvAreaSelect;
     @BindView(R.id.tv_product_complete_area)
     TextView tvArea;
-    @BindView(R.id.monthCompleteView_product)
-    MonthCompleteChartView monthCompleteView;
+//    @BindView(R.id.monthCompleteView_product)
+//    MonthCompleteChartView monthCompleteView;
 
+    @BindView(R.id.barChartView)
+    BarChartView mBarChartView;
     private ProductCompleteBean productCompleteBean;
     private String cityCode;
     private String type;
@@ -58,19 +67,37 @@ public class ProductCompleteFragment extends MyFragment<ProductCompletePresenter
 
     /**
      * 获取数据成功
-     *
-     * @param productCompleteBean
      */
     @Override
-    public void getDataSuccess(ProductCompleteBean productCompleteBean) {
+    public void getDataSuccess(ProductCompleteBean bean) {
         dismissLoading();
-        this.productCompleteBean = productCompleteBean;
-        tvAreaSelect.setText(productCompleteBean.getSelect().getName());
-        tvArea.setText(productCompleteBean.getSelect().getName() + getString(R.string.translate_report_month_complete));
-        monthCompleteView.setBeans(productCompleteBean.getPercentList());
+        this.productCompleteBean = bean;
+        String tempText = (bean.getSelect() == null || TextUtils.isEmpty(bean.getSelect().getName())) ? "" : bean.getSelect().getName();
+        tvAreaSelect.setText(tempText);
+        tempText += mContext.getString(R.string.translate_report_month_complete);
+        tvArea.setText(tempText);
+        setBarData(bean.getPercentList());
+//        monthCompleteView.setBeans(productCompleteBean.getPercentList());
         if (cityCode == null) {
-            cityCode = productCompleteBean.getSelect().getCityCode();
+            cityCode = bean.getSelect().getCityCode();
         }
+    }
+
+    private void setBarData(List<ProductCompleteBean.PercentListBean> dataList) {
+        List<BarChartData> chartDataList = new ArrayList<>();
+        String[] xAxisTextArray = new String[dataList.size()];
+        String[] subXAxisTextArray = new String[dataList.size()];
+        for (int i = 0; i < dataList.size(); i++) {
+            MonthCompleteBean bean = dataList.get(i);
+            float value = ParseUtils.parseFloat(bean.getDepositPercent().replace("%", ""));
+            chartDataList.add(new BarChartData("", value, value > 0 ? value + "%" : " "));
+            xAxisTextArray[i] = TextUtils.isEmpty(bean.getMonth()) ? "" : bean.getMonth();
+            subXAxisTextArray[i] = TextUtils.isEmpty(bean.getDay()) ? "" : bean.getDay().replace("-", "\n至\n");
+        }
+        mBarChartView.withData(chartDataList, xAxisTextArray, "%")
+                .withSubXAxisTextArray(subXAxisTextArray)
+                .barValueUnitEdge(false)
+                .start();
     }
 
     /**

@@ -1,21 +1,16 @@
 package com.holike.crm.activity.customer.helper;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.gallopmark.recycler.adapterhelper.BaseRecyclerAdapter;
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
 import com.holike.crm.activity.main.PhotoViewActivity;
 import com.holike.crm.base.BaseActivity;
-import com.holike.crm.base.IntentValue;
 import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
+import com.holike.crm.util.GlideUtils;
 
 import java.util.List;
 
@@ -56,8 +51,7 @@ public class CustomerImagePreviewHelper {
 
         @Override
         public void onBindHolder(RecyclerHolder holder, String url, int position) {
-            ImageView iv = holder.obtainView(R.id.iv_image);
-            Glide.with(mContext).load(url).apply(new RequestOptions().placeholder(R.drawable.loading_photo).error(0).centerCrop()).into(iv);
+            GlideUtils.load(mContext, url, R.drawable.loading_photo, holder.obtainView(R.id.iv_image));
         }
     }
 }

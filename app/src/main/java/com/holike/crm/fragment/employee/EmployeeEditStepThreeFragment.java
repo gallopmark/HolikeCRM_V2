@@ -14,7 +14,8 @@ import com.holike.crm.view.fragment.EmployeeAuthInfoView;
 import java.util.List;
 
 import butterknife.BindView;
-
+//v2.0版本以前
+@Deprecated
 public class EmployeeEditStepThreeFragment extends MyFragment<EmployeeAuthInfoPresenter, EmployeeAuthInfoView>
         implements EmployeeAuthInfoView, OnFragmentDataChangedListener {
 

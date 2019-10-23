@@ -1,6 +1,7 @@
 package com.holike.crm.fragment.employee;
 
 import androidx.collection.ArrayMap;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,6 +21,8 @@ import com.holike.crm.view.fragment.EmployeeView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+//v2.0版本以前
+@Deprecated
 public class EmployeeDetailOneFragment extends MyFragment<EmployeePresenter, BaseView> implements EmployeeView, EmployeePresenter.OnStatusSelectListener {
 
     @BindView(R.id.mLoginIDTextView)

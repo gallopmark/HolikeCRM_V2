@@ -9,23 +9,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.ImageViewTarget;
-import com.gallopmark.imagepicker.utils.ImageUtil;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.holike.crm.R;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BasePresenter;
 import com.holike.crm.customView.PhotoViewPager;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,41 +139,10 @@ public class PhotoViewActivity extends BaseActivity {
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             String url = mImages.get(position);
             PhotoView photoView = new PhotoView(PhotoViewActivity.this);
-            Glide.with(PhotoViewActivity.this).asBitmap().load(url)
-                    .into(new ImageViewTarget<Bitmap>(photoView) {
-                        @Override
-                        protected void setResource(@Nullable Bitmap resource) {
-                            if (resource == null) return;
-                            int width = resource.getWidth();
-                            int height = resource.getHeight();
-                            if (width > 8192 || height > 8192) {
-                                Bitmap newBitmap = ImageUtil.zoomBitmap(resource, 8192, 8192);
-                                setBitmap(photoView, newBitmap);
-                            } else {
-                                setBitmap(photoView, resource);
-                            }
-                        }
-                    });
+            GlideUtils.imagePreview(PhotoViewActivity.this,url,photoView);
             container.addView(photoView);
             photoView.setOnClickListener(v -> finish());
             return photoView;
-        }
-
-        private void setBitmap(ImageView imageView, Bitmap bitmap) {
-            imageView.setImageBitmap(bitmap);
-            if (bitmap != null) {
-                int bw = bitmap.getWidth();
-                int bh = bitmap.getHeight();
-                int vw = imageView.getWidth();
-                int vh = imageView.getHeight();
-                if (bw != 0 && bh != 0 && vw != 0 && vh != 0) {
-                    if (1.0f * bh / bw > 1.0f * vh / vw) {
-                        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    } else {
-                        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                    }
-                }
-            }
         }
 
         @Override

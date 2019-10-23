@@ -17,7 +17,6 @@ import com.holike.crm.R;
 import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.MonthCompleteBean;
 import com.holike.crm.bean.FastLiveBean;
-import com.holike.crm.bean.staticbean.JumpBean;
 import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.presenter.fragment.FastLivePresenter;
 import com.holike.crm.util.Constants;
@@ -100,10 +99,10 @@ public class FastLiveFragment extends MyFragment<FastLivePresenter, FastLiveView
     @Override
     public void getCompleteDataSuccess(List<MonthCompleteBean> bean, String title) {
         dismissLoading();
-        Map<String, Serializable> params = new HashMap<>();
-        params.put(Constants.MONTH_COMPLETE, (Serializable) bean);
-        params.put(Constants.TITLE, title);
-        startFragment(params, new MonthCompleteFragment());
+//        Map<String, Serializable> params = new HashMap<>();
+//        params.put(Constants.MONTH_COMPLETE, (Serializable) bean);
+//        params.put(Constants.TITLE, title);
+        startFragment(null, MonthCompleteFragment.newInstance(title,bean));
     }
 
     /**

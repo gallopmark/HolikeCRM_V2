@@ -17,13 +17,13 @@ public abstract class CommonActivity<P extends BasePresenter, V extends BaseView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityHelper = newHelper();
-        setup();
+        setup(savedInstanceState);
     }
 
     @NonNull
     protected abstract H newHelper();
 
-    protected void setup() {
+    protected void setup(Bundle savedInstanceState) {
 
     }
 

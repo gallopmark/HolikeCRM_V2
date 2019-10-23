@@ -15,6 +15,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /*新增员工步骤二*/
+//v2.0版本以前
+@Deprecated
 public class EmployeeEditStepTwoFragment extends MyFragment<EmployeeStorePresenter, StoreListView> implements StoreListView, EmployeeStorePresenter.StoreListAdapter.OnItemSelectedListener {
 
     @BindView(R.id.mRecyclerView)

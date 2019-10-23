@@ -149,7 +149,7 @@ public class DetailsFragment extends MyFragment<PayDetailsPresenter, PayDetailsV
     @Override
     public void onOptionsMenuClick(Toolbar toolbar, MenuItem menuItem) {
         ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_credit_info, R.array.title_credit_info_id, this);
-//                popupWindow.showAsDropDown(mContentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
+//                popupWindow.showAsDropDown(mFragmentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
         ToolbarHelper.showPopupWindow(popupWindow, toolbar);
     }
 
@@ -159,7 +159,7 @@ public class DetailsFragment extends MyFragment<PayDetailsPresenter, PayDetailsV
         switch (text.toString()) {
 //            case "":
 //                ListMenuPopupWindow popupWindow = new ListMenuPopupWindow(mContext, R.array.title_credit_info, R.array.title_credit_info_id, this);
-////                popupWindow.showAsDropDown(mContentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
+////                popupWindow.showAsDropDown(mFragmentView.findViewById(R.id.iv_right_menu), -DensityUtil.dp2px(6), 0);
 //                ToolbarHelper.showPopupWindow(popupWindow, actionView);
 //                break;
             case "修改":

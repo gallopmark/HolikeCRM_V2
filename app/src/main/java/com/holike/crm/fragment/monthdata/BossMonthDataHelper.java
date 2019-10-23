@@ -40,7 +40,7 @@ class BossMonthDataHelper extends MonthDataHelper {
     BossMonthDataHelper(BaseFragment<?, ?> fragment, Callback callback) {
         super((BaseActivity<?, ?>) fragment.getActivity(), callback);
         mFragmentView = fragment.getContentView();
-        mContentViewStub = mFragmentView.findViewById(R.id.form_data_vs);
+        mContentViewStub = mFragmentView.findViewById(R.id.vs_form_data);
         Bundle bundle = fragment.getArguments();
         boolean isAnimation = false;
         if (bundle != null) {

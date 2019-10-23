@@ -7,5 +7,5 @@
     <item name="right_menu_view" type="id" />
     <item name="right_menu_dot" type="id" />
 
-    <item name="form_data_vs" type="id"/>
+    <item name="vs_form_data" type="id"/>
 </resources>

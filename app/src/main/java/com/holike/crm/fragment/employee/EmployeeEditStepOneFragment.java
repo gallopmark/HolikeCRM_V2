@@ -18,6 +18,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /*新增员工步骤一*/
+//v2.0版本以前
+@Deprecated
 public class EmployeeEditStepOneFragment extends MyFragment<EmployeePresenter, EmployeeView> implements EmployeeView {
 
     @BindView(R.id.mNameEditText)

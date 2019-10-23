@@ -193,12 +193,6 @@ public class SelectImageHelper {
                         remove(position);
                     }
                 });
-//                holder.setOnClickListener(R.id.iv_delete, view -> {
-//                    remove(position);
-//                    if (mListener != null) {
-//                        mListener.onDelete(position, imageItem.path);
-//                    }
-//                });
             }
         }
     }

@@ -103,7 +103,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ViewStub
-                android:id="@id/form_data_vs"
+                android:id="@id/vs_form_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"

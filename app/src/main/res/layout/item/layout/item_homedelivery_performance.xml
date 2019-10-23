@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="@dimen/dp_36"
+        android:orientation="horizontal"
+        tools:ignore="NestedWeights">
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_ranking"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.14" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:text="@string/category" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_performance"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.18" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_proportion"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.18" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_sales_volume"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.18"
+            android:text="@string/sales_volume" />
+
+        <View style="@style/divider_vertical" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

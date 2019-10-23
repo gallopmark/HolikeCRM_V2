@@ -41,6 +41,7 @@
     <string name="login_expired">您的登录信息已经过期，请重新登录</string>
     <string name="login_now">马上登录</string>
     <string name="this_month">本月</string>
+    <string name="settings">设置</string>
     <string name="version_update_notification_wait">正在更新…</string>
     <string name="version_update_pause">下载已暂停，点击继续！</string>
     <string name="version_update_error">下载失败，请点击重试！</string>
@@ -1130,6 +1131,7 @@
     <string name="tips_add_plan_images">添加方案图</string>
 
     <string name="tips_add_install_drawings_images">添加安装图纸</string>
+    <string name="tips_evaluation_time">评价时间：</string>
 
     <string name="the_data_description">数据说明</string>
 
@@ -1225,4 +1227,22 @@
 
     <string name="hint_fragment_customer_search">搜索客户姓名、电话、地址、微信</string>
     <string name="hint_fragment_order_search">搜索客户姓名、电话、订单号</string>
+
+    <string name="tips_allow_customers_check_orders">允许客户查询订单</string>
+    <string name="tips_check_orders_under">关闭后，客户将不能通过舒适好家小程序查询订单</string>
+    
+    <string name="title_home_delivery_performance">宅配业绩</string>
+    <string name="title_series_performance">系列业绩</string>
+    <string name="title_color_performance">花色业绩</string>
+    <string name="tab_annual">全年</string>
+    <string name="tab_this_month">当月</string>
+    <string name="tab_query_date">查询日期</string>
+
+    <string name="ranking">排名</string>
+    <string name="category">类别</string>
+    <string name="performance_million">业绩(万)</string>
+    <string name="proportion">占比</string>
+    <string name="sales_volume">销售数量</string>
+    <string name="series">系列</string>
+    <string name="colors">花色</string>
 </resources>

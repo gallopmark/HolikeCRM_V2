@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Created by wqj on 2018/9/19.
  */
-
+@Deprecated
 public class ShopListRequestHelper {
 
     private ShopListCallback mCallback;

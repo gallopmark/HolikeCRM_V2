@@ -106,9 +106,11 @@
         <activity android:name=".activity.analyze.OnlineAttractReportActivity" />
         <activity android:name=".activity.analyze.WoodenDoorActivity" />
         <activity android:name=".activity.analyze.CustomerSatisfactionActivity" />
+
         <activity
             android:name=".activity.homepage.AddCustomerActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.customer.ScanByPhoneActivity" />
         <activity
             android:name=".activity.customer.CustomerEditActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -170,28 +172,28 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".activity.employee2.EmployeeListV2Activity"
+            android:name=".activity.employee.EmployeeListV2Activity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
         <!--新增员工-->
         <activity
-            android:name=".activity.employee2.EmployeeEditV2Activity"
+            android:name=".activity.employee.EmployeeEditV2Activity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!--员工详情-->
         <activity
-            android:name=".activity.employee2.EmployeeDetailsActivity"
+            android:name=".activity.employee.EmployeeDetailsV2Activity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".activity.employee2.EmployeeStrikeActivity"
+            android:name=".activity.employee.EmployeeStrikeActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!--员工重置密码-->
         <activity
-            android:name=".activity.employee2.EmployeeResetPwActivity"
+            android:name=".activity.employee.EmployeeResetPwActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
@@ -209,7 +211,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <activity android:name=".activity.homepage2.MonthDataActivity" />
+        <activity android:name=".activity.homepage.ThisMonthDataActivity" />
         <activity android:name=".activity.customer.CustomerChargeDepositActivity" />
         <activity
             android:name=".activity.customer.CustomerChargeDepositSearchActivity"
@@ -217,6 +219,11 @@
 
         <activity android:name=".activity.customer.CustomerOnlineLogActivity" />
         <activity android:name=".activity.web.WebViewActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+
+        <!--v3.0-->
+        <activity android:name=".activity.reportv3.BusinessReferenceActivity" />
+
         <!--版本更新服务-->
         <service android:name=".service.VersionUpdateService" />
 

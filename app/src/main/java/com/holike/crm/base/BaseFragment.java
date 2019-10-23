@@ -153,13 +153,17 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
         back();
     }
 
+    protected void setTitle(@StringRes int resId) {
+        setTitle(mContext.getString(resId));
+    }
+
     /**
      * 设置主题
      *
      * @param title a
      */
     protected void setTitle(CharSequence title) {
-//        TextView tvTitle = mContentView.findViewById(R.id.tv_title);
+//        TextView tvTitle = mFragmentView.findViewById(R.id.tv_title);
 //        if (tvTitle != null) {
 //            tvTitle.setText(title);
 //        }

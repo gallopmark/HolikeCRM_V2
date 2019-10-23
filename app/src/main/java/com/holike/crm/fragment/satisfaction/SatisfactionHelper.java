@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,18 +16,24 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
+import com.holike.crm.activity.SettingsActivity;
 import com.holike.crm.activity.main.PhotoViewActivity;
+import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.FragmentHelper;
 import com.holike.crm.bean.CustomerSatisfactionBean;
 import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.helper.TextSpanHelper;
 import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
 import com.holike.crm.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /*客户满意度帮助类*/
 class SatisfactionHelper extends FragmentHelper {
@@ -37,17 +44,16 @@ class SatisfactionHelper extends FragmentHelper {
     private Date mDatetime;
     private FrameLayout mContainerLayout;
     private boolean mAnimation;
+    private CustomerSatisfactionBean mDataBean;
+    private Disposable mDisposable;
 
     SatisfactionHelper(BaseFragment<?, ?> fragment, Callback callback) {
         super(fragment);
         this.mCallback = callback;
         initView();
         obtainValue();
-        long delayMillis = 0;
-        if (mAnimation) {
-            delayMillis = 300;
-        }
-        mContainerLayout.postDelayed(mRequestRun, delayMillis);
+        initData();
+        registerResult();
     }
 
     private Runnable mRequestRun = this::doRequest;
@@ -66,6 +72,14 @@ class SatisfactionHelper extends FragmentHelper {
         }
     }
 
+    private void initData() {
+        long delayMillis = 0;
+        if (mAnimation) {
+            delayMillis = 300;
+        }
+        mContainerLayout.postDelayed(mRequestRun, delayMillis);
+    }
+
     void doRequest() {
         String datetime = "";
         if (mDatetime != null) {
@@ -76,60 +90,91 @@ class SatisfactionHelper extends FragmentHelper {
         mCallback.onHttpRequest(type, cityCode, datetime);
     }
 
+    /*观察者模式监听（设置页面的结果变化）*/
+    private void registerResult() {
+        mDisposable = RxBus.getInstance().toObservable(MessageEvent.class).subscribe(event -> {
+            Bundle bundle = event.getArguments();
+            if (bundle != null) {
+                mDataBean.id = bundle.getString("id");
+                mDataBean.param2 = bundle.getString("param2");
+            }
+        });
+    }
+
     void onHttpSuccess(CustomerSatisfactionBean bean) {
-        if (bean == null) {
+        this.mDataBean = bean;
+        if (mDataBean == null) {
+            mContainerLayout.setVisibility(View.GONE);
             mFragment.noResult();
         } else {
-            mContainerLayout.setVisibility(View.VISIBLE);
-            if (bean.isShop()) {  //判断加载哪个布局
-                setShopData(bean);
-            } else {
-                setSelectData(bean);
-            }
+            setSettingsButton();
+            setData();
+        }
+    }
+
+    private void setSettingsButton() {
+        if (mDataBean.isShowSettings()) {
+            mFragment.setRightMenu(R.string.settings, view -> SettingsActivity.startRuleSettings((BaseActivity<?, ?>) mContext, mDataBean.id, mDataBean.param2));
+        } else {
+            mFragment.hideRightMenu();
+        }
+    }
+
+    private void setData() {
+        mContainerLayout.setVisibility(View.VISIBLE);
+        if (mDataBean.isShop()) {  //判断加载哪个布局
+            setShopData();
+        } else {
+            setSelectData();
         }
     }
 
     /*列表式*/
-    private void setShopData(CustomerSatisfactionBean bean) {
+    private void setShopData() {
         mContainerLayout.removeAllViews();
         View view = LayoutInflater.from(mContext).inflate(R.layout.include_customer_satisfaction_list, mContainerLayout, true);
         final TextView tvDatetime = view.findViewById(R.id.tv_datetime);
-        setDatetime(tvDatetime, bean.time);
+        setDatetime(tvDatetime, mDataBean.time);
         tvDatetime.setOnClickListener(v -> PickerHelper.showTimeYMPicker(mContext, date -> {
             mDatetime = date;
-            setDatetime(tvDatetime, TimeUtil.timeMillsFormat(date, "yyyy.MM"));
             doRequest();
         }));
         TextView tvEmpty = view.findViewById(R.id.tv_empty);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        if (bean.getShopData().isEmpty()) {
+        if (mDataBean.getShopData().isEmpty()) {
             tvEmpty.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
             tvEmpty.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
-            recyclerView.setAdapter(new ShopDataItemAdapter(mContext, bean.getShopData()));
+            recyclerView.setAdapter(new ShopDataItemAdapter(mContext, mDataBean.getShopData()));
         }
     }
 
     private void setDatetime(TextView tvDatetime, String datetime) {
-        String timeTemp = mContext.getString(R.string.order_time_tips) + (TextUtils.isEmpty(datetime) ? "" : datetime);
+        String timeTemp = mContext.getString(R.string.tips_evaluation_time) + (TextUtils.isEmpty(datetime) ? "" : datetime);
         tvDatetime.setText(timeTemp);
     }
 
     /*表格式*/
-    private void setSelectData(CustomerSatisfactionBean bean) {
+    private void setSelectData() {
         mContainerLayout.removeAllViews();
         View view = LayoutInflater.from(mContext).inflate(R.layout.include_customer_satisfaction_form, mContainerLayout, true);
         final TextView tvDatetime = view.findViewById(R.id.tv_datetime);
-        tvDatetime.setText(bean.time);
+        tvDatetime.setText(mDataBean.time);
         tvDatetime.setOnClickListener(v -> PickerHelper.showTimeYMPicker(mContext, date -> {
             mDatetime = date;
-            tvDatetime.setText(TimeUtil.timeMillsFormat(date, "yyyy.MM"));
             doRequest();
         }));
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(new FormDataAdapter(mContext, bean.getSelectData()));
+        if (mDataBean.getSelectData().isEmpty()) {
+            view.findViewById(R.id.tv_empty).setVisibility(View.VISIBLE);
+        } else {
+            view.findViewById(R.id.tv_empty).setVisibility(View.GONE);
+            ViewStub viewStub = view.findViewById(R.id.viewStub);
+            View contentView = viewStub.inflate();
+            RecyclerView recyclerView = contentView.findViewById(R.id.recyclerView);
+            recyclerView.setAdapter(new FormDataAdapter(mContext, mDataBean.getSelectData()));
+        }
     }
 
     void onHttpFailure(String failReason) {
@@ -139,6 +184,7 @@ class SatisfactionHelper extends FragmentHelper {
 
     void deDetach() {
         mContainerLayout.removeCallbacks(mRequestRun);
+        mDisposable.dispose();
     }
 
     //shopData
@@ -159,7 +205,7 @@ class SatisfactionHelper extends FragmentHelper {
         @Override
         public void onBindHolder(RecyclerHolder holder, CustomerSatisfactionBean.ShopDataBean bean, int position) {
             holder.setText(R.id.tv_customer_phone, mSpanHelper.obtainColorBoldStyle(R.string.customer_telephone_tips, bean.phoneNumber, R.color.textColor4));
-            holder.setText(R.id.tv_order_time, mSpanHelper.obtainColorBoldStyle(R.string.order_time_tips, bean.time, R.color.textColor4));
+            holder.setText(R.id.tv_order_time, mSpanHelper.obtainColorBoldStyle(R.string.tips_evaluation_time, bean.time, R.color.textColor4));
             holder.setText(R.id.tv_service_satisfaction, mSpanHelper.obtainColorBoldStyle(R.string.customer_satisfaction_service, bean.service, R.color.textColor4));
             holder.setText(R.id.tv_design_satisfaction, mSpanHelper.obtainColorBoldStyle(R.string.customer_satisfaction_design, bean.design, R.color.textColor4));
             holder.setText(R.id.tv_delivery_satisfaction, mSpanHelper.obtainColorBoldStyle(R.string.customer_satisfaction_delivery, bean.delivery, R.color.textColor4));
@@ -208,10 +254,11 @@ class SatisfactionHelper extends FragmentHelper {
                         .placeholder(R.drawable.loading_photo)
                         .error(0).centerCrop()).into(iv);
                 holder.itemView.setOnClickListener(view -> {
-                    if (bean.isMp4()) { //播放视频 跳转播放页面
-                    } else {
-                        PhotoViewActivity.openImage(mContext, position, mImages);
-                    }
+                    PhotoViewActivity.openImage(mContext, position, mImages);
+//                    if (bean.isMp4()) { //播放视频 跳转播放页面
+//                    } else {
+//                        PhotoViewActivity.openImage(mContext, position, mImages);
+//                    }
                 });
             }
         }

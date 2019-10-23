@@ -5,6 +5,22 @@
     android:layout_height="match_parent"
     android:background="@color/translucent">
 
+    <!--  <SurfaceView
+          android:id="@+id/surfaceView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+      <com.king.zxing.ViewfinderView
+          android:id="@+id/viewfinderView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:cornerColor="@color/colorPrimary"
+          app:frameColor="@color/colorPrimary"
+          app:labelTextLocation="bottom"
+          app:laserColor="@color/colorAccent"
+          app:laserStyle="line"
+          app:resultPointColor="@color/colorAccent" />-->
+
     <cn.bingoogolapple.qrcode.zxing.ZXingView
         android:id="@+id/zxingView"
         android:layout_width="match_parent"
@@ -41,53 +57,47 @@
         android:layout_height="@dimen/dp_180"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:gravity="center"
+            android:text="@string/scan_by_phone_title"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_18" />
+
+        <TextView
+            android:id="@+id/tv_receiving_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/scan_by_phone_received"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_16" />
+
+        <TextView
+            android:id="@+id/tv_current_scan_numb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/scan_by_phone_current_numb"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_16" />
+
+        <TextView
+            android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_44"
-                android:gravity="center"
-                android:text="@string/scan_by_phone_title"
-                android:textColor="@color/color_while"
-                android:textSize="@dimen/textSize_18" />
-
-            <TextView
-                android:id="@+id/tv_receiving_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/scan_by_phone_received"
-                android:textColor="@color/color_while"
-                android:textSize="@dimen/textSize_16" />
-
-            <TextView
-                android:id="@+id/tv_current_scan_numb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/scan_by_phone_current_numb"
-                android:textColor="@color/color_while"
-                android:textSize="@dimen/textSize_16" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_4"
-                android:gravity="bottom|center"
-                android:maxLines="1"
-                android:text="@string/scan_by_phone_attention"
-                android:textColor="@color/color_while_alpha_0_8"
-                android:textSize="@dimen/textSize_12" />
-        </LinearLayout>
+            android:layout_marginTop="@dimen/dp_4"
+            android:gravity="bottom|center"
+            android:maxLines="1"
+            android:text="@string/scan_by_phone_attention"
+            android:textColor="@color/color_while_alpha_0_8"
+            android:textSize="@dimen/textSize_12" />
     </LinearLayout>
 
     <LinearLayout

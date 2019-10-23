@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.internal.$Gson$Types;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyJsonParser {
-    public static final int DEFAULT_CODE = -1234567890;
+    static final int DEFAULT_CODE = -1234567890;
 
     private static class ParameterizedTypeImpl implements ParameterizedType {
         Class clazz;
@@ -156,6 +155,7 @@ public class MyJsonParser {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static boolean hasAtt(String json) {
         return has(json, "att");
     }
@@ -216,7 +216,7 @@ public class MyJsonParser {
     public static <T> T fromResult(String json, Class<T> clazz) {
         if (isEmpty(json) || !hasResult(json)) return null;
         try {
-            return new Gson().fromJson(getResult(json), getSuperclassTypeParameter(clazz));
+            return new Gson().fromJson(getResult(json), clazz);
         } catch (Exception e) {
             LogCat.e(e);
             return null;
@@ -364,7 +364,7 @@ public class MyJsonParser {
     public static String getAsString(String json, String memberName) {
         if (!has(json, memberName)) return "";
         try {
-            return getAsJsonObject(json).get(memberName).toString();
+            return getAsJsonObject(json).get(memberName).getAsString();
         } catch (Exception e) {
             LogCat.e(e);
             return "";

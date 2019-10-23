@@ -93,12 +93,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         if (isFullScreen()) {
             requestFullScreen();
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                setStatusBarColor(R.color.color_while);
-            } else {
-                setStatusBarColor(R.color.bg_state_bar);
-            }
-            SystemTintHelper.setStatusBarLightMode(this);
+            setStatusBarLightMode();
         }
         setupTitleBar();
         init(savedInstanceState);
@@ -116,6 +111,15 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
             mActivityCloseExitAnimation = activityStyle.getResourceId(1, 0);
             activityStyle.recycle();
         }
+    }
+
+    public void setStatusBarLightMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            setStatusBarColor(R.color.color_while);
+        } else {
+            setStatusBarColor(R.color.bg_state_bar);
+        }
+        SystemTintHelper.setStatusBarLightMode(this);
     }
 
     protected abstract P attachPresenter();

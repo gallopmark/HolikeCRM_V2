@@ -28,7 +28,7 @@ import com.holike.crm.R;
 import com.holike.crm.activity.analyze.OrderReportActivity;
 import com.holike.crm.activity.analyze.PerformanceActivity;
 import com.holike.crm.activity.customer.CustomerChargeDepositActivity;
-import com.holike.crm.activity.homepage2.MonthDataActivity;
+import com.holike.crm.activity.homepage.ThisMonthDataActivity;
 import com.holike.crm.activity.message.MessageDetailsActivity;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.IntentValue;
@@ -160,13 +160,13 @@ class HomepageHelper implements HomeMenuFragment.OnMenuClickListener, View.OnCli
                 String userType = roleBean.usrType;
                 if (TextUtils.equals(userType, UserTypeValue.BOSS_V2) && roleBean.isClick()) {
                     //跳转老板本月数据页面
-                    MonthDataActivity.start(mContext, MonthDataActivity.TYPE_BOSS);
+                    ThisMonthDataActivity.start(mContext, ThisMonthDataActivity.TYPE_BOSS);
                 } else if (TextUtils.equals(userType, UserTypeValue.FINANCE)) {
                     //跳转财务本月数据
-                    MonthDataActivity.start(mContext, MonthDataActivity.TYPE_FINANCE);
+                    ThisMonthDataActivity.start(mContext, ThisMonthDataActivity.TYPE_FINANCE);
                 } else if (TextUtils.equals(userType, UserTypeValue.INSTALL_MANAGER)) {
                     //跳转安装经理本月数据
-                    MonthDataActivity.start(mContext, MonthDataActivity.TYPE_INSTALL_MANAGER);
+                    ThisMonthDataActivity.start(mContext, ThisMonthDataActivity.TYPE_INSTALL_MANAGER);
                 }
 //                else {
 //                    MonthDataActivity.start(mContext, MonthDataActivity.TYPE_FINANCE);

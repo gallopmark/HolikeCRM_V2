@@ -26,7 +26,7 @@ class InstallManagerMonthDataHelper extends MonthDataHelper {
 
 //    private ViewStub mContentViewStub;
     private View mFragmentView;
-//    private View mContentView;
+//    private View mFragmentView;
     private List<MonthDataInstallManagerBean.ArrBean> mItems;
     private ItemContentAdapter mAdapter;
 

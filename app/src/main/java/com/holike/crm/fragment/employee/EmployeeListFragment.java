@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
+//v2.0版本以前 员工列表
 @Deprecated
 public class EmployeeListFragment extends MyFragment<EmployeeListPresenter, EmployeeListView>
         implements View.OnClickListener, EmployeeListView, EmployeeListPresenter.OnItemClickListener, EmployeeModel.OnGetStoreCallback {

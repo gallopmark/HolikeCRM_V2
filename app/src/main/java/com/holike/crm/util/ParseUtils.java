@@ -1,5 +1,7 @@
 package com.holike.crm.util;
 
+import android.text.TextUtils;
+
 /**
  * Created by gallop on 2019/9/5.
  * Copyright holike possess 2019.
@@ -11,6 +13,7 @@ public class ParseUtils {
     }
 
     public static double parseDouble(String source, double defaultValue) {
+        if (TextUtils.isEmpty(source)) return defaultValue;
         try {
             return Double.parseDouble(source);
         } catch (Exception e) {
@@ -23,6 +26,7 @@ public class ParseUtils {
     }
 
     public static int parseInt(String source, int defaultValue) {
+        if (TextUtils.isEmpty(source)) return defaultValue;
         try {
             return Integer.parseInt(source);
         } catch (Exception e) {
@@ -35,6 +39,7 @@ public class ParseUtils {
     }
 
     public static float parseFloat(String source, float defaultValue) {
+        if (TextUtils.isEmpty(source)) return defaultValue;
         try {
             return Float.parseFloat(source);
         } catch (Exception e) {
@@ -47,6 +52,7 @@ public class ParseUtils {
     }
 
     public static boolean parseBoolean(String source, boolean defaultValue) {
+        if (TextUtils.isEmpty(source)) return defaultValue;
         try {
             return Boolean.parseBoolean(source);
         } catch (Exception e) {
@@ -59,6 +65,7 @@ public class ParseUtils {
     }
 
     public static long parseLong(String source, long defaultValue) {
+        if (TextUtils.isEmpty(source)) return defaultValue;
         try {
             return Long.parseLong(source);
         } catch (Exception e) {

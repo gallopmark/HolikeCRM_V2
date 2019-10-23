@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.holike.crm.R;
 import com.holike.crm.activity.credit.CreditInquiryActivity;
 import com.holike.crm.activity.customer.CustomerDetailV2Activity;
-import com.holike.crm.activity.employee2.EmployeeListV2Activity;
+import com.holike.crm.activity.employee.EmployeeListV2Activity;
 import com.holike.crm.activity.homepage.MessageV2Activity;
 import com.holike.crm.activity.message.MessageDetailsActivity;
 import com.holike.crm.base.BaseActivity;
