@@ -12,7 +12,7 @@ import com.holike.crm.activity.main.PhotoViewActivity;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/9/23.
+ * Created by pony on 2019/9/23.
  * Copyright holike possess 2019.
  * 图片列表适配器 方形图片
  */

@@ -1,151 +1,101 @@
 package com.holike.crm.helper;
 
 
-import android.os.Bundle;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.holike.crm.R;
-import com.holike.crm.base.BaseActivity;
-import com.holike.crm.base.BaseFragment;
-import com.holike.crm.dialog.CalendarPickerDialog;
-
-import java.util.Date;
-import java.util.List;
-
+import com.holike.crm.util.RecyclerUtils;
 
 /**
  * 表格类数据处理帮助类
  */
-public abstract class FormDataHelper<T, V> {
-    protected BaseActivity<?, ?> mActivity;
-    protected V mCallback;
-    protected View mFragmentView;
-    protected ViewStub mViewStub;
-    protected View mInflatedView;
-    protected String mType, mCityCode;
-    protected Date mStartDate, mEndDate;
-    private List<Date> mSelectedDates;
+public class FormDataHelper {
 
-    public FormDataHelper(BaseFragment<?, ?> fragment, V callback) {
-        this.mActivity = (BaseActivity<?, ?>) fragment.getActivity();
-        this.mCallback = callback;
-        this.mFragmentView = fragment.getContentView();
-        mViewStub = mFragmentView.findViewById(R.id.vs_form_data);
-        Bundle bundle = fragment.getArguments();
-        obtainBundleValue(bundle);
-        boolean isAnimation = false;
-        if (bundle != null) {
-            isAnimation = bundle.getBoolean("isAnimation", false);
+    public static void attachView(View contentView, @NonNull FormDataBinder binder) {
+        attachView(contentView, binder, null);
+    }
+
+    public static void attachView(View contentView, @NonNull FormDataBinder binder, @Nullable FormDataCallback callback) {
+        Context context = contentView.getContext();
+        FrameLayout flContainer = contentView.findViewById(R.id.fl_form_data_container);
+        //第一列数据
+        View firstColumnView = LayoutInflater.from(context).inflate(binder.bindFirstColumnLayoutRes(), flContainer, false);
+        ((TextView) firstColumnView.findViewById(R.id.tv_first_name)).setText(binder.bindSideTitle());
+        flContainer.addView(firstColumnView, 1);  //动态添加layout 第一列数据展示布局
+        if (callback != null) {
+            callback.bindFirstColumn(firstColumnView);
         }
-        long delayMillis = 0;
-        if (isAnimation) {
-            delayMillis = 300;
+        LinearLayout scrollableLayout = contentView.findViewById(R.id.ll_scrollable_content);
+        /*第一行数据*/
+        View firstRowView = LayoutInflater.from(context).inflate(binder.bindFirstRowLayoutRes(), scrollableLayout, false);
+        scrollableLayout.addView(firstRowView, 0);
+        if (callback != null) {
+            callback.bindFirstRow(firstRowView);
         }
-        mFragmentView.postDelayed(mAction, delayMillis);
-    }
-
-    private final Runnable mAction = this::startRequest;
-
-    void onDestroy() {
-        mFragmentView.removeCallbacks(mAction);
-    }
-
-    protected void obtainBundleValue(@Nullable Bundle bundle) {
-
-    }
-
-    protected abstract void startRequest();
-
-    protected void startCalendarPicker() {
-        new CalendarPickerDialog.Builder(mActivity).maxDate(new Date())
-                .withSelectedDates(mSelectedDates)
-                .clickToClear(true)
-                .calendarRangeSelectedListener(new CalendarPickerDialog.OnCalendarRangeSelectedListener() {
-                    @Override
-                    public void onLeftClicked(CalendarPickerDialog dialog) {
-
-                    }
-
-                    @Override
-                    public void onRightClick(CalendarPickerDialog dialog, List<Date> selectedDates, Date start, Date end) {
-                        dialog.dismiss();
-                        if (selectedDates.size() >= 1) {
-                            mSelectedDates = selectedDates;
-                            mStartDate = start;
-                            mEndDate = end;
-                            startRequest();
-                        } else {
-                            mStartDate = null;
-                            mEndDate = null;
-                            startRequest();
-                        }
-                    }
-                }).show();
-    }
-
-    /*设置联动滚动的两个recyclerView*/
-    protected void setLinkageScrolling(@NonNull RecyclerView target, @NonNull final RecyclerView follow) {
-        target.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
-                    follow.scrollBy(dx, dy);
-                }
-            }
-        });
-    }
-
-    protected abstract void onSuccess(T bean);
-
-    protected void requestUpdate(T bean) {
-        if (mInflatedView == null) {
-            mInflatedView = mViewStub.inflate();
+        RecyclerView rvSide = firstColumnView.findViewById(R.id.rv_side);
+        rvSide.setLayoutManager(new LinearLayoutManager(context));
+        RecyclerView rvContent = flContainer.findViewById(R.id.rv_content);
+        rvContent.setLayoutManager(new LinearLayoutManager(context));
+        if (callback != null) {
+            callback.bindFormContent(contentView);
         }
-        FrameLayout contentLayout = mInflatedView.findViewById(R.id.fl_form_data_container);
-        if (contentLayout.getChildCount() >= 2) {
-            contentLayout.removeViewAt(1);
-        }
-        final RecyclerView contentRecyclerView = mInflatedView.findViewById(R.id.rv_content);
-        contentRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        contentRecyclerView.setNestedScrollingEnabled(false);
-        View firstColumnView = addFirstColumn(bean, contentLayout);
-        RecyclerView sideRecyclerView = firstColumnView.findViewById(R.id.rv_side);
-        sideRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        bindSideAdapter(sideRecyclerView, bean);
-        bindContentAdapter(contentRecyclerView, bean);
-        contentLayout.addView(firstColumnView);
-        /*添加第一行数据*/
-        getScrollableLayout().addView(addFirstRow(bean), 0);
-        setLinkageScrolling(sideRecyclerView, contentRecyclerView);
-        setLinkageScrolling(contentRecyclerView, sideRecyclerView);
+        rvSide.setAdapter(binder.bindSideAdapter());
+        rvContent.setAdapter(binder.bindContentAdapter());
+        RecyclerUtils.setScrollSynchronous(rvSide, rvContent);  //设置两个recyclerView联动滚动
     }
 
-    /*第一行数据*/
-    @NonNull
-    protected abstract View addFirstRow(T bean);
+    public interface FormDataBinder {
+        //第一列
+        @LayoutRes
+        int bindFirstColumnLayoutRes();  //include_form_data_column_60dp、include_form_data_column_70dp、include_form_data_column_80dp
 
-    /*第一列数据*/
-    @NonNull
-    protected abstract View addFirstColumn(T bean, FrameLayout contentLayout);
+        CharSequence bindSideTitle();
 
-    protected abstract void bindSideAdapter(RecyclerView sideRecyclerView, T bean);
+        //第一行
+        @LayoutRes
+        int bindFirstRowLayoutRes();
 
-    protected abstract void bindContentAdapter(RecyclerView contentRecyclerView, T bean);
+        /*设置第一列数据适配器*/
+        RecyclerView.Adapter bindSideAdapter();
 
-    protected LinearLayout getScrollableLayout() {
-        LinearLayout scrollableLayout = mInflatedView.findViewById(R.id.ll_scrollable_content);
-        if (scrollableLayout.getChildCount() >= 2) {
-            scrollableLayout.removeViewAt(0);
+        /*设置表格适配器*/
+        RecyclerView.Adapter bindContentAdapter();
+    }
+
+    public interface FormDataCallback {
+        void bindFirstColumn(View view);
+
+        void bindFirstRow(View view);
+
+        void bindFormContent(View view);
+    }
+
+    public static class SimpleFormDataCallback implements FormDataCallback {
+
+        @Override
+        public void bindFirstColumn(View view) {
+
         }
-        return scrollableLayout;
+
+        @Override
+        public void bindFirstRow(View view) {
+
+        }
+
+        @Override
+        public void bindFormContent(View view) {
+
+        }
     }
 }

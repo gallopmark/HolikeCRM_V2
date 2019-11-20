@@ -10,7 +10,7 @@ import java.util.List;
 import io.reactivex.annotations.NonNull;
 
 /**
- * Created by gallop on 2019/8/21.
+ * Created by pony on 2019/8/21.
  * Copyright holike possess 2019.
  */
 public class MessageResultBean {

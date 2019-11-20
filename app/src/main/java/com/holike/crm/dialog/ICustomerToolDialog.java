@@ -27,7 +27,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by gallop on 2019/8/30.
+ * Created by pony on 2019/8/30.
  * Copyright holike possess 2019.
  * 客户分配门店组织工具类
  */

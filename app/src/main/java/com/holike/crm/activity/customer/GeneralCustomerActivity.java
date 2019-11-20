@@ -5,7 +5,7 @@ import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
 import com.holike.crm.view.fragment.GeneralCustomerView;
 
 /**
- * Created by gallop on 2019/8/14.
+ * Created by pony on 2019/8/14.
  * Copyright holike possess 2019.
  * 客户管理模块通用activity
  */

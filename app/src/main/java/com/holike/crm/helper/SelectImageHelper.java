@@ -24,7 +24,7 @@ import java.util.List;
 
 
 /**
- * Created by gallop on 2019/7/19.
+ * Created by pony on 2019/7/19.
  * Copyright holike possess 2019.
  * 选择图片展示
  */

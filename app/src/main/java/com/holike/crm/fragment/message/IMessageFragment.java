@@ -24,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by gallop on 2019/8/21.
+ * Created by pony on 2019/8/21.
  * Copyright holike possess 2019.
  */
 public abstract class IMessageFragment extends MyFragment<MessageV2Presenter, MessageV2View>

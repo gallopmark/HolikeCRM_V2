@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/7/29.
+ * Created by pony on 2019/7/29.
  * Copyright holike possess 2019.
  * 预约安装帮助类
  */
@@ -48,6 +48,7 @@ public class UninstallHelper {
     private List<Installer> mSelectedInstallers; //从详情进来，已被选择的安装师傅集合
     private List<Installer> mDeleteInstallers;  //被删除的安装师傅id集合
     private InstallerAdapter mAdapter;
+    private String mShopId; //门店id，从客户详情带过来，目的根据门店id查询安装工
     private String mPersonalId,
             mHouseId, mPhone,
             mAddress, mName,
@@ -70,6 +71,7 @@ public class UninstallHelper {
         }
         mAdapter = new InstallerAdapter(mContext, mList);
         mRecyclerView.setAdapter(mAdapter);
+        mCallback.onQueryInstallers(mShopId, false);
     }
 
     private void initView(View contentView) {
@@ -131,6 +133,7 @@ public class UninstallHelper {
     }
 
     private void obtainBundleValue(Bundle bundle) {
+        mShopId = bundle.getString("shopId");
         mPersonalId = bundle.getString(CustomerValue.PERSONAL_ID);
         mHouseId = bundle.getString(CustomerValue.HOUSE_ID);
         mName = bundle.getString("name");
@@ -209,7 +212,7 @@ public class UninstallHelper {
         }
         if (mInstallUsers == null) {
             mIsTrigger = true;
-            mCallback.onQueryInstallers(true);
+            mCallback.onQueryInstallers(mShopId, true);
         } else {
             selectInstaller();
         }
@@ -375,7 +378,7 @@ public class UninstallHelper {
     }
 
     public interface Callback {
-        void onQueryInstallers(boolean showLoading);
+        void onQueryInstallers(String shopId, boolean showLoading);
 
         void onRequired(CharSequence text);
 

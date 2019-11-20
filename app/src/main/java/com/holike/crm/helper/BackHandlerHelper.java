@@ -20,7 +20,6 @@ public class BackHandlerHelper {
      * 没有处理back事件，则尝试 FragmentManager.popBackStack()
      *
      * @return 如果处理了back键则返回 <b>true</b>
-     * @see #handleBackPress(Fragment)
      * @see #handleBackPress(FragmentActivity)
      */
     public static boolean handleBackPress(FragmentManager fragmentManager) {
@@ -41,6 +40,7 @@ public class BackHandlerHelper {
         return false;
     }
 
+    @Deprecated
     public static boolean handleBackPress(Fragment fragment) {
         return handleBackPress(fragment.getChildFragmentManager());
     }
@@ -54,7 +54,7 @@ public class BackHandlerHelper {
      *
      * @return 如果处理了back键则返回 <b>true</b>
      */
-    public static boolean isFragmentBackHandled(Fragment fragment) {
+    private static boolean isFragmentBackHandled(Fragment fragment) {
         return fragment != null && fragment.isVisible() && fragment.getUserVisibleHint() //for ViewPager
                 && fragment instanceof FragmentBackHandler && ((FragmentBackHandler) fragment).onBackPressed();
     }

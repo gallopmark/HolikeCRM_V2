@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/tv_receipt_category"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_80"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/tv_receipt_amount"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/tv_receipt_time"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_80"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />

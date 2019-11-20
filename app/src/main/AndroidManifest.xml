@@ -30,15 +30,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-
-    <!--x5 webView-->
     <uses-permission android:name="android.permission.READ_SETTINGS" />
 
-    <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
-
-
     <uses-permission android:name="android.permission.GET_TASKS" />
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="false"
@@ -222,7 +217,21 @@
         <activity android:name=".activity.SettingsActivity" />
 
         <!--v3.0-->
-        <activity android:name=".activity.reportv3.BusinessReferenceActivity" />
+        <activity android:name=".activity.report.TestActivity" />
+        <activity android:name=".activity.report.BusinessReferenceMainActivity" /> <!--生意内参首页-->
+        <activity android:name=".activity.report.DealerMultiPerformanceActivity" /> <!--生意内参分类-->
+        <activity android:name=".activity.report.EmployeeRankingActivity" />  <!--员工排行-->
+        <activity android:name=".activity.report.BusinessTargetActivity" /> <!--经营目标-->
+        <activity android:name=".activity.report.BusinessSetTargetActivity" /><!--设置目标-->
+        <activity android:name=".activity.report.EmployeePerformanceActivity" /> <!--员工绩效-->
+        <activity android:name=".activity.report.ReportGridActivity" /> <!--报表分类-->
+        <activity android:name=".activity.report.CustomerConversionActivity" /> <!--客户转化率-->
+        <activity android:name=".activity.report.OnlineDrainageActivity" /> <!--线上引流报表-->
+        <activity android:name=".activity.report.HomeDollChannelActivity" /><!--家装渠道-->
+        <activity android:name=".activity.report.SheetAnalysisActivity" /> <!--板材分析-->
+        <activity android:name=".activity.report.ShopAnalysisActivity" /> <!--门店分析-->
+        <activity android:name=".activity.report.FactoryPerformanceActivity" /> <!--出产业绩报表-->
+        <activity android:name=".activity.report.MultiPerformanceAnalysisActivity" /> <!--业绩分析-->
 
         <!--版本更新服务-->
         <service android:name=".service.VersionUpdateService" />

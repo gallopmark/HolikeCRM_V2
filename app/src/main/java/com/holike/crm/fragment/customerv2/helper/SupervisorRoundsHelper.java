@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/7/24.
+ * Created by pony on 2019/7/24.
  * Copyright holike possess 2019.
  * 主管查房帮助类
  */

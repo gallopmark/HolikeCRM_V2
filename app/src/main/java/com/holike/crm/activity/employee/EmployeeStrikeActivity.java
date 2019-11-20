@@ -23,7 +23,7 @@ import java.util.Map;
 import butterknife.OnClick;
 
 /**
- * Created by gallop on 2019/8/8.
+ * Created by pony on 2019/8/8.
  * Copyright holike possess 2019.
  */
 public class EmployeeStrikeActivity extends MyFragmentActivity<EmployeeEditV2Presenter, EmployeeEditV2View>

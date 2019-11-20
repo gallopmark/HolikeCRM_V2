@@ -22,6 +22,7 @@ import com.holike.crm.base.BaseFragment;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
 import com.holike.crm.bean.internal.Installer;
+import com.holike.crm.enumeration.CustomerOperateCode;
 import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.helper.TextSpanHelper;
 import com.holike.crm.http.CustomerUrlPath;
@@ -31,26 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class IHouseHelper {
-
-    /*操作流程状态码*/
-    static class OperateCode {
-        static final String CODE_GUIDE = "01"; //分配导购
-        static final String CODE_UNMEASURED = "04"; //预约量尺
-        static final String CODE_DESIGNER = "05";   //分配设计师
-        static final String CODE_MEASURED = "06";   //量尺结果
-        static final String CODE_UPLOAD_PLAN = "07";    //上传方案
-        static final String CODE_ROUNDS = "08"; //主管查房
-        static final String CODE_CONTRACT = "09";   //合同登记
-        static final String CODE_ORDER = "11";  //生成订单
-        static final String CODE_LOSE = "12";   //已流失
-        static final String CODE_UNINSTALL = "15";  //预约安装
-        static final String CODE_INSTALLED = "16";  //安装完成
-        static final String CODE_INSTALL_DRAWING = "17";    //上传安装图纸
-        static final String CODE_MESSAGE_BOARD = "18";  //留言记录
-        static final String CODE_RECEIPT = "19";    //收款
-        static final String CODE_CONFIRM_LOSE = "21";   //确认流失
-        static final String CODE_INVALID_RETURN = "23";  //（线上引流）无效退回
-    }
 
     TextSpanHelper mTextHelper;
     LayoutInflater mLayoutInflater;
@@ -279,7 +260,7 @@ class IHouseHelper {
                 ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.textColor21)), 0, source.length(), flags);
                 ss.setSpan(new StyleSpan(Typeface.NORMAL), 0, source.length(), flags);
             } else {
-                String source = tips + (TextUtils.isEmpty(bean.installSquare) ? "" : bean.installSquare + "m2");
+                String source = tips + bean.installSquare + "m2";
                 ss = new SpannableString(source);
                 int start = source.lastIndexOf("2");
                 int end = source.lastIndexOf("2") + 1;
@@ -345,85 +326,85 @@ class IHouseHelper {
     /*导购历史记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getGuideHistory() {
-        return getHistoryByCode(OperateCode.CODE_GUIDE);
+        return getHistoryByCode(CustomerOperateCode.CODE_GUIDE);
     }
 
     /*预约量房记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getUnmeasuredHistory() {
-        return getHistoryByCode(OperateCode.CODE_UNMEASURED);
+        return getHistoryByCode(CustomerOperateCode.CODE_UNMEASURED);
     }
 
     /*分配设计师记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getDesignerHistory() {
-        return getHistoryByCode(OperateCode.CODE_DESIGNER);
+        return getHistoryByCode(CustomerOperateCode.CODE_DESIGNER);
     }
 
     /*量房完成记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getMeasuredHistory() {
-        return getHistoryByCode(OperateCode.CODE_MEASURED);
+        return getHistoryByCode(CustomerOperateCode.CODE_MEASURED);
     }
 
     /*上传方案记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getUploadPlanHistory() {
-        return getHistoryByCode(OperateCode.CODE_UPLOAD_PLAN);
+        return getHistoryByCode(CustomerOperateCode.CODE_UPLOAD_PLAN);
     }
 
     /*主管查房记录*/
     CustomerManagerV2Bean.HistoryBean getRoundsHistory() {
-        return getHistoryByCode(OperateCode.CODE_ROUNDS);
+        return getHistoryByCode(CustomerOperateCode.CODE_ROUNDS);
     }
 
     /*收款记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getReceiptHistory() {
-        return getHistoryByCode(OperateCode.CODE_RECEIPT);
+        return getHistoryByCode(CustomerOperateCode.CODE_RECEIPT);
     }
 
     /*合同登记记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getContractHistory() {
-        return getHistoryByCode(OperateCode.CODE_CONTRACT);
+        return getHistoryByCode(CustomerOperateCode.CODE_CONTRACT);
     }
 
     /*订单记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getOrderHistory() {
-        return getHistoryByCode(OperateCode.CODE_ORDER);
+        return getHistoryByCode(CustomerOperateCode.CODE_ORDER);
     }
 
     /*流失记录*/
     @SuppressWarnings("unused")
     @Nullable
     CustomerManagerV2Bean.HistoryBean getLoseHistory() {
-        return getHistoryByCode(OperateCode.CODE_LOSE);
+        return getHistoryByCode(CustomerOperateCode.CODE_LOSE);
     }
 
     /*导购历史记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getUninstallHistory() {
-        return getHistoryByCode(OperateCode.CODE_UNINSTALL);
+        return getHistoryByCode(CustomerOperateCode.CODE_UNINSTALL);
     }
 
     /*安装完成记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getInstalledHistory() {
-        return getHistoryByCode(OperateCode.CODE_INSTALLED);
+        return getHistoryByCode(CustomerOperateCode.CODE_INSTALLED);
     }
 
     /*上传安装图纸记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getInstallDrawingHistory() {
-        return getHistoryByCode(OperateCode.CODE_INSTALL_DRAWING);
+        return getHistoryByCode(CustomerOperateCode.CODE_INSTALL_DRAWING);
     }
 
     /*留言板记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getMessageBoardHistory() {
-        return getHistoryByCode(OperateCode.CODE_MESSAGE_BOARD);
+        return getHistoryByCode(CustomerOperateCode.CODE_MESSAGE_BOARD);
     }
 
     @Nullable
@@ -438,42 +419,42 @@ class IHouseHelper {
 
     /*预约量尺 编辑按钮是否显示*/
     boolean isUnmeasuredEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_UNMEASURED);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_UNMEASURED);
     }
 
     /*量尺结果 编辑按钮是否显示*/
     boolean isMeasuredEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_MEASURED);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_MEASURED);
     }
 
     /*上传方案 编辑按钮是否显示*/
     boolean isUploadPlanEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_UPLOAD_PLAN);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_UPLOAD_PLAN);
     }
 
     /*主管查房 编辑按钮是否显示*/
     boolean isRoundsEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_ROUNDS);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_ROUNDS);
     }
 
     /*合同登记 编辑按钮是佛显示*/
     boolean isContractEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_CONTRACT);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_CONTRACT);
     }
 
     /*预约安装 编辑按钮是否显示*/
     boolean isUninstallEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_UNINSTALL);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_UNINSTALL);
     }
 
     /*上传安装图纸 编辑按钮是否显示*/
     boolean isInstallDrawingEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_INSTALL_DRAWING);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_INSTALL_DRAWING);
     }
 
     /*安装完成 编辑按钮是佛硻*/
     boolean isInstalledEditVisibility() {
-        return isOperateItemEnabled(OperateCode.CODE_INSTALLED);
+        return isOperateItemEnabled(CustomerOperateCode.CODE_INSTALLED);
     }
 
     /*操作菜单是否被锁上*/
@@ -678,6 +659,7 @@ class IHouseHelper {
     /*预约安装*/
     Bundle uninstall() {
         Bundle bundle = new Bundle();
+        bundle.putString("shopId", mCurrentHouseDetailBean.shopId);
         CustomerManagerV2Bean.PersonalInfoBean personalBean = mManagerV2Bean.getPersonalInfo();
         if (personalBean != null) {
             bundle.putString(CustomerValue.PERSONAL_ID, personalBean.personalId);

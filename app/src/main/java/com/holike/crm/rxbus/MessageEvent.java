@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 /**
- * Created by gallop on 2019/8/23.
+ * Created by pony on 2019/8/23.
  * Copyright holike possess 2019.
  */
 public class MessageEvent {

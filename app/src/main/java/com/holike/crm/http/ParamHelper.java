@@ -1,20 +1,33 @@
 package com.holike.crm.http;
 
 
+import android.text.TextUtils;
+
 import androidx.annotation.Nullable;
 
 import com.holike.crm.util.SharedPreferencesUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/8/1.
+ * Created by pony on 2019/8/1.
  * Copyright holike possess 2019.
  */
 public class ParamHelper {
+
+    public static String urlEncode(String source) {
+        if (TextUtils.isEmpty(source)) return "";
+        try {
+            return URLEncoder.encode(source, "utf-8");
+        } catch (Exception e) {
+            return source;
+        }
+    }
 
     public static Map<String, String> general() {
         return new HashMap<>();
@@ -351,7 +364,7 @@ public class ParamHelper {
          * @return body
          */
         public static String addHouseInfo(String personalId, String provinceCode, String cityCode, String districtCode,
-                                          String address, String shopId,String groupId, String budgetTypeCode, String spareContact,
+                                          String address, String shopId, String groupId, String budgetTypeCode, String spareContact,
                                           String spareContactPhone, String remark) {
             Map<String, String> params = general();
             params.put("dealerId", noNullWrap(SharedPreferencesUtils.getDealerId()));
@@ -361,7 +374,7 @@ public class ParamHelper {
             params.put("districtCode", noNullWrap(districtCode));
             params.put("address", noNullWrap(address));
             params.put("shopId", noNullWrap(shopId));
-            params.put("groupId",noNullWrap(groupId));
+            params.put("groupId", noNullWrap(groupId));
             params.put("budgetTypeCode", noNullWrap(budgetTypeCode));
             params.put("spareContact", noNullWrap(spareContact));
             params.put("spareContactPhone", noNullWrap(spareContactPhone));

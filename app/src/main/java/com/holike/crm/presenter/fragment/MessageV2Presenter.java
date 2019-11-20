@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/8/21.
+ * Created by pony on 2019/8/21.
  * Copyright holike possess 2019.
  */
 public class MessageV2Presenter extends BasePresenter<MessageV2View, MessageV2Model> {

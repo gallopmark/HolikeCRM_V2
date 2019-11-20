@@ -273,8 +273,9 @@ public class DatetimePickerDialog extends CommonDialog {
     /*获取最小年份*/
     private int getMinYear() {
         Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int minYear = year - 100;  //往后100年
+//        int year = calendar.get(Calendar.YEAR);
+//        int minYear = year - 100;  //往后100年
+        int minYear = 1970;  //默认从1970年开始
         if (mMinDate != null) {
             calendar.setTime(mMinDate);
             minYear = calendar.get(Calendar.YEAR);

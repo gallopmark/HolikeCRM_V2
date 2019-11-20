@@ -10,15 +10,13 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.gallopmark.imagepicker.model.ImagePicker;
 import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.AssociateBean;
 import com.holike.crm.bean.CustomerDetailBean;
 import com.holike.crm.bean.TypeIdBean;
+import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.helper.UploadImgHelper;
 import com.holike.crm.presenter.activity.AddCustomerPresenter;
 import com.holike.crm.presenter.fragment.WorkflowPresenter;
@@ -27,7 +25,6 @@ import com.holike.crm.util.TimeUtil;
 import com.holike.crm.view.fragment.WorkflowView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -156,14 +153,21 @@ public abstract class WorkflowFragment extends MyFragment<WorkflowPresenter, Wor
         if (view != null) {
             hideSoftInput(view);
         }
-        TimePickerView pvTime = new TimePickerBuilder(context, (date, v) ->
-                selectTime(date)).setType(new boolean[]{true, true, true, false, false, false}).build();
-        if (!TextUtils.isEmpty(time)) {
-            pvTime.setDate(TimeUtil.stringToCalendar(time, "yyyy.MM.dd"));
+        Date selectDate;
+        if (TextUtils.isEmpty(time) || TextUtils.equals(time, "无法显示时间")) {
+            selectDate = new Date();
         } else {
-            pvTime.setDate(Calendar.getInstance());
+            selectDate = TimeUtil.stringToCalendar(time, "yyyy.MM.dd").getTime();
         }
-        pvTime.show();
+        PickerHelper.showTimePicker(mContext, selectDate, this::selectTime);
+//        TimePickerView pvTime = new TimePickerBuilder(context, (date, v) ->
+//                selectTime(date)).setType(new boolean[]{true, true, true, false, false, false}).build();
+//        if (!TextUtils.isEmpty(time)) {
+//            pvTime.setDate(TimeUtil.stringToCalendar(time, "yyyy.MM.dd"));
+//        } else {
+//            pvTime.setDate(Calendar.getInstance());
+//        }
+//        pvTime.show();
     }
 
 }

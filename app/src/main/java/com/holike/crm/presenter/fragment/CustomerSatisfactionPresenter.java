@@ -7,7 +7,7 @@ import com.holike.crm.model.fragment.CustomerSatisfactionModel;
 import com.holike.crm.view.fragment.CustomerSatisfactionView;
 
 /**
- * Created by gallop on 2019/9/20.
+ * Created by pony on 2019/9/20.
  * Copyright holike possess 2019.
  */
 public class CustomerSatisfactionPresenter extends BasePresenter<CustomerSatisfactionView, CustomerSatisfactionModel> {

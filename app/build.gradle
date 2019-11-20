@@ -68,7 +68,9 @@ android {
         android.applicationVariants.all { variant ->
             variant.outputs.all {
                 // 输出apk名称为CRM_1.0.0_debug.apk
-                outputFileName = "CRM_${defaultConfig.versionName}_${variant.buildType.name}.apk"
+                outputFileName = "智慧营销平台-" + "V${defaultConfig.versionName}" +
+                        "-${new Date().format("yyyyMMdd_HHmm", TimeZone.getTimeZone("UTC"))}"+
+                        "-${variant.buildType.name}.apk"
             }
         }
         release {//正式环境 
@@ -76,7 +78,7 @@ android {
             shrinkResources true
             minifyEnabled true
             zipAlignEnabled true
-            resValue "string", "app_name", "好莱客CRM"
+            resValue "string", "app_name", "智慧营销平台"  //好莱客CRM
             buildConfigField "boolean", "LOG_DEBUG", "false"
             buildConfigField "String", "UM_KEY", "\"5af111be8f4a9d08990000d5\""
             buildConfigField "String", "API_HOST", "\"https://client.holike.com\""  //正式线
@@ -96,17 +98,20 @@ android {
             shrinkResources false
             minifyEnabled false
             zipAlignEnabled true
-            resValue "string", "app_name", "crm-测试"
+            resValue "string", "app_name", "智慧营销平台"   //智慧营销平台  --crm-测试
             buildConfigField "boolean", "LOG_DEBUG", "true"
             buildConfigField "String", "UM_KEY", "\"5af511d7f29d982bdf000093\""
-            buildConfigField "String", "API_HOST", "\"http://120.79.9.159:8081\""  //测试线
+            buildConfigField "String", "API_HOST", "\"http://120.79.9.159:8081\""
+            //测试线  119.23.232.149  --120.79.9.159
             buildConfigField "String", "API_HOST_CM", "\"http://120.79.76.243/customermgr/api\""
             //客户管理测试线
             buildConfigField "String", "API_HOST_CM_SHORT", "\"http://120.79.76.243\""
             /*客户管理 v2.0 测试接口地址*/
             buildConfigField "String", "API_CUSTOMER_MANAGER", "\"http://120.79.9.159:8090/customermanager/api\""
+            //120.79.9.159   - 119.23.232.149
             /*线上引流测试接口*/
             buildConfigField "String", "API_HOST_ONLINE_DRAINAGE", "\"http://120.79.9.159:9090/newretailBoot/public/details\""
+            //119.23.232.149
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             matchingFallbacks = ['debug']
             signingConfig signingConfigs.config
@@ -180,8 +185,8 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
     implementation 'com.aliyun.dpa:oss-android-sdk:2.4.5'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    implementation 'com.umeng.sdk:common:1.5.0'
-    implementation 'com.umeng.sdk:analytics:7.5.0'
+    implementation 'com.umeng.umsdk:analytics:8.0.0'
+    implementation 'com.umeng.umsdk:common:2.0.0'
 
     //    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.4'
 
@@ -214,10 +219,11 @@ dependencies {
     implementation project(':AndroidCalendarPicker')
 
     /*图片压缩库*/
+
     implementation 'top.zibin:Luban:1.1.8'
 
     //https://github.com/bingoogolapple/BGAQRCode-Android
-    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
+//    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
     implementation 'com.github.gallopmark:titlebar:1.1.0'
     implementation 'com.liulishuo.filedownloader:library:1.7.6'
 
@@ -225,8 +231,9 @@ dependencies {
     implementation 'com.google.android:flexbox:1.1.0'
 
     /*chartView 画图工具包*/
-    implementation 'com.github.gallopmark:chartview:1.0.7'
+    implementation 'com.github.gallopmark:chartview:1.2.4'
 
     //https://github.com/jenly1314/ZXingLite
+    implementation 'com.github.gallopmark:zxinglib:1.0.2'
 //    implementation 'com.king.zxing:zxing-lite:1.1.3-androidx'
 }

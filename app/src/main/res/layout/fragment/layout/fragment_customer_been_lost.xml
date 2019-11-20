@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -48,7 +49,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_18"
-                android:layout_marginBottom="@dimen/dp_18"
                 android:orientation="horizontal">
 
                 <TextView
@@ -63,10 +63,12 @@
                 <TextView style="@style/Required_TextViewStyle" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_series"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/et_go"
+                style="@style/EditText_Remark_Style"
+                android:layout_marginTop="@dimen/dp_14"
+                android:hint="@string/followup_lose_series_hint"
+                tools:ignore="Autofill" />
 
             <View style="@style/divider_horizontal" />
 

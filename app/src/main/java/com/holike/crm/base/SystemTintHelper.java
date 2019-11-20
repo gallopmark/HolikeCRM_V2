@@ -24,11 +24,11 @@ public class SystemTintHelper {
      * @return 1:MIUUI 2:Flyme 3:android6.0
      */
     @SuppressWarnings("UnusedReturnValue")
-    static int setStatusBarLightMode(Activity activity) {
+    public static int setStatusBarLightMode(Activity activity) {
         return setStatusBarLightMode(activity.getWindow());
     }
 
-    private static int setStatusBarLightMode(Window window) {
+    public static int setStatusBarLightMode(Window window) {
         int result = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -218,7 +218,7 @@ public class SystemTintHelper {
         return resources.getDimensionPixelSize(resourceId);
     }
 
-    static void fullScreen(Activity activity) {
+    public static void fullScreen(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色

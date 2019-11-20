@@ -4,7 +4,6 @@ import android.content.Intent;
 
 
 import com.holike.crm.R;
-import com.holike.crm.bean.DealerInfoBean;
 import com.holike.crm.bean.SysCodeItemBean;
 import com.holike.crm.fragment.customerv2.helper.InstalledHelper;
 
@@ -13,7 +12,7 @@ import java.util.Map;
 
 
 /**
- * Created by gallop on 2019/7/23.
+ * Created by pony on 2019/7/23.
  * Copyright holike possess 2019.
  * 安装完成
  */
@@ -44,11 +43,11 @@ public class InstalledFragment extends GeneralCustomerFragment implements Instal
     }
 
     /*获取经销商安装工*/
-    @Override
-    public void onQueryInstaller() {
-        showLoading();
-        mPresenter.getDealerInstaller();
-    }
+//    @Override
+//    public void onQueryInstaller() {
+//        showLoading();
+//        mPresenter.getDealerInstaller();
+//    }
 
     @Override
     public void onRequired(CharSequence text) {

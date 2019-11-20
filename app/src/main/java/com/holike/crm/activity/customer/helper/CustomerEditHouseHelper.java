@@ -26,7 +26,7 @@ import java.util.Map;
 
 
 /**
- * Created by gallop on 2019/8/2.
+ * Created by pony on 2019/8/2.
  * Copyright holike possess 2019.
  * 客户新建或编辑房屋
  */
@@ -157,8 +157,8 @@ public class CustomerEditHouseHelper extends CheckInputHelper implements SelectR
     }
 
     @Override
-    void onActivationCustomer(String personalId, String houseId, String shopId, String groupId, String guideId) {
-        mCallback.onActivationCustomer(personalId, houseId, shopId, groupId, guideId);
+    void onActivationCustomer(String personalId, String houseId, String shopId, String groupId) {
+        mCallback.onActivationCustomer(personalId,houseId, shopId, groupId);
     }
 
     @Override
@@ -329,7 +329,7 @@ public class CustomerEditHouseHelper extends CheckInputHelper implements SelectR
 
         void onReceivingCustomer(String personalId, String houseId, String shopId, String groupId);
 
-        void onActivationCustomer(String personalId, String houseId, String shopId, String groupId, String guideId);
+        void onActivationCustomer(String personalId, String houseId, String shopId, String groupId);
 
         void onDistributionMsgPush(String requestBody);
     }

@@ -39,6 +39,7 @@ import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
 import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.dialog.ReceivingCustomerDialog;
+import com.holike.crm.enumeration.CustomerOperateCode;
 import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.helper.ICallPhoneHelper;
 import com.holike.crm.itemdecoration.GridSpacingItemDecoration;
@@ -49,12 +50,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/7/16.
+ * Created by pony on 2019/7/16.
  * Copyright holike possess 2019.
  * 客户管理页面帮助类
  */
 public class CustomerManagerHelper extends IHouseHelper {
 
+    private boolean mOnlineDrainage; //是否是线上引流客户
     private boolean mHighSeasFlag; //是否是公海标识，从bundle带过来，如果为true，则调公海客户详情接口
     private String mPersonalId = "";
     private String mSelectedHouseId;  //选中的房屋（进来默认选中那个房屋）
@@ -142,6 +144,7 @@ public class CustomerManagerHelper extends IHouseHelper {
 
     private void validOnlineLog() {
         if (mCustomerInfoBean != null && TextUtils.equals(mCustomerInfoBean.source, "09")) { //线上引流客户
+            mOnlineDrainage = true;
             mOnlineLogTextView.setVisibility(View.VISIBLE);
             mOnlineLogTextView.setOnClickListener(view -> CustomerOnlineLogActivity.open(mContext, mCustomerInfoBean.personalId));
         } else {
@@ -221,6 +224,7 @@ public class CustomerManagerHelper extends IHouseHelper {
         bundle.putString("intentLevelName", mCustomerInfoBean.getIntentionLevel()); //意向评级名称
         bundle.putString("nextFollowTime", mCustomerInfoBean.nextFollowTime); //下次跟进
         bundle.putString("activityPolicy", mCustomerInfoBean.activityPolicy); //活动政策
+        bundle.putBoolean("isOnline", mOnlineDrainage);  //是否是线上引流客户
         return bundle;
     }
 
@@ -306,16 +310,19 @@ public class CustomerManagerHelper extends IHouseHelper {
         TextView tvEditInfo = mHeaderView.findViewById(R.id.tv_edit_info); //编辑客户信息
         TextView tvAddHouse = mHeaderView.findViewById(R.id.tv_add_house); //添加房屋
         TextView tvEditHouse = mHeaderView.findViewById(R.id.tv_edit_house); //编辑房屋信息
+        if (mOnlineDrainage || mIsHighSeaHouse) { //线上引流客户、公海客户-不能添加房屋
+            tvAddHouse.setVisibility(View.GONE);
+        } else {
+            tvAddHouse.setVisibility(View.VISIBLE);
+            tvAddHouse.setOnClickListener(view -> mCallback.onEditHouse(obtainBundle(null)));
+        }
         if (mIsHighSeaHouse) { //公海客户隐藏 编辑客户信息按钮、添加房屋按钮、编辑房屋信息按钮
             tvEditInfo.setVisibility(View.GONE);
-            tvAddHouse.setVisibility(View.GONE);
             tvEditHouse.setVisibility(View.GONE);
         } else {
             tvEditInfo.setVisibility(View.VISIBLE);
-            tvAddHouse.setVisibility(View.VISIBLE);
             tvEditHouse.setVisibility(View.VISIBLE);
             tvEditInfo.setOnClickListener((v -> mCallback.onEditInfo(alterCustomer())));
-            tvAddHouse.setOnClickListener(view -> mCallback.onEditHouse(obtainBundle(null)));
             tvEditHouse.setOnClickListener(view -> mCallback.onEditHouse(obtainBundle(mCurrentHouseDetailBean)));
         }
     }
@@ -725,37 +732,37 @@ public class CustomerManagerHelper extends IHouseHelper {
         /*操作流程点击*/
         private void onOperateClick(CustomerManagerV2Bean.OperateItemBean bean) {
             String code = bean.iconCode;
-            if (TextUtils.equals(code, OperateCode.CODE_MESSAGE_BOARD)) {  //留言板
+            if (TextUtils.equals(code, CustomerOperateCode.CODE_MESSAGE_BOARD)) {  //留言板
                 mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() + 1);  //滚动到底部
-            } else if (TextUtils.equals(code, OperateCode.CODE_GUIDE)) {  //分配导购
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_GUIDE)) {  //分配导购
                 openMultipleActivity(CustomerValue.TYPE_ASSIGN_GUIDE, assignGuide());
-            } else if (TextUtils.equals(code, OperateCode.CODE_DESIGNER)) { //分配设计师
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_DESIGNER)) { //分配设计师
                 openMultipleActivity(CustomerValue.TYPE_ASSIGN_DESIGNER, assignDesigner());
-            } else if (TextUtils.equals(code, OperateCode.CODE_RECEIPT)) { //收款
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_RECEIPT)) { //收款
                 openMultipleActivity(CustomerValue.TYPE_RECEIPT, payment());
-            } else if (TextUtils.equals(code, OperateCode.CODE_LOSE)) { //已流失
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_LOSE)) { //已流失
                 openMultipleActivity(CustomerValue.TYPE_BEEN_LOST, null);
-            } else if (TextUtils.equals(code, OperateCode.CODE_UNMEASURED)) { //预约量尺
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_UNMEASURED)) { //预约量尺
                 toUnmeasured();
-            } else if (TextUtils.equals(code, OperateCode.CODE_MEASURED)) { //量尺结果
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_MEASURED)) { //量尺结果
                 toMeasured();
-            } else if (TextUtils.equals(code, OperateCode.CODE_UPLOAD_PLAN)) { //上传方案
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_UPLOAD_PLAN)) { //上传方案
                 toUploadPlan();
-            } else if (TextUtils.equals(code, OperateCode.CODE_ROUNDS)) { //主管查房
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_ROUNDS)) { //主管查房
                 toRounds();
-            } else if (TextUtils.equals(code, OperateCode.CODE_CONTRACT)) { //合同登记（仅能登记一次）
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_CONTRACT)) { //合同登记（仅能登记一次）
                 if (!mCurrentHouseDetailBean.isContractRegistration()) {  //没有填过合同登记
                     toContractRegister();
                 }
-            } else if (TextUtils.equals(code, OperateCode.CODE_INSTALL_DRAWING)) { //上传安装图纸
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_INSTALL_DRAWING)) { //上传安装图纸
                 toInstallDrawing();
-            } else if (TextUtils.equals(code, OperateCode.CODE_UNINSTALL)) { //预约安装
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_UNINSTALL)) { //预约安装
                 toUninstall();
-            } else if (TextUtils.equals(code, OperateCode.CODE_INSTALLED)) { //安装完成
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_INSTALLED)) { //安装完成
                 toInstalled();
-            } else if (TextUtils.equals(code, OperateCode.CODE_CONFIRM_LOSE)) { //确认流失
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_CONFIRM_LOSE)) { //确认流失
                 toConfirmLose();
-            } else if (TextUtils.equals(code, OperateCode.CODE_INVALID_RETURN)) { //无效退回
+            } else if (TextUtils.equals(code, CustomerOperateCode.CODE_INVALID_RETURN)) { //无效退回
                 toInvalidReturn();
             }
         }

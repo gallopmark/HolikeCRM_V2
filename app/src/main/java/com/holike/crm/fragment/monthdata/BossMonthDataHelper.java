@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,47 +23,36 @@ import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.bean.MonthDataBossBean;
 import com.holike.crm.helper.TextSpanHelper;
+import com.holike.crm.util.RecyclerUtils;
 
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/9.
+ * Created by pony on 2019/8/9.
  * Copyright holike possess 2019.
  * 老板、店长等本月数据
  */
 class BossMonthDataHelper extends MonthDataHelper {
 
     private ViewStub mContentViewStub;
-    private View mFragmentView;
     private View mContentView;
 
     BossMonthDataHelper(BaseFragment<?, ?> fragment, Callback callback) {
-        super((BaseActivity<?, ?>) fragment.getActivity(), callback);
-        mFragmentView = fragment.getContentView();
-        mContentViewStub = mFragmentView.findViewById(R.id.vs_form_data);
-        Bundle bundle = fragment.getArguments();
-        boolean isAnimation = false;
-        if (bundle != null) {
-            mType = bundle.getString("type");
-            mCityCode = bundle.getString("cityCode");
-            mStartDate = (Date) bundle.getSerializable("startDate");
-            mEndDate = (Date) bundle.getSerializable("endDate");
-            boolean isDescription = bundle.getBoolean("isDescription", true);
-            mFragmentView.findViewById(R.id.tv_description).setVisibility(isDescription ? View.VISIBLE : View.GONE);
-            isAnimation = bundle.getBoolean("isAnimation", false);
-        }
-        long delayMillis = 0;
-        if (isAnimation) {
-            delayMillis = 300;
-        }
-        mFragmentView.postDelayed(mAction, delayMillis);
+        super(fragment, callback);
     }
 
-    private final Runnable mAction = this::onQuery;
+    @Override
+    void initView() {
+        mContentViewStub = mFragmentView.findViewById(R.id.vs_form_data);
+    }
 
-    void onDestroy() {
-        mFragmentView.removeCallbacks(mAction);
+    @Override
+    void obtainBundle(@Nullable Bundle bundle) {
+        boolean isDescription = true;
+        if (bundle != null) {
+            isDescription = bundle.getBoolean("isDescription", true);
+        }
+        mFragmentView.findViewById(R.id.tv_description).setVisibility(isDescription ? View.VISIBLE : View.GONE);
     }
 
     void onSuccess(MonthDataBossBean bean) {
@@ -80,31 +70,30 @@ class BossMonthDataHelper extends MonthDataHelper {
         }
         String shop = bean.isShop;
         final RecyclerView contentRecyclerView = mContentView.findViewById(R.id.rv_content);
-        contentRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        contentRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         contentRecyclerView.setNestedScrollingEnabled(false);
         if (TextUtils.equals(shop, "1")) { //1小组数据 2员工数据 3员工收款数据
-            View firstLayout = LayoutInflater.from(mActivity).inflate(R.layout.include_form_data_firstrow_60dp, contentLayout, false);
+            View firstLayout = LayoutInflater.from(mContext).inflate(R.layout.include_form_data_column_60dp, contentLayout, false);
             TextView tvFirst = firstLayout.findViewById(R.id.tv_first_name);
-            tvFirst.setText(mActivity.getString(R.string.report_table_divide));
+            tvFirst.setText(mContext.getString(R.string.report_table_divide));
             contentLayout.addView(firstLayout, 1);  //动态添加layout 第一列数据展示布局
             RecyclerView sideRecyclerView = mContentView.findViewById(R.id.rv_side);
-            sideRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+            sideRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             LinearLayout scrollableLayout = getScrollableLayout();
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_boss_tablist, scrollableLayout, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_boss_tablist, scrollableLayout, false);
             TextView tvInstallArea = view.findViewById(R.id.tv_install_area);
             setSquareMeter(tvInstallArea);
             scrollableLayout.addView(view, 0);
-            sideRecyclerView.setAdapter(new ClickableSideAdapter(mActivity, bean.getArr()));
-            ScrollableContentAdapter adapter = new ScrollableContentAdapter(mActivity, bean.getArr());
+            sideRecyclerView.setAdapter(new ClickableSideAdapter(mContext, bean.getArr()));
+            ScrollableContentAdapter adapter = new ScrollableContentAdapter(mContext, bean.getArr());
             contentRecyclerView.setAdapter(adapter);
-            setScrollSynchronous(sideRecyclerView, contentRecyclerView);
-            setScrollSynchronous(contentRecyclerView, sideRecyclerView);
+            RecyclerUtils.setScrollSynchronous(sideRecyclerView, contentRecyclerView);
         } else if (TextUtils.equals(shop, "2")) { //员工数据
             List<MonthDataBossBean.ArrBean2> list = bean.getArr2();
             final RecyclerView rvRole = mFragmentView.findViewById(R.id.rv_role);
             rvRole.setVisibility(View.VISIBLE);
-            rvRole.setLayoutManager(new LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false));
-            final RoleListAdapter adapter = new RoleListAdapter(mActivity, list);
+            rvRole.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
+            final RoleListAdapter adapter = new RoleListAdapter(mContext, list);
             rvRole.setAdapter(adapter);
             adapter.setOnItemClickListener((a, holder, view, position) -> {
                 adapter.setSelectIndex(position);
@@ -113,19 +102,18 @@ class BossMonthDataHelper extends MonthDataHelper {
             });
             switchRole(contentLayout, 0, list, contentRecyclerView);
         } else { //员工收款数据
-            View firstLayout = LayoutInflater.from(mActivity).inflate(R.layout.include_form_data_firstrow_80dp, contentLayout, false);
+            View firstLayout = LayoutInflater.from(mContext).inflate(R.layout.include_form_data_column_80dp, contentLayout, false);
             TextView tvFirst = firstLayout.findViewById(R.id.tv_first_name);
-            tvFirst.setText(mActivity.getString(R.string.tips_customer_name));
+            tvFirst.setText(mContext.getString(R.string.tips_customer_name));
             contentLayout.addView(firstLayout, 1);  //动态添加layout 第一列数据展示布局
             RecyclerView sideRecyclerView = mContentView.findViewById(R.id.rv_side);
-            sideRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+            sideRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             LinearLayout scrollableLayout = getScrollableLayout();
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_boss_tablowest, scrollableLayout, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_boss_tablowest, scrollableLayout, false);
             scrollableLayout.addView(view, 0);
-            sideRecyclerView.setAdapter(new SingleSideAdapter(mActivity, bean.getArr3()));
-            contentRecyclerView.setAdapter(new SingleDetailDataAdapter(mActivity, bean.getArr3()));
-            setScrollSynchronous(sideRecyclerView, contentRecyclerView);
-            setScrollSynchronous(contentRecyclerView, sideRecyclerView);
+            sideRecyclerView.setAdapter(new SingleSideAdapter(mContext, bean.getArr3()));
+            contentRecyclerView.setAdapter(new SingleDetailDataAdapter(mContext, bean.getArr3()));
+            RecyclerUtils.setScrollSynchronous(sideRecyclerView, contentRecyclerView);
         }
     }
 
@@ -137,7 +125,7 @@ class BossMonthDataHelper extends MonthDataHelper {
             tvShop.setText(bean.shopDetail);
             TextView tvName = layout.findViewById(R.id.tv_name);
             if (!TextUtils.isEmpty(bean.userName)) {
-                String text = mActivity.getString(R.string.customer_name_tips);
+                String text = mContext.getString(R.string.customer_name_tips);
                 int start = text.length();
                 text += bean.userName;
                 int end = text.length();
@@ -178,47 +166,46 @@ class BossMonthDataHelper extends MonthDataHelper {
         }
         View firstLayout;
         if (TextUtils.equals(bean.type, "4")) { //安装工第一列数据
-            firstLayout = LayoutInflater.from(mActivity).inflate(R.layout.include_form_data_firstrow_80dp, contentLayout, false);
+            firstLayout = LayoutInflater.from(mContext).inflate(R.layout.include_form_data_column_80dp, contentLayout, false);
         } else {
-            firstLayout = LayoutInflater.from(mActivity).inflate(R.layout.include_form_data_firstrow_60dp, contentLayout, false);
+            firstLayout = LayoutInflater.from(mContext).inflate(R.layout.include_form_data_column_60dp, contentLayout, false);
         }
         TextView tvFirst = firstLayout.findViewById(R.id.tv_first_name);
-        tvFirst.setText(mActivity.getString(R.string.report_table_divide));
+        tvFirst.setText(mContext.getString(R.string.report_table_divide));
         contentLayout.addView(firstLayout, 1);  //动态添加layout 第一列数据展示布局
-//        sideRecyclerView.setAdapter(new GeneralSideAdapter(mActivity, bean.getList()));
+//        sideRecyclerView.setAdapter(new GeneralSideAdapter(mContext, bean.getList()));
         RecyclerView sideRecyclerView = mContentView.findViewById(R.id.rv_side);
-        sideRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        sideRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         if (TextUtils.equals(bean.type, "1") || TextUtils.equals(bean.type, "2")) { //导购、业务员
             LinearLayout scrollableLayout = getScrollableLayout();
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_boss_tablist2, scrollableLayout, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_boss_tablist2, scrollableLayout, false);
             scrollableLayout.addView(view, 0);
             sideRecyclerView = mContentView.findViewById(R.id.rv_side);
-            sideRecyclerView.setAdapter(new GuideSalesmanSideAdapter(mActivity, bean.getList()));
-            contentRecyclerView.setAdapter(new GuideSalesmanDetailDataAdapter(mActivity, bean.getList()));
+            sideRecyclerView.setAdapter(new GuideSalesmanSideAdapter(mContext, bean.getList()));
+            contentRecyclerView.setAdapter(new GuideSalesmanDetailDataAdapter(mContext, bean.getList()));
         } else if (TextUtils.equals(bean.type, "3")) { //设计师
             LinearLayout scrollableLayout = getScrollableLayout();
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_boss_tablist3, scrollableLayout, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_boss_tablist3, scrollableLayout, false);
             scrollableLayout.addView(view, 0);
-            sideRecyclerView.setAdapter(new DesignerDetailSideAdapter(mActivity, bean.getList()));
-            contentRecyclerView.setAdapter(new DesignerDetailDataAdapter(mActivity, bean.getList()));
+            sideRecyclerView.setAdapter(new DesignerDetailSideAdapter(mContext, bean.getList()));
+            contentRecyclerView.setAdapter(new DesignerDetailDataAdapter(mContext, bean.getList()));
         } else if (TextUtils.equals(bean.type, "4")) { //安装工
             LinearLayout scrollableLayout = getScrollableLayout();
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_boss_tablist4, scrollableLayout, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_boss_tablist4, scrollableLayout, false);
             TextView tvInstallArea = view.findViewById(R.id.tv_install_area);
             setSquareMeter(tvInstallArea);
             scrollableLayout.addView(view, 0);
-            sideRecyclerView.setAdapter(new InstallerDetailSideAdapter(mActivity, bean.getList()));
-            contentRecyclerView.setAdapter(new InstallerDetailDataAdapter(mActivity, bean.getList()));
+            sideRecyclerView.setAdapter(new InstallerDetailSideAdapter(mContext, bean.getList()));
+            contentRecyclerView.setAdapter(new InstallerDetailDataAdapter(mContext, bean.getList()));
         } else {  //管理者
             LinearLayout scrollableLayout = getScrollableLayout();
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_boss_tablist5, scrollableLayout, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_boss_tablist5, scrollableLayout, false);
             scrollableLayout.addView(view, 0);
             sideRecyclerView = mContentView.findViewById(R.id.rv_side);
-            sideRecyclerView.setAdapter(new ManagerSideDetailSideAdapter(mActivity, bean.getList()));
-            contentRecyclerView.setAdapter(new ManagerSideDetailDataAdapter(mActivity, bean.getList()));
+            sideRecyclerView.setAdapter(new ManagerSideDetailSideAdapter(mContext, bean.getList()));
+            contentRecyclerView.setAdapter(new ManagerSideDetailDataAdapter(mContext, bean.getList()));
         }
-        setScrollSynchronous(sideRecyclerView, contentRecyclerView);
-        setScrollSynchronous(contentRecyclerView, sideRecyclerView);
+        RecyclerUtils.setScrollSynchronous(sideRecyclerView, contentRecyclerView);
     }
 
     /*第一列门店数据*/
@@ -269,7 +256,7 @@ class BossMonthDataHelper extends MonthDataHelper {
             holder.setText(R.id.tv_received, bean.receivables); //已收款
             holder.setText(R.id.tv_contract_amount, bean.contractTotal); //成交总金额
             holder.itemView.setOnClickListener(view -> startFragment(bean.type, bean.cityCode, true));
-//            holder.itemView.setOnClickListener(view -> BossMonthDataActivity.open(mActivity, bean.type, bean.cityCode, bean.area));
+//            holder.itemView.setOnClickListener(view -> BossMonthDataActivity.open(mContext, bean.type, bean.cityCode, bean.area));
         }
     }
 
@@ -338,7 +325,7 @@ class BossMonthDataHelper extends MonthDataHelper {
 
         @Override
         protected int bindView(int viewType) {
-            return R.layout.item_month_data_boss_role;
+            return R.layout.item_form_data_tabhost;
         }
 
         @Override
@@ -682,7 +669,7 @@ class BossMonthDataHelper extends MonthDataHelper {
     }
 
     private void startFragment(String type, String cityCode, boolean isDescription) {
-        mActivity.startFragment(new BossMonthDataFragment(), obtainBundle(type, cityCode, isDescription));
+        ((BaseActivity<?, ?>) mContext).startFragment(new BossMonthDataFragment(), obtainBundle(type, cityCode, isDescription));
     }
 
     private Bundle obtainBundle(String type, String cityCode, boolean isDescription) {

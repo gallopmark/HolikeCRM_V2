@@ -57,7 +57,7 @@ public class MainPresenter extends BasePresenter<MainView, MainModel> {
     public static void setUpdateType(UpdateBean updateBean) {
         int localVersion = PackageUtil.getVersionCode(IOUtil.getCachePath() + "/" + "CRM.apk");     //本地安装包版本
         int netVersion = ParseUtils.parseInt(updateBean.getVersion());                                                      //线上版本
-        int currentVersion = PackageUtil.getVersionCode();                                                               //当前版本
+        long currentVersion = PackageUtil.getVersionCode();                                                               //当前版本
         if (netVersion > currentVersion || localVersion > currentVersion) {
             if (netVersion > localVersion) {
                 updateBean.setType(UpdateBean.TYPE_DOWNLOAD);

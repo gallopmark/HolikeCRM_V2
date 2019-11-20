@@ -167,7 +167,7 @@ public class AddOrModifyPayInfoFragment extends MyFragment<PayInfoPresenter, Pay
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_details_trading_hours:
-                showTimePickerView(getActivity(), TimeUtil.stampToString(getText(tvDetailsTradingHours), "yyyy.MM.dd"), tvDetailsTradingHours);
+                showTimePickerView(TimeUtil.stampToString(getText(tvDetailsTradingHours), "yyyy.MM.dd"), tvDetailsTradingHours);
                 break;
             case R.id.btn_save:
 

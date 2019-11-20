@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/fl_fragment_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_while">
+
+    <LinearLayout
+        android:id="@+id/ll_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_while"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_titlebar" />
+
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</FrameLayout>

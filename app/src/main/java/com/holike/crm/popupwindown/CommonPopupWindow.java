@@ -19,7 +19,7 @@ import com.holike.crm.R;
 import com.holike.crm.util.DensityUtil;
 
 /**
- * Created by gallop on 2019/7/11.
+ * Created by pony on 2019/7/11.
  * Copyright holike possess 2019.
  */
 public abstract class CommonPopupWindow extends PopupWindow {
@@ -81,7 +81,7 @@ public abstract class CommonPopupWindow extends PopupWindow {
             Rect visibleFrame = new Rect();
             anchor.getGlobalVisibleRect(visibleFrame);
             int height = anchor.getResources().getDisplayMetrics().heightPixels - visibleFrame.bottom;
-            setHeight(height + DensityUtil.getStatusHeight(mContext) - getBottomMargin());
+            setHeight(height - getBottomMargin());
             showAsDropDown(anchor, xoff, yoff, gravity);
         } else {
             PopupWindowCompat.showAsDropDown(this, anchor, 0, 0, gravity);

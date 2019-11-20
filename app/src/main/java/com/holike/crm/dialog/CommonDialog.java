@@ -2,6 +2,8 @@ package com.holike.crm.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.DrawableRes;
@@ -17,10 +19,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.holike.crm.R;
 import com.holike.crm.util.DensityUtil;
+
 
 /*dialog基础类*/
 public abstract class CommonDialog extends Dialog {
@@ -42,11 +44,26 @@ public abstract class CommonDialog extends Dialog {
         setWidth(getCommonWidth());
         mContentView = LayoutInflater.from(mContext).inflate(bindContentView(), null);
         initView(mContentView);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        ViewGroup.LayoutParams params;
         if (getLayoutParams() != null) {
-            setContentView(mContentView, getLayoutParams());
+            params = getLayoutParams();
+            setWidth(getLayoutParams().width);
+            setHeight(getLayoutParams().height);
         } else {
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(getWidth(), getHeight());
-            setContentView(mContentView, params);
+            params = new FrameLayout.LayoutParams(getWidth(), getHeight());
+        }
+        setContentView(mContentView, params);
+        Window window = getWindow();
+        if (window != null) {
+            //设置window背景，默认的背景会有Padding值，不能全屏。当然不一定要是透明，你可以设置其他背景，替换默认的背景即可。
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            renderWindow(window);
         }
     }
 
@@ -118,21 +135,13 @@ public abstract class CommonDialog extends Dialog {
         this.gravity = gravity;
     }
 
-    @Override
-    public void show() {
-        Window window = getWindow();
-        if (window != null) {
-            renderWindow(window);
-            super.show();
-        }
-    }
-
-    private void renderWindow(Window window) {
+    protected void renderWindow(Window window) {
         if (isFullScreen()) {
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        }
-        if (fullWidth()) {
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        } else {
+            if (fullWidth()) {
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, getHeight());
+            }
         }
         if (getWindowAnimations() != -1) {
             window.setWindowAnimations(getWindowAnimations());

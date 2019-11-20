@@ -10,6 +10,7 @@ public class CheckUtils {
     }
 
     /*是否是微信号*/
+    @Deprecated
     public static boolean isWxNumber(String source) {
         if (TextUtils.isEmpty(source)) return false;
         String regex = "^[a-zA-Z][-_a-zA-Z0-9]{5,19}+$";

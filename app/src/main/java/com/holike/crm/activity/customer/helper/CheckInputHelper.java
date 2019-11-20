@@ -11,7 +11,6 @@ import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.SimpleTextWatcher;
 import com.holike.crm.bean.ErrorInfoBean;
 import com.holike.crm.dialog.CustomerRedistributionDialog;
-import com.holike.crm.dialog.DistributionDialog;
 import com.holike.crm.dialog.ExistHighSeasDialog;
 import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.dialog.RepeatDigitalDialog;
@@ -25,7 +24,7 @@ import com.holike.crm.http.SimpleRequestCallback;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by gallop on 2019/9/4.
+ * Created by pony on 2019/9/4.
  * Copyright holike possess 2019.
  * 客户房屋信息地址检查
  */
@@ -106,7 +105,7 @@ abstract class CheckInputHelper {
             return true;
         } else if (TextUtils.equals(msg, "repeat-digital")) {  //线上引流客户重复(弹出激活弹窗)
             ErrorInfoBean bean = MyJsonParser.fromJson(MyJsonParser.getErrorInfoAsString(json), ErrorInfoBean.class);
-            onRepeatDigitalError(bean, MyJsonParser.getMoreInfoAsString(json), MyJsonParser.getErrorInfoAsString(json));
+            onRepeatDigitalError(bean, MyJsonParser.getMoreInfoAsString(json), bean == null ? "" : bean.houseId);
         } else if (TextUtils.equals(msg, "digital_no_add")) {  //线上引流客户新建房屋
             digitalNoAddError(MyJsonParser.getErrorInfoAsString(json));
             return true;
@@ -150,7 +149,7 @@ abstract class CheckInputHelper {
 
     private void onRepeatDigitalError(ErrorInfoBean bean, final String personalId, final String houseId) {
         RepeatDigitalDialog dialog = new RepeatDigitalDialog(mActivity, bean);
-        dialog.setOnConfirmListener((shopId, groupId, guideId) -> onActivationCustomer(personalId, houseId, shopId, groupId, guideId));
+        dialog.setOnSelectedListener(((shopId, groupId) -> onActivationCustomer(personalId, houseId, shopId, groupId)));
         dialog.show();
     }
 
@@ -165,7 +164,7 @@ abstract class CheckInputHelper {
 
     abstract void onReceivingCustomer(String personalId, String houseId, String shopId, String groupId);
 
-    abstract void onActivationCustomer(String personalId, String houseId, String shopId, String groupId, String guideId);
+    abstract void onActivationCustomer(String personalId, String houseId, String shopId, String groupId);
 
     /*新增或修改结果*/
     public void onSaveResult(String json) {

@@ -16,7 +16,7 @@ import butterknife.BindView;
  * 物流信息
  */
 public class LogisticsInfoFragment extends MyFragment<LogisticsInfoPresenter, LogisticsInfoView> implements LogisticsInfoView {
-    String orderId;
+    private String orderId;
     @BindView(R.id.tv_logistics_line)
     TextView tvLogisticsLine;
     @BindView(R.id.tv_logistics_station)
@@ -39,11 +39,15 @@ public class LogisticsInfoFragment extends MyFragment<LogisticsInfoPresenter, Lo
     @Override
     protected void init() {
         super.init();
-        showLoading();
         setTitle(getString(R.string.logistics_info));
         if (getArguments() != null) {
             orderId = (String) getArguments().getSerializable(Constants.ORDER_ID);
         }
+        initData();
+    }
+
+    private void initData() {
+        showLoading();
         mPresenter.getData(orderId);
     }
 

@@ -5,23 +5,26 @@
     android:layout_height="match_parent"
     android:background="@color/translucent">
 
-    <!--  <SurfaceView
+      <SurfaceView
           android:id="@+id/surfaceView"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
 
-      <com.king.zxing.ViewfinderView
+      <pony.xcode.zxing.ViewfinderView
           android:id="@+id/viewfinderView"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           app:cornerColor="@color/colorPrimary"
           app:frameColor="@color/colorPrimary"
           app:labelTextLocation="bottom"
+          app:labelTextColor="@color/color_while"
+          app:labelText="@string/scan_by_phone_tip"
+          app:labelTextSize="@dimen/textSize_14"
           app:laserColor="@color/colorAccent"
           app:laserStyle="line"
-          app:resultPointColor="@color/colorAccent" />-->
+          app:resultPointColor="@color/colorAccent" />
 
-    <cn.bingoogolapple.qrcode.zxing.ZXingView
+  <!--  <cn.bingoogolapple.qrcode.zxing.ZXingView
         android:id="@+id/zxingView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +38,7 @@
         app:qrcv_cornerSize="@dimen/dp_3"
         app:qrcv_isAutoZoom="true"
         app:qrcv_isBarcode="false"
-        app:qrcv_isOnlyDecodeScanBoxArea="false"
+        app:qrcv_isOnlyDecodeScanBoxArea="true"
         app:qrcv_isScanLineReverse="true"
         app:qrcv_isShowDefaultGridScanLineDrawable="false"
         app:qrcv_isShowDefaultScanLineDrawable="true"
@@ -49,7 +52,7 @@
         app:qrcv_scanLineMargin="0dp"
         app:qrcv_scanLineSize="@dimen/dp_1"
         app:qrcv_topOffset="@dimen/dp_250"
-        app:qrcv_verticalBias="-1" />
+        app:qrcv_verticalBias="-1" />-->
 
     <LinearLayout
         android:id="@+id/mTopLayout"
@@ -107,7 +110,7 @@
         android:layout_gravity="bottom"
         android:orientation="vertical">
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +118,7 @@
             android:text="@string/scan_by_phone_tip"
             android:textColor="@color/color_while_alpha_0_8"
             android:textSize="@dimen/textSize_12"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
         <LinearLayout
             android:layout_width="match_parent"

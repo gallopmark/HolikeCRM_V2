@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="MainTableLayout">
-        <attr name="mtlNorColor" format="color" />
-        <attr name="mtlSelectColor" format="color" />
-    </declare-styleable>
-
     <declare-styleable name="HVScrollView">
         <!--水平内容宽度是否充满，默认false自适应-->
         <attr name="fillViewportH" format="boolean" />

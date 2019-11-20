@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat;
 import com.holike.crm.R;
 
 /**
- * Created by gallop on 2019/9/26.
+ * Created by pony on 2019/9/26.
  * Copyright holike possess 2019.
  * 收款二次确认提示框
  */

@@ -28,7 +28,7 @@ import com.holike.crm.fragment.customerv2.UploadPlanFragment;
 import com.holike.crm.util.KeyBoardUtil;
 
 /**
- * Created by gallop on 2019/7/22.
+ * Created by pony on 2019/7/22.
  * Copyright holike possess 2019.
  */
 public class CustomerMultiTypeActivity extends MyFragmentActivity {

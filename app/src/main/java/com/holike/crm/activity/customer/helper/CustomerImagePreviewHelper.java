@@ -15,7 +15,7 @@ import com.holike.crm.util.GlideUtils;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/2.
+ * Created by pony on 2019/8/2.
  * Copyright holike possess 2019.
  */
 public class CustomerImagePreviewHelper {

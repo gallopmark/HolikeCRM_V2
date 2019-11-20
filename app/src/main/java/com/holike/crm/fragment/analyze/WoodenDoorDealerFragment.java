@@ -28,7 +28,7 @@ import pony.xcode.chart.LineChartView;
 import pony.xcode.chart.data.LineChartData;
 
 /**
- * Created by gallop on 2019/8/28.
+ * Created by pony on 2019/8/28.
  * Copyright holike possess 2019.
  * 木门业绩报表-经销商
  */

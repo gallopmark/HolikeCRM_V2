@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
@@ -27,18 +28,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.holike.crm.R;
 import com.holike.crm.customView.AppToastCompat;
 import com.holike.crm.customView.CompatToast;
 import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.fragment.FragmentBackHandler;
+import com.holike.crm.helper.PickerHelper;
 import com.holike.crm.util.AppUtils;
 import com.holike.crm.util.CheckUtils;
 import com.holike.crm.util.CopyUtil;
@@ -47,7 +46,6 @@ import com.holike.crm.util.LogCat;
 import com.holike.crm.util.TimeUtil;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
@@ -100,15 +98,19 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (mContentView == null) {
-            mContentView = inflater.inflate(setContentViewId(), container, false);
-            mContentView.setClickable(true);
-            mUnbinder = ButterKnife.bind(this, mContentView);
-            setupTitleBar();
-            init();
-            mContentView.setOnTouchListener(this);
+        if (setContentViewId() == 0) {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        } else {
+            if (mContentView == null) {
+                mContentView = inflater.inflate(setContentViewId(), container, false);
+                mContentView.setClickable(true);
+                mUnbinder = ButterKnife.bind(this, mContentView);
+                setupTitleBar();
+                init();
+                mContentView.setOnTouchListener(this);
+            }
+            return mContentView;
         }
-        return mContentView;
     }
 
     protected abstract int setContentViewId();
@@ -153,7 +155,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
         back();
     }
 
-    protected void setTitle(@StringRes int resId) {
+    public void setTitle(@StringRes int resId) {
         setTitle(mContext.getString(resId));
     }
 
@@ -162,7 +164,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
      *
      * @param title a
      */
-    protected void setTitle(CharSequence title) {
+    public void setTitle(CharSequence title) {
 //        TextView tvTitle = mFragmentView.findViewById(R.id.tv_title);
 //        if (tvTitle != null) {
 //            tvTitle.setText(title);
@@ -395,27 +397,36 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     protected void selectTime(Date date) {
     }
 
-    private TimePickerView pvTime;
+//    private TimePickerView pvTime;
 
     /**
      * 选择时间
      */
+    @Deprecated
     protected void showTimePickerView(Context context, String time, View view) {
         if (view != null) {
             hideSoftInput(view);
         }
-        if (pvTime == null) {
-            pvTime = new TimePickerBuilder(context, (date, v) ->
-                    selectTime(date)).setType(new boolean[]{true, true, true, false, false, false})
-                    .setBgColor(getResources().getColor(R.color.bg_transparent1)).build();
-        }
-        if (TextUtils.isEmpty(time) || time.equals("无法显示时间")) {
-            pvTime.setDate(Calendar.getInstance());
+        Date selectDate;
+        if (TextUtils.isEmpty(time) || TextUtils.equals(time, "无法显示时间")) {
+            selectDate = new Date();
         } else {
-            pvTime.setDate(TimeUtil.stringToCalendar(time, "yyyy.MM.dd"));
-
+            selectDate = TimeUtil.stringToCalendar(time, "yyyy.MM.dd").getTime();
         }
-        pvTime.show();
+        PickerHelper.showTimePicker2(mContext, selectDate, this::selectTime);
+    }
+
+    protected void showTimePickerView(String time, View view) {
+        if (view != null) {
+            hideSoftInput(view);
+        }
+        Date selectDate;
+        if (TextUtils.isEmpty(time) || TextUtils.equals(time, "无法显示时间")) {
+            selectDate = new Date();
+        } else {
+            selectDate = TimeUtil.stringToCalendar(time, "yyyy.MM.dd").getTime();
+        }
+        PickerHelper.showTimePicker2(mContext, selectDate, this::selectTime);
     }
 
     protected void onFinishResult(int requestCode, int resultCode, Map<String, Serializable> result) {
@@ -426,7 +437,9 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
         if (mPresenter != null) {
             mPresenter.deAttach();
         }
-        mUnbinder.unbind();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
         super.onDestroyView();
     }
 
@@ -511,7 +524,7 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
 
     protected void setStatusBar(int resid) {
         View statusView = mContentView.findViewById(R.id.statusView);
-        if (statusView != null) {
+        if (statusView != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ViewGroup.LayoutParams params = statusView.getLayoutParams();
             params.height = SystemTintHelper.getStatusBarHeight(mContext);
             if (resid != 0) {
@@ -531,28 +544,28 @@ public abstract class BaseFragment<P extends BasePresenter, V extends BaseView> 
     /**
      * 没有数据
      */
-    protected void noData(int imgId, @StringRes int strId, boolean needReload) {
-        if (isContainEmptyView()) {
-            noData(imgId, mContext.getString(strId), needReload);
-        }
+    protected void noData(@DrawableRes int imgId, @StringRes int strId, boolean needReload) {
+        noData(imgId, mContext.getString(strId), needReload);
     }
 
     /**
      * 没有数据
      */
-    protected void noData(int imgId, CharSequence str, boolean needReload) {
+    protected void noData(@DrawableRes int imgId, @Nullable CharSequence text, boolean needReload) {
         if (isContainEmptyView()) {
             mContentView.findViewById(R.id.ll_empty_page).setVisibility(View.VISIBLE);
-            ((ImageView) mContentView.findViewById(R.id.iv_empty_page)).setImageResource(imgId);
-            ((TextView) mContentView.findViewById(R.id.tv_empty_page)).setText(str);
+            TextView tv = mContentView.findViewById(R.id.tv_empty_page);
+            tv.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(mContext, imgId), null, null);
+            tv.setText(text);
+            TextView tvReload = mContentView.findViewById(R.id.btn_empty_page_reload);
             if (needReload) {
-                mContentView.findViewById(R.id.btn_empty_page_reload).setVisibility(View.VISIBLE);
-                mContentView.findViewById(R.id.btn_empty_page_reload).setOnClickListener(v -> {
+                tvReload.setVisibility(View.VISIBLE);
+                tvReload.setOnClickListener(view -> {
                     hasData();
                     reload();
                 });
             } else {
-                mContentView.findViewById(R.id.btn_empty_page_reload).setVisibility(View.GONE);
+                tvReload.setVisibility(View.GONE);
             }
         }
     }

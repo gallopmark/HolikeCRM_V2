@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="@string/dealer_ranking_tips2"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_15"
+        android:textStyle="bold" />
+
+    <pony.xcode.chart.LineChartView
+        android:id="@+id/lineChartView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_280"
+        android:layout_marginTop="@dimen/dp_20"
+        app:lcv_area_enabled="false"
+        app:lcv_bottom_space="@dimen/dp_75"
+        app:lcv_dashed_color="@color/textColor21"
+        app:lcv_description_background="@color/textColor21"
+        app:lcv_description_oval_strokeColor="@color/textColor26"
+        app:lcv_description_oval_strokeWidth="@dimen/dp_1_5"
+        app:lcv_description_padding="@dimen/dp_14"
+        app:lcv_description_textColor="@color/textColor25"
+        app:lcv_display_animation="false"
+        app:lcv_polyline_color="@color/textColor27"
+        app:lcv_point_color="@color/color_while"
+        app:lcv_description_arrow_size="@dimen/dp_6"
+        app:lcv_description_oval_visibility="gone"
+        app:lcv_point_strokeColor="@color/textColor26"
+        app:lcv_reverse="true"
+        app:lcv_vertical_dashed_effect="true"
+        app:lcv_vertical_lineColor="@color/textColor28"
+        app:lcv_xAxis_textArray="@array/line_chart_months"
+        app:lcv_xAxis_textColor="@color/textColor6"
+        app:lcv_xAxis_textSize="@dimen/textSize_14"
+        app:lcv_yAxis_textColor="@color/textColor6"
+        app:lcv_yAxis_textSize="@dimen/textSize_12" />
+
+    <View
+        style="@style/divider_horizontal"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10" />
+</LinearLayout>

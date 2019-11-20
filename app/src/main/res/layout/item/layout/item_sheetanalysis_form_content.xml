@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="@dimen/dp_36"
+        android:orientation="horizontal"
+        tools:ignore="NestedWeights">
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_division"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="65" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_principal"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="65" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_particle"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            android:layout_height="match_parent"
+            android:layout_weight="60" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_original"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            android:layout_height="match_parent"
+            android:layout_weight="84" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_originalK"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            android:layout_height="match_parent"
+            android:layout_weight="84" />
+
+        <View style="@style/divider_vertical" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

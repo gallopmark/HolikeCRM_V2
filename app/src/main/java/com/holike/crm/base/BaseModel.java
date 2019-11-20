@@ -6,36 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.holike.crm.http.CallbackHelper;
-import com.holike.crm.http.GetService;
 import com.holike.crm.http.HttpClient;
 import com.holike.crm.http.MyHttpClient;
 import com.holike.crm.http.RequestCallBack;
-import com.holike.crm.util.Constants;
 import com.holike.crm.util.LogCat;
 import com.holike.crm.util.MultipartUtils;
-import com.holike.crm.util.PackageUtil;
-import com.holike.crm.util.SharedPreferencesUtils;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 import top.zibin.luban.Luban;
 
 /**

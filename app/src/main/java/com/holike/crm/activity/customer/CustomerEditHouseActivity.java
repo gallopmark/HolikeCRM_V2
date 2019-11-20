@@ -19,7 +19,7 @@ import java.util.List;
 
 
 /**
- * Created by gallop on 2019/7/31.
+ * Created by pony on 2019/7/31.
  * Copyright holike possess 2019.
  * 客户添加房屋或编辑房屋
  */
@@ -82,9 +82,9 @@ public class CustomerEditHouseActivity extends GeneralCustomerActivity implement
 
     /*激活客户*/
     @Override
-    public void onActivationCustomer(String personalId, String houseId, String shopId, String groupId, String guideId) {
+    public void onActivationCustomer(String personalId, String houseId, String shopId, String groupId) {
         showLoading();
-        mPresenter.activationCustomer(personalId, houseId, shopId, groupId, guideId, this);
+        mPresenter.activationCustomer(personalId, houseId, shopId, groupId, this);
     }
 
     /*重新分配客户*/

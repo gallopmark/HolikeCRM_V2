@@ -1,0 +1,4 @@
+2.0.0上线条件
+1、MainActivity、HomepageHelper(setSelectRole)
+2、ReportGridItemClickHelper
+3、gradle.properties

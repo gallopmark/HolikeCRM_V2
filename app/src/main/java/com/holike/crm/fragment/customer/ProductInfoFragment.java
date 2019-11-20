@@ -9,6 +9,7 @@ import com.holike.crm.base.MyFragment;
 import com.holike.crm.bean.ProductInfoBean;
 import com.holike.crm.presenter.fragment.ProductInfoPresenter;
 import com.holike.crm.util.Constants;
+import com.holike.crm.util.RecyclerUtils;
 import com.holike.crm.view.fragment.ProductInfoView;
 
 import java.util.List;
@@ -57,17 +58,15 @@ public class ProductInfoFragment extends MyFragment<ProductInfoPresenter, Produc
         if (bean.size() == 0) {
             onFail(getString(R.string.tips_no_data));
         }
-        mPresenter.setTabAdapter(getActivity(), rvTab, bean);
+        mPresenter.setTabAdapter(mContext, rvTab, bean);
         new Handler().postDelayed(() -> {
             if (bean.size() == 0)
                 return;
-            mPresenter.setSideAdapter(getActivity(), rvSide, bean, 0);
-            mPresenter.setContentNameAdapter(getActivity(), rvContentName, bean.get(0));
-            mPresenter.setContentAdapter(getActivity(), rvCenter, bean, 0);
+            mPresenter.setSideAdapter(mContext, rvSide, bean, 0);
+            mPresenter.setContentNameAdapter(mContext, rvContentName, bean.get(0));
+            mPresenter.setContentAdapter(mContext, rvCenter, bean, 0);
         }, 0);
-
-        setScrollSynchronous(rvCenter, rvSide);
-        setScrollSynchronous(rvSide, rvCenter);
+        RecyclerUtils.setScrollSynchronous(rvSide,rvCenter);
     }
 
 
@@ -80,9 +79,9 @@ public class ProductInfoFragment extends MyFragment<ProductInfoPresenter, Produc
     @Override
     public void onTagSelect(final int position, final List<ProductInfoBean> listBean) {
 
-        mPresenter.setContentNameAdapter(getActivity(), rvContentName, listBean.get(position));
-        mPresenter.setContentAdapter(getActivity(), rvCenter, listBean, position);
-        mPresenter.setSideAdapter(getActivity(), rvSide, listBean, position);
+        mPresenter.setContentNameAdapter(mContext, rvContentName, listBean.get(position));
+        mPresenter.setContentAdapter(mContext, rvCenter, listBean, position);
+        mPresenter.setSideAdapter(mContext, rvSide, listBean, position);
 
 
     }
@@ -92,30 +91,6 @@ public class ProductInfoFragment extends MyFragment<ProductInfoPresenter, Produc
         if (showDialog)
             showLoading();
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> dismissLoading(), 1000);
-    }
-
-    /**
-     * 设置2个 RecyclerView 同步滚动
-     *
-     * @param hostRv   导向者
-     * @param syncerRv 被导向者
-     */
-    public void setScrollSynchronous(RecyclerView hostRv, final RecyclerView syncerRv) {
-        hostRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
-                    syncerRv.scrollBy(dx, dy);
-                }
-
-            }
-        });
+        new Handler(Looper.getMainLooper()).postDelayed(this::dismissLoading, 1000);
     }
 }

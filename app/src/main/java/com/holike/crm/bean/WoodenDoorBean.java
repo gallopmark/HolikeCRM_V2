@@ -11,7 +11,7 @@ import java.util.List;
 import io.reactivex.annotations.Nullable;
 
 /**
- * Created by gallop on 2019/8/28.
+ * Created by pony on 2019/8/28.
  * Copyright holike possess 2019.
  */
 public class WoodenDoorBean implements Serializable {

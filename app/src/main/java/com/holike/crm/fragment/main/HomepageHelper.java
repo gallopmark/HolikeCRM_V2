@@ -95,9 +95,14 @@ class HomepageHelper implements HomeMenuFragment.OnMenuClickListener, View.OnCli
         if (mViewCollectDeposit != null) {
             mViewCollectDeposit.setVisibility(View.GONE);
         }
-        if (this.mHomepageBean.getOrderData() != null) {
-            SharedPreferencesUtils.saveString(Constants.COOKIE, this.mHomepageBean.getOrderData().getCookie());
-            SharedPreferencesUtils.saveString(Constants.COOKIE2, this.mHomepageBean.getOrderData().Cookie2);
+        HomepageBean.OrderDataBean orderDataBean = mHomepageBean.getOrderData();
+        if (orderDataBean != null) {  //本地保存cookie
+            if (!TextUtils.isEmpty(orderDataBean.getCookie())) {
+                SharedPreferencesUtils.saveString(Constants.COOKIE, orderDataBean.getCookie());
+            }
+            if (!TextUtils.isEmpty(orderDataBean.Cookie2)) {
+                SharedPreferencesUtils.saveString(Constants.COOKIE2, orderDataBean.Cookie2);
+            }
         }
 //        tvMsg.setText(HomePagePresenter.getMsgNum(bean.getNewData().getNewsCount()));
         if (this.mHomepageBean.getNewData() != null)
@@ -168,8 +173,15 @@ class HomepageHelper implements HomeMenuFragment.OnMenuClickListener, View.OnCli
                     //跳转安装经理本月数据
                     ThisMonthDataActivity.start(mContext, ThisMonthDataActivity.TYPE_INSTALL_MANAGER);
                 }
-//                else {
-//                    MonthDataActivity.start(mContext, MonthDataActivity.TYPE_FINANCE);
+//                else {  //v3.0
+//                    if (TextUtils.equals(userType, UserTypeValue.DESIGN_MANAGER)) {
+//                        //跳转设计经理本月数据
+//                        ThisMonthDataActivity.start(mContext, ThisMonthDataActivity.TYPE_DESIGN_MANAGER);
+//                    } else {
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("userType", userType);
+//                        ThisMonthDataActivity.start(mContext, ThisMonthDataActivity.TYPE_PERSONAL_PERFORMANCE, bundle);
+//                    }
 //                }
             });
         }
@@ -353,7 +365,7 @@ class HomepageHelper implements HomeMenuFragment.OnMenuClickListener, View.OnCli
                 } else {
                     holder.setTextColorRes(R.id.tv_type, R.color.bg_homepage_new);
                     holder.setText(R.id.tv_type, mContext.getString(R.string.message_notify_message));
-                    holder.setBackgroundResource(R.id.tv_type, R.drawable.bg_corners2dp_red);
+                    holder.setBackgroundResource(R.id.tv_type, R.drawable.bg_corners4dp_red);
                 }
                 holder.itemView.setOnClickListener(v -> mCallback.onMessageItemClick(false, bean));
             }

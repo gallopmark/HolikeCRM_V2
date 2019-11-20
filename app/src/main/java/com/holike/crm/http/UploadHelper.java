@@ -19,7 +19,7 @@ import okhttp3.MultipartBody;
 import top.zibin.luban.Luban;
 
 /**
- * Created by gallop on 2019/8/20.
+ * Created by pony on 2019/8/20.
  * Copyright holike possess 2019.
  * 上传图片帮助类
  */

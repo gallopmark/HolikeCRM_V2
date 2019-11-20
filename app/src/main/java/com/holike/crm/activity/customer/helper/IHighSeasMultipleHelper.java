@@ -18,6 +18,7 @@ import com.holike.crm.R;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.bean.CustomerManagerV2Bean;
 import com.holike.crm.bean.MultiItem;
+import com.holike.crm.enumeration.CustomerOperateCode;
 import com.holike.crm.helper.TextSpanHelper;
 import com.holike.crm.http.CustomerUrlPath;
 
@@ -25,27 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/18.
+ * Created by pony on 2019/8/18.
  * Copyright holike possess 2019.
  */
 class IHighSeasMultipleHelper {
-
-    static class OperateCode {
-        static final String CODE_GUIDE = "01";
-        static final String CODE_UNMEASURED = "04";
-        static final String CODE_DESIGNER = "05";
-        static final String CODE_MEASURED = "06";
-        static final String CODE_UPLOAD_PLAN = "07";
-        static final String CODE_ROUNDS = "08";
-        static final String CODE_CONTRACT = "09";
-        static final String CODE_ORDER = "11";
-        static final String CODE_LOSE = "12";
-        static final String CODE_UNINSTALL = "15";
-        static final String CODE_INSTALLED = "16";
-        static final String CODE_INSTALL_DRAWING = "17";
-        static final String CODE_MESSAGE_BOARD = "18";
-        static final String CODE_RECEIPT = "19";
-    }
 
     TextSpanHelper mTextHelper;
 //    LayoutInflater mLayoutInflater;
@@ -266,10 +250,10 @@ class IHighSeasMultipleHelper {
                 ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mActivity, R.color.textColor21)), 0, source.length(), flags);
                 ss.setSpan(new StyleSpan(Typeface.NORMAL), 0, source.length(), flags);
             } else {
-                String source = tips + (TextUtils.isEmpty(bean.installSquare) ? "" : bean.installSquare + "m2");
+                String source = tips + bean.installSquare + "m2";
                 ss = new SpannableString(source);
-                int start = source.indexOf("2");
-                int end = source.indexOf("2") + 1;
+                int start = source.lastIndexOf("2");
+                int end = source.lastIndexOf("2") + 1;
                 ss.setSpan(new RelativeSizeSpan(0.8f), start, end, flags);
                 ss.setSpan(new SuperscriptSpan(), start, end, flags); //数学上标（平方）
                 start = tips.length();
@@ -332,84 +316,84 @@ class IHighSeasMultipleHelper {
     /*导购历史记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getGuideHistory() {
-        return getHistoryByCode(OperateCode.CODE_GUIDE);
+        return getHistoryByCode(CustomerOperateCode.CODE_GUIDE);
     }
 
     /*预约量房记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getUnmeasuredHistory() {
-        return getHistoryByCode(OperateCode.CODE_UNMEASURED);
+        return getHistoryByCode(CustomerOperateCode.CODE_UNMEASURED);
     }
 
     /*分配设计师记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getDesignerHistory() {
-        return getHistoryByCode(OperateCode.CODE_DESIGNER);
+        return getHistoryByCode(CustomerOperateCode.CODE_DESIGNER);
     }
 
     /*量房完成记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getMeasuredHistory() {
-        return getHistoryByCode(OperateCode.CODE_MEASURED);
+        return getHistoryByCode(CustomerOperateCode.CODE_MEASURED);
     }
 
     /*上传方案记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getUploadPlanHistory() {
-        return getHistoryByCode(OperateCode.CODE_UPLOAD_PLAN);
+        return getHistoryByCode(CustomerOperateCode.CODE_UPLOAD_PLAN);
     }
 
     /*主管查房记录*/
     CustomerManagerV2Bean.HistoryBean getRoundsHistory() {
-        return getHistoryByCode(OperateCode.CODE_ROUNDS);
+        return getHistoryByCode(CustomerOperateCode.CODE_ROUNDS);
     }
 
     /*收款记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getReceiptHistory() {
-        return getHistoryByCode(OperateCode.CODE_RECEIPT);
+        return getHistoryByCode(CustomerOperateCode.CODE_RECEIPT);
     }
 
     /*合同登记记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getContractHistory() {
-        return getHistoryByCode(OperateCode.CODE_CONTRACT);
+        return getHistoryByCode(CustomerOperateCode.CODE_CONTRACT);
     }
 
     /*订单记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getOrderHistory() {
-        return getHistoryByCode(OperateCode.CODE_ORDER);
+        return getHistoryByCode(CustomerOperateCode.CODE_ORDER);
     }
 
     /*流失记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getLoseHistory() {
-        return getHistoryByCode(OperateCode.CODE_LOSE);
+        return getHistoryByCode(CustomerOperateCode.CODE_LOSE);
     }
 
     /*导购历史记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getUninstallHistory() {
-        return getHistoryByCode(OperateCode.CODE_UNINSTALL);
+        return getHistoryByCode(CustomerOperateCode.CODE_UNINSTALL);
     }
 
     /*安装完成记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getInstalledHistory() {
-        return getHistoryByCode(OperateCode.CODE_INSTALLED);
+        return getHistoryByCode(CustomerOperateCode.CODE_INSTALLED);
     }
 
     /*上传安装图纸记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getInstallDrawingHistory() {
-        return getHistoryByCode(OperateCode.CODE_INSTALL_DRAWING);
+        return getHistoryByCode(CustomerOperateCode.CODE_INSTALL_DRAWING);
     }
 
     /*留言板记录*/
     @Nullable
     CustomerManagerV2Bean.HistoryBean getMessageBoardHistory() {
-        return getHistoryByCode(OperateCode.CODE_MESSAGE_BOARD);
+        return getHistoryByCode(CustomerOperateCode.CODE_MESSAGE_BOARD);
     }
 
     @Nullable

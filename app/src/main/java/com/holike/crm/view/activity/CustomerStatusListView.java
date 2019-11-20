@@ -4,7 +4,7 @@ import com.holike.crm.base.BaseView;
 import com.holike.crm.bean.CustomerStatusBean;
 
 /**
- * Created by gallop 2019/7/8
+ * Created by pony 2019/7/8
  * Copyright (c) 2019 holike
  */
 public interface CustomerStatusListView extends BaseView {

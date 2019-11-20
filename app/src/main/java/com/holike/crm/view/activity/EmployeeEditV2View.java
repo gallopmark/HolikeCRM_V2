@@ -6,7 +6,7 @@ import com.holike.crm.base.BaseView;
 import com.holike.crm.bean.EmployeeEditResultBean;
 
 /**
- * Created by gallop on 2019/8/6.
+ * Created by pony on 2019/8/6.
  * Copyright holike possess 2019.
  */
 public interface EmployeeEditV2View extends BaseView {

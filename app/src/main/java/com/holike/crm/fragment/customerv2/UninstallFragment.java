@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * Created by gallop on 2019/7/25.
+ * Created by pony on 2019/7/25.
  * Copyright holike possess 2019.
  * 预约安装
  */
@@ -24,15 +24,14 @@ public class UninstallFragment extends GeneralCustomerFragment implements Uninst
     @Override
     protected void init() {
         mHelper = new UninstallHelper(this, this);
-        onQueryInstallers(false);
     }
 
     @Override
-    public void onQueryInstallers(boolean showLoading) {
+    public void onQueryInstallers(String shopId, boolean showLoading) {
         if (showLoading) {
             showLoading();
         }
-        mPresenter.getDealerInstaller();
+        mPresenter.getShopInstallers(shopId);
     }
 
     @Override

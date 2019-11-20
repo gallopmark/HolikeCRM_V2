@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/7/25.
+ * Created by pony on 2019/7/25.
  * Copyright holike possess 2019.
  */
 public class InstalledHelper extends IImageSelectHelper implements View.OnClickListener {
@@ -170,7 +170,7 @@ public class InstalledHelper extends IImageSelectHelper implements View.OnClickL
         for (Installer installer : mInstallerList) {
             optionItems.add(new DictionaryBean(installer.getInstallUserId(), installer.getInstallUserName()));
         }
-        PickerHelper.showOptionsPicker(mContext, optionItems, (position,bean) -> {
+        PickerHelper.showOptionsPicker(mContext, optionItems, (position, bean) -> {
             mInstallUserId = bean.id;
             mInstallUserName = bean.name;
             mInstallMasterTextView.setText(mInstallUserName);
@@ -202,8 +202,6 @@ public class InstalledHelper extends IImageSelectHelper implements View.OnClickL
 
     public interface Callback {
         void onQuerySystemCode();
-
-        void onQueryInstaller();
 
         void onRequired(CharSequence text);
 

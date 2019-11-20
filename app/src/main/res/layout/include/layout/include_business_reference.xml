@@ -23,8 +23,13 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_12"
         android:layout_marginBottom="@dimen/dp_12"
+        android:text="@string/all_stores"
+        android:drawableEnd="@drawable/choice_down"
+        android:drawableRight="@drawable/choice_down"
+        android:drawablePadding="@dimen/dp_6"
         android:textColor="@color/textColor8"
-        android:textSize="@dimen/textSize_14" />
+        android:textSize="@dimen/textSize_14"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tab"

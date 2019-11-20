@@ -3,7 +3,7 @@ package com.holike.crm.http;
 import com.holike.crm.BuildConfig;
 
 /**
- * Created by gallop on 2019/7/19.
+ * Created by pony on 2019/7/19.
  * Copyright holike possess 2019.
  * 新版客户管理接口 客户管理v2.0
  */
@@ -125,7 +125,8 @@ public class CustomerUrlPath {
 
     /*客户管理-获取经销商安装工*/
     public static final String URL_GET_DEALER_INSTALLER = CUSTOMER_MANAGER_V2 + "/sysUser/getDealerInstaller";
-
+    /*客户管理-获取门店安装工*/
+    public static final String URL_GET_SHOP_INSTALLER = CUSTOMER_MANAGER_V2 + "/sysUser/getShopInstaller";
     /*客户管理-预约安装*/
     public static final String URL_SAVE_UNINSTALL = CUSTOMER_MANAGER_V2 + "/customerInstallInfo/saveInstallInfo";
 

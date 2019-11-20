@@ -22,28 +22,23 @@ import com.holike.crm.base.OnRequestPermissionsCallback;
 import com.holike.crm.customView.CompatToast;
 import com.holike.crm.customView.InputEditText;
 import com.holike.crm.dialog.InputDialog;
-import com.holike.crm.fragment.customer.ScanByPhoneFragment;
 import com.holike.crm.fragment.customer.ScanGunInstructionActivity;
 import com.holike.crm.model.event.EventCurrentResult;
 import com.holike.crm.model.event.EventQRCodeScanResult;
 import com.holike.crm.presenter.activity.ReceivingScanPresenter;
 import com.holike.crm.presenter.fragment.HomePagePresenter;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
 import com.holike.crm.util.RxLoopTask;
 import com.holike.crm.view.activity.ReceivingScanView;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 收货扫描
@@ -67,8 +62,9 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
     TextView tvScanResultSave;
     @BindView(R.id.et_scan_gun)
     EditText etScanGun;
-    InputDialog inputDialog;
+    private InputDialog inputDialog;
     private List<EventQRCodeScanResult> results = new ArrayList<>(0);
+    private Disposable mDisposable;
     private RxLoopTask loopTask;
 
     @Override
@@ -90,6 +86,13 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
         loopTask.doLoopTask(300, () -> { //循环器 循环监听文本长度
             mPresenter.textLengthListener(etScanGun);
         });
+        mDisposable = RxBus.getInstance().toObservable(MessageEvent.class).subscribe(event -> mPresenter.getResult(event.obj));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setRightMenuMsg(HomePagePresenter.isNewMsg());
     }
 
     @Override
@@ -103,6 +106,10 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
         if (loopTask != null) {
             loopTask.dispose();
         }
+        if (inputDialog != null) {
+            inputDialog.dismiss();
+        }
+        mDisposable.dispose();
         super.onDestroyView();
     }
 
@@ -217,8 +224,8 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
 //            params.put("a", new EventCurrentResult(results.get(results.size() - 1).getResult(), results.size(), results));
 //            startFragment(params, new ScanByPhoneFragment());
             ScanByPhoneActivity.open((BaseActivity<?, ?>) mContext, new EventCurrentResult(results.get(results.size() - 1).getResult(), results.size(), results));
-        } else{
-            ScanByPhoneActivity.open((BaseActivity<?, ?>) mContext,null);
+        } else {
+            ScanByPhoneActivity.open((BaseActivity<?, ?>) mContext, null);
         }
 //            startFragment(new ScanByPhoneFragment(), true);
     }
@@ -242,25 +249,4 @@ public class ReceivingScanFragment extends MyFragment<ReceivingScanPresenter, Re
             showShortToast(R.string.permission_camera_never_ask_again);
         }
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onScanSuccess(List<EventQRCodeScanResult> result) {
-        mPresenter.getResult(result);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setRightMenuMsg(HomePagePresenter.isNewMsg());
-        if (!EventBus.getDefault().isRegistered(this)) //加上判断
-            EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (EventBus.getDefault().isRegistered(this))//加上判断
-            EventBus.getDefault().unregister(this);
-    }
-
 }

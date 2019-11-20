@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/7/29.
+ * Created by pony on 2019/7/29.
  * Copyright holike possess 2019.
  * 图片上传成功返回
  */

@@ -5,7 +5,7 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
 /**
- * Created by gallop on 2019/8/23.
+ * Created by pony on 2019/8/23.
  * Copyright holike possess 2019.
  */
 public class RxBus {

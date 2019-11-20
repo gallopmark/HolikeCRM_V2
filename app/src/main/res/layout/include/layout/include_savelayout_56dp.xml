@@ -14,7 +14,7 @@
         android:layout_marginRight="@dimen/dp_12"
         android:background="@drawable/bg_clickable_selector"
         android:gravity="center"
-        android:text="@string/receive_deposit_save"
+        android:text="@string/save"
         android:textColor="@color/color_while"
         android:textSize="@dimen/textSize_16"
         android:textStyle="bold" />

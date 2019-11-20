@@ -111,7 +111,7 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
     @Override
     public void reload() {
         super.reload();
-        getOrderList();
+        mOrderHelper.startFirstLoad();
     }
 
     @OnClick({R.id.tv_select_time, R.id.tv_select_order_type,
@@ -134,11 +134,6 @@ public class OrderV2Fragment extends MyFragment<OrderListPresenter, OrderCenterV
     public void onGetSelectData() {
         showLoading();
         mPresenter.getSelectData();
-    }
-
-    @Override
-    public void onDateSelected(List<Date> selectedDates, Date start, Date end) {
-        getOrderList();
     }
 
     private void search() {

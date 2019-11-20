@@ -17,13 +17,8 @@ public class ReportPresenter extends BasePresenter<ReportView, ReportModel> {
         model.getPermissions(new ReportModel.GetPermissionsListener() {
             @Override
             public void success(List<ReportPermissionsBean> list) {
-                if (list == null || list.size() == 0) {
-                    if (getView() != null)
-                    getView().noPermissions();
-                } else {
-                    if (getView() != null)
+                if (getView() != null)
                     getView().getPermissionsSuccess(list);
-                }
             }
 
             @Override

@@ -24,6 +24,7 @@ public class LineAttractBean {
     List<DealerDataBean> dealerData;
     List<PercentDataBean> percentData;
     List<SelectDataBean> selectData;
+    String isShow;
 
     public String getIsDealer() {
         return isDealer;
@@ -75,6 +76,10 @@ public class LineAttractBean {
 
     public void setSelectData(List<SelectDataBean> selectData) {
         this.selectData = selectData;
+    }
+
+    public boolean isShow() {
+        return TextUtils.equals(isShow, "1");
     }
 
     @Parcel

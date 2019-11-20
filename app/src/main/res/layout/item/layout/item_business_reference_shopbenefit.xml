@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:background="@color/color_while"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+    <com.holike.crm.customView.DrawableCenterTextView
+        android:id="@+id/tv_effect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/dp_5"
+        android:gravity="center"
+        android:text="@string/effect"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <View style="@style/divider_vertical" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_6">
+
+        <TextView
+            android:id="@+id/tv_total_human_effect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/dp_4"
+            android:text="@string/total_human_effect"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_sales_effectiveness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:drawablePadding="@dimen/dp_4"
+            android:text="@string/sales_effectiveness"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+</LinearLayout>

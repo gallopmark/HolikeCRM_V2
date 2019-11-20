@@ -8,8 +8,6 @@ public interface OnlineAttractReportView extends BaseView {
 
     void getDataFail(String errorMsg);
 
-    void getData();
-
     void onSmoothScroll(int position);
     void onTagSelect(int position,LineAttractBean datas);
 }

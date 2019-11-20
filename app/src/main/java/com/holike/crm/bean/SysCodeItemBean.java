@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/7/19.
+ * Created by pony on 2019/7/19.
  * Copyright holike possess 2019.
  * 业务字典
  */
@@ -219,6 +219,7 @@ public class SysCodeItemBean {
         return nonNullWrap(loseReason);
     }
 
+    @Deprecated
     @NonNull
     public Map<String, String> getCustomerBrand() {
         return nonNullWrap(customerBrand);

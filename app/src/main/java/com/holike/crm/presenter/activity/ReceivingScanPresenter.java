@@ -57,7 +57,6 @@ public class ReceivingScanPresenter extends BasePresenter<ReceivingScanView, Rec
 
     /**
      * 设置输入框监听
-     *
      */
     public void setEditTextWatcher(final EditText et) {
         et.addTextChangedListener(new TextWatcher() {
@@ -100,15 +99,18 @@ public class ReceivingScanPresenter extends BasePresenter<ReceivingScanView, Rec
         }
     }
 
-    public void getResult(List<EventQRCodeScanResult> results) {
-        if (getView() != null)
-            getView().onAddResultSuccess(results, results.size() > 0);
+    @SuppressWarnings("unchecked")
+    public void getResult(Object obj) {
+        if (obj != null) {
+            List<EventQRCodeScanResult> results = (List<EventQRCodeScanResult>) obj;
+            if (getView() != null)
+                getView().onAddResultSuccess(results, results.size() > 0);
+        }
     }
 
 
     /**
      * 遍历是否重复
-     *
      */
     private boolean travers(List<EventQRCodeScanResult> results, String code) {
         for (EventQRCodeScanResult r : results) {

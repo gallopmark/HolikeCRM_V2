@@ -16,7 +16,7 @@ import java.util.Map;
 
 
 /**
- * Created by gallop on 2019/7/25.
+ * Created by pony on 2019/7/25.
  * Copyright holike possess 2019.
  */
 public class PickerHelper {
@@ -32,6 +32,13 @@ public class PickerHelper {
     public static void showTimePicker(Context context, DatetimePickerDialog.OnDatetimePickerListener listener) {
         new DatetimePickerDialog.Builder(context)
                 .withType(DatetimePickerDialog.TYPE_Y_M_D)
+                .listener(listener).show();
+    }
+
+    public static void showTimePicker2(Context context, Date selectDate, DatetimePickerDialog.OnDatetimePickerListener listener) {
+        new DatetimePickerDialog.Builder(context)
+                .withType(DatetimePickerDialog.TYPE_Y_M_D)
+                .selectDate(selectDate)
                 .listener(listener).show();
     }
 

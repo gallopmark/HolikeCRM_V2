@@ -39,7 +39,7 @@ import io.reactivex.schedulers.Schedulers;
 
 
 /**
- * Created by gallop on 2019/7/16.
+ * Created by pony on 2019/7/16.
  * Copyright holike possess 2019.
  * 客户管理页面 model
  */
@@ -363,10 +363,18 @@ public class GeneralCustomerModel extends BaseModel {
     }
 
     /*客户管理-获取经销商安装工*/
+    @Deprecated
     public void getDealerInstaller(RequestCallBack<List<DealerInfoBean.UserBean>> callBack) {
         Map<String, String> params = ParamHelper.general();
         params.put("dealerId", SharedPreferencesUtils.getDealerId());
         getByTimeout(CustomerUrlPath.URL_GET_DEALER_INSTALLER, null, params, 60, callBack);
+    }
+
+    /*客户管理-获取经销商安装工*/
+    public void getShopInstallers(String shopId, RequestCallBack<List<DealerInfoBean.UserBean>> callBack) {
+        Map<String, String> params = ParamHelper.general();
+        params.put("shopId", ParamHelper.noNullWrap(shopId));
+        getByTimeout(CustomerUrlPath.URL_GET_SHOP_INSTALLER, null, params, 60, callBack);
     }
 
     /*客户管理-主管查房*/

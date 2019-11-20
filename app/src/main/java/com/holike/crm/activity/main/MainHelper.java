@@ -25,20 +25,18 @@ import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.http.CustomerUrlPath;
 import com.holike.crm.http.MyHttpClient;
-import com.holike.crm.http.MyJsonParser;
 import com.holike.crm.http.ParamHelper;
 import com.holike.crm.http.RequestCallBack;
 import com.holike.crm.rxbus.MessageEvent;
 import com.holike.crm.rxbus.RxBus;
 import com.holike.crm.util.AppUtils;
-import com.holike.crm.util.LogCat;
 import com.holike.crm.util.SharedPreferencesUtils;
 import com.holike.crm.util.TimeUtil;
 
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Created by gallop on 2019/8/26.
+ * Created by pony on 2019/8/26.
  * Copyright holike possess 2019.
  */
 class MainHelper implements OnRequestPermissionsCallback {
@@ -141,7 +139,6 @@ class MainHelper implements OnRequestPermissionsCallback {
             super.onCallStateChanged(state, phoneNumber);
             switch (state) {
                 case TelephonyManager.CALL_STATE_IDLE://空闲
-                    LogCat.e("电话处于休闲状态中...");
                     if (mCalled) {
                         //通话时长
                         mCallFinished = true;
@@ -150,10 +147,8 @@ class MainHelper implements OnRequestPermissionsCallback {
                     }
                     break;
                 case TelephonyManager.CALL_STATE_RINGING://响铃
-                    LogCat.e("电话处于响铃中...");
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK://通话状态
-                    LogCat.e("电话处于通话中...");
                     mCalled = true;
                     break;
                 default:
@@ -203,7 +198,6 @@ class MainHelper implements OnRequestPermissionsCallback {
                 int duration = cursor.getInt(cursor.getColumnIndex(CallLog.Calls.DURATION)); // 通话时长
                 int type = cursor.getInt(cursor.getColumnIndex(CallLog.Calls.TYPE)); //通话类型
                 if ((type == CallLog.Calls.INCOMING_TYPE || type == CallLog.Calls.OUTGOING_TYPE) && duration > 0) {
-                    LogCat.e("duration", String.valueOf(duration));  //单位：秒
                     onCallFinish(duration);
                 }
             }
@@ -237,13 +231,11 @@ class MainHelper implements OnRequestPermissionsCallback {
         mDisposables.add(MyHttpClient.postByBody(CustomerUrlPath.URL_SAVE_PHONE_RECORD, null, mRequestBody, new RequestCallBack<String>() {
             @Override
             public void onFailed(String failReason) {
-                LogCat.e("添加通话记录失败:" + (TextUtils.isEmpty(failReason) ? "" : failReason));
                 mHandler.postDelayed(retryRun, 3000);
             }
 
             @Override
             public void onSuccess(String result) {
-                LogCat.e(MyJsonParser.getShowMessage(result));
                 mHandler.removeCallbacks(retryRun);
             }
         }));

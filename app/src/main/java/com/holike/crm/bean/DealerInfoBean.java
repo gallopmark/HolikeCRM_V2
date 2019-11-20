@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/14.
+ * Created by pony on 2019/8/14.
  * Copyright holike possess 2019.
  * 经销商所有门店和设计师信息
  */

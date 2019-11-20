@@ -1,7 +1,9 @@
 package com.holike.crm.fragment.analyze;
 
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -33,7 +35,8 @@ import butterknife.BindView;
 
 /*线上引流*/
 public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportPresenter, OnlineAttractReportView> implements OnlineAttractReportView, OnlineAttractReportPresenter.ClickListener {
-
+    @BindView(R.id.ll_content_layout)
+    LinearLayout mContentLayout;
     @BindView(R.id.rv_online_drainage_tab)
     RecyclerView rvTab;
     @BindView(R.id.rv_online_drainage_side)
@@ -42,7 +45,7 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
     RecyclerView rvTitle;
     @BindView(R.id.rv_online_drainage_center)
     RecyclerView rvCenter;
-    @BindView(R.id.tab_online_drainage_type)
+    @BindView(R.id.tab_layout)
     CommonTabLayout tabType;
     @BindView(R.id.tv_online_drainage_date)
     TextView tvDate;
@@ -52,14 +55,12 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
     TextView tvQuestionMark;
     @BindView(R.id.tv_online_drainage_shop_name)
     TextView tvShopName;
-    @BindView(R.id.ll_order_report)
-    LinearLayout llMain;
     @BindView(R.id.ll_form)
     LinearLayout llForm;
     @BindView(R.id.ll_date_tip)
     LinearLayout llDateTip;
-    @BindView(R.id.v_line)
-    View vLine;
+    //    @BindView(R.id.v_line)
+//    View vLine;
     @BindView(R.id.mHsv)
     HorizontalScrollView mHsv;
 
@@ -102,7 +103,7 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
         mPresenter.setScrollSynchronous(rvCenter, rvSide);
         llForm.setVisibility(View.INVISIBLE);
         llDateTip.setVisibility(View.INVISIBLE);
-        vLine.setVisibility(View.INVISIBLE);
+//        vLine.setVisibility(View.INVISIBLE);
         initData();
     }
 
@@ -124,6 +125,13 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
     @Override
     public void getDataSuccess(LineAttractBean bean) {
         dismissLoading();
+        if (bean.isShow()) {
+            hasData();
+            mContentLayout.setVisibility(View.VISIBLE);
+        } else {
+            mContentLayout.setVisibility(View.GONE);
+            noData(R.drawable.ic_update, R.string.tips_please_wait, false);
+        }
         initTab(bean.getSelectData());
         tvDate.setText(bean.getTimeData());
         mPresenter.addTitleData(mContext, bean.isDealer());
@@ -148,7 +156,7 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
         }
         llForm.setVisibility(View.VISIBLE);
         llDateTip.setVisibility(View.VISIBLE);
-        vLine.setVisibility(View.VISIBLE);
+//        vLine.setVisibility(View.VISIBLE);
         scrollToTop();
         tvQuestionMark.setOnClickListener(v -> new OnlineDrainageTipDialog(mContext, bean.isDealer()).show());
     }
@@ -175,29 +183,38 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
             tabType.setOnTabSelectListener(new OnTabSelectListener() {
                 @Override
                 public void onTabSelect(int position) {
-                    tabSelect(position, selectDataBeans);
+                    time = selectDataBeans.get(position).getSelectTime();
+                    if (TextUtils.equals(selectDataBeans.get(position).getName(), "查询日期")) {
+                        checkDate();
+                    } else {
+                        initData();
+                    }
+//                    tabSelect(position, selectDataBeans);
                 }
 
                 @Override
                 public void onTabReselect(int position) {
-                    tabSelect(position, selectDataBeans);
+                    if (TextUtils.equals(selectDataBeans.get(position).getName(), "查询日期")) {
+                        checkDate();
+                    }
+//                    tabSelect(position, selectDataBeans);
                 }
             });
             tabType.setCurrentTab(OnlineAttractReportPresenter.getSelectPosition(time, selectDataBeans));
         }
     }
 
-    /**
+    /*
      * 选择导航
      */
-    public void tabSelect(int position, List<LineAttractBean.SelectDataBean> selectDataBeans) {
-        time = selectDataBeans.get(position).getSelectTime();
-        if (!TextUtils.isEmpty(selectDataBeans.get(position).getName()) && selectDataBeans.get(position).getName().equals("查询日期")) {
-            checkDate();
-        } else {
-            getData();
-        }
-    }
+//    public void tabSelect(int position, List<LineAttractBean.SelectDataBean> selectDataBeans) {
+//        time = selectDataBeans.get(position).getSelectTime();
+//        if (!TextUtils.isEmpty(selectDataBeans.get(position).getName()) && selectDataBeans.get(position).getName().equals("查询日期")) {
+//            checkDate();
+//        } else {
+//            initData();
+//        }
+//    }
 
     /**
      * 查询日期
@@ -220,13 +237,13 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
                     endTime = TimeUtil.dateToStamp(end, true);
 //                    startTime = TimeUtil.dataToStamp(start, "yyyy年MM月dd日");
 //                    endTime = String.valueOf(mPresenter.convertEndDate(end) / 1000);
-                    getData();
+                    initData();
                 } else {
                     if (selectDataBeans != null && !selectDataBeans.isEmpty()) {
                         startTime = null;
                         endTime = null;
                         time = selectDataBeans.get(0).getSelectTime();
-                        getData();
+                        initData();
                     }
                 }
             }
@@ -235,12 +252,13 @@ public class OnlineAttractReportFragment extends MyFragment<OnlineAttractReportP
 
     @Override
     public void getDataFail(String errorMsg) {
-        showShortToast(errorMsg);
         dismissLoading();
+        mContentLayout.setVisibility(View.GONE);
+        noNetwork(errorMsg);
     }
 
     @Override
-    public void getData() {
+    protected void reload() {
         initData();
     }
 

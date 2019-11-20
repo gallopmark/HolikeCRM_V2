@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_time_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|start"
+            android:drawableEnd="@drawable/ic_choice_date_down"
+            android:drawableRight="@drawable/ic_choice_date_down"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center"
+            android:text="@string/query_date"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_select_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:background="@drawable/bg_corners4dp_stroke1dp"
+            android:drawableEnd="@drawable/space_triangle_down"
+            android:drawableRight="@drawable/space_triangle_down"
+            android:drawablePadding="@dimen/dp_4"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:minWidth="@dimen/dp_60"
+            android:padding="@dimen/dp_8"
+            android:text="@string/select_area"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/textSize_14" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_shop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_select_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|start"
+            android:drawableEnd="@drawable/choice_down"
+            android:drawableRight="@drawable/choice_down"
+            android:drawablePadding="@dimen/dp_4"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/all_stores"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

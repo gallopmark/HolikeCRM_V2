@@ -1,10 +1,12 @@
 package com.holike.crm.presenter.fragment;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
@@ -21,7 +23,6 @@ import com.holike.crm.customView.WrapContentLinearLayoutManager;
 import com.holike.crm.customView.listener.TouchPressListener;
 import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.model.fragment.OnlineAttractReportModel;
-import com.holike.crm.util.DensityUtil;
 import com.holike.crm.view.fragment.OnlineAttractReportView;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class OnlineAttractReportPresenter extends BasePresenter<OnlineAttractRep
         public void onBindHolder(RecyclerHolder holder, ListViewBean bean, int position) {
             holder.setText(R.id.tv_online_drainage_title, bean.getName());
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.obtainView(R.id.fl_online_drainage_title).getLayoutParams();
-            params.width = DensityUtil.dp2px(bean.getLayoutWith());
+            params.width = bean.getLayoutWith();
             holder.itemView.setLayoutParams(params);
         }
     }
@@ -184,10 +185,9 @@ public class OnlineAttractReportPresenter extends BasePresenter<OnlineAttractRep
                 }
                 mSideTv.setText(bean.getName());
                 holder.setText(R.id.item_tv_side, bean.getName());
-                setLayoutWidth(holder, R.id.fl_online_drainage_side, 60);
+                setLayoutWidth(holder, R.id.fl_online_drainage_side, mContext.getResources().getDimensionPixelSize(R.dimen.dp_60));
                 holder.setBackgroundColor(R.id.fl_online_drainage_side, context.getResources().getColor(position % 2 == 1 ? R.color.bg_transparent : R.color.container_divider));
             }
-
         });
     }
 
@@ -201,14 +201,14 @@ public class OnlineAttractReportPresenter extends BasePresenter<OnlineAttractRep
 
             @Override
             protected int bindView(int viewType) {
-                return  R.layout.item_online_drainage_side;
+                return R.layout.item_online_drainage_side;
             }
 
             @Override
             public void onBindHolder(RecyclerHolder holder, LineAttractBean.PercentDataBean bean, int position) {
                 TextView tvSide = holder.obtainView(R.id.item_tv_side);
                 holder.setText(R.id.item_tv_side, bean.getArea());
-                setLayoutWidth(holder, R.id.fl_online_drainage_side, 64);
+                setLayoutWidth(holder, R.id.fl_online_drainage_side, mContext.getResources().getDimensionPixelSize(R.dimen.dp_64));
                 tvSide.setTextColor(ContextCompat.getColor(mContext, bean.getIsClick().equals("1") ? R.color.textColor5 : R.color.textColor4));
                 holder.setBackgroundColor(R.id.fl_online_drainage_side, context.getResources().getColor(position % 2 == 1 ? R.color.bg_transparent : R.color.light_text5));
                 if (TextUtils.equals(bean.getIsClick(), "1")) {
@@ -330,7 +330,7 @@ public class OnlineAttractReportPresenter extends BasePresenter<OnlineAttractRep
     private void setLayoutWidth(BaseRecyclerAdapter.RecyclerHolder holder, int id, int width) {
         FrameLayout frameLayout = holder.obtainView(id);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) frameLayout.getLayoutParams();
-        params.width = DensityUtil.dp2px(width);
+        params.width = width;
         frameLayout.setLayoutParams(params);
     }
 
@@ -338,12 +338,15 @@ public class OnlineAttractReportPresenter extends BasePresenter<OnlineAttractRep
     private List<ListViewBean> titleData(Context context, boolean isDealer) {
         String[] titles;
         int[] sizes;
+        int dp46 = context.getResources().getDimensionPixelSize(R.dimen.dp_46);
+        int dp50 = context.getResources().getDimensionPixelSize(R.dimen.dp_50);
+        int dp60 = context.getResources().getDimensionPixelSize(R.dimen.dp_60);
         if (isDealer) {
             titles = context.getResources().getStringArray(R.array.online_attract_dealer_title);
-            sizes = new int[]{50, 50, 50, 50, 50, 50, 50, 60, 60, 60, 60, 60};
+            sizes = new int[]{dp50, dp50, dp50, dp50, dp50, dp50, dp50, dp60, dp60, dp60, dp60, dp60};
         } else {
             titles = context.getResources().getStringArray(R.array.online_attract_nonDealer_title);
-            sizes = new int[]{50, 50, 46, 46, 46, 46, 46, 60, 46, 60, 60};
+            sizes = new int[]{dp50, dp50, dp46, dp46, dp46, dp46, dp46, dp60, dp46, dp60, dp60};
         }
         List<ListViewBean> beans = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {

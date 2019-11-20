@@ -133,7 +133,7 @@
 
         <TextView
             android:id="@+id/tv_satisfaction"
-            style="@style/Scrollable_TextViewStyle2"
+            style="@style/Scrollable_TextViewStyle22"
             android:layout_width="@dimen/dp_64"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -143,7 +143,7 @@
 
         <TextView
             android:id="@+id/tv_store_turnover_rate"
-            style="@style/Scrollable_TextViewStyle2"
+            style="@style/Scrollable_TextViewStyle22"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -152,7 +152,7 @@
 
         <TextView
             android:id="@+id/tv_scale_rate"
-            style="@style/Scrollable_TextViewStyle2"
+            style="@style/Scrollable_TextViewStyle22"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />-->

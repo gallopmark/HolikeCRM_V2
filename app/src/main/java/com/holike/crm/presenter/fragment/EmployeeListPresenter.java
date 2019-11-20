@@ -21,7 +21,7 @@ import com.holike.crm.view.fragment.EmployeeListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public class EmployeeListPresenter extends BasePresenter<EmployeeListView, EmployeeModel> {
     private List<EmployeeBean> beans = new ArrayList<>();
     private EmployeeListAdapter adapter;
@@ -47,7 +47,7 @@ public class EmployeeListPresenter extends BasePresenter<EmployeeListView, Emplo
         @Override
         protected int bindView(int viewType) {
             if (viewType == TYPE_FOOTER) {
-                return R.layout.item_employeelist_footer;
+                return R.layout.item_nomore_data;
             }
             return R.layout.item_employeelist;
         }
@@ -55,7 +55,7 @@ public class EmployeeListPresenter extends BasePresenter<EmployeeListView, Emplo
         @Override
         public void onBindHolder(RecyclerHolder holder, EmployeeBean bean, int position) {
             if (holder.getItemViewType() == 2) {
-                holder.setText(R.id.mFooterTextView, mContext.getString(R.string.complete_loading));
+                holder.setText(R.id.mNoMoreTextView, mContext.getString(R.string.complete_loading));
             } else {
                 holder.setText(R.id.mShortNameTv, bean.getShortName());
                 holder.setText(R.id.mNameTv, bean.getName());

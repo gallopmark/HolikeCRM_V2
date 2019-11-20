@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/9/20.
+ * Created by pony on 2019/9/20.
  * Copyright holike possess 2019.
  * 客户满意度
  */
@@ -80,6 +80,7 @@ public class CustomerSatisfactionBean {
         @SerializedName("url")
         List<UrlBean> urlList;
 
+        @Deprecated
         public List<String> getImages() {
             if (TextUtils.isEmpty(image)) {
                 return new ArrayList<>();

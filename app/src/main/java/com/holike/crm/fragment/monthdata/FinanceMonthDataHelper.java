@@ -22,44 +22,25 @@ import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.bean.MonthDataFinanceBean;
 
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/9.
+ * Created by pony on 2019/8/9.
  * Copyright holike possess 2019.
  * 财务本月数据
  */
 class FinanceMonthDataHelper extends MonthDataHelper {
 
     private ViewStub mContentViewStub;
-    private View mFragmentView;
     private View mContentView;
 
     FinanceMonthDataHelper(BaseFragment<?, ?> fragment, Callback callback) {
-        super((BaseActivity<?, ?>) fragment.getActivity(), callback);
-        mFragmentView = fragment.getContentView();
-        mContentViewStub = mFragmentView.findViewById(R.id.vs_form_data);
-        Bundle bundle = fragment.getArguments();
-        boolean isAnimation = false;
-        if (bundle != null) {
-            mType = bundle.getString("type");
-            mCityCode = bundle.getString("cityCode");
-            mStartDate = (Date) bundle.getSerializable("startDate");
-            mEndDate = (Date) bundle.getSerializable("endDate");
-            isAnimation = bundle.getBoolean("isAnimation");
-        }
-        long delayMillis = 0;
-        if (isAnimation) {
-            delayMillis = 300;
-        }
-        mFragmentView.postDelayed(mAction, delayMillis);
+        super(fragment, callback);
     }
 
-    private final Runnable mAction = this::onQuery;
-
-    void onDestroy() {
-        mFragmentView.removeCallbacks(mAction);
+    @Override
+    void initView() {
+        mContentViewStub = mFragmentView.findViewById(R.id.vs_form_data);
     }
 
     void onSuccess(MonthDataFinanceBean bean) {
@@ -77,38 +58,37 @@ class FinanceMonthDataHelper extends MonthDataHelper {
         String isShop = bean.isShop;
         View firstLayout;
         if (TextUtils.equals(isShop, "1")) {
-            firstLayout = LayoutInflater.from(mActivity).inflate(R.layout.include_form_data_firstrow_60dp, contentLayout, false);
+            firstLayout = LayoutInflater.from(mContext).inflate(R.layout.include_form_data_column_60dp, contentLayout, false);
         } else {
-            firstLayout = LayoutInflater.from(mActivity).inflate(R.layout.include_form_data_firstrow_80dp, contentLayout, false);
+            firstLayout = LayoutInflater.from(mContext).inflate(R.layout.include_form_data_column_80dp, contentLayout, false);
         }
         TextView tvFirst = firstLayout.findViewById(R.id.tv_first_name);
         contentLayout.addView(firstLayout, 1);
         RecyclerView sideRecyclerView = mContentView.findViewById(R.id.rv_side);
         RecyclerView contentRecyclerView = mFragmentView.findViewById(R.id.rv_content);
-        sideRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        contentRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        sideRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        contentRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         contentRecyclerView.setNestedScrollingEnabled(false);
         setScrollSynchronous(sideRecyclerView, contentRecyclerView);
-        setScrollSynchronous(contentRecyclerView, sideRecyclerView);
         LinearLayout scrollableLayout = mContentView.findViewById(R.id.ll_scrollable_content);
         if (scrollableLayout.getChildCount() >= 2) {
             scrollableLayout.removeViewAt(0);
         }
         //isShop 1门店数据 2门店人员收款数据
         if (TextUtils.equals(isShop, "1")) {
-            tvFirst.setText(mActivity.getString(R.string.report_table_divide));
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_finance_tablist, scrollableLayout, false);
+            tvFirst.setText(mContext.getString(R.string.report_table_divide));
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_finance_tablist, scrollableLayout, false);
             scrollableLayout.addView(view, 0);
-            sideRecyclerView.setAdapter(new ClickableSideAdapter(mActivity, bean.getArr()));
-            contentRecyclerView.setAdapter(new ScrollableContentAdapter(mActivity, bean.getArr()));
+            sideRecyclerView.setAdapter(new ClickableSideAdapter(mContext, bean.getArr()));
+            contentRecyclerView.setAdapter(new ScrollableContentAdapter(mContext, bean.getArr()));
         } else {
             TextView tvUnit = mFragmentView.findViewById(R.id.tv_unit);
             tvUnit.setVisibility(View.GONE);
-            tvFirst.setText(mActivity.getString(R.string.tips_customer_name));
-            View view = LayoutInflater.from(mActivity).inflate(R.layout.include_monthdata_finance_tablist2, scrollableLayout, false);
+            tvFirst.setText(mContext.getString(R.string.tips_customer_name));
+            View view = LayoutInflater.from(mContext).inflate(R.layout.include_monthdata_finance_tablist2, scrollableLayout, false);
             scrollableLayout.addView(view, 0);
-            sideRecyclerView.setAdapter(new ArrBean2Adapter(mActivity, bean.getArr2()));
-            contentRecyclerView.setAdapter(new ContentArrBean2Adapter(mActivity, bean.getArr2()));
+            sideRecyclerView.setAdapter(new ArrBean2Adapter(mContext, bean.getArr2()));
+            contentRecyclerView.setAdapter(new ContentArrBean2Adapter(mContext, bean.getArr2()));
         }
     }
 
@@ -120,7 +100,7 @@ class FinanceMonthDataHelper extends MonthDataHelper {
             tvShop.setText(bean.shopName);
             TextView tvName = layout.findViewById(R.id.tv_name);
             if (!TextUtils.isEmpty(bean.userName)) {
-                String text = mActivity.getString(R.string.customer_name_tips);
+                String text = mContext.getString(R.string.customer_name_tips);
                 int start = text.length();
                 text += bean.userName;
                 int end = text.length();
@@ -258,7 +238,7 @@ class FinanceMonthDataHelper extends MonthDataHelper {
     }
 
     private void startFragment(String type, String cityCode) {
-        mActivity.startFragment(new FinanceMonthDataFragment(), obtainBundle(type, cityCode), true);
+        ((BaseActivity<?, ?>) mContext).startFragment(new FinanceMonthDataFragment(), obtainBundle(type, cityCode), true);
     }
 
     private Bundle obtainBundle(String type, String cityCode) {

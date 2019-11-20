@@ -7,7 +7,7 @@ import com.holike.crm.model.fragment.EmployeeModel;
 import com.holike.crm.view.activity.EmployeeResetPwView;
 
 /**
- * Created by gallop on 2019/9/19.
+ * Created by pony on 2019/9/19.
  * Copyright holike possess 2019.
  */
 public class EmployeeResetPwPresenter extends BasePresenter<EmployeeResetPwView, EmployeeModel> {

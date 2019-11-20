@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_time_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_14" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_while"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_14"
+        android:paddingBottom="@dimen/dp_20"
+        tools:ignore="RtlHardcoded">
+
+        <TextView
+            android:id="@+id/tv_newCount_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center"
+            android:text="@string/number_of_new_customers"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_newCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fl_newCount" />
+
+        <FrameLayout
+            android:id="@+id/fl_newCount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:layout_toEndOf="@+id/tv_newCount_tips"
+            android:layout_toRightOf="@+id/tv_newCount_tips"
+            android:background="@color/block_one"
+            app:layout_constraintStart_toEndOf="@+id/tv_newCount_tips"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_newCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_newCount_tips"
+            app:layout_constraintTop_toBottomOf="@+id/fl_newCount" />
+
+        <TextView
+            android:id="@+id/tv_rate_one"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_conversion"
+            android:drawableLeft="@drawable/ic_conversion"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center|start"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_preScaleCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fl_newCount" />
+
+        <TextView
+            android:id="@+id/tv_preScaleCount_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/number_of_reservation_scale"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_preScaleCount"
+            app:layout_constraintStart_toStartOf="@+id/tv_newCount_tips"
+            app:layout_constraintTop_toTopOf="@+id/fl_preScaleCount" />
+
+        <FrameLayout
+            android:id="@+id/fl_preScaleCount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:background="@color/block_two"
+            app:layout_constraintStart_toStartOf="@+id/fl_newCount"
+            app:layout_constraintTop_toBottomOf="@+id/fl_newCount" />
+
+        <TextView
+            android:id="@+id/tv_preScaleCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_preScaleCount_tips"
+            app:layout_constraintTop_toBottomOf="@+id/fl_preScaleCount" />
+
+        <TextView
+            android:id="@+id/tv_rate_two"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_conversion"
+            android:drawableLeft="@drawable/ic_conversion"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center|start"
+            android:minWidth="@dimen/dp_70"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_scaleCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fl_preScaleCount" />
+
+        <TextView
+            android:id="@+id/tv_scaleCount_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/number_of_measuring"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_scaleCount"
+            app:layout_constraintStart_toStartOf="@+id/tv_newCount_tips"
+            app:layout_constraintTop_toTopOf="@+id/fl_scaleCount" />
+
+        <FrameLayout
+            android:id="@+id/fl_scaleCount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:background="@color/block_three"
+            app:layout_constraintStart_toStartOf="@+id/fl_newCount"
+            app:layout_constraintTop_toBottomOf="@+id/fl_preScaleCount" />
+
+        <TextView
+            android:id="@+id/tv_scaleCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_scaleCount_tips"
+            app:layout_constraintTop_toBottomOf="@+id/fl_scaleCount" />
+
+        <TextView
+            android:id="@+id/tv_deposit_customers_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/number_of_deposit"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_deposit_count"
+            app:layout_constraintStart_toStartOf="@+id/tv_newCount_tips"
+            app:layout_constraintTop_toTopOf="@+id/fl_deposit_count" />
+
+        <FrameLayout
+            android:id="@+id/fl_deposit_count"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:background="@color/block_four"
+            app:layout_constraintStart_toStartOf="@+id/fl_newCount"
+            app:layout_constraintTop_toBottomOf="@+id/fl_scaleCount" />
+
+        <TextView
+            android:id="@+id/tv_deposit_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_deposit_customers_tips"
+            app:layout_constraintTop_toBottomOf="@+id/fl_deposit_count" />
+
+        <TextView
+            android:id="@+id/tv_rate_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_conversion"
+            android:drawableLeft="@drawable/ic_conversion"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center|start"
+            android:minWidth="@dimen/dp_70"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_deposit_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fl_scaleCount" />
+
+        <TextView
+            android:id="@+id/tv_sign_count_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/number_of_signatures"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_sign_count"
+            app:layout_constraintStart_toStartOf="@+id/tv_newCount_tips"
+            app:layout_constraintTop_toTopOf="@+id/fl_sign_count" />
+
+        <FrameLayout
+            android:id="@+id/fl_sign_count"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:background="@color/block_five"
+            app:layout_constraintStart_toStartOf="@+id/fl_newCount"
+            app:layout_constraintTop_toBottomOf="@+id/fl_deposit_count" />
+
+        <TextView
+            android:id="@+id/tv_sign_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_sign_count_tips"
+            app:layout_constraintTop_toBottomOf="@+id/fl_sign_count" />
+
+        <TextView
+            android:id="@+id/tv_rate_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:drawableStart="@drawable/ic_conversion"
+            android:drawableLeft="@drawable/ic_conversion"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center|start"
+            android:minWidth="@dimen/dp_70"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_sign_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fl_deposit_count" />
+
+        <TextView
+            android:id="@+id/tv_pie_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/scale_conversion_rate"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sign_count" />
+
+        <TextView
+            android:id="@+id/tv_scale_conversion_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_pie_one"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pie_one" />
+
+        <TextView
+            android:id="@+id/tv_pie_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_100"
+            android:layout_marginRight="@dimen/dp_100"
+            android:text="@string/deposit_conversion_rate"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_pie_one" />
+
+        <TextView
+            android:id="@+id/tv_deposit_conversion_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_pie_two"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pie_two" />
+
+        <TextView
+            android:id="@+id/tv_pie_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/store_entry_turnover_rate"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_pie_one"
+            app:layout_constraintTop_toBottomOf="@+id/tv_scale_conversion_rate" />
+
+        <TextView
+            android:id="@+id/tv_entry_turnover_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_pie_three"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pie_three" />
+
+        <TextView
+            android:id="@+id/tv_pie_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_100"
+            android:layout_marginRight="@dimen/dp_100"
+            android:text="@string/scale_turnover_rate"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_pie_three" />
+
+        <TextView
+            android:id="@+id/tv_scale_turnover_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_pie_four"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pie_four" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

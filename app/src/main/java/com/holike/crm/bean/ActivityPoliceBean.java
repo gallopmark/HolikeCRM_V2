@@ -3,7 +3,7 @@ package com.holike.crm.bean;
 import android.text.TextUtils;
 
 /**
- * Created by gallop on 2019/8/13.
+ * Created by pony on 2019/8/13.
  * Copyright holike possess 2019.
  * 活动优惠政策
  */

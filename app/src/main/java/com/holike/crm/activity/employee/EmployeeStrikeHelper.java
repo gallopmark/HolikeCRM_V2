@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 /**
- * Created by gallop on 2019/8/8.
+ * Created by pony on 2019/8/8.
  * Copyright holike possess 2019.
  */
 class EmployeeStrikeHelper {

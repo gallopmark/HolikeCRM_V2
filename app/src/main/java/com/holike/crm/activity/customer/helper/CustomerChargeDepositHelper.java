@@ -12,7 +12,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 
 /**
- * Created by gallop on 2019/9/2.
+ * Created by pony on 2019/9/2.
  * Copyright holike possess 2019.
  */
 public class CustomerChargeDepositHelper extends MultiItemListHelper {

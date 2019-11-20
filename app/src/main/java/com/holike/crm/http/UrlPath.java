@@ -25,6 +25,7 @@ public class UrlPath {
     public static final String URL_HOMEPAGE_DATA = HOST + "/member/crmIndex";
 
     /*获取客户选择条件数据*/
+    @Deprecated
     public static final String URL_CUSTOMER_SELECT = HOST + "/member/getType";
 
     /*获取订单中心条件数据*/
@@ -201,6 +202,7 @@ public class UrlPath {
     public static final String URL_QUERY_PER_SHOP = HOST_CM + "/message/queryPer";
 
     /*获取消失的数据*/
+    @Deprecated
     public static final String URL_NEW_ITEM = HOST + "/member/getNewItem";
 
     /*验证货物包装号*/
@@ -283,4 +285,24 @@ public class UrlPath {
 
     /*新增编辑规则*/
     public static final String URL_SETTINGS_RULE = HOST + "/member/editRule";
+
+    /*v3.0*/
+    /*员工个人排行榜*/
+    public static final String URL_EMPLOYEE_RANKING = HOST + "/forms/rank";
+    public static final String URL_EVALUATE_TYPE = HOST + "/forms/getEvaluateType";
+    public static final String URL_DESIGN_MONTH_DATA = HOST + "/forms/designerData"; //本月数据-设计经理
+    public static final String URL_PERSONAL_PERFORMANCE = HOST + "/forms/formsAfterSale"; //个人绩效
+    public static final String URL_GET_TARGET = HOST + "/forms/getTarget"; //获取目标
+    public static final String URL_SET_TARGET = HOST + "/forms/setTarget"; //设置目标
+    public static final String URL_BUSINESS_OBJECTIVES = HOST + "/forms/getManagement"; //经营目标首页数据
+    public static final String URL_POWER_INFO = HOST + "/forms/getPowerInfo4";  //3.0获取分析图标
+    public static final String URL_CUSTOMER_CONVERSION = HOST + "/forms/getChange"; //客户转化率报表
+    public static final String URL_DEALER_FACTORY_PERFORMANCE = HOST + "/forms/getDealerFactoryPerformance"; //经销商-出厂业绩
+    public static final String URL_MARKET_FACTORY_PERFORMANCE = HOST + "/forms/getMarketFactoryPerformance"; //营销人员-出厂业绩
+    public static final String URL_SHOP_ANALYSIS = HOST + "/forms/storeList"; //门店分析
+    public static final String URL_ONLINE_DRAINAGE = HOST + "/forms/drainageData"; //线上引流
+    public static final String URL_SHEET_ANALYSIS = HOST + "/forms/getSheetAnalysis"; //板材分析
+    public static final String URL_HOME_DOLL_CHANNEL = HOST + "/forms/getHomeChannel"; //家装渠道-营销人员
+    public static final String URL_DEALER_HOME_DOLL_CHANNEL = HOST + "/forms/getDealerHomeChannel"; //家装渠道-经销商
+    public static final String URL_DEALER_MULTI_PERFORMANCE = HOST + "/forms/getDealerColorAndSeriesDetail"; //花色/系列 业绩详情-经销商
 }

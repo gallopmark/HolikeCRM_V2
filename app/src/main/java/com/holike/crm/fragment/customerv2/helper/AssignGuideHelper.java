@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/1.
+ * Created by pony on 2019/8/1.
  * Copyright holike possess 2019.
  * 分配导购帮助类
  */

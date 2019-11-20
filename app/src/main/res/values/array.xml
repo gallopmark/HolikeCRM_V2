@@ -91,4 +91,69 @@
         <item>11\n月</item>
         <item>12\n月</item>
     </string-array>
+
+    <string-array name="customer_conversion_tips">
+        <item>新建客户数为所选择时间段内新建的总客户数，预约量尺数、量尺数、订金数、签约数为新建客户到目前为止已经转化过的数量。若有步骤跳过未填写，就会出现转化率＞100%的情况；</item>
+        <item>例如：自定义时间2019年3月1日至2019年5月5日，则新建客户数为2019年3月1日至2019年5月5日创建的客户，量尺数/订金数/签约数为2019年3月1日至2019年5月5日新建的客户截止今天（10月1日）已经量尺/收订金/签约的数量。</item>
+    </string-array>
+
+    <string-array name="online_drainage_dealer_tips">
+        <item>分配转化率=签约数/分配数(房屋为当月分配至经销商并当月签约)</item>
+        <item>有效客户转化率=签约数/有效客户数(房屋为当月确认有效，即超过三天无退回并当月签约)</item>
+        <item>量尺转化率=已量尺数/(分配数-无效退回数)</item>
+        <item>定金转化率=已收定金数(个)/(分配数-无效退回数)</item>
+    </string-array>
+
+    <string-array name="online_drainage_personal_tips">
+        <item>分配转化率=签约数/分配数(房屋为当月创建并当月量尺)</item>
+        <item>有效客户转化率=签约数/有效客户数(房 屋为当月确认有效，即超过三天无退回 并当月签约)</item>
+        <item>量尺转化率=已量尺数/(分配数-无效退回数)</item>
+        <item>定金转化率=已收定金数(个)/(分配数- 无效退回数)</item>
+        <item>无效率=无效客户数/下发客户数</item>
+        <item>量尺率=量尺数/有效客户数</item>
+        <item>订单转化率=订单数/有效客户数</item>
+    </string-array>
+
+    <string-array name="sheet_analysis_tips">
+        <item>原态板占比=原态板面积/(颗粒板+原态 板+原态k面积)</item>
+        <item>原态K板占比=原态k板面积/(颗粒板+原 态板+原态k面积)</item>
+    </string-array>
+
+    <string-array name="shop_analysis_tips">
+        <item>坪效=当月门店总业绩/门店平方数</item>
+        <item>总人效=当月门店总业绩/门店员工总数</item>
+        <item>销售人效=当月门店总业绩/门店销售总数</item>
+        <item>客单价=成交总金额/成交客户数</item>
+        <item>量尺转化率=量尺客户数/新建客户数</item>
+        <item>订金转化率=订金客户数/新建客户数</item>
+        <item>进店成交率=签约客户数/新建客户数</item>
+        <item>量尺成交率=签约客户数/量尺客户数</item>
+        <item>平均门店价值取门店价值的平均数</item>
+    </string-array>
+
+    <string-array name="shop_analysis_child_tips">
+        <item>坪效=当月门店总业绩/门店平方数</item>
+        <item>总人效=当月门店总业绩/门店员工总数</item>
+        <item>销售人效=当月门店总业绩/门店销售总数</item>
+        <item>客单价=成交总金额/成交客户数</item>
+        <item>量尺转化率=量尺客户数/新建客户数</item>
+        <item>订金转化率=订金客户数/新建客户数</item>
+        <item>进店成交率=签约客户数/新建客户数</item>
+        <item>量尺成交率=签约客户数/量尺客户数</item>
+    </string-array>
+
+    <!--生意内参客户分析数据说明-->
+    <string-array name="business_reference_customer_analysis_tips">
+        <item>客单价=成交总金额/成交客户数</item>
+        <item>平均成交周期是所有已成交客户，从新建房屋到合同登记步骤填写的签约时间的周期的平均值；</item>
+        <item>签约→下单为所有已签约房屋，从签约步骤填写的签约日期到第一次下单周期的平均值；</item>
+        <item>下单→已安装为所有已下单房屋，从第一次下单时间到全部完成安装周期的平均值。</item>
+    </string-array>
+
+    <!--生意内参门店效益数据说明-->
+    <string-array name="business_reference_shop_benefit_tips">
+        <item>坪效=当月门店总业绩/门店平方数</item>
+        <item>总人效=当月门店总业绩/门店员工总数</item>
+        <item>销售人效=当月门店总业绩/门店销售总数</item>
+    </string-array>
 </resources>

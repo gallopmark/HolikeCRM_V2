@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by gallop on 2019/7/24.
+ * Created by pony on 2019/7/24.
  * Copyright holike possess 2019.
  * 过滤用户输入只能为金额格式
  */

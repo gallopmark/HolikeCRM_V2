@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
- * Created by gallop on 2019/7/18.
+ * Created by pony on 2019/7/18.
  * Copyright holike possess 2019.
  * 正方形ImageView
  */

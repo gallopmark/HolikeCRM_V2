@@ -178,7 +178,7 @@ public class MyJsonParser {
     public static String getShowMessage(String json) {
         if (!TextUtils.isEmpty(getMsg(json))) return getMsg(json);
         if (!TextUtils.isEmpty(getReason(json))) return getReason(json);
-        return getDataAsString(json);
+        return "";
     }
 
     public static boolean hasData(String json) {

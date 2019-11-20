@@ -5,6 +5,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import androidx.core.content.pm.PackageInfoCompat;
+
 import com.holike.crm.base.MyApplication;
 
 
@@ -24,8 +26,8 @@ public class PackageUtil {
     /**
      * 获取本应用版本号
      */
-    public static int getVersionCode() {
-        return getPackageInfo(MyApplication.getInstance()).versionCode;
+    public static long getVersionCode() {
+        return PackageInfoCompat.getLongVersionCode(getPackageInfo(MyApplication.getInstance()));
     }
 
     /**

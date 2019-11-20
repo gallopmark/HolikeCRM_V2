@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
@@ -31,7 +33,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,6 @@ import com.holike.crm.helper.BackHandlerHelper;
 import com.holike.crm.service.VersionUpdateService;
 import com.holike.crm.util.CheckUtils;
 import com.holike.crm.util.CopyUtil;
-import com.holike.crm.util.LogCat;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.Serializable;
@@ -72,7 +72,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
 
     protected int mActivityCloseExitAnimation = -1;
 
-    @SuppressWarnings("unchecked")
+    public static void start(BaseActivity<?, ?> activity, Class<? extends Activity> clz, String title) {
+        Intent intent = new Intent(activity, clz);
+        intent.putExtra("title", title);
+        activity.openActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,26 +86,14 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         setContentView(setContentViewId());
         ButterKnife.bind(this);
         mFragmentManager = getSupportFragmentManager();
-        try {
-            mPresenter = attachPresenter();
-//            mPresenter = ((Class<P>) GenericsUtils.getSuperClassGenricType(getClass())).newInstance();
-            if (this instanceof BaseView) {
-                if (mPresenter != null) mPresenter.attach((V) this);
-            }
-        } catch (Exception e) {
-            LogCat.e(e);
-        }
-        if (isFullScreen()) {
-            requestFullScreen();
-        } else {
-            setStatusBarLightMode();
-        }
+        setupPresenter();
+        setupScreenStyle();
         setupTitleBar();
         init(savedInstanceState);
     }
 
     /*activity动画兼容性,style 退出动画 解决退出动画无效问题*/
-    private void setupWindow() {
+    protected void setupWindow() {
         Resources.Theme theme = getTheme();
         if (theme != null) {
             TypedArray activityStyle = theme.obtainStyledAttributes(new int[]{android.R.attr.windowAnimationStyle});
@@ -128,6 +121,22 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置layout
      */
     protected abstract int setContentViewId();
+
+    @SuppressWarnings("unchecked")
+    private void setupPresenter() {
+        mPresenter = attachPresenter();
+        if (this instanceof BaseView && mPresenter != null) {
+            mPresenter.attach((V) this);
+        }
+    }
+
+    private void setupScreenStyle() {
+        if (isFullScreen()) {
+            requestFullScreen();
+        } else {
+            setStatusBarLightMode();
+        }
+    }
 
     @Nullable
     protected TitleBar getTitleBar() {
@@ -158,7 +167,7 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         }
     }
 
-    protected FrameLayout setRightMenu(@StringRes int id) {
+    public FrameLayout setRightMenu(@StringRes int id) {
         return setRightMenu(getString(id));
     }
 
@@ -166,12 +175,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      * 设置右边菜单文字
      */
     @Nullable
-    protected FrameLayout setRightMenu(final CharSequence menuText) {
+    public FrameLayout setRightMenu(final CharSequence menuText) {
         return ToolbarHelper.setRightMenu(getTitleBar(), menuText, view -> clickRightMenu(menuText, view));
     }
 
     /*设置菜单*/
-    protected void setOptionsMenu(@MenuRes int menuId) {
+    public void setOptionsMenu(@MenuRes int menuId) {
         ToolbarHelper.setOptionsMenu(getTitleBar(), menuId, item -> {
             onOptionsMenuClick(item);
             return true;
@@ -186,20 +195,20 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     /**
      * 设置右边菜单文字
      */
-    protected void setRightMsg(final boolean hasNewMsg) {
+    public void setRightMsg(final boolean hasNewMsg) {
         FrameLayout menuLayout = setRightMenu(getString(R.string.message_title));
         ToolbarHelper.setMessageMenu(menuLayout, hasNewMsg);
     }
 
     /*显示消息红点*/
     @SuppressWarnings("unused")
-    protected void setRightDot(@Nullable FrameLayout menuLayout) {
+    public void setRightDot(@Nullable FrameLayout menuLayout) {
         ToolbarHelper.setMessageRedDot(menuLayout);
     }
 
     /*移除消息红点*/
     @SuppressWarnings("unused")
-    protected void hideRightDot(@Nullable FrameLayout menuLayout) {
+    public void hideRightDot(@Nullable FrameLayout menuLayout) {
         ToolbarHelper.hideMessageRedDot(menuLayout);
     }
 
@@ -260,18 +269,6 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
      */
     protected BaseActivity getActivity() {
         return this;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -375,6 +372,41 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
         mFragmentList.add(fragment);
     }
 
+    /*以下构造方法-当activity只有一个fragment时，采用replace方法*/
+    public void replace(Fragment fragment) {
+        replace(fragment, false);
+    }
+
+    public void replace(Fragment fragment, boolean smoothScroll) {
+        replace(fragment, null, smoothScroll);
+    }
+
+    public void replace(Fragment fragment, @Nullable Bundle args) {
+        replace(fragment, args, false);
+    }
+
+    public void replace(Fragment fragment, @Nullable Bundle args, boolean smoothScroll) {
+        replace(R.id.fl_fragment_main, fragment, args, smoothScroll);
+    }
+
+    public void replace(@IdRes int containerViewId, Fragment fragment, @Nullable Bundle args, boolean smoothScroll) {
+        if (args != null) {
+            fragment.setArguments(args);
+        }
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (smoothScroll) {
+            transaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_right_out);
+        }
+        final String tag = "tag-replace";
+        Fragment f = mFragmentManager.findFragmentByTag(tag);
+        if (f != null) {
+            transaction.show(f);
+        } else {
+            transaction.replace(containerViewId, fragment, tag);
+        }
+        transaction.commitAllowingStateLoss();
+    }
+
     /**
      * 关闭fragment
      */
@@ -427,12 +459,12 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     /**
      * 设置状态栏颜色
      */
-    public void setStatusBarColor(int colorId) {
+    public void setStatusBarColor(@ColorRes int colorId) {
         if (!isFullScreen()) {
             SystemTintHelper.setStatusBarColor(this, ContextCompat.getColor(this, colorId));
         } else {
             View statusView = findViewById(R.id.statusView);
-            if (statusView != null && colorId != 0) {
+            if (statusView != null && colorId != 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 ViewGroup.LayoutParams params = statusView.getLayoutParams();
                 params.height = SystemTintHelper.getStatusBarHeight(this);
                 statusView.setBackgroundResource(colorId);
@@ -463,35 +495,28 @@ public abstract class BaseActivity<P extends BasePresenter, V extends BaseView> 
     /**
      * 没数据
      */
-    public void noData(int imgId, int strId, boolean needReload) {
-        if (isContainEmptyView()) {
-            noDataImg(imgId, needReload);
-            ((TextView) findViewById(R.id.tv_empty_page)).setText(strId);
-        }
+    public void noData(@DrawableRes int imgId, @StringRes int strId, boolean needReload) {
+        noData(imgId, getString(strId), needReload);
     }
 
     /**
      * 没数据
      */
-    public void noData(int imgId, String strId, boolean needReload) {
-        if (isContainEmptyView()) {
-            noDataImg(imgId, needReload);
-            ((TextView) findViewById(R.id.tv_empty_page)).setText(strId);
-        }
-    }
-
-    public void noDataImg(int imgId, boolean needReload) {
+    public void noData(@DrawableRes int imgId, @Nullable CharSequence text, boolean needReload) {
         if (isContainEmptyView()) {
             findViewById(R.id.ll_empty_page).setVisibility(View.VISIBLE);
-            ((ImageView) findViewById(R.id.iv_empty_page)).setImageResource(imgId);
+            TextView tv = findViewById(R.id.tv_empty_page);
+            tv.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, imgId), null, null);
+            tv.setText(text);
+            TextView tvReload = findViewById(R.id.btn_empty_page_reload);
             if (needReload) {
-                findViewById(R.id.btn_empty_page_reload).setVisibility(View.VISIBLE);
-                findViewById(R.id.btn_empty_page_reload).setOnClickListener(v -> {
+                tvReload.setVisibility(View.VISIBLE);
+                tvReload.setOnClickListener(view -> {
                     hasData();
                     reload();
                 });
             } else {
-                findViewById(R.id.btn_empty_page_reload).setVisibility(View.GONE);
+                tvReload.setVisibility(View.GONE);
             }
         }
     }

@@ -119,16 +119,15 @@
         android:textColor="@color/textColor8"
         android:textSize="@dimen/textSize_13" />
 
-    <View
-        style="@style/divider_horizontal"
-        android:layout_marginTop="@dimen/dp_10" />
-
     <LinearLayout
         android:id="@+id/ll_pictures_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:orientation="vertical"
         android:visibility="gone">
+
+        <View style="@style/divider_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,24 +145,4 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:text="@string/tips_char_logs"
-        android:textColor="@color/textColor8"
-        android:textSize="@dimen/textSize_13" />
-
-    <TextView
-        android:id="@+id/tv_chat_logs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@drawable/bg_solid_colorf3_corners5dp"
-        android:lineSpacingExtra="@dimen/dp_4"
-        android:padding="@dimen/dp_10"
-        android:textColor="@color/textColor8"
-        android:textSize="@dimen/textSize_13" />
-
 </LinearLayout>

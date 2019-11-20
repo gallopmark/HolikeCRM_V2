@@ -1,7 +1,7 @@
 package com.holike.crm.bean;
 
 /**
- * Created by gallop on 2019/8/19.
+ * Created by pony on 2019/8/19.
  * Copyright holike possess 2019.
  */
 public class ShopGroupBean {

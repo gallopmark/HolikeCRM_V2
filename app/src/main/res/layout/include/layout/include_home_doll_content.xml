@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:text="@string/analysis_report_tips"
+        android:textColor="@color/textColor6"
+        android:textSize="@dimen/textSize_12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_time_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/report_unit"
+            android:textColor="@color/textColor6"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical">
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:orientation="horizontal">
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:text="@string/division" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="105"
+                android:text="@string/principal" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="90"
+                android:text="@string/this_month_performance" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="90"
+                android:text="@string/annual_total_performance" />
+
+            <View style="@style/divider_vertical" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:paddingBottom="@dimen/dp_10"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</LinearLayout>

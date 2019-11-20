@@ -27,7 +27,7 @@ import com.liulishuo.filedownloader.FileDownloader;
 import java.io.File;
 
 /**
- * Created by gallop on 2019/9/9.
+ * Created by pony on 2019/9/9.
  * Copyright holike possess 2019.
  * 版本更新服务
  */

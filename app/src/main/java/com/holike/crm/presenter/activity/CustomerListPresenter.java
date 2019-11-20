@@ -14,7 +14,7 @@ import com.holike.crm.view.activity.CustomerV2View;
 import java.util.Date;
 
 /**
- * Created by gallop 2019/7/5
+ * Created by pony 2019/7/5
  * Copyright (c) 2019 holike
  */
 public class CustomerListPresenter extends BasePresenter<CustomerV2View, GeneralCustomerModel> {

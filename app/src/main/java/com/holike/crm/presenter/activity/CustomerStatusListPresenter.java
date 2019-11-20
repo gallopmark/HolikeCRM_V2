@@ -10,7 +10,7 @@ import com.holike.crm.model.customer.GeneralCustomerModel;
 import com.holike.crm.view.activity.CustomerStatusListView;
 
 /**
- * Created by gallop 2019/7/8
+ * Created by pony 2019/7/8
  * Copyright (c) 2019 holike
  */
 public class CustomerStatusListPresenter extends BasePresenter<CustomerStatusListView, GeneralCustomerModel> {

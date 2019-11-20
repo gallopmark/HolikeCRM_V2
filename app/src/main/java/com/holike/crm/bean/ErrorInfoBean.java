@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by gallop on 2019/8/13.
+ * Created by pony on 2019/8/13.
  * Copyright holike possess 2019.
  */
 public class ErrorInfoBean {

@@ -12,7 +12,7 @@ import com.holike.crm.customView.AppToastCompat;
 import com.holike.crm.enumeration.CustomerValue;
 
 /**
- * Created by gallop on 2019/8/1.
+ * Created by pony on 2019/8/1.
  * Copyright holike possess 2019.
  */
 abstract class GeneralHelper {
@@ -30,7 +30,7 @@ abstract class GeneralHelper {
         mCurrentUser = IntentValue.getInstance().getCurrentUser();
     }
 
-    void showToast(String text) {
+    void showToast(CharSequence text) {
         AppToastCompat.makeText(mContext, text, Toast.LENGTH_SHORT).show();
     }
 }

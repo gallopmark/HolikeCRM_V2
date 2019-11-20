@@ -18,7 +18,7 @@ import com.holike.crm.bean.MultiItem;
 import java.util.List;
 
 /**
- * Created by gallop 2019/7/8
+ * Created by pony 2019/7/8
  * Copyright (c) 2019 holike
  */
 public abstract class CustomerStatusListAdapter extends CommonAdapter<MultiItem> {

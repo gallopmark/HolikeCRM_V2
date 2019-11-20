@@ -13,7 +13,7 @@ import com.holike.crm.fragment.customer.ScanByPhoneFragment;
 import com.holike.crm.model.event.EventCurrentResult;
 
 /**
- * Created by gallop on 2019/10/23.
+ * Created by pony on 2019/10/23.
  * Copyright holike possess 2019.
  * 手机直接扫描
  */

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/21.
+ * Created by pony on 2019/8/21.
  * Copyright holike possess 2019.
  */
 class MessageHelper implements OnTabSelectListener, IMessageFragment.IMessageRequestCallback {

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 
@@ -45,11 +47,13 @@ public class MyLifecycleHelper implements Application.ActivityLifecycleCallbacks
     public void onActivityResumed(@NonNull Activity activity) {
         activityWeakReference = new WeakReference<>(activity);
         ++resumed;
+        MobclickAgent.onResume(activity);
     }
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
         ++paused;
+        MobclickAgent.onPause(activity);
     }
 
     @Override

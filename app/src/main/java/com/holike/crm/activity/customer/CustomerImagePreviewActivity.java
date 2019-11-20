@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by gallop on 2019/8/2.
+ * Created by pony on 2019/8/2.
  * Copyright holike possess 2019.
  * 客户管理点击展开图片 图片查看
  */

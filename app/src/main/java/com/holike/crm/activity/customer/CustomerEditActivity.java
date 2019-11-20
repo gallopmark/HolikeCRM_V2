@@ -22,7 +22,7 @@ import java.util.List;
 import butterknife.OnClick;
 
 /**
- * Created by gallop 2019/7/5
+ * Created by pony 2019/7/5
  * Copyright (c) 2019 holike
  * 新建客户、编辑客户
  */
@@ -97,9 +97,9 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
 
     /*激活客户*/
     @Override
-    public void onActivationCustomer(String personalId, String houseId, String shopId, String grouoId, String guideId) {
+    public void onActivationCustomer(String personalId, String houseId, String shopId, String groupId) {
         showLoading();
-        mPresenter.activationCustomer(personalId, houseId, shopId, grouoId, guideId, this);
+        mPresenter.activationCustomer(personalId, houseId, shopId, groupId, this);
     }
 
     /*重新分配客户*/
@@ -169,7 +169,7 @@ public class CustomerEditActivity extends GeneralCustomerActivity implements Cus
         } else if (object instanceof CurrentUserBean) {
             mHelper.setCurrentUserBean((CurrentUserBean) object);
         } else if (object instanceof List) {
-            mHelper.setActivityPoliceBean( (List<ActivityPoliceBean>) object);
+            mHelper.setActivityPoliceBean((List<ActivityPoliceBean>) object);
         } else if (object instanceof String) { //创建或者修改客户成功
             mHelper.onSaveResult((String) object);
         }

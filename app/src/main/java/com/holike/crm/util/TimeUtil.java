@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import io.reactivex.annotations.Nullable;
+
 /**
  * Created by wqj on 2017/10/9.
  */
@@ -22,6 +24,7 @@ public class TimeUtil {
      * @return
      */
     public static String stampToString(String stamp, String type) {
+        if (TextUtils.isEmpty(stamp)) return "";
         try {
             //时间戳转字符串要13位
             switch (stamp.length()) {
@@ -35,13 +38,12 @@ public class TimeUtil {
                     stamp = stamp + "0";
                     break;
             }
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(type);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(type, Locale.getDefault());
             Date date = new Date(ParseUtils.parseLong(stamp));
             return simpleDateFormat.format(date);
         } catch (Exception e) {
             return "无法显示时间";
         }
-
     }
 
 
@@ -128,7 +130,7 @@ public class TimeUtil {
      * @return
      */
     public static Calendar stringToCalendar(String str, String type) {
-        SimpleDateFormat sdf = new SimpleDateFormat(type);
+        SimpleDateFormat sdf = new SimpleDateFormat(type, Locale.getDefault());
         Date date = null;
         try {
             date = sdf.parse(str);
@@ -136,7 +138,8 @@ public class TimeUtil {
             e.printStackTrace();
         }
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
+        if (date != null)
+            calendar.setTime(date);
         return calendar;
     }
 
@@ -163,6 +166,9 @@ public class TimeUtil {
         return stampToString(stringToStamp(time, type), toType);
     }
 
+    /**
+     * 获取开始时间或结束时间 10位时间戳
+     */
     public static String dateToStamp(Date date, boolean isEndDate) {
         long time;
         Calendar calendar = Calendar.getInstance();
@@ -178,6 +184,15 @@ public class TimeUtil {
         }
         time = calendar.getTimeInMillis();
         return String.valueOf(time > 10000000000L ? time / 1000 : time);
+    }
+
+    //10位时间戳转date
+    public static Date stampToDate(String source) {
+        if (TextUtils.isEmpty(source)) return new Date();
+        long time = ParseUtils.parseLong(source) * 1000;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        return calendar.getTime();
     }
 
     public static String timeMillsFormat(String timeMills) {
@@ -204,11 +219,12 @@ public class TimeUtil {
         return format.format(date);
     }
 
-    public static String timeMillsFormat(Date date) {
+    public static String timeMillsFormat(@Nullable Date date) {
         return timeMillsFormat(date, "yyyy.MM.dd");
     }
 
-    public static String timeMillsFormat(Date date, String pattern) {
+    public static String timeMillsFormat(@Nullable Date date, String pattern) {
+        if (date == null) return "";
         SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.getDefault());
         return format.format(date);
     }
@@ -302,5 +318,22 @@ public class TimeUtil {
         calendar.set(Calendar.SECOND, 59);
         long time = calendar.getTimeInMillis();
         return String.valueOf(time > 10000000000L ? time / 1000 : time);
+    }
+
+    //判断两个Date是否是同一天
+    public static boolean isSameDay(Date date1, Date date2) {
+        if (date1 != null && date2 != null) {
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(date1);
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(date2);
+            return isSameDay(cal1, cal2);
+        }
+        return false;
+    }
+
+    private static boolean isSameDay(Calendar cal1, Calendar cal2) {
+        return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) &&
+                cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
     }
 }

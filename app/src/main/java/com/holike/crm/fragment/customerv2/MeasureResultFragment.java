@@ -9,8 +9,11 @@ import com.holike.crm.R;
 import com.holike.crm.bean.CurrentUserBean;
 import com.holike.crm.bean.ShopRoleUserBean;
 import com.holike.crm.bean.SysCodeItemBean;
+import com.holike.crm.enumeration.CustomerValue;
 import com.holike.crm.fragment.customerv2.helper.MeasureResultHelper;
 import com.holike.crm.presenter.fragment.GeneralCustomerPresenter;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,7 @@ import java.util.Map;
 import butterknife.BindView;
 
 /**
- * Created by gallop on 2019/7/22.
+ * Created by pony on 2019/7/22.
  * Copyright holike possess 2019.
  * 量尺结果
  */

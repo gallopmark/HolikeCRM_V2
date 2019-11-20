@@ -18,6 +18,7 @@ import com.gallopmark.recycler.adapterhelper.CommonAdapter;
 import com.holike.crm.R;
 import com.holike.crm.activity.SettingsActivity;
 import com.holike.crm.activity.main.PhotoViewActivity;
+import com.holike.crm.adapter.AbsFormAdapter;
 import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.base.FragmentHelper;
@@ -216,7 +217,7 @@ class SatisfactionHelper extends FragmentHelper {
             } else {
                 holder.setVisibility(R.id.ll_content_layout, View.GONE);
             }
-            if (bean.getImages().isEmpty()) {
+            if (bean.getUrlList().isEmpty()) {
                 holder.setVisibility(R.id.ll_photo_layout, View.GONE);
             } else {
                 holder.setVisibility(R.id.ll_photo_layout, View.VISIBLE);
@@ -264,7 +265,7 @@ class SatisfactionHelper extends FragmentHelper {
         }
     }
 
-    class FormDataAdapter extends CommonAdapter<CustomerSatisfactionBean.SelectDataBean> {
+    class FormDataAdapter extends AbsFormAdapter<CustomerSatisfactionBean.SelectDataBean> {
 
         FormDataAdapter(Context context, List<CustomerSatisfactionBean.SelectDataBean> mDatas) {
             super(context, mDatas);
@@ -276,12 +277,7 @@ class SatisfactionHelper extends FragmentHelper {
         }
 
         @Override
-        public void onBindHolder(RecyclerHolder holder, CustomerSatisfactionBean.SelectDataBean bean, int position) {
-            if (position % 2 == 0) {
-                holder.itemView.setBackgroundResource(R.color.textColor24);
-            } else {
-                holder.itemView.setBackgroundResource(R.color.color_while);
-            }
+        protected void bindViewHolder(RecyclerHolder holder, CustomerSatisfactionBean.SelectDataBean bean, int position) {
             holder.setText(R.id.tv_division, bean.area);
             holder.setText(R.id.tv_service_satisfaction, bean.service);
             holder.setText(R.id.tv_design_satisfaction, bean.design);
@@ -294,11 +290,6 @@ class SatisfactionHelper extends FragmentHelper {
                 holder.setTextColorRes(R.id.tv_division, R.color.textColor8);
                 holder.setEnabled(R.id.tv_division, false);
             }
-//            if (bean.isChange()) {
-//                holder.setTextColorRes(R.id.tv_division, R.color.colorAccent);
-//            } else {
-//                holder.setTextColorRes(R.id.tv_division, R.color.textColor8);
-//            }
             holder.setOnClickListener(R.id.tv_division, view -> mCallback.toNextLevel(obtainBundle(bean.type, bean.cityCode)));
         }
     }

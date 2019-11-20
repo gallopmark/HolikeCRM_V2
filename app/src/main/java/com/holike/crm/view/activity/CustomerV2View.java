@@ -6,7 +6,7 @@ import com.holike.crm.bean.CustomerListBeanV2;
 import com.holike.crm.bean.SysCodeItemBean;
 
 /**
- * Created by gallop 2019/7/5
+ * Created by pony 2019/7/5
  * Copyright (c) 2019 holike
  */
 public interface CustomerV2View extends BaseView {

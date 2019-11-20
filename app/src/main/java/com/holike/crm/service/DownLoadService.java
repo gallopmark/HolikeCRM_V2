@@ -19,6 +19,7 @@ import static com.holike.crm.service.UpdateService.DOWNLOADFILEBEAN;
 /**
  * 下载文件服务父类
  */
+@Deprecated
 public abstract class DownLoadService extends Service {
     protected List<DownloadFileBean> downloadFileBeans;
     protected Download download;

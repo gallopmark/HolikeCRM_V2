@@ -38,13 +38,17 @@ import com.holike.crm.helper.MultiItemListHelper;
 import com.holike.crm.helper.ICallPhoneHelper;
 import com.holike.crm.popupwindown.MultipleSelectPopupWindow;
 import com.holike.crm.popupwindown.StringItemPopupWindow;
+import com.holike.crm.rxbus.MessageEvent;
+import com.holike.crm.rxbus.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 
 /**
- * Created by gallop 2019/7/8
+ * Created by pony 2019/7/8
  * Copyright (c) 2019 holike
  * 客户状态列表帮助类
  */
@@ -88,9 +92,7 @@ public class CustomerStatusListHelper extends MultiItemListHelper {
 
     private int mViewPosition = -1;
 
-    public String getStateName() {
-        return mStatusName;
-    }
+    private Disposable mDisposable;
 
     public CustomerStatusListHelper(BaseActivity<?, ?> activity, String statusName, CustomerStatusListCallback callback) {
         super(activity, 1);
@@ -100,6 +102,14 @@ public class CustomerStatusListHelper extends MultiItemListHelper {
         this.mNoMoreBean = new NoMoreBean();
         this.mStatusCallback = callback;
         setupAdapter();
+        mDisposable = RxBus.getInstance().toObservable(MessageEvent.class).subscribe(event -> {
+            if (TextUtils.equals(event.type, CustomerValue.EVENT_TYPE_LOST_HOUSE) ||    //流失房屋
+                    TextUtils.equals(event.type, CustomerValue.EVENT_TYPE_RECEIVE_HOUSE) ||  //领取房屋
+                    TextUtils.equals(event.type, CustomerValue.EVENT_TYPE_CONFIRM_LOST_HOUSE)) { //确认流失房屋
+                onReceiveHouseOk();
+                onRefresh();
+            }
+        });
     }
 
     private void setupAdapter() {
@@ -147,7 +157,7 @@ public class CustomerStatusListHelper extends MultiItemListHelper {
             mAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
                 CustomerStatusBean.InnerBean bean = getItem(position);
                 if (bean != null) {
-                    onItemClick(position,bean);
+                    onItemClick(position, bean);
                 }
             });
             mAdapter.setOnItemChildClickListener((adapter, holder, view, position) -> {
@@ -658,10 +668,16 @@ public class CustomerStatusListHelper extends MultiItemListHelper {
         textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.choice_down, 0);
     }
 
-    public void onReceiveHouseOk() {
+    private void onReceiveHouseOk() {
         if (mViewPosition >= 0 && mViewPosition < mListBeans.size()) {
             mListBeans.remove(mViewPosition);
             notifyDataSetChanged();
+        }
+    }
+
+    public void destroy() {
+        if (mDisposable != null) {
+            mDisposable.dispose();
         }
     }
 }

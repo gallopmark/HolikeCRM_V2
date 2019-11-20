@@ -14,6 +14,4 @@ public interface ReportView extends BaseView {
     void getPermissionsSuccess(List<ReportPermissionsBean> list);
 
     void getPermissionsFailed(String failed);
-
-    void noPermissions();
 }

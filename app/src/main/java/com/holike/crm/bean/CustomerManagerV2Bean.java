@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by gallop on 2019/7/16.
+ * Created by pony on 2019/7/16.
  * Copyright holike possess 2019.
  */
 public class CustomerManagerV2Bean {
@@ -385,13 +385,14 @@ public class CustomerManagerV2Bean {
             return TimeUtil.timeMillsFormat(appDeliveryDate);
         }
 
+        /*两个空格符*/
         public String getAppointmentTime() {
-            return TimeUtil.timeMillsFormat(appointmentTime);
+            return TimeUtil.timeMillsFormat(appointmentTime, "yyyy.MM.dd  HH:mm");
         }
 
         /*预约量尺 时分秒*/
         public String getAppointmentHM() {
-            return TimeUtil.timeMillsFormat(appointmentTime, "HH:mm:ss");
+            return TimeUtil.timeMillsFormat(appointmentTime, "HH:mm");
         }
 
         public String getAppointmentToInstallDate() {

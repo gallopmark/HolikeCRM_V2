@@ -33,16 +33,11 @@ public class ScanByPhonePresenter extends BasePresenter<ScanByPhoneView, ScanByP
         super.onDestroy();
     }
 
-    public void delayEvent(long ms) {
-//        handler.sendEmptyMessageDelayed(1, ms);
-    }
-
 //    private long startTime = 0;
 //    private long endTime = 0;
 
     public void getCodeInfo(final String code, final List<EventQRCodeScanResult> results) {
-        if (travers(results, code)) {//本地判断是否重复
-//            rescan(code, false);
+        if (results.contains(new EventQRCodeScanResult(code))) {//本地判断是否重复
             if (getView() != null)
                 getView().onFail(Constants.SCAN_REPEAT);
             return;
@@ -53,7 +48,9 @@ public class ScanByPhonePresenter extends BasePresenter<ScanByPhoneView, ScanByP
             public void success(String messageBean) {
 //                long useTime = System.currentTimeMillis() - startTime;
 //                rescan(code, useTime > 1000);
-                results.add(new EventQRCodeScanResult(code));
+                EventQRCodeScanResult result = new EventQRCodeScanResult(code);
+                if (!results.contains(result))
+                    results.add(new EventQRCodeScanResult(code));
 
                 if (getView() != null)
                     getView().onSuccess(code, results);
@@ -70,21 +67,17 @@ public class ScanByPhonePresenter extends BasePresenter<ScanByPhoneView, ScanByP
         });
     }
 
-    /**
+    /*
      * 遍历是否重复
-     *
-     * @param results
-     * @param code
-     * @return
      */
-    private boolean travers(List<EventQRCodeScanResult> results, String code) {
-        for (EventQRCodeScanResult r : results) {
-            if (r.getResult().equals(code)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    private boolean travers(List<EventQRCodeScanResult> results, String code) {
+//        for (EventQRCodeScanResult r : results) {
+//            if (r.getResult().equals(code)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 //
 //    private void rescan(String result, boolean isLongTime) {
 //        Message message = Message.obtain();

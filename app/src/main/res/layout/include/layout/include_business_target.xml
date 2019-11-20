@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_select_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:drawableEnd="@drawable/choice_down"
+        android:drawableRight="@drawable/choice_down"
+        android:drawablePadding="@dimen/dp_4"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/all_stores"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_14" />
+
+    <ViewStub
+        android:id="@+id/viewStub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

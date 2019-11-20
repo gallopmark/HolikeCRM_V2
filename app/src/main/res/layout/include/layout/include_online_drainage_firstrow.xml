@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/v_divider"
+        style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:text="@string/division" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:text="@string/number_of_customers_issued" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:text="@string/number_of_customers_effective" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:text="@string/number_of_customers_invalid" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:text="@string/invalid_rate" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:text="@string/number_of_measuring" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/scale_rate" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/number_of_deposit" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/deposit_conversion_rate" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/amount_of_deposit" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/signing_count" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/signing_conversion_rate" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/amount_of_contract" />
+
+        <View style="@style/divider_vertical" />
+
+        <LinearLayout
+            android:id="@+id/ll_order_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/number_of_place_orders" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/order_conversion_rate" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/order_amount_million" />
+
+            <View style="@style/divider_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

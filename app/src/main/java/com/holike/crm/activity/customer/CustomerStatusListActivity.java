@@ -24,7 +24,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import butterknife.BindView;
 
 /**
- * Created by gallop 2019/7/8
+ * Created by pony 2019/7/8
  * Copyright (c) 2019 holike
  * 客户状态列表
  */
@@ -163,16 +163,24 @@ public class CustomerStatusListActivity extends MyFragmentActivity<CustomerStatu
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && (resultCode == CustomerValue.RESULT_CODE_RECEIVE_HOUSE || resultCode == CustomerValue.RESULT_CODE_LOST_HOUSE)) {
-            if (requestCode == CustomerValue.RESULT_CODE_RECEIVE_HOUSE) {
-                mHelper.onReceiveHouseOk();
-            }
-            mHelper.onRefresh();
-        } else if ((resultCode == CustomerValue.RESULT_CODE_ACTIVATION ||
+//        if (requestCode == REQUEST_CODE && (resultCode == CustomerValue.RESULT_CODE_RECEIVE_HOUSE
+//                || resultCode == CustomerValue.RESULT_CODE_LOST_HOUSE)) {
+//            if (requestCode == CustomerValue.RESULT_CODE_RECEIVE_HOUSE) {
+//                mHelper.onReceiveHouseOk();
+//            }
+//            mHelper.onRefresh();
+//        } else
+        if ((resultCode == CustomerValue.RESULT_CODE_ACTIVATION ||
                 resultCode == CustomerValue.RESULT_CODE_HIGH_SEAS) && data != null) {
             String personalId = data.getStringExtra(CustomerValue.PERSONAL_ID);
             String houseId = data.getStringExtra(CustomerValue.HOUSE_ID);
             CustomerDetailV2Activity.open(this, personalId, houseId, false);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mHelper.destroy();
+        super.onDestroy();
     }
 }

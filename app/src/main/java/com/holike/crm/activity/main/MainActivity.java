@@ -25,7 +25,6 @@ import com.galloped.tablayout.tab.TabEntity;
 import com.holike.crm.R;
 import com.holike.crm.activity.customer.CustomerDetailV2Activity;
 import com.holike.crm.activity.login.LoginActivity;
-import com.holike.crm.base.BaseActivity;
 import com.holike.crm.base.MyApplication;
 import com.holike.crm.base.MyFragmentActivity;
 import com.holike.crm.bean.UpdateBean;
@@ -114,18 +113,18 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
         List<Tab> tabList = new ArrayList<>();
         String[] titles = getResources().getStringArray(R.array.names_main_tab);
         Drawable[] selectedDrawables = new Drawable[]{
-                ContextCompat.getDrawable(this, R.drawable.tab_home_sel),
-                ContextCompat.getDrawable(this, R.drawable.tab_customer_sel),
-                ContextCompat.getDrawable(this, R.drawable.tab_order_sel),
-                ContextCompat.getDrawable(this, R.drawable.tab_analysis_sel),
-                ContextCompat.getDrawable(this, R.drawable.tab_mine_sel),
+                ContextCompat.getDrawable(this, R.drawable.ic_home_sel),
+                ContextCompat.getDrawable(this, R.drawable.ic_customer_sel),
+                ContextCompat.getDrawable(this, R.drawable.ic_order_sel),
+                ContextCompat.getDrawable(this, R.drawable.ic_analysis_sel),
+                ContextCompat.getDrawable(this, R.drawable.ic_mine_sel),
         };
         Drawable[] unSelectDrawables = new Drawable[]{
-                ContextCompat.getDrawable(this, R.drawable.tab_home_nor),
-                ContextCompat.getDrawable(this, R.drawable.tab_customer_nor),
-                ContextCompat.getDrawable(this, R.drawable.tab_order_nor),
-                ContextCompat.getDrawable(this, R.drawable.tab_analysis_nor),
-                ContextCompat.getDrawable(this, R.drawable.tab_mine_nor),
+                ContextCompat.getDrawable(this, R.drawable.ic_home_nor),
+                ContextCompat.getDrawable(this, R.drawable.ic_customer_nor),
+                ContextCompat.getDrawable(this, R.drawable.ic_order_nor),
+                ContextCompat.getDrawable(this, R.drawable.ic_analysis_nor),
+                ContextCompat.getDrawable(this, R.drawable.ic_mine_nor),
         };
         for (int i = 0; i < titles.length; i++) {
             tabList.add(new TabEntity(titles[i], selectedDrawables[i], unSelectDrawables[i]));
@@ -184,7 +183,9 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
     private void setCurrentTab(String tab) {
         this.mCurrentTab = tab;
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        hideFragments(transaction);
+        if (mShowingFragment != null) {
+            transaction.hide(mShowingFragment);
+        }
         Fragment fragment = mFragmentManager.findFragmentByTag(tab);
         if (fragment != null) {
             transaction.show(fragment);
@@ -204,12 +205,6 @@ public class MainActivity extends MyFragmentActivity<MainPresenter, MainView> im
         }
         this.mShowingFragment = fragment;
         transaction.commitAllowingStateLoss();
-    }
-
-    private void hideFragments(FragmentTransaction transaction) {
-        if (mShowingFragment != null) {
-            transaction.hide(mShowingFragment);
-        }
     }
 
     private void checkVersion() {

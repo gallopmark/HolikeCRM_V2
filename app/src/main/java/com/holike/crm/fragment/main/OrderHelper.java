@@ -19,7 +19,7 @@ import com.holike.crm.bean.DictionaryBean;
 import com.holike.crm.bean.OrderListBean;
 import com.holike.crm.bean.TypeListBean;
 import com.holike.crm.dialog.CalendarPickerDialog;
-import com.holike.crm.helper.CalendarDialogHelper;
+import com.holike.crm.helper.CalendarPickerHelper;
 import com.holike.crm.helper.MultiItemListHelper;
 import com.holike.crm.popupwindown.MultipleSelectPopupWindow;
 import com.holike.crm.popupwindown.StringItemPopupWindow;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by gallop 2019/7/4
+ * Created by pony 2019/7/4
  * Copyright (c) 2019 holike
  */
 public class OrderHelper extends MultiItemListHelper {
@@ -41,8 +41,6 @@ public class OrderHelper extends MultiItemListHelper {
         void getListByOrderType();
 
         void getListByOrderState();
-
-        void onDateSelected(List<Date> selectedDates, Date start, Date end);
 
         void onGetSelectData();
 
@@ -149,7 +147,7 @@ public class OrderHelper extends MultiItemListHelper {
     private void selectOrderType(final Context context, final List<TypeListBean.OrderTypeDataBean> list, final View dvFilter,
                                  final TextView tvType, View contentView) {
         final List<DictionaryBean> myList = new ArrayList<>();
-        myList.add(new DictionaryBean("", mContext.getString(R.string.all)));
+        myList.add(new DictionaryBean("", mContext.getString(R.string.order_all)));
         List<String> optionItems = new ArrayList<>();
         for (TypeListBean.OrderTypeDataBean bean : list) {
             myList.add(new DictionaryBean(bean.getOrderTypeId(), bean.getOrderTypeName()));
@@ -195,12 +193,12 @@ public class OrderHelper extends MultiItemListHelper {
         tv.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.choice_up), null);
     }
 
+
+    private List<MultipleSelectPopupWindow.Item> mSelectItems = new ArrayList<>();
+    private boolean mFirstSelect = true;
     /**
      * 选择订单状态
      */
-    private List<MultipleSelectPopupWindow.Item> mSelectItems = new ArrayList<>();
-    private boolean mFirstSelect = true;
-
     private void selectOrderState(final List<TypeListBean.OrderStatusDataBean> list, final TextView tvState, final View dvFilter, View contentView) {
         MobclickAgent.onEvent(mContext, "order_state");
         long delayed = hideKeyBoard(contentView);
@@ -239,7 +237,7 @@ public class OrderHelper extends MultiItemListHelper {
     private List<Date> mSelectedDates;
 
     public void showCalendarDialog(Context context, final TextView timeTextView) {
-        CalendarDialogHelper.showCalendarDialog(context, mSelectedDates, new CalendarDialogHelper.OnCalendarOperateListener() {
+        CalendarPickerHelper.showCalendarDialog(context, mSelectedDates, new CalendarPickerHelper.OnCalendarOperateListener() {
             @Override
             public void onShow() {
                 timeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_choice_date, 0, R.drawable.ic_choice_date_up, 0);
@@ -266,7 +264,7 @@ public class OrderHelper extends MultiItemListHelper {
                     setDefaultTime(timeTextView);
                 }
                 dialog.dismiss();
-                mHelperListener.onDateSelected(selectedDates, start, end);
+                startFirstLoad();
             }
 
             @Override

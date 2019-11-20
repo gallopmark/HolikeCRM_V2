@@ -9,7 +9,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 
 /**
- * Created by gallop on 2019/9/19.
+ * Created by pony on 2019/9/19.
  * Copyright holike possess 2019.
  */
 public abstract class ActivityHelper extends HelperWrapper implements BaseHelper {

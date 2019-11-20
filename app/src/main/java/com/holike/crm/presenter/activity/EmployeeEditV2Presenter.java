@@ -10,7 +10,7 @@ import com.holike.crm.view.activity.EmployeeEditV2View;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/8/6.
+ * Created by pony on 2019/8/6.
  * Copyright holike possess 2019.
  */
 public class EmployeeEditV2Presenter extends BasePresenter<EmployeeEditV2View, GeneralEmployeeModel> {

@@ -1,6 +1,7 @@
 package com.holike.crm.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -161,7 +162,7 @@ public class DealerRankBean implements Serializable {
         }
 
         public List<RangBean> getRang() {
-            return rang;
+            return rang == null ? new ArrayList<>() : rang;
         }
 
         public void setRang(List<RangBean> rang) {
@@ -262,7 +263,7 @@ public class DealerRankBean implements Serializable {
             }
 
             public String getPosition() {
-                return position;
+                return position == null ? "" : position;
             }
 
             public void setPosition(String position) {

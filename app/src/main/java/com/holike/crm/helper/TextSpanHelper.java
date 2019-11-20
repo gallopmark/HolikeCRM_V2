@@ -9,6 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SuperscriptSpan;
+import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 /**
- * Created by gallop on 2019/7/30.
+ * Created by pony on 2019/7/30.
  * Copyright holike possess 2019.
  */
 public class TextSpanHelper {
@@ -146,4 +147,15 @@ public class TextSpanHelper {
         return m2;
     }
 
+    public static void setSquareText(TextView tv){
+        String source = tv.getText().toString();
+        if(!TextUtils.isEmpty(source)){
+            SpannableString m2 = new SpannableString(source);
+            int start = source.indexOf("2");
+            int end = source.indexOf("2") + 1;
+            m2.setSpan(new RelativeSizeSpan(0.8f), start, end, DEFAULT_FLAGS);
+            m2.setSpan(new SuperscriptSpan(), start, end, DEFAULT_FLAGS);
+            tv.setText(m2);
+        }
+    }
 }

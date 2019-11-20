@@ -62,7 +62,7 @@ import java.util.regex.Pattern;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by gallop 2019/7/8
+ * Created by pony 2019/7/8
  * Copyright (c) 2019 holike
  */
 public class CustomerEditHelper extends CheckInputHelper implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -102,8 +102,8 @@ public class CustomerEditHelper extends CheckInputHelper implements View.OnClick
     }
 
     @Override
-    void onActivationCustomer(String personalId, String houseId, String shopId, String groupId, String guideId) {
-        mCustomerEditCallback.onActivationCustomer(personalId, houseId, shopId, groupId, guideId);
+    void onActivationCustomer(String personalId, String houseId, String shopId, String groupId) {
+        mCustomerEditCallback.onActivationCustomer(personalId, houseId, shopId, groupId);
     }
 
     class ActivityPoliceAdapter extends CommonAdapter<ActivityPoliceBean> {
@@ -213,7 +213,9 @@ public class CustomerEditHelper extends CheckInputHelper implements View.OnClick
                 mOldWxNumber = wxNumber;
                 mPhoneEditText.setText(phoneNumber);
                 mWechatEditText.setText(wxNumber);
-                mPhoneEditText.setEnabled(bundle.getBoolean("isValidCustomer", true));
+                boolean isOnline = bundle.getBoolean("isOnline");
+                mPhoneEditText.setEnabled(!isOnline);
+//                mPhoneEditText.setEnabled(bundle.getBoolean("isValidCustomer", true));
                 mGender = bundle.getString("gender");
                 if (TextUtils.equals(mGender, "1")) { //女士
                     mWomenCheckbox.setChecked(true);
@@ -841,10 +843,6 @@ public class CustomerEditHelper extends CheckInputHelper implements View.OnClick
         }
     }
 
-    interface OptionSelectListener {
-        void onSelect(int position, String key, String value);
-    }
-
     public interface CustomerEditCallback {
 
         void onRequestSysCode();
@@ -857,7 +855,7 @@ public class CustomerEditHelper extends CheckInputHelper implements View.OnClick
 
         void onReceivingCustomer(String personalId, String houseId, String shopId, String groupId);
 
-        void onActivationCustomer(String personalId, String houseId, String shopId, String grouoId, String guideId);
+        void onActivationCustomer(String personalId, String houseId, String shopId, String groupId);
 
         void onDistributionMsgPush(String requestBody);
 

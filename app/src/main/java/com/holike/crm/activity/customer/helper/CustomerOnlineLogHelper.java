@@ -33,7 +33,9 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             return singlePattern(houseStatus, getHouseStatusDict());
         }
 
+        //房屋状态
         static Map<String, String> getHouseStatusDict() {
+            //['精装房','毛坯房','自建房','二手房','在住房','简装','旧房翻新','其他']
             Map<String, String> map = new HashMap<>();
             map.put("01", "精装房");
             map.put("02", "毛坯房");
@@ -52,6 +54,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
         }
 
         static Map<String, String> getHouseTypeDict() {
+            //['单间','一房一厅','二房一厅','二房二厅','三房一厅','三房二厅','四房二厅','别墅','复式','其他']
             Map<String, String> map = new HashMap<>();
             map.put("01", "单间");
             map.put("02", "一房一厅");
@@ -71,6 +74,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             return singlePattern(followCode, getFollowTypeDict());
         }
 
+        //预约类型
         static Map<String, String> getFollowTypeDict() {
             Map<String, String> map = new HashMap<>();
             map.put("0", "预约进店");
@@ -86,6 +90,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
         }
 
         static Map<String, String> getDecorationProgressDict() {
+            //['已装修','未装修','改主体','水电','铺地砖','刷墙','地暖','其它']
             Map<String, String> map = new HashMap<>();
             map.put("01", "已装修");
             map.put("02", "未装修");
@@ -103,13 +108,16 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             return multiplePattern(customClass, getCustomClassDict());
         }
 
+        //定制品类
         static Map<String, String> getCustomClassDict() {
+            // ['全屋定制','橱柜定制','木门定制','成品宅配','窗帘','其他']
             Map<String, String> map = new HashMap<>();
             map.put("01", "全屋定制");
             map.put("02", "橱柜定制");
             map.put("03", "木门定制");
             map.put("04", "成品宅配");
-            map.put("05", "其它");
+            map.put("05", "窗帘");
+            map.put("06", "其它");
             return map;
         }
 
@@ -119,6 +127,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
         }
 
         static Map<String, String> getCustomSpaceDict() {
+            //['卧室','客厅','厨房','儿童房','玄关','餐厅','阳台','书房','功能房']
             Map<String, String> map = new HashMap<>();
             map.put("01", "卧室");
             map.put("02", "客厅");
@@ -138,7 +147,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
         }
 
         static Map<String, String> getFurnitureDemandDict() {
-            //['衣柜','橱柜','榻榻米','电视柜','餐边柜','酒柜','鞋柜','隔断','玄关柜','书柜',
+            // ['衣柜','橱柜','榻榻米','电视柜','餐边柜','酒柜','鞋柜','隔断','玄关柜','书柜',
             // '书桌','飘窗柜','上下床','阳台柜','衣帽间','沙发','床','餐桌椅','其他']
             Map<String, String> map = new HashMap<>();   //装修情况
             map.put("01", "衣柜");
@@ -168,15 +177,17 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             return singlePattern(boardType, getBoardTypeDict());
         }
 
+        //板材类型
         static Map<String, String> getBoardTypeDict() {
-            //['原态板','颗粒板','中纤板','实木板','实木多层板','其它']
+            // ['原态板','原态k板','颗粒板','中纤板','实木板','实木多层板','其它']
             Map<String, String> map = new HashMap<>();
             map.put("01", "原态板");
-            map.put("02", "颗粒板");
-            map.put("03", "中纤板");
-            map.put("04", "实木板");
-            map.put("05", "实木多层板");
-            map.put("06", "其它");
+            map.put("02", "原态k板");
+            map.put("03", "颗粒板");
+            map.put("04", "中纤板");
+            map.put("05", "实木板");
+            map.put("06", "实木多层板");
+            map.put("07", "其它");
             return map;
         }
 
@@ -184,6 +195,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             return singlePattern(decorationStyle, getDecorationStyleDict());
         }
 
+        ////风格喜好
         static Map<String, String> getDecorationStyleDict() {
             //['现代简约','简欧','中式','田园','美式','北欧','日式','欧式','地中海','其他']
             Map<String, String> map = new HashMap<>();
@@ -395,6 +407,7 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
     }
 
     class FollowupItem extends MultipleItem {
+        static final String PATTERN = "yyyy.MM.dd HH:mm";
         String followTypeTime; //预约类型时间
         String waitShopDatetime; //下发客户时间
         String returnDateTime; //无效驳回时间
@@ -407,8 +420,8 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             super(TYPE_FOLLOWUP);
             CustomerOnlineLogBean.SignUpBean infoBean = bean.getSignUpBean();
             if (infoBean != null) {
-                waitShopDatetime = TimeUtil.timeMillsFormat(infoBean.waitShopDatetime);
-                returnDateTime = TimeUtil.timeMillsFormat(infoBean.reutrnDateTime);
+                waitShopDatetime = TimeUtil.timeMillsFormat(infoBean.waitShopDatetime, PATTERN);
+                returnDateTime = TimeUtil.timeMillsFormat(infoBean.reutrnDateTime, PATTERN);
                 signupRemark = TextUtils.isEmpty(infoBean.signupRemark) ? "" : infoBean.signupRemark.replaceAll("=", "\n");
                 followUpRecord = infoBean.followUpRecord;
                 followTypeTime = DictionaryPattern.getFollowType(infoBean.followCode);
@@ -537,9 +550,12 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
             holder.setText(R.id.tv_customer_name, obtainText(R.string.customer_name_tips, item.customerName));
             holder.setText(R.id.tv_customer_phone, obtainText(R.string.customer_phone_tips, item.customerPhone));
             holder.setText(R.id.tv_province_area, obtainText(0, item.provinceArea));
+            holder.setText(R.id.tv_building_info, obtainText(0, item.buildingInformation));
             holder.setText(R.id.tv_detail_address, obtainText(0, item.address));
             holder.setText(R.id.tv_house_status, obtainText(R.string.followup_house_status_tips, item.houseStatus));
             holder.setText(R.id.tv_house_area, obtainText(R.string.followup_house_area_tips, item.houseArea));
+            holder.setText(R.id.tv_housing_type, obtainText(R.string.tips_housing_type, item.houseType));
+            holder.setText(R.id.tv_custom_budget, obtainText(R.string.tips_customer_custom_budget, item.decorationBudget));
             holder.setText(R.id.tv_whether_repossess, obtainText(R.string.tips_whether_repossess, item.checkBulidingValue));
             holder.setText(R.id.tv_repossession_date, obtainText(R.string.tips_repossession_date, item.checkbulidingTime));
             holder.setText(R.id.tv_renovation_condition, obtainText(R.string.tips_renovation_condition, item.decorationProgress));
@@ -571,7 +587,6 @@ public class CustomerOnlineLogHelper extends ActivityHelper {
                 }
                 rvPictures.setAdapter(new SquareImageGridAdapter(mContext, item.images));
             }
-            holder.setText(R.id.tv_chat_logs, obtainText(0, item.followUpRecord));
         }
 
         private CharSequence obtainText(int stringRes, String source) {

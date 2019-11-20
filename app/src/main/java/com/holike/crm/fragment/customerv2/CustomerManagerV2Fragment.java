@@ -27,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by gallop on 2019/7/16.
+ * Created by pony on 2019/7/16.
  * Copyright holike possess 2019.
  * 客户管理页面 v2.0版本
  */
@@ -164,6 +164,8 @@ public class CustomerManagerV2Fragment extends GeneralCustomerFragment
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             mHelper.doRequest();
+        } else if (resultCode == CustomerValue.RESULT_CODE_INVALID_RETURN) {  //无效退回成功 关闭客户管理页面
+            ((BaseActivity<?, ?>) mContext).finish();
         } else if ((resultCode == CustomerValue.RESULT_CODE_ACTIVATION ||
                 resultCode == CustomerValue.RESULT_CODE_HIGH_SEAS) && data != null) {
             ((BaseActivity<?, ?>) mContext).setResult(CustomerValue.RESULT_CODE_ACTIVATION, data);
@@ -182,7 +184,7 @@ public class CustomerManagerV2Fragment extends GeneralCustomerFragment
     /*领取房屋成功 刷新页面*/
     private void onReceiveHouseSuccess(String message) {
         RxBus.getInstance().post(new MessageEvent(CustomerValue.EVENT_TYPE_RECEIVE_HOUSE));
-        ((BaseActivity<?, ?>) mContext).setResult(CustomerValue.RESULT_CODE_RECEIVE_HOUSE);
+//        ((BaseActivity<?, ?>) mContext).setResult(CustomerValue.RESULT_CODE_RECEIVE_HOUSE);
         dismissLoading();
         showShortToast(message);
         mHelper.onReceiveHouseSuccess();
@@ -204,7 +206,7 @@ public class CustomerManagerV2Fragment extends GeneralCustomerFragment
         dismissLoading();
         showShortToast(message);
         RxBus.getInstance().post(new MessageEvent(CustomerValue.EVENT_TYPE_CONFIRM_LOST_HOUSE));
-        ((BaseActivity<?, ?>) mContext).setResult(CustomerValue.RESULT_CODE_LOST_HOUSE);
+//        ((BaseActivity<?, ?>) mContext).setResult(CustomerValue.RESULT_CODE_LOST_HOUSE);
         ((BaseActivity<?, ?>) mContext).finish();
     }
 

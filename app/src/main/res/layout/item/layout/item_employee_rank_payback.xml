@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="@dimen/dp_36"
+        android:orientation="horizontal"
+        tools:ignore="NestedWeights">
+
+        <View style="@style/divider_vertical" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.16">
+
+            <ImageView
+                android:id="@+id/iv_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_rank"
+                style="@style/FormTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.23" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_store"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.21" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_payback_amout"
+            style="@style/FormTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
+        <View style="@style/divider_vertical" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

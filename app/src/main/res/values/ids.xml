@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="fl_fragment_main" type="id" />
+    <item name="app_titlebar_layout" type="id"/>
     <item name="app_toolbar" type="id" />
     <item name="app_search_view" type="id" />
     <item name="right_menu_layout" type="id" />
@@ -8,4 +9,7 @@
     <item name="right_menu_dot" type="id" />
 
     <item name="vs_form_data" type="id"/>
+
+    <item name="ll_basis_container" type="id"/>
+    <item name="fl_basis" type="id"/>
 </resources>

@@ -11,7 +11,7 @@ import com.holike.crm.view.activity.WoodenDoorView;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/28.
+ * Created by pony on 2019/8/28.
  * Copyright holike possess 2019.
  */
 public class WoodenDoorPresenter extends BasePresenter<WoodenDoorView, WoodenDoorModel> {

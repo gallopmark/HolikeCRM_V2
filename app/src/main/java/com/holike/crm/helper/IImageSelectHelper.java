@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
- * Created by gallop on 2019/7/25.
+ * Created by pony on 2019/7/25.
  * Copyright holike possess 2019.
  */
 public abstract class IImageSelectHelper {

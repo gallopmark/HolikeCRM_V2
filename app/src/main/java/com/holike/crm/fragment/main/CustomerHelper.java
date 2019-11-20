@@ -28,7 +28,7 @@ import com.holike.crm.dialog.CalendarPickerDialog;
 import com.holike.crm.dialog.MaterialDialog;
 import com.holike.crm.dialog.TipViewDialog;
 import com.holike.crm.enumeration.CustomerValue;
-import com.holike.crm.helper.CalendarDialogHelper;
+import com.holike.crm.helper.CalendarPickerHelper;
 import com.holike.crm.helper.ICallPhoneHelper;
 import com.holike.crm.helper.MultiItemListHelper;
 import com.holike.crm.popupwindown.MultipleSelectPopupWindow;
@@ -93,20 +93,13 @@ public class CustomerHelper extends MultiItemListHelper {
     private Date mStartDate, mEndDate;
     private String mOrderBy = "desc"; //排序 默认降序
     private boolean mDesc = true;  //默认降序
-    private boolean isShowTotalRows;
     private int mPressedType = 0;
+    private String mTotalRowTemp; //客户数量判断标记-检查客户数量是否发生了改变
     private long mTotalRows;
 
-    private int mViewPosition = -1;  //被点击的item位置，用于在客户管理页面流失房屋时，从客户列表数据中移除该条数据
     private Disposable mDisposable;
 
     private CustomerListBeanV2 mCustomerListBean;
-
-    @Override
-    public void onReset() {
-        super.onReset();
-        this.isShowTotalRows = false;
-    }
 
     public int getPressedType() {
         return mPressedType;
@@ -121,13 +114,11 @@ public class CustomerHelper extends MultiItemListHelper {
         mDisposable = RxBus.getInstance().toObservable(MessageEvent.class).subscribe(event -> {
             if (TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_ADD_CUSTOMER) ||  //添加客户
                     TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_ALTER_CUSTOMER) //编辑客户
-                    || TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_RECEIVE_HOUSE)) { //领取房屋
+                    || TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_RECEIVE_HOUSE)//领取房屋
+                    || TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_INVALID_RETURN) //无效退回
+                    || TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_LOST_HOUSE)  //流失房屋
+                    || TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_CONFIRM_LOST_HOUSE)) { //确认流失房屋
                 onRefresh();
-            } else if (TextUtils.equals(event.getType(), CustomerValue.EVENT_TYPE_CONFIRM_LOST_HOUSE)) { //流失房屋
-                if (mViewPosition >= 0 && mViewPosition < this.mListBeans.size()) {
-                    this.mListBeans.remove(mViewPosition);
-                    mAdapter.notifyDataSetChanged();
-                }
             }
         });
     }
@@ -146,7 +137,7 @@ public class CustomerHelper extends MultiItemListHelper {
                 if (!TextUtils.isEmpty(bean.phoneNumber)) { //手机号才能拨打
                     ICallPhoneHelper.with((BaseActivity<?, ?>) mContext).requestCallPhone(bean.personalId, bean.houseId, bean.phoneNumber);
                 } else {
-                    onItemClick(position, bean);
+                    mCallback.onItemClick(bean);
                 }
             }
         });
@@ -158,7 +149,7 @@ public class CustomerHelper extends MultiItemListHelper {
         this.mAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
             CustomerListBeanV2.CustomerBean bean = getItem(position);
             if (bean != null) {
-                onItemClick(position, bean);
+                mCallback.onItemClick(bean);
             }
         });
 //        this.mAdapter.setOnItemLongClickListener((adapter, holder, view, position) -> {
@@ -166,11 +157,6 @@ public class CustomerHelper extends MultiItemListHelper {
 //                onCustomerItemLongClick(getItem(position), position);
 //            }
 //        });
-    }
-
-    private void onItemClick(int position, CustomerListBeanV2.CustomerBean bean) {
-        mViewPosition = position;
-        mCallback.onItemClick(bean);
     }
 
     private CustomerListBeanV2.CustomerBean getItem(int position) {
@@ -196,36 +182,23 @@ public class CustomerHelper extends MultiItemListHelper {
     /*加载客户列表数据成功*/
     void onGetCustomerOk(CustomerListBeanV2 bean, String total, TextView tvCount) {
         this.mCustomerListBean = bean;
-        if (!isShowTotalRows) {
+        if (!TextUtils.equals(total, mTotalRowTemp)) {
             showTotalRows(total, tvCount);
-            isShowTotalRows = true;
+            mTotalRowTemp = total;
         }
         onHttpResultOk(bean.getList());
     }
 
     private void showTotalRows(String total, TextView tvCount) {
-        if (!TextUtils.isEmpty(total)) {
-            try {
-                this.mTotalRows = ParseUtils.parseLong(total);
-            } catch (Exception ignored) {
-            }
-            setCustomerCount(tvCount, total);
-            setTotalRows(total);
-        } else {
-            tvCount.setVisibility(View.GONE);
-        }
+        this.mTotalRows = ParseUtils.parseLong(total);
+        setCustomerCount(tvCount, total);
+        setTotalRows(total);
     }
 
     /*设置列表总数*/
     private void setTotalRows(String total) {
         //客户总数
-        long totalRows;
-        try {
-            totalRows = ParseUtils.parseLong(total);
-        } catch (Exception e) {
-            totalRows = 0;
-        }
-        ((CustomerListAdapter) this.mAdapter).setTotalRows(totalRows);
+        ((CustomerListAdapter) this.mAdapter).setTotalRows(ParseUtils.parseLong(total));
     }
 
     /*显示客户数量*/
@@ -272,7 +245,7 @@ public class CustomerHelper extends MultiItemListHelper {
 
     /*显示日历选择对话框*/
     void showCalendarDialog(Context context, final TextView timeTextView) {
-        CalendarDialogHelper.showCalendarDialog(context, mSelectedDates, new CalendarDialogHelper.OnCalendarOperateListener() {
+        CalendarPickerHelper.showCalendarDialog(context, mSelectedDates, new CalendarPickerHelper.OnCalendarOperateListener() {
             @Override
             public void onShow() {
                 timeTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(mContext, R.drawable.ic_choice_date_up), null);
@@ -377,7 +350,7 @@ public class CustomerHelper extends MultiItemListHelper {
                 items.add(bean.name);
             }
             arrowUp(tv);
-            StringItemPopupWindow popupWindow = new StringItemPopupWindow(mContext, items, mSelectSourceIndex);
+            StringItemPopupWindow popupWindow = new StringItemPopupWindow(mContext, items, mSelectSourceIndex, mContext.getResources().getDimensionPixelSize(R.dimen.dp_50));
             popupWindow.setOnMenuItemClickListener((pw, position, content) -> {
                 mSelectSourceIndex = position;
                 MobclickAgent.onEvent(mContext, "customer_source"); //receive_deposit_customerSource

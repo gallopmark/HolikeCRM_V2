@@ -17,7 +17,7 @@ import com.holike.crm.R;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/7/15.
+ * Created by pony on 2019/7/15.
  * Copyright holike possess 2019.
  */
 public class StringItemPopupWindow extends CommonPopupWindow {

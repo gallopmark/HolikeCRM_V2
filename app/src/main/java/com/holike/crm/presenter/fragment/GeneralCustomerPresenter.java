@@ -26,7 +26,7 @@ import java.util.Map;
 
 
 /**
- * Created by gallop on 2019/8/1.
+ * Created by pony on 2019/8/1.
  * Copyright holike possess 2019.
  * 客户管理
  */
@@ -666,9 +666,31 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
     }
 
     /*客户管理-获取经销商安装工*/
+    @Deprecated
     public void getDealerInstaller() {
         if (getModel() != null) {
             getModel().getDealerInstaller(new RequestCallBack<List<DealerInfoBean.UserBean>>() {
+                @Override
+                public void onFailed(String failReason) {
+                    if (getView() != null) {
+                        getView().onFailure(failReason);
+                    }
+                }
+
+                @Override
+                public void onSuccess(List<DealerInfoBean.UserBean> result) {
+                    if (getView() != null) {
+                        getView().onSuccess(result);
+                    }
+                }
+            });
+        }
+    }
+
+    /*客户管理-获取门店安装工*/
+    public void getShopInstallers(String shopId) {
+        if (getModel() != null) {
+            getModel().getShopInstallers(shopId, new RequestCallBack<List<DealerInfoBean.UserBean>>() {
                 @Override
                 public void onFailed(String failReason) {
                     if (getView() != null) {
@@ -924,12 +946,11 @@ public class GeneralCustomerPresenter extends BasePresenter<GeneralCustomerView,
 
     /*客户管理-激活线上客户*/
     public void activationCustomer(final String personalId, final String houseId, String
-            shopId, String groupId, String guideId, final OnActivationCallback callback) {
+            shopId, String groupId, final OnActivationCallback callback) {
         Map<String, String> params = new HashMap<>();
-        params.put("houseId", houseId);
-        params.put("shopId", shopId);
-        params.put("groupId", groupId);
-        params.put("guideId", guideId);
+        params.put("houseId", ParamHelper.noNullWrap(houseId));
+        params.put("shopId", ParamHelper.noNullWrap(shopId));
+        params.put("groupId", ParamHelper.noNullWrap(groupId));
         if (getModel() != null) {
             getModel().activationCustomer(ParamHelper.toBody(params), new RequestCallBack<String>() {
                 @Override

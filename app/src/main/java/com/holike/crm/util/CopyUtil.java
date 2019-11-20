@@ -11,10 +11,10 @@ import static android.content.Context.CLIPBOARD_SERVICE;
  */
 public class CopyUtil {
     public static void copy(Context context, String content) {
-        ClipboardManager myClipboard;
-        myClipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-        ClipData myClip;
-        myClip = ClipData.newPlainText("text", content);
-        myClipboard.setPrimaryClip(myClip);
+        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+        if (clipboardManager != null) {
+            ClipData clipData = ClipData.newPlainText("text", content);
+            clipboardManager.setPrimaryClip(clipData);
+        }
     }
 }

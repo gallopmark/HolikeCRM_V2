@@ -7,7 +7,7 @@ import com.holike.crm.model.employee.GeneralEmployeeModel;
 import com.holike.crm.view.activity.EmployeeDetailV2View;
 
 /**
- * Created by gallop on 2019/8/7.
+ * Created by pony on 2019/8/7.
  * Copyright holike possess 2019.
  * 员工详情 v2.0
  */

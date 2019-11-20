@@ -9,7 +9,7 @@ import com.holike.crm.R;
 import com.holike.crm.bean.CustomerListBeanV2;
 
 /**
- * Created by gallop on 2019/8/21.
+ * Created by pony on 2019/8/21.
  * Copyright holike possess 2019.
  * 线上引流客户分配门店dialog
  */

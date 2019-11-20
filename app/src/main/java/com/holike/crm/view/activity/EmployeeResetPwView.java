@@ -3,7 +3,7 @@ package com.holike.crm.view.activity;
 import com.holike.crm.base.BaseView;
 
 /**
- * Created by gallop on 2019/9/19.
+ * Created by pony on 2019/9/19.
  * Copyright holike possess 2019.
  */
 public interface EmployeeResetPwView extends BaseView {

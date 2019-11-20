@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/tv_new_customers"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/tv_number_calls"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/tv_number_scale"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/tv_number_measure"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />-->
@@ -59,7 +59,7 @@
 
         <TextView
             android:id="@+id/tv_number_drawing"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -69,7 +69,7 @@
 
         <TextView
             android:id="@+id/tv_deposit_customers"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -78,7 +78,7 @@
 
         <TextView
             android:id="@+id/tv_signatures"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -87,7 +87,7 @@
 
         <TextView
             android:id="@+id/tv_order_number"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />-->
@@ -96,7 +96,7 @@
 
         <TextView
             android:id="@+id/tv_number_install"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -105,7 +105,7 @@
 
         <TextView
             android:id="@+id/tv_store_turnover_rate"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -114,7 +114,7 @@
 
         <TextView
             android:id="@+id/tv_scale_rate"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />-->
@@ -123,7 +123,7 @@
 
         <TextView
             android:id="@+id/tv_number_highSeas"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -132,7 +132,7 @@
 
         <TextView
             android:id="@+id/tv_received"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -141,7 +141,7 @@
 
         <TextView
             android:id="@+id/tv_contract_amount"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />

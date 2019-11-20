@@ -17,7 +17,7 @@ import java.util.Date;
 import butterknife.BindView;
 
 /**
- * Created by gallop on 2019/8/9.
+ * Created by pony on 2019/8/9.
  * Copyright holike possess 2019.
  * 安装经理本月数据
  */

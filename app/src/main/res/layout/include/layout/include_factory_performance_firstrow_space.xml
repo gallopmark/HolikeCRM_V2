@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/v_divider"
+        style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/store" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/guestrestaurant_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/hall_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/balcony_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_number_scale"
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/masterbedroom_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:text="@string/guest_bedroom_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/childrenroom_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/elderroom_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/studyroom_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/multfunroom_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/kitchen_proportion" />
+
+        <View style="@style/divider_vertical" />
+
+        <TextView
+            style="@style/FirstRowTextStyle"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="@string/other_proportion" />
+
+        <View style="@style/divider_vertical" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+</LinearLayout>

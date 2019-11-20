@@ -15,13 +15,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by gallop on 2019/7/29.
+ * Created by pony on 2019/7/29.
  * Copyright holike possess 2019.
  * http请求结果处理
  */
 public class CallbackHelper {
 
-   public static Disposable deliveryResult(Observable<String> observable, final RequestCallBack<?> callBack) {
+    public static Disposable deliveryResult(Observable<String> observable, final RequestCallBack<?> callBack) {
         return observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> onDeliverySuccess(s, callBack),
                         throwable -> onDeliveryFailure(throwable, callBack),
@@ -50,25 +50,11 @@ public class CallbackHelper {
                                     dialogInterface.dismiss();
                                     MinePresenter.logout(activity);
                                 }).show();
-//                        new SimpleDialog(MyApplication.getInstance().getCurrentActivity()).setDate("重新登录", "您的登录信息已经过期，请重新登录", "取消", "马上登录").setListener(new SimpleDialog.ClickListener() {
-//                            @Override
-//                            public void left() {
-//                            }
-//
-//                            @Override
-//                            public void right() {
-//                                MinePresenter.logout(MyApplication.getInstance().getCurrentActivity());
-//                            }
-//                        }).show();
-                        callBack.onFailed(MyJsonParser.getMsg(s));
+                        callBack.onFailed(MyJsonParser.getShowMessage(s));
                     }
                     break;
                 default:
-                    if (MyJsonParser.hasMsg(s)) {
-                        callBack.onFailed(MyJsonParser.getMsg(s));
-                    } else if (MyJsonParser.hasReason(s)) {
-                        callBack.onFailed(MyJsonParser.getReason(s));
-                    }
+                    callBack.onFailed(MyJsonParser.getShowMessage(s));
                     break;
             }
         } catch (Exception e) {
@@ -88,9 +74,9 @@ public class CallbackHelper {
     static Disposable processResult(Observable<String> observable, final RequestCallBack<String> callBack) {
         return observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    LogCat.i_response(s);
-                    callBack.onSuccess(s);
-                }, throwable -> onDeliveryFailure(throwable, callBack),
+                            LogCat.i_response(s);
+                            callBack.onSuccess(s);
+                        }, throwable -> onDeliveryFailure(throwable, callBack),
                         callBack::onFinished, callBack::onStart);
     }
 }

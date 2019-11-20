@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_14">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text="@string/report_dealer_rank_top_three_city"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no2"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:gravity="center"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@color/second" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no1"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:gravity="center"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@color/first" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no3"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:gravity="center"
+                android:textColor="@color/textColor8"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@color/third" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

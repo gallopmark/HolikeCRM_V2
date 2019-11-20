@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/6.
+ * Created by pony on 2019/8/6.
  * Copyright holike possess 2019.
  */
 class EmployeeListHelper {
@@ -210,7 +210,7 @@ class EmployeeListHelper {
                 mActivity.showShortToast(failReason);
             } else {
                 refreshLayout.setVisibility(View.GONE);
-                mActivity.noNetwork();
+                mActivity.noNetwork(failReason);
             }
         }
         mIsRefresh = false;

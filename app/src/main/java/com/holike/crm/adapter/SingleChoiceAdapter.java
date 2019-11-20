@@ -13,7 +13,7 @@ import com.holike.crm.bean.DictionaryBean;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/7/25.
+ * Created by pony on 2019/7/25.
  * Copyright holike possess 2019.
  */
 public class SingleChoiceAdapter extends CommonAdapter<DictionaryBean> {

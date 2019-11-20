@@ -1,7 +1,7 @@
 package com.holike.crm.enumeration;
 
 /**
- * Created by gallop on 2019/7/12.
+ * Created by pony on 2019/7/12.
  * Copyright holike possess 2019.
  * 用户类型
  */

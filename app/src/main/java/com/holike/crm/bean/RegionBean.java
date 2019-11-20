@@ -3,7 +3,7 @@ package com.holike.crm.bean;
 import android.text.TextUtils;
 
 /**
- * Created by gallop on 2019/8/2.
+ * Created by pony on 2019/8/2.
  * Copyright holike possess 2019.
  */
 public class RegionBean {

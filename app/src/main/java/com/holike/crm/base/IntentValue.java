@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/7/11.
+ * Created by pony on 2019/7/11.
  * Copyright holike possess 2019.
  * 替换activity、fragment等大数据传值
  */

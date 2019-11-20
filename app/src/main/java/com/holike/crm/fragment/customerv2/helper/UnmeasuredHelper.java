@@ -30,7 +30,7 @@ import java.util.Map;
 
 
 /**
- * Created by gallop on 2019/8/12.
+ * Created by pony on 2019/8/12.
  * Copyright holike possess 2019.
  * 预约量尺帮助类
  */
@@ -39,7 +39,7 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
     private Activity mActivity;
     private Callback mCallback;
     private CurrentUserBean mCurrentUser;
-    private String mDate, mTime;
+    private String mDate, mTime; //mTime-接口需要传HH:mm:ss格式
     private List<DictionaryBean> mSelectedItems;
     private MultipleChoiceAdapter mMeasureSpaceAdapter;
     private String mAppointShopId, mAppointMeasureBy;
@@ -79,7 +79,7 @@ public class UnmeasuredHelper extends GeneralHelper implements View.OnClickListe
         mDate = TimeUtil.timeMillsFormat(appointmentTime, "yyyy-MM-dd");
         mReservationDateTextView.setText(mDate);
         mTime = TimeUtil.timeMillsFormat(appointmentTime, "HH:mm:ss");
-        mReservationTimeTextView.setText(mTime);
+        mReservationTimeTextView.setText(TimeUtil.timeMillsFormat(appointmentTime, "HH:mm"));
         mAppointShopId = bundle.getString("appointShopId");
         mMeasureShopTextView.setText(bundle.getString("appointShopName"));
         mAppointMeasureBy = bundle.getString("appointMeasureBy");

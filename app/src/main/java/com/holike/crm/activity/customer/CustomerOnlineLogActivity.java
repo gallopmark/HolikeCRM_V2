@@ -10,7 +10,7 @@ import com.holike.crm.bean.CustomerOnlineLogBean;
 import com.holike.crm.enumeration.CustomerValue;
 
 /**
- * Created by gallop on 2019/10/15.
+ * Created by pony on 2019/10/15.
  * Copyright holike possess 2019.
  * 线上引流客户（线上记录）
  */

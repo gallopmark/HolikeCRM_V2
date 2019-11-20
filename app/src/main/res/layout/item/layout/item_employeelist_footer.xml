@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mFooterTextView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="@dimen/dp_12"
-    android:textColor="@color/textColor6"
-    android:textSize="@dimen/textSize_12" />

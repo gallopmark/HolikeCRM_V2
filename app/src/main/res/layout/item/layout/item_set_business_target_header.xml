@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@color/color_while"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/target_time"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+
+        <TextView style="@style/Required_TextViewStyle" />
+
+        <TextView
+            android:id="@+id/tv_select_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/choice_down"
+            android:drawableRight="@drawable/choice_down"
+            android:drawablePadding="@dimen/dp_6"
+            android:gravity="center|end"
+            android:hint="@string/tips_please_select"
+            android:textColor="@color/textColor4"
+            android:textColorHint="@color/textColor21"
+            android:textSize="@dimen/textSize_14" />
+    </LinearLayout>
+
+    <View style="@style/divider_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/transaction_target"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+
+        <TextView style="@style/Required_TextViewStyle" />
+
+        <EditText
+            android:id="@+id/et_target_performance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_6"
+            android:layout_weight="1"
+            android:background="@color/bg_transparent"
+            android:gravity="center|end"
+            android:hint="@string/target_hint"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textColor="@color/textColor4"
+            android:textColorHint="@color/textColor21"
+            android:textSize="@dimen/textSize_14"
+            tools:ignore="Autofill" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/ten_thousand"
+            android:textColor="@color/textColor4"
+            android:textSize="@dimen/textSize_14"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

@@ -3,55 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_corners_top_white_5dp"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <View
+        android:id="@+id/view_outside"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_54"
-        android:paddingLeft="@dimen/dp_20"
-        android:paddingRight="@dimen/dp_20">
+        android:layout_height="@dimen/dp_130" />
 
-        <TextView
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_corners_top_white_5dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:text="@string/tips_customer_area"
+                android:textColor="@color/textColor4"
+                android:textSize="@dimen/textSize_16"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_gravity="end|center"
+                android:contentDescription="@string/close"
+                android:src="@drawable/icon_clear" />
+        </FrameLayout>
+
+        <View style="@style/divider_horizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tab"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|start"
-            android:text="@string/tips_customer_area"
-            android:textColor="@color/textColor4"
-            android:textSize="@dimen/textSize_16"
-            android:textStyle="bold" />
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_28"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:ignore="RtlSymmetry" />
 
-        <ImageView
-            android:id="@+id/iv_close"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_gravity="end|center"
-            android:contentDescription="@string/close"
-            android:src="@drawable/icon_clear" />
-    </FrameLayout>
-
-    <View style="@style/divider_horizontal" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_28"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:paddingEnd="@dimen/dp_20"
-        android:paddingRight="@dimen/dp_20"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:ignore="RtlSymmetry" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_region"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_region"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
 </LinearLayout>

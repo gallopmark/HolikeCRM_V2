@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/tv_install_count"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/tv_install_area"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/tv_complete_rate"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_90"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />
@@ -49,7 +49,7 @@
 
         <!--<TextView
             android:id="@+id/tv_satisfaction"
-            style="@style/Scrollable_TextViewStyle"
+            style="@style/Scrollable_TextViewStyle2"
             android:layout_width="@dimen/dp_70"
             android:layout_height="match_parent"
             android:textColor="@color/textColor8" />

@@ -1,7 +1,7 @@
 package com.holike.crm.enumeration;
 
 /**
- * Created by gallop on 2019/7/11.
+ * Created by pony on 2019/7/11.
  * Copyright holike possess 2019.
  */
 public class CustomerValue {
@@ -53,11 +53,12 @@ public class CustomerValue {
     public static final String EVENT_TYPE_RECEIVE_HOUSE = "event.type.RECEIVE.HOUSE"; //领取房屋
     public static final String EVENT_TYPE_CONFIRM_LOST_HOUSE = "event.type.CONFIRM.LOST.HOUSE"; //确认流失房屋
     public static final String EVENT_TYPE_LOST_HOUSE = "event.type.LOST_HOUSE"; //流失房屋
+    public static final String EVENT_TYPE_INVALID_RETURN = "event.type.INVALID.RETURN"; //无效退回
 
-    public static final int RESULT_CODE_EDIT_CUSTOMER = 1001; //新增或修改客户信息成功返回码
-    public static final int RESULT_CODE_LOST_HOUSE = 1002; //流失房屋成功返回码
-    public static final int RESULT_CODE_RECEIVE_HOUSE = 1003; //领取房屋成功
+//    public static final int RESULT_CODE_LOST_HOUSE = 1002; //流失房屋成功返回码
+//    public static final int RESULT_CODE_RECEIVE_HOUSE = 1003; //领取房屋成功
 
     public static final int RESULT_CODE_ACTIVATION = 1006; //激活客户成功返回码
     public static final int RESULT_CODE_HIGH_SEAS = 1007; //领取公海客户成功
+    public static final int RESULT_CODE_INVALID_RETURN = 1008; //无效退回成功返回码
 }

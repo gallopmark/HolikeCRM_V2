@@ -3,12 +3,13 @@ package com.holike.crm.fragment.main;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.holike.crm.BuildConfig;
 import com.holike.crm.R;
 import com.holike.crm.activity.homepage.MessageV2Activity;
 import com.holike.crm.activity.mine.ChangePasswordActivity;
+import com.holike.crm.activity.report.TestActivity;
 import com.holike.crm.base.BaseFragment;
 import com.holike.crm.bean.UpdateBean;
 import com.holike.crm.bean.UserInfoBean;
@@ -31,10 +32,6 @@ import butterknife.OnClick;
  */
 
 public class MineFragment extends BaseFragment<MinePresenter, MineView> implements MineView {
-    @BindView(R.id.iv_my_bg)
-    ImageView ivBg;
-    @BindView(R.id.iv_my_userface)
-    ImageView ivUserface;
     @BindView(R.id.tv_my_username)
     TextView tvUsername;
     @BindView(R.id.tv_my_login_account)
@@ -66,6 +63,10 @@ public class MineFragment extends BaseFragment<MinePresenter, MineView> implemen
     @Override
     protected void init() {
         tvVersionMsg.setText(AppUtils.getVersionName(true));
+        tvVersionMsg.setOnClickListener(view -> {
+            if (BuildConfig.DEBUG)
+                startActivity(TestActivity.class);
+        });
         initData(true);
         refreshLayout.setOnRefreshListener(refreshLayout -> initData(false));
     }

@@ -6,10 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * Created by gallop on 2019/9/19.
+ * Created by pony on 2019/9/19.
  * Copyright holike possess 2019.
  */
-public abstract class CommonActivity<P extends BasePresenter, V extends BaseView, H extends ActivityHelper> extends BaseActivity<P, V> {
+public abstract class CommonActivity<P extends BasePresenter, V extends BaseView, H extends BaseHelper> extends BaseActivity<P, V> {
 
     protected H mActivityHelper;
 

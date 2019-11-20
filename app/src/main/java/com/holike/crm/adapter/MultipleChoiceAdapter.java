@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/7/23.
+ * Created by pony on 2019/7/23.
  * Copyright holike possess 2019.
  */
 public class MultipleChoiceAdapter extends CommonAdapter<DictionaryBean> {

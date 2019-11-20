@@ -1,5 +1,6 @@
 package com.holike.crm.util;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.holike.crm.BuildConfig;
@@ -14,7 +15,7 @@ import java.io.StringWriter;
  */
 
 public class LogCat {
-//    private static boolean isShow = BuildConfig.LOG_DEBUG;
+    //    private static boolean isShow = BuildConfig.LOG_DEBUG;
     private static String TAG = BuildConfig.VERSION_NAME;
     private final static int LOG_MAX_LENGTH = 2000;
 
@@ -111,7 +112,7 @@ public class LogCat {
 
     public static void e(String tag, String msg) {
         if (isShow()) {
-            Log.e(tag, msg);
+            LogCat.print("e", tag, msg);
         }
     }
 
@@ -120,7 +121,7 @@ public class LogCat {
     日志长度超过限制时，采取分段形式打印日志
      */
     public static void print(String logType, String TAG, String msg) {
-        if (!isShow()) return;
+        if (!isShow() || TextUtils.isEmpty(msg)) return;
         int strLength = msg.length();
         int start = 0;
         int end = LOG_MAX_LENGTH;

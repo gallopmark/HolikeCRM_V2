@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/iv_the_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_the_first"
+        android:layout_alignBottom="@+id/tv_the_first"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/dp_4"
+        android:contentDescription="@string/ranking"
+        android:src="@drawable/ic_champion" />
+
+    <TextView
+        android:id="@+id/tv_the_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_the_first"
+        android:layout_toRightOf="@+id/iv_the_first"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <ImageView
+        android:id="@+id/iv_the_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_the_second"
+        android:layout_alignBottom="@+id/tv_the_second"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/dp_4"
+        android:contentDescription="@string/ranking"
+        android:src="@drawable/ic_runnerup" />
+
+    <TextView
+        android:id="@+id/tv_the_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_the_first"
+        android:layout_alignStart="@+id/tv_the_first"
+        android:layout_alignLeft="@+id/tv_the_first"
+        android:layout_marginTop="@dimen/dp_16"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <ImageView
+        android:id="@+id/iv_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_third"
+        android:layout_alignBottom="@+id/tv_third"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_4"
+        android:contentDescription="@string/ranking"
+        android:src="@drawable/ic_third_place" />
+
+    <TextView
+        android:id="@+id/tv_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_the_second"
+        android:layout_alignStart="@+id/tv_the_first"
+        android:layout_alignLeft="@+id/tv_the_first"
+        android:layout_marginTop="@dimen/dp_16"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <TextView
+        android:id="@+id/tv_ranking_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/iv_the_first"
+        android:layout_alignLeft="@+id/iv_the_first"
+        android:layout_alignTop="@+id/tv_fourth"
+        android:layout_alignEnd="@+id/iv_the_first"
+        android:layout_alignRight="@+id/iv_the_first"
+        android:layout_alignBottom="@+id/tv_fourth"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_fourth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_third"
+        android:layout_alignStart="@+id/tv_the_first"
+        android:layout_alignLeft="@+id/tv_the_first"
+        android:layout_marginTop="@dimen/dp_16"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <TextView
+        android:id="@+id/tv_ranking_five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/iv_the_first"
+        android:layout_alignLeft="@+id/iv_the_first"
+        android:layout_alignTop="@+id/tv_fifth"
+        android:layout_alignEnd="@+id/iv_the_first"
+        android:visibility="gone"
+        android:layout_alignRight="@+id/iv_the_first"
+        android:layout_alignBottom="@+id/tv_fifth"
+        android:gravity="center"
+        android:textColor="@color/textColor4"
+        android:textSize="@dimen/textSize_13"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_fifth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_fourth"
+        android:layout_alignStart="@+id/tv_the_first"
+        android:layout_alignLeft="@+id/tv_the_first"
+        android:layout_marginTop="@dimen/dp_16"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+
+    <TextView
+        android:id="@+id/tv_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_fifth"
+        android:layout_alignStart="@+id/tv_the_first"
+        android:layout_alignLeft="@+id/tv_the_first"
+        android:layout_marginTop="@dimen/dp_16"
+        android:drawablePadding="@dimen/dp_6"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_14" />
+</RelativeLayout>

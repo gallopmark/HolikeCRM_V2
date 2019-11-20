@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_while"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/dealer_ranking_tips1"
+        android:textColor="@color/textColor8"
+        android:textSize="@dimen/textSize_16"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_20">
+
+        <TextView
+            android:id="@+id/tv_performance_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/performance_ranking"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_entry_turnover_rate_rinking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_performance_ranking"
+            android:layout_marginTop="@dimen/dp_16"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/entry_store_rate_ranking"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_effect_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_entry_turnover_rate_rinking"
+            android:layout_marginTop="@dimen/dp_16"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/effect_ranking"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <View
+            android:id="@+id/v_divider"
+            style="@style/divider_vertical"
+            android:layout_alignTop="@+id/tv_performance_ranking"
+            android:layout_alignBottom="@+id/tv_effect_ranking"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_toEndOf="@+id/tv_entry_turnover_rate_rinking"
+            android:layout_toRightOf="@+id/tv_entry_turnover_rate_rinking" />
+
+        <TextView
+            android:id="@+id/tv_customer_price_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/v_divider"
+            android:layout_toRightOf="@+id/v_divider"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/customer_price_ranking"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14"
+            tools:ignore="UnknownId" />
+
+        <TextView
+            android:id="@+id/tv_scale_turnover_rate_rinking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_customer_price_ranking"
+            android:layout_alignStart="@+id/tv_customer_price_ranking"
+            android:layout_alignLeft="@+id/tv_customer_price_ranking"
+            android:layout_marginTop="@dimen/dp_16"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/scale_turnover_rate_ranking"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+        <TextView
+            android:id="@+id/tv_human_effect_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_scale_turnover_rate_rinking"
+            android:layout_alignStart="@+id/tv_customer_price_ranking"
+            android:layout_alignLeft="@+id/tv_customer_price_ranking"
+            android:layout_marginTop="@dimen/dp_16"
+            android:lineSpacingExtra="@dimen/dp_10"
+            android:text="@string/human_effect_ranking"
+            android:textColor="@color/textColor8"
+            android:textSize="@dimen/textSize_14" />
+
+    </RelativeLayout>
+
+</LinearLayout>

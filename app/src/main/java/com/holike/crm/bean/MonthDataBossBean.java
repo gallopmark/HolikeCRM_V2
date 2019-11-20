@@ -8,18 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gallop on 2019/8/9.
+ * Created by pony on 2019/8/9.
  * Copyright holike possess 2019.
  * 老板本月数据
  */
 public class MonthDataBossBean {
 
+    @SuppressWarnings("WeakerAccess")
     List<ArrBean> arr;
     public String shopDetail;
     public String timeDetail;
     public String userName;
     public String isShop; //1小组数据 2员工数据 3员工收款数据
+    @SuppressWarnings("WeakerAccess")
     List<ArrBean2> arr2;
+    @SuppressWarnings("WeakerAccess")
     List<ArrBean3> arr3;
 
 

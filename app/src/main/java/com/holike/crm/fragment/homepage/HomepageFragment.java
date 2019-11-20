@@ -466,7 +466,7 @@ public class HomepageFragment extends BaseFragment<HomePagePresenter, HomePageVi
                     holder.setBackgroundResource(R.id.tv_type, R.drawable.bg_corners2dp_accent);
                 } else {
                     holder.setText(R.id.tv_type, mContext.getString(R.string.message_notify_message));
-                    holder.setBackgroundResource(R.id.tv_type, R.drawable.bg_corners2dp_red);
+                    holder.setBackgroundResource(R.id.tv_type, R.drawable.bg_corners4dp_red);
                 }
                 holder.itemView.setOnClickListener(v -> {
                     if (bean.getType() == 2) {

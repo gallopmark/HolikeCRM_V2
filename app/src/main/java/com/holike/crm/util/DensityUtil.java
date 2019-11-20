@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 
 /**
@@ -70,30 +71,39 @@ public class DensityUtil {
         return result;
     }
 
+    public static int getNavigationBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = 0;
+        try {
+            resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        } catch (Exception ignored) {
+        }
+        if (resourceId != 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+
     /**
      * 获得屏幕宽度
-     *
-     * @param context
-     * @return
      */
     public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
+        return context.getResources().getDisplayMetrics().widthPixels;
+//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        wm.getDefaultDisplay().getMetrics(outMetrics);
+//        return outMetrics.widthPixels;
     }
 
     /**
      * 获得屏幕高度
-     *
-     * @param context
-     * @return
      */
     public static int getScreenHeight(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
+        return context.getResources().getDisplayMetrics().heightPixels;
+//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        wm.getDefaultDisplay().getMetrics(outMetrics);
+//        return outMetrics.heightPixels;
     }
 
 }

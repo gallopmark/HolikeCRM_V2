@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/analysis_report_tips"
+                android:textColor="@color/textColor6"
+                android:textSize="@dimen/textSize_12" />
+
+            <TextView
+                android:id="@+id/tv_time_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/textColor6"
+                android:textSize="@dimen/textSize_14" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_question_mark"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_shadow_layer_oval_textcolor14"
+            android:gravity="center"
+            android:text="@string/symbol_question"
+            android:textColor="@color/color_while"
+            android:textSize="@dimen/textSize_16"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View style="@style/divider_horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:orientation="horizontal">
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="65"
+                android:text="@string/division" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="65"
+                android:text="@string/principal" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                android:id="@+id/tv_particle"
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="60"
+                android:text="@string/particle_board" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                android:id="@+id/tv_original"
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="84"
+                android:text="@string/original_board" />
+
+            <View style="@style/divider_vertical" />
+
+            <TextView
+                android:id="@+id/tv_originalK"
+                style="@style/FirstRowTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="84"
+                android:text="@string/original_K_board" />
+
+            <View style="@style/divider_vertical" />
+        </LinearLayout>
+
+        <View style="@style/divider_horizontal" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/dp_10"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</LinearLayout>

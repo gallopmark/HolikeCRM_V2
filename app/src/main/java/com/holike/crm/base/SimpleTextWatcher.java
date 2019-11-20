@@ -4,7 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 
 /**
- * Created by gallop on 2019/7/24.
+ * Created by pony on 2019/7/24.
  * Copyright holike possess 2019.
  */
 public class SimpleTextWatcher implements TextWatcher {

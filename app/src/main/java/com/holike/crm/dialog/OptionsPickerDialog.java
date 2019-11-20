@@ -46,6 +46,18 @@ public class OptionsPickerDialog extends CommonDialog {
         return withData(dataList, 0);
     }
 
+    public OptionsPickerDialog withData(@Nullable List<DictionaryBean> dataList, @Nullable DictionaryBean selectBean) {
+        if (dataList != null && !dataList.isEmpty()) {
+            mDataList = new ArrayList<>(dataList);
+            int selectPosition = 0;
+            if (selectBean != null) {
+                selectPosition = dataList.indexOf(selectBean);
+            }
+            invalidate(selectPosition);
+        }
+        return this;
+    }
+
     public OptionsPickerDialog withData(@Nullable List<DictionaryBean> dataList, int selectPosition) {
         if (dataList != null && !dataList.isEmpty()) {
             mDataList = new ArrayList<>(dataList);

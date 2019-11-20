@@ -18,7 +18,7 @@ import androidx.annotation.StyleRes;
 import com.holike.crm.R;
 
 /**
- * Created by gallop on 2019/7/24.
+ * Created by pony on 2019/7/24.
  * Copyright holike possess 2019.
  */
 public class MaterialDialog extends CommonDialog {

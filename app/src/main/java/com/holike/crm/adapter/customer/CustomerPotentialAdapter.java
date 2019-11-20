@@ -11,7 +11,7 @@ import com.holike.crm.bean.MultiItem;
 import java.util.List;
 
 /**
- * Created by gallop 2019/7/9
+ * Created by pony 2019/7/9
  * Copyright (c) 2019 holike
  * 潜在客户列表适配器
  */

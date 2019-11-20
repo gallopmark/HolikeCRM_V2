@@ -12,7 +12,7 @@ import com.holike.crm.enumeration.CustomerValue;
 import butterknife.BindView;
 
 /**
- * Created by gallop on 2019/7/30.
+ * Created by pony on 2019/7/30.
  * Copyright holike possess 2019.
  * 历史记录（被领取后客户管理历史记录）
  */

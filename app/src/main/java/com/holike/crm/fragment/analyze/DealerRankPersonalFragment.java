@@ -1,6 +1,7 @@
 package com.holike.crm.fragment.analyze;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -77,7 +78,7 @@ public class DealerRankPersonalFragment extends MyFragment {
                 for (int i = 0, size = bean.getRang().size(); i < size; i++) {
                     DealerRankBean.DealerDataBean.RangBean rangBean = bean.getRang().get(i);
                     ((TextView) mContentView.findViewById(tvAreId[i])).setText(rangBean.getName());
-                    if (rangBean.getIsIn().equals("1")) {
+                    if (TextUtils.equals(rangBean.getIsIn(), "1")) {
                         mContentView.findViewById(tvYourLocationId[i]).setVisibility(View.VISIBLE);
                         ImageView imageView = mContentView.findViewById(ivYourLocationId[i]);
                         imageView.setVisibility(View.VISIBLE);

@@ -2,6 +2,7 @@ package com.holike.crm.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,6 +25,7 @@ import com.holike.crm.R;
 import com.holike.crm.bean.RegionBean;
 import com.holike.crm.customView.AppToastCompat;
 import com.holike.crm.presenter.RegionPresenter;
+import com.holike.crm.util.DensityUtil;
 import com.holike.crm.view.RegionView;
 
 import java.util.ArrayList;
@@ -30,11 +34,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/8/2.
+ * Created by pony on 2019/8/2.
  * Copyright holike possess 2019.
  * 选择区域(省市区)
  */
-public class SelectRegionDialog extends CommonDialog implements RegionView {
+public class SelectRegionDialog extends CommonDialog implements RegionView, DialogInterface.OnDismissListener {
 
     private List<Tab> mTabList;
     private TabAdapter mTabAdapter;
@@ -67,10 +71,18 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         mSelectCityCache = new HashMap<>();
         mDistrictCache = new HashMap<>();
         mSelectDistrictCache = new HashMap<>();
+        mPresenter = new RegionPresenter();
+        mPresenter.attach(this);
+        setOnDismissListener(this);
+        setCanceledOnTouchOutside(false);
         setup();
     }
 
     private void setup() {
+        LinearLayout contentLayout = mContentView.findViewById(R.id.ll_content_layout);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) contentLayout.getLayoutParams();
+        params.bottomMargin = DensityUtil.getStatusHeight(mContext);
+        mContentView.findViewById(R.id.view_outside).setOnClickListener(view -> hide());
         ImageView ivClose = mContentView.findViewById(R.id.iv_close);
         ivClose.setOnClickListener(view -> hide());
         RecyclerView rvTab = mContentView.findViewById(R.id.rv_tab);
@@ -99,8 +111,6 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
     }
 
     private void initData() {
-        mPresenter = new RegionPresenter();
-        mPresenter.attach(this);
         showLoading();
         mGetType = 1;
         mPresenter.getProvince();
@@ -128,7 +138,7 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
     @Nullable
     @Override
     public ViewGroup.MarginLayoutParams getLayoutParams() {
-        return new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, getCommonHeight());
+        return new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, DensityUtil.getScreenHeight(mContext));
     }
 
     @Override
@@ -180,7 +190,10 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         if (mProvinceDatas == null || mProvinceDatas.isEmpty()) return;
         RegionAdapter regionAdapter = new RegionAdapter(mContext, mProvinceDatas, mSelectProvince);
         mRegionRv.setAdapter(regionAdapter);
-        regionAdapter.setOnItemClickListener((adapter, holder, view, position) -> setSelectProvince(position, mProvinceDatas));
+        regionAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
+            regionAdapter.setSelectPosition(position);
+            setSelectProvince(position, mProvinceDatas);
+        });
     }
 
     private void setSelectProvince(int position, final List<RegionBean> list) {
@@ -239,12 +252,16 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         }
         mTabAdapter.setSelectPosition(1);
         int selectPosition = -1;
-        if (mSelectCityCache.get(mCurrentProvinceCode) != null) {
-            selectPosition = mSelectCityCache.get(mCurrentProvinceCode);
+        Integer index = mSelectCityCache.get(mCurrentProvinceCode);
+        if (index != null) {
+            selectPosition = index;
         }
         RegionAdapter regionAdapter = new RegionAdapter(mContext, list, selectPosition);
         mRegionRv.setAdapter(regionAdapter);
-        regionAdapter.setOnItemClickListener((adapter, holder, view, position) -> setSelectCity(position, list));
+        regionAdapter.setOnItemClickListener((adapter, holder, view, position) -> {
+            regionAdapter.setSelectPosition(position);
+            setSelectCity(position, list);
+        });
     }
 
     private void setSelectCity(int position, final List<RegionBean> list) {
@@ -277,8 +294,9 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
         }
         mTabAdapter.setSelectPosition(2);
         int selectPosition = -1;
-        if (mSelectDistrictCache.get(mCurrentCityCode) != null) {
-            selectPosition = mSelectDistrictCache.get(mCurrentCityCode);
+        Integer index = mSelectDistrictCache.get(mCurrentCityCode);
+        if (index != null) {
+            selectPosition = index;
         }
         final RegionAdapter regionAdapter = new RegionAdapter(mContext, list, selectPosition);
         mRegionRv.setAdapter(regionAdapter);
@@ -316,6 +334,16 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
     public void onFailure(String failReason) {
         hideLoading();
         AppToastCompat.makeText(mContext, failReason, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialogInterface) {
+        mPresenter.deAttach();
+    }
+
+    @Override
+    public void onBackPressed() {
+        hide();
     }
 
     class Tab {
@@ -371,8 +399,8 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
             this.mSelectPosition = selectPosition;
         }
 
-        void setSelectPosition(int mSelectPosition) {
-            this.mSelectPosition = mSelectPosition;
+        void setSelectPosition(int selectPosition) {
+            this.mSelectPosition = selectPosition;
             notifyDataSetChanged();
         }
 
@@ -390,12 +418,6 @@ public class SelectRegionDialog extends CommonDialog implements RegionView {
                 holder.setDrawableLeft(R.id.tv_region, null);
             }
         }
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        mPresenter.deAttach();
-        super.onDetachedFromWindow();
     }
 
     public interface OnRegionSelectedListener {

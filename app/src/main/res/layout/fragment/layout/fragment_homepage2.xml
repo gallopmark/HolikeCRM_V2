@@ -19,6 +19,7 @@
             android:drawableRight="@drawable/ic_expand_more_white_24dp"
             android:ellipsize="end"
             android:gravity="center"
+            android:drawablePadding="@dimen/dp_4"
             android:maxLines="1"
             android:padding="@dimen/dp_10"
             android:textColor="@color/color_while"

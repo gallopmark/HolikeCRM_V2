@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gallop on 2019/8/7.
+ * Created by pony on 2019/8/7.
  * Copyright holike possess 2019.
  */
 class EmployeeDetailHelper implements EmployeeBasicDetailsFragment.OnViewClickListener {
